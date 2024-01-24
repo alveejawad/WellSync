@@ -1,3 +1,6 @@
+COMP 3350 A02, Winter 2024 \
+**Group 16: `char++`**
+
 # WellSync
 
 WellSync is a health and wellness tracker that allows patients and their healthcare providers to plan treatments and monitor progress together.
