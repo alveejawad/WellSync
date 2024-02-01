@@ -4,4 +4,4 @@
 
 ## Iteration 1 Diagram
 
-![architecture](architecture-1.jpg)
+![architecture](architecture-1.png)
