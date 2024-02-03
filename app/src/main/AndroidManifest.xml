@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.cook_ebook">
+    package="com.well_sync">
 
     <application
         android:allowBackup="true"
@@ -10,18 +10,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".presentation.SingleRecipe"
+            android:name="com.well_sync.presentation.SingleRecipe"
             android:label="@string/title_activity_single_recipe"
-            android:parentActivityName=".presentation.MainActivity"
+            android:parentActivityName="com.well_sync.presentation.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.cook_ebook.presentation.MainActivity" />
+                android:value="com.well_sync.presentation.MainActivity" />
         </activity>
-        <activity android:name=".presentation.AddEditView"
-            android:parentActivityName=".presentation.MainActivity"></activity>
+        <activity android:name="com.well_sync.presentation.AddEditView"
+            android:parentActivityName="com.well_sync.presentation.MainActivity"></activity>
         <activity
-            android:name=".presentation.MainActivity"
+            android:name="com.well_sync.presentation.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>

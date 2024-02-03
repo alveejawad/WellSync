@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        tools:context="com.cook_ebook.presentation.AddEditView">
+        tools:context="com.well_sync.presentation.AddEditView">
         <item
             android:id="@+id/save_recipe"
             android:orderInCategory="100"
