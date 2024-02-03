@@ -1,4 +1,3 @@
-
 # ARCHITECTURE
 
 ##  3-tier architecture.
