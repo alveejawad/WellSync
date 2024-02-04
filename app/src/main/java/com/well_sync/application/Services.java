@@ -1,11 +1,7 @@
-package com.well_sync.application;
+/*package com.well_sync.application;
 
 import com.well_sync.persistence.RecipePersistence;
 import com.well_sync.persistence.RecipeTagPersistence;
-import com.well_sync.persistence.hsqldb.RecipePersistenceHSQLDB;
-import com.well_sync.persistence.hsqldb.RecipeTagPersistenceHSQLDB;
-import com.well_sync.persistence.stubs.RecipePersistenceStub;
-import com.well_sync.persistence.stubs.RecipeTagPersistenceStub;
 
 
 public class Services {
@@ -39,8 +35,8 @@ public class Services {
      *
      * Reset all services so to be reloaded from scratch next time they are referenced
      */
-    public static synchronized void clean() {
+   /* public static synchronized void clean() {
         recipePersistence = null;
         recipeTagPersistence = null;
     }
-}
+}*/

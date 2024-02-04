@@ -1,4 +1,4 @@
-package com.well_sync.persistence;
+/*package com.well_sync.persistence;
 
 import com.well_sync.objects.UserDetails;
 import com.well_sync.objects.MoodLog;
@@ -24,4 +24,4 @@ public interface WellnessLogPersistence {
     void setSubstanceUseLog(UserDetails user, SubstanceUseLog substanceUseLog, Date date);
 
     SubstanceUseLog getSubstanceUseLog(UserDetails user, Date date);
-}
+}*/
