@@ -1,45 +1,43 @@
 package com.well_sync.objects;
 
-import androidx.annotation.NonNull;
-
 import java.util.Locale;
 import java.util.Objects;
 
 public class Patient {
-    enum BloodType {
+    public enum BloodType {
         TYPE_A,
         TYPE_B,
         TYPE_AB,
         TYPE_O
     }
 
-    enum Sex {
+    public enum Sex {
         MALE,
         FEMALE,
         UNSPECIFIED
     }
 
-    private final int id;
+    private final String email;
     private String name;
     private BloodType bloodType;
     private Sex sex;
     private int age;
 
-    public Patient(final int id) {
-        this.id = id;
+    public Patient(final String email) {
+        this.email = email;
     }
 
-    public Patient(final int id, final String name, final BloodType bloodType,
+    public Patient(final String email, final String name, final BloodType bloodType,
                    final Sex sex, final int age) {
-        this.id = id;
+        this.email = email;
         this.name = name;
         this.bloodType = bloodType;
         this.sex = sex;
         this.age = age;
     }
 
-    public int getId() {
-        return id;
+    public String getEmail() {
+        return email;
     }
 
     public String getName() {
@@ -74,7 +72,6 @@ public class Patient {
         this.age = age;
     }
 
-    @NonNull
     @Override
     public String toString() {
         return String.format(Locale.CANADA, "%s (%d / %s / %s)", name, age, sex, bloodType);
@@ -85,8 +82,8 @@ public class Patient {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Patient patient = (Patient) o;
-        return id == patient.id
-                && age == patient.age
+        return age == patient.age
+                && Objects.equals(email, patient.email)
                 && Objects.equals(name, patient.name)
                 && bloodType == patient.bloodType
                 && sex == patient.sex;
@@ -94,6 +91,6 @@ public class Patient {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, bloodType, sex, age);
+        return Objects.hash(email, name, bloodType, sex, age);
     }
 }
