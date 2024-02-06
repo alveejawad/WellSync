@@ -1,4 +1,4 @@
-package com.well_sync.application;
+package com.well_sync.logic;
 
 public class UserValidationHandler {
 }
