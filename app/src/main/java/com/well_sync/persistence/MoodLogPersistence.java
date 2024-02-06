@@ -9,5 +9,4 @@ public interface MoodLogPersistence {
     void setMoodLog(Patient patient, MoodLog moodLog);
 
     MoodLog getMoodLog(Patient patient, Date date);
-
 }
