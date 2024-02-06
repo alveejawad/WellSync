@@ -2,7 +2,7 @@ package com.well_sync.application;
 
 public class Main {
 
-    private static String dbName = "CookieDB";
+    private static String dbName = "WellSyncDB";
 
     public static void setDBPathName(final String name) {
         try {
