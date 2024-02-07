@@ -1,4 +1,7 @@
 package com.well_sync.presentation;
 
-public class SymptomTrackerActivity {
+import android.app.Activity;
+
+public class SymptomTrackerActivity extends Activity {
 }
+
