@@ -1,14 +1,19 @@
 package com.well_sync.logic;
 
-import com.well_sync.objects.Patient;
+import com.well_sync.application.Services;
 import com.well_sync.objects.UserCredentials;
+import com.well_sync.persistence.UserPersistence;
 
 public class UserValidationHandler {
 
-    private UserPersistence persistUsers;
+    private final UserPersistence persistUsers;
 
     public UserValidationHandler() {
-        // TODO
+        persistUsers = Services.getUserPersistence();
+    }
+
+    public UserValidationHandler(UserPersistence persistence) {
+        persistUsers = persistence;
     }
 
     public boolean login(UserCredentials inputCreds) {
@@ -17,6 +22,7 @@ public class UserValidationHandler {
     }
 
     public void register(UserCredentials credentials) {
+        // User details (Patient DSO) must be set separately
         persistUsers.setUserCredentials(credentials);
     }
 }

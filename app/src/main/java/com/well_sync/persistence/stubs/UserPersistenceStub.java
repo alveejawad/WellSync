@@ -16,9 +16,9 @@ public class UserPersistenceStub implements UserPersistence {
         this.patientList = new ArrayList<>();
         this.userCredentialsList = new ArrayList<>();
 
-        patientList.add(new Patient("test123@umanitoba.ca", "Test 123", new Patient.BloodType.TYPE_A(), new Patient.Sex.UNSPECIFIED(), 21));
-        patientList.add(new Patient("muhammad@umanitoba.ca", "Muhammad", new Patient.BloodType.TYPE_A(), new Patient.Sex.MALE(), 23));
-        patientList.add(new Patient("test456@umanitoba.ca", "Test 456", new Patient.BloodType.TYPE_A(), new Patient.Sex.UNSPECIFIED(), 20));
+        patientList.add(new Patient("test123@umanitoba.ca", "Test 123", Patient.BloodType.TYPE_A, Patient.Sex.UNSPECIFIED, 21));
+        patientList.add(new Patient("muhammad@umanitoba.ca", "Muhammad", Patient.BloodType.TYPE_A, Patient.Sex.MALE, 23));
+        patientList.add(new Patient("test456@umanitoba.ca", "Test 456", Patient.BloodType.TYPE_A, Patient.Sex.UNSPECIFIED, 20));
 
         userCredentialsList.add(new UserCredentials("test123@umanitoba.ca", "test123"));
         userCredentialsList.add(new UserCredentials("muhammad@umanitoba.ca", "gossipzilla"));

@@ -1,42 +1,36 @@
-/*package com.well_sync.application;
+package com.well_sync.application;
 
-import com.well_sync.persistence.RecipePersistence;
-import com.well_sync.persistence.RecipeTagPersistence;
+import com.well_sync.persistence.MoodLogPersistence;
+import com.well_sync.persistence.UserPersistence;
+import com.well_sync.persistence.stubs.UserPersistenceStub;
 
 
 public class Services {
-    private static RecipePersistence recipePersistence = null;
-    private static RecipeTagPersistence recipeTagPersistence = null;
+    private static UserPersistence userPersistence = null;
 
-    public static synchronized RecipeTagPersistence getRecipeTagPersistence(boolean forProduction) {
-        if(recipeTagPersistence == null) {
-            if (forProduction) {
-                recipeTagPersistence = new RecipeTagPersistenceHSQLDB(Main.getDBPathName());
-            } else {
-                recipeTagPersistence = new RecipeTagPersistenceStub();
-            }
+    private static final MoodLogPersistence moodLogPersistence = null;
+
+    public static synchronized UserPersistence getUserPersistence() {
+        if (userPersistence == null) {
+            userPersistence = new UserPersistenceStub();
         }
-        return recipeTagPersistence;
+        return userPersistence;
     }
 
-    public static synchronized RecipePersistence getRecipePersistence(boolean forProduction) {
-        if(recipePersistence == null) {
-            if (forProduction) {
-                recipePersistence = new RecipePersistenceHSQLDB(getRecipeTagPersistence(true), Main.getDBPathName());
-            } else {
-                recipePersistence = new RecipePersistenceStub();
-            }
+    public static synchronized MoodLogPersistence getMoodLogPersistence() {
+        if (moodLogPersistence == null) {
+            //Need a mood log persistence stub
+            //moodLogPersistence = new MoodLogPersistenceStub() {
+            //}
         }
-        return recipePersistence;
+        return moodLogPersistence;
     }
 
     /**
      * clean
-     *
      * Reset all services so to be reloaded from scratch next time they are referenced
      */
-   /* public static synchronized void clean() {
-        recipePersistence = null;
-        recipeTagPersistence = null;
+    public static synchronized void clean() {
+        userPersistence = null;
     }
-}*/
+}
