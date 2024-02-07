@@ -4,10 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
-import androidx.appcompat.app.AppCompatActivity;
+import android.widget.ImageView;
 import com.well_sync.R;
+import android.app.Activity;
 
-public class HomePageActivity extends AppCompatActivity {
+public class HomePageActivity extends Activity {
+
+    private ImageView userAccess;
 
     @Override
     protected void onCreate(Bundle saveInstanceState) {
@@ -20,6 +23,16 @@ public class HomePageActivity extends AppCompatActivity {
         LinearLayout medicationLayout = findViewById(R.id.medicationID);
         LinearLayout substanceLayout = findViewById(R.id.substanceUseID);
 
+        userAccess = findViewById(R.id.user);
+        // Set click listeners for each widget
+        userAccess.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Handle close button click
+                Intent closeIntent = new Intent(HomePageActivity.this, UserDetailsActivity.class);
+                HomePageActivity.this.startActivity(closeIntent);
+            }
+        });
         // Set click listeners for each widget
         moodLayout.setOnClickListener(new View.OnClickListener() {
             @Override
