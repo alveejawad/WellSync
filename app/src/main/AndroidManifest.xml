@@ -33,6 +33,14 @@
         </activity>
         <activity
             android:name=".presentation.HomePageActivity"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".presentation.SignUpActivity"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".presentation.LoginActivity"
             android:exported="true"
             android:label="WELLSYNC">
             <intent-filter>
