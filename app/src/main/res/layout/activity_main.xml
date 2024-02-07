@@ -1,141 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     tools:context=".presentation.HomePageActivity">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:orientation="vertical"
-        android:background="@color/top_bg"
-        android:padding="5dp">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="WELLSYNC"
-            android:textSize="45sp"
-            android:textColor="@color/colorPrimaryDark"
-            android:fontFamily="sans-serif-black"
-            android:layout_marginLeft="90sp"/>
-    </LinearLayout>
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="647dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="84dp">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="80dp">
+            android:layout_marginTop="80dp"
+            android:orientation="vertical">
+
             <LinearLayout
                 android:id="@+id/moodID"
                 android:layout_width="350dp"
                 android:layout_height="100dp"
-                android:orientation="horizontal"
-                android:background="@drawable/mood_bg"
+                android:layout_gravity="center"
                 android:layout_marginTop="30dp"
-                android:padding="3dp"
-                android:layout_gravity="center">
+                android:background="@drawable/mood_bg"
+                android:orientation="horizontal"
+                android:padding="3dp">
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="MOOD"
-                        android:textStyle="bold"
-                        android:textSize="23sp"
-                        android:layout_marginTop="10dp"
-                        android:textColor="@color/colorPrimary"
-                        android:layout_marginLeft="15dp"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Something here to be done"
-                        android:textStyle="bold"
-                        android:textSize="18sp"
                         android:layout_marginLeft="15dp"
-                        android:textColor="@color/colorPrimary"/>
+                        android:layout_marginTop="10dp"
+                        android:text="MOOD"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="23sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="226dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:text="Track the frequency of your mood today"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
+
                 <ImageView
                     android:layout_width="90dp"
                     android:layout_height="90dp"
+                    android:layout_marginLeft="10dp"
                     android:padding="8dp"
-
-                    android:layout_marginLeft="10dp"/>
+                    android:src="@drawable/mood" />
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/symptomID"
                 android:layout_width="350dp"
                 android:layout_height="100dp"
-                android:orientation="horizontal"
-                android:background="@drawable/symptom_bg"
+                android:layout_gravity="center"
                 android:layout_marginTop="30dp"
-                android:padding="3dp"
-                android:layout_gravity="center">
+                android:background="@drawable/symptom_bg"
+                android:orientation="horizontal"
+                android:padding="3dp">
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="SYMPTOM"
-                        android:textStyle="bold"
-                        android:textSize="23sp"
-                        android:layout_marginTop="10dp"
-                        android:textColor="@color/colorPrimary"
-                        android:layout_marginLeft="15dp"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Something here to be done"
-                        android:textStyle="bold"
-                        android:textSize="18sp"
                         android:layout_marginLeft="15dp"
-                        android:textColor="@color/colorPrimary"/>
+                        android:layout_marginTop="10dp"
+                        android:text="SYMPTOM"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="23sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="229dp"
+                        android:layout_height="43dp"
+                        android:layout_marginLeft="15dp"
+                        android:text="Track the frequency of your symptom today"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
+
                 <ImageView
                     android:layout_width="90dp"
                     android:layout_height="90dp"
+                    android:layout_marginLeft="10dp"
                     android:padding="8dp"
-
-                    android:layout_marginLeft="10dp"/>
+                    android:src="@drawable/symptom" />
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/medicationID"
                 android:layout_width="350dp"
                 android:layout_height="100dp"
-                android:orientation="horizontal"
-                android:background="@drawable/medication_bg"
+                android:layout_gravity="center"
                 android:layout_marginTop="30dp"
-                android:padding="3dp"
-                android:layout_gravity="center">
+                android:background="@drawable/medication_bg"
+                android:orientation="horizontal"
+                android:padding="3dp">
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="MEDICATION"
-                        android:textStyle="bold"
-                        android:textSize="23sp"
-                        android:layout_marginTop="10dp"
-                        android:textColor="@color/colorPrimary"
-                        android:layout_marginLeft="15dp"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Something here to be done"
-                        android:textStyle="bold"
-                        android:textSize="18sp"
                         android:layout_marginLeft="15dp"
-                        android:textColor="@color/colorPrimary"/>
+                        android:layout_marginTop="10dp"
+                        android:text="MEDICATION"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="23sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="219dp"
+                        android:layout_height="43dp"
+                        android:layout_marginLeft="15dp"
+                        android:text="Track the frequency of your medication today"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
                 <ImageView
@@ -143,49 +146,79 @@
                     android:layout_height="90dp"
                     android:layout_marginLeft="10dp"
                     android:padding="8dp"
-                     />
+                    android:src="@drawable/medication" />
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/substanceUseID"
                 android:layout_width="350dp"
                 android:layout_height="100dp"
-                android:orientation="horizontal"
-                android:background="@drawable/substance_bg"
+                android:layout_gravity="center"
                 android:layout_marginTop="30dp"
-                android:padding="3dp"
-                android:layout_gravity="center">
+                android:background="@drawable/substance_bg"
+                android:orientation="horizontal"
+                android:padding="3dp">
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="SUBSTANCE USE"
-                        android:textStyle="bold"
-                        android:textSize="23sp"
-                        android:layout_marginTop="10dp"
-                        android:textColor="@color/colorPrimary"
-                        android:layout_marginLeft="15dp"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Something here to be done"
-                        android:textStyle="bold"
-                        android:textSize="18sp"
                         android:layout_marginLeft="15dp"
-                        android:textColor="@color/colorPrimary"/>
+                        android:layout_marginTop="10dp"
+                        android:text="SUBSTANCE USE"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="23sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="228dp"
+                        android:layout_height="48dp"
+                        android:layout_marginLeft="15dp"
+                        android:text="Track the frequency of your substance use today"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
+
                 <ImageView
                     android:layout_width="90dp"
                     android:layout_height="90dp"
+                    android:layout_marginLeft="10dp"
                     android:padding="8dp"
-
-                    android:layout_marginLeft="10dp"/>
+                    android:src="@drawable/substance_use" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
+    <ImageView
+        android:id="@+id/user"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="18dp"
+        app:srcCompat="@drawable/user" />
 
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="262dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="81dp"
+        android:layout_marginTop="55dp"
+        android:layout_marginEnd="68dp"
+        android:fontFamily="sans-serif-black"
+        android:gravity="center"
+        android:text="WELLSYNC"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="45sp" />
 </RelativeLayout>
 
 
