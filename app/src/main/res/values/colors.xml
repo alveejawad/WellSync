@@ -16,4 +16,6 @@
     <color name="medication_end">#526AEE</color>
     <color name="substanceUse_stat">#3EC2FA</color>
     <color name="substanceUse_end">#526AEE</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
 </resources>
