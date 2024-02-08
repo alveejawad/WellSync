@@ -2,21 +2,20 @@ package com.well_sync.presentation;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.well_sync.R;
 import com.well_sync.objects.UserCredentials;
-import com.well_sync.logic.UserValidationHandler;
+import com.well_sync.logic.UserAuthenticationHandler;
 import android.graphics.Paint;
 
 
 public class LoginActivity extends AppCompatActivity {
 
     private UserCredentials userCredentials;
-    private UserValidationHandler loginHandler;
+    private UserAuthenticationHandler loginHandler;
     TextView loginButton;
     TextView signUpButton;
     EditText userPassword;
@@ -28,7 +27,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_login);
 
-        loginHandler = new UserValidationHandler();
+        loginHandler = new UserAuthenticationHandler();
         loginButton = findViewById(R.id.Loginbutton);
         signUpButton = findViewById(R.id.SignUp);
         userEmail = findViewById(R.id.editEmail);

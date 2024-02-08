@@ -45,12 +45,7 @@ public class MoodLog {
     }
 
     public void setMoodScore(int moodScore) {
-        if (moodScore < -4)
-            this.moodScore = -4;
-        else if (moodScore > 4)
-            this.moodScore = 4;
-        else
-            this.moodScore = moodScore;
+        this.moodScore = moodScore;
     }
 
     public void setSleepHours(int sleepHours) {
