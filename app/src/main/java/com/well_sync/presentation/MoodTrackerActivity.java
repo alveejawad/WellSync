@@ -10,7 +10,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.well_sync.R;
-
+import com.well_sync.objects.*;
+import com.well_sync.logic.MoodLogHandler;
+import java.util.Date;
+import java.time.LocalDate;
 
 public class MoodTrackerActivity extends AppCompatActivity {
 
@@ -19,11 +22,20 @@ public class MoodTrackerActivity extends AppCompatActivity {
     private Button saveButton;
     private TextView emotionText;
 
+    private MoodLog moodLog;
+    private MoodLogHandler moodLogHandler;
 
+    private Date date;
+    private int moodScores;
+    private int sleepHours;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mood); // Replace with your actual layout file name
+
+        // Create a LocalDate instance and convert it to date
+        LocalDate localDate = LocalDate.now();
+        date = java.sql.Date.valueOf(localDate.toString());
 
         // Initialize views
         closeImageView = findViewById(R.id.close);
@@ -35,6 +47,8 @@ public class MoodTrackerActivity extends AppCompatActivity {
         sleepHoursEditText = findViewById(R.id.sleep_hours);
         userNotesEditText = findViewById(R.id.user_notes);
         saveButton = findViewById(R.id.button);
+
+
 
         // Set click listeners for icon selection
         smileImageView.setOnClickListener(new View.OnClickListener() {
@@ -49,6 +63,9 @@ public class MoodTrackerActivity extends AppCompatActivity {
                 // Set the emotion text below the selected image view
                 emotionText.setText("Happy");
 
+                // Set the mood score
+                moodScores = 4;
+
             }
         });
 
@@ -60,6 +77,9 @@ public class MoodTrackerActivity extends AppCompatActivity {
                 selectedImageView = neutralImageView;
                 // Set the emotion text below the selected image view
                 emotionText.setText("Neutral");
+
+                // Set the mood score
+                moodScores = 3;
             }
         });
 
@@ -71,6 +91,9 @@ public class MoodTrackerActivity extends AppCompatActivity {
                 selectedImageView = angryImageView;
                 // Set the emotion text below the selected image view
                 emotionText.setText("Angry");
+
+                // Set the mood score
+                moodScores = 2;
             }
         });
 
@@ -82,6 +105,9 @@ public class MoodTrackerActivity extends AppCompatActivity {
                 selectedImageView = sickImageView;
                 // Set the emotion text below the selected image view
                 emotionText.setText("Sick");
+
+                // Set the mood score
+                moodScores = 1;
             }
         });
         // Set click listeners or any other event listeners as needed
@@ -99,16 +125,29 @@ public class MoodTrackerActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 // Handle save button click
                 String emotion = emotionText.getText().toString();
-                String sleepHours = sleepHoursEditText.getText().toString();
+                String sleepHoursText = sleepHoursEditText.getText().toString();
+                // Convert sleepHours to an integer
+                try {
+                    sleepHours = Integer.parseInt(sleepHoursText);
+                } catch (NumberFormatException e) {
+                    // Handle the case where th input is not a valid integer
+                    e.printStackTrace();
+                }
                 String userNotes = userNotesEditText.getText().toString();
+                // Handle the object MoodLog
+                moodLog.setSleepHours(sleepHours);
+                moodLog.setDate(date);
+                moodLog.setMoodScore(moodScores);
+                moodLog.setNotes(userNotes);
+                // Save date to show on the next page
                 Intent saveIntent = new Intent(MoodTrackerActivity.this, DisplayDataActivity.class);
                 saveIntent.putExtra("emotion", emotion);
-                saveIntent.putExtra("sleepHours", sleepHours);
+                saveIntent.putExtra("sleepHours", sleepHoursText);
                 saveIntent.putExtra("userNotes", userNotes);
                 MoodTrackerActivity.this.startActivity(saveIntent);
-                // Perform actions with sleepHours and userNotes (e.g., save to database)
             }
         });
     }
