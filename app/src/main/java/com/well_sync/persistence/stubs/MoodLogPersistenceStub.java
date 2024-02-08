@@ -3,15 +3,15 @@ package com.well_sync.persistence.stubs;
 import com.well_sync.objects.Patient;
 import com.well_sync.objects.MoodLog;
 import com.well_sync.objects.UserCredentials;
-import com.well_sync.persistence.MoodLogPersistence;
-import com.well_sync.persistence.UserPersistence;
+import com.well_sync.persistence.iMoodLogPersistence;
+import com.well_sync.persistence.iUserPersistence;
 
 import java.util.*;
 
-public class MoodLogPersistenceStub implements MoodLogPersistence {
+public class MoodLogPersistenceStub implements iMoodLogPersistence {
 
     private final Map<Patient, List<MoodLog>> moodLogList;
-    private UserPersistence userPersistence;
+    private iUserPersistence userPersistence;
 
     public MoodLogPersistenceStub() {
         moodLogList = new HashMap<>();
