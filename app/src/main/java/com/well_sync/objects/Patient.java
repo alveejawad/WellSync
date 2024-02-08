@@ -18,7 +18,8 @@ public class Patient {
     }
 
     private final String email;
-    private String name;
+    private String firstName;
+    private String lastName;
     private BloodType bloodType;
     private Sex sex;
     private int age;
@@ -27,10 +28,11 @@ public class Patient {
         this.email = email;
     }
 
-    public Patient(final String email, final String name, final BloodType bloodType,
+    public Patient(final String email, final String firstName, final String lastName, final BloodType bloodType,
                    final Sex sex, final int age) {
         this.email = email;
-        this.name = name;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.bloodType = bloodType;
         this.sex = sex;
         this.age = age;
@@ -40,9 +42,11 @@ public class Patient {
         return email;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
+
+    public String getLastName() { return lastName; }
 
     public BloodType getBloodType() {
         return bloodType;
@@ -56,8 +60,11 @@ public class Patient {
         return age;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public void setBloodType(BloodType bloodType) {
@@ -74,7 +81,7 @@ public class Patient {
 
     @Override
     public String toString() {
-        return String.format(Locale.CANADA, "%s (%d / %s / %s)", name, age, sex, bloodType);
+        return String.format(Locale.CANADA, "%s %s (%d / %s / %s)", firstName, lastName, age, sex, bloodType);
     }
 
     @Override
@@ -84,13 +91,14 @@ public class Patient {
         Patient patient = (Patient) o;
         return age == patient.age
                 && Objects.equals(email, patient.email)
-                && Objects.equals(name, patient.name)
+                && Objects.equals(firstName, patient.firstName)
+                && Objects.equals(lastName, patient.lastName)
                 && bloodType == patient.bloodType
                 && sex == patient.sex;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(email, name, bloodType, sex, age);
+        return Objects.hash(email, firstName, lastName, bloodType, sex, age);
     }
 }

@@ -11,7 +11,8 @@ public class PatientValidator {
             throw new InvalidPatientException("Patient details object undefined.");
 
         UserCredentialsValidator.validateEmail(patient.getEmail());
-        validateName(patient.getName());
+        validateName(patient.getFirstName());
+        validateName(patient.getLastName());
         validateAge(patient.getAge());
         validateNonNullObject(patient.getBloodType(), "blood type");
         validateNonNullObject(patient.getSex(), "sex");
