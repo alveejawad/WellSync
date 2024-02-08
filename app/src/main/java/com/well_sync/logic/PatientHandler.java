@@ -6,17 +6,17 @@ import com.well_sync.logic.exceptions.InvalidPatientException;
 import com.well_sync.objects.Patient;
 import com.well_sync.objects.PatientValidator;
 import com.well_sync.objects.UserCredentials;
-import com.well_sync.persistence.UserPersistence;
+import com.well_sync.persistence.iUserPersistence;
 
 public class PatientHandler {
 
-	private final UserPersistence persistUsers;
+	private final iUserPersistence persistUsers;
 
 	public PatientHandler() {
 		persistUsers = Services.getUserPersistence();
 	}
 
-	public PatientHandler(UserPersistence persistence){
+	public PatientHandler(iUserPersistence persistence){
 		persistUsers = persistence;
 	}
 

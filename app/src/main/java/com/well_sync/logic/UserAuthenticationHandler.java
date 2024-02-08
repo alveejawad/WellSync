@@ -4,17 +4,17 @@ import com.well_sync.application.Services;
 import com.well_sync.logic.exceptions.InvalidCredentialsException;
 import com.well_sync.objects.UserCredentials;
 import com.well_sync.objects.UserCredentialsValidator;
-import com.well_sync.persistence.UserPersistence;
+import com.well_sync.persistence.iUserPersistence;
 
 public class UserAuthenticationHandler {
 
-    private final UserPersistence persistUsers;
+    private final iUserPersistence persistUsers;
 
     public UserAuthenticationHandler() {
         persistUsers = Services.getUserPersistence();
     }
 
-    public UserAuthenticationHandler(UserPersistence persistence) {
+    public UserAuthenticationHandler(iUserPersistence persistence) {
         persistUsers = persistence;
     }
 

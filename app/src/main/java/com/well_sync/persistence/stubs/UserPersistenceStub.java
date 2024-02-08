@@ -2,13 +2,12 @@ package com.well_sync.persistence.stubs;
 
 import com.well_sync.objects.Patient;
 import com.well_sync.objects.UserCredentials;
-import com.well_sync.persistence.UserPersistence;
+import com.well_sync.persistence.iUserPersistence;
 
-import java.util.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserPersistenceStub implements UserPersistence {
+public class UserPersistenceStub implements iUserPersistence {
     private final List<Patient> patientList;
     private final List<UserCredentials> userCredentialsList;
 

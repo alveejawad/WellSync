@@ -3,7 +3,7 @@ package com.well_sync.persistence;
 import com.well_sync.objects.Patient;
 import com.well_sync.objects.UserCredentials;
 
-public interface UserPersistence {
+public interface iUserPersistence {
 
     UserCredentials getUserCredentials(UserCredentials userCredentials);
 
