@@ -3,16 +3,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.well_sync.R;
-import com.well_sync.logic.UserValidationHandler;
+import com.well_sync.logic.UserAuthenticationHandler;
 import com.well_sync.objects.UserCredentials;
 
 public class SignUpActivity extends AppCompatActivity {
     private UserCredentials newUser;
-    private UserValidationHandler signUpHandler;
+    private UserAuthenticationHandler signUpHandler;
     TextView nextButton;
     EditText userFirstName;
     EditText userLastName;
@@ -25,7 +24,7 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_signup);
 
-        signUpHandler = new UserValidationHandler();
+        signUpHandler = new UserAuthenticationHandler();
         userFirstName = findViewById(R.id.editFirstName);
         userLastName = findViewById(R.id.editLastName);
         userEmail = findViewById(R.id.editEmail);

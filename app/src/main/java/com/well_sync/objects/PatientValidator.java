@@ -22,7 +22,7 @@ public class PatientValidator {
      */
     public static void validateName(String name) throws InvalidPatientException {
         validateNonNullObject(name, "patient name");
-        if (!Pattern.matches("[A-Za-z]{2,}", name))
+        if (!Pattern.matches("[\\w -]{2,}", name))
             throw new InvalidPatientException("Invalid name specified.");
     }
 

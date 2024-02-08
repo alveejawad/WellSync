@@ -24,7 +24,7 @@ public class UserCredentialsValidator {
     public static void validateEmail(String email) throws InvalidCredentialsException {
         if (email == null)
             throw new InvalidCredentialsException("No email address specified.");
-        if (!Pattern.matches("[\\w_.-]+@[\\w-]+.[a-z]{2}", email))
+        if (!Pattern.matches("[\\w_.-]+@[\\w-]+.[a-z]{2,}", email))
             throw new InvalidCredentialsException("Invalid/malformed email address.");
     }
 

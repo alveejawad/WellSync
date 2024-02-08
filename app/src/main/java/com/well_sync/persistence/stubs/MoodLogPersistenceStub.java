@@ -19,12 +19,12 @@ public class MoodLogPersistenceStub implements MoodLogPersistence {
 
         Patient patient1 = userPersistence.getPatient(new UserCredentials("test123@umanitoba.ca", "test123"));
         List<MoodLog> moodLogsPatient1 = new ArrayList<>();
-        moodLogsPatient1.add(new MoodLog(new Date(), 2, 420, "Anxious"));
+        moodLogsPatient1.add(new MoodLog(new Date(124, Calendar.FEBRUARY, 7), 3, 6, "Anxious"));
         moodLogList.put(patient1, moodLogsPatient1);
 
         Patient patient2 = userPersistence.getPatient(new UserCredentials("muhammad@umanitoba.ca", "gossipzilla"));
         List<MoodLog> moodLogsPatient2 = new ArrayList<>();
-        moodLogsPatient1.add(new MoodLog(new Date(), -2, 420, "Sad"));
+        moodLogsPatient1.add(new MoodLog(new Date(124, Calendar.JANUARY, 31), 4, 7, "Sad"));
         moodLogList.put(patient2, moodLogsPatient2);
     }
 
