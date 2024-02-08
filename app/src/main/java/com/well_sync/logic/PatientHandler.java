@@ -1,10 +1,7 @@
 package com.well_sync.logic;
 
 import com.well_sync.application.Services;
-import com.well_sync.logic.exceptions.InvalidMoodLogException;
-import com.well_sync.logic.exceptions.InvalidPatientException;
 import com.well_sync.objects.Patient;
-import com.well_sync.objects.PatientValidator;
 import com.well_sync.objects.UserCredentials;
 import com.well_sync.persistence.UserPersistence;
 
@@ -26,16 +23,21 @@ public class PatientHandler {
 	}
 
 	//editDetails function will get the userInput and set the details into the persistence layer
-	public boolean editDetails(Patient inputDetails) throws InvalidMoodLogException {
-		try {
-			PatientValidator.validatePatient(inputDetails);
-			persistUsers.setPatient(inputDetails);
-		} catch (InvalidPatientException e) {
-			return false;
+	public void editDetails(Patient inputDetails) {
+
+		//user info
+		String email = inputDetails.getEmail();
+
+		//got from the database
+		Patient p = persistUsers.getPatient(email);
+
+		//compare p wih inputDetails
+		if (!p.equals(inputDetails)){
+			persistUsers.setPatient(p);
 		}
 
-		return true;
 	}
+
 }
 
 
