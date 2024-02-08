@@ -28,7 +28,7 @@ public class UserPersistenceStub implements UserPersistence {
     @Override
     public UserCredentials getUserCredentials(UserCredentials userCredentials) {
         for(int i = 0; i < userCredentialsList.size(); i ++) {
-            if(userCredentialsList.get(i).getEmail() == userCredentials.getEmail()) {
+            if(userCredentialsList.get(i).getEmail().equals(userCredentials.getEmail())) {
                 return userCredentialsList.get(i);
             }
         }
