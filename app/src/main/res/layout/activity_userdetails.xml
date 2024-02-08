@@ -59,7 +59,7 @@
 
 
         <RadioGroup
-            android:id="@id/Gender"
+            android:id="@+id/GenderPicker"
             android:layout_width="wrap_content"
             android:layout_height="45dp"
             android:layout_gravity="center"
@@ -92,6 +92,7 @@
 
 
         </RadioGroup>
+        <!--
 
         <TableLayout
             android:id="@+id/HeightWeight"
@@ -101,12 +102,12 @@
             android:shrinkColumns="*"
             android:stretchColumns="*">
 
-            <!-- First Row -->
+
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <!-- First Column -->
+
                 <TextView
                     android:id="@+id/Height"
                     android:layout_width="wrap_content"
@@ -116,7 +117,7 @@
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
-                <!-- Second Column -->
+
                 <TextView
                     android:id="@+id/Weight"
                     android:layout_width="wrap_content"
@@ -127,18 +128,18 @@
                     android:textStyle="bold" />
             </TableRow>
 
-            <!-- Second Row -->
+
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <!-- First Column -->
+
                 <NumberPicker
                     android:id="@+id/HeightNumberPicker"
                     android:layout_width="match_parent"
                     android:layout_height="76dp" />
 
-                <!-- Second Column -->
+
                 <NumberPicker
                     android:id="@+id/WeightNumberPicker"
                     android:layout_width="match_parent"
@@ -146,6 +147,8 @@
             </TableRow>
 
         </TableLayout>
+     -->
+
 
         <TextView
             android:id="@+id/BloodType"
