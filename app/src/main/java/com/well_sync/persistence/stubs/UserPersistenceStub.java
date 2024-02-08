@@ -43,7 +43,7 @@ public class UserPersistenceStub implements UserPersistence {
     @Override
     public Patient getPatient(UserCredentials userCredentials) {
         for(int i = 0; i < patientList.size(); i ++) {
-            if(patientList.get(i).getEmail() == userCredentials.getEmail()) {
+            if(patientList.get(i).getEmail().equals(userCredentials.getEmail())) {
                 return patientList.get(i);
             }
         }
