@@ -34,16 +34,34 @@ public class LoginActivity extends AppCompatActivity {
         userEmail = findViewById(R.id.editEmail);
         userPassword = findViewById(R.id.editPassword);
 
+        stylizeSignUpLink();
+
 
         //LOG IN BUTTON
         loginButton.setOnClickListener(new View.OnClickListener(){
 
             public void onClick(View v) {
                 userCredentials=getCredentials(v);
-                if(loginHandler.login(userCredentials)) {
-                    startActivity(new Intent(LoginActivity.this,HomePageActivity.class));
-                }else {
-                    Toast.makeText(getApplicationContext(), "login failed" , Toast.LENGTH_SHORT).show();
+                String currEmail= userCredentials.getEmail();
+                String currPassword = userCredentials.getPassword();
+                if(currEmail.isEmpty() && currPassword.isEmpty()){
+                    userEmail.setError("Enter your email");
+                    userEmail.requestFocus();
+                    userPassword.setError("Enter your password");
+                } else if (currEmail.isEmpty()) {
+                    userEmail.setError("Enter your email");
+                    userEmail.requestFocus();
+                } else if (currPassword.isEmpty()) {
+                    userPassword.setError("Enter your password");
+                    userPassword.requestFocus();
+                }else{
+                    if(loginHandler.login(userCredentials)) {
+                        startActivity(new Intent(LoginActivity.this,HomePageActivity.class));
+                    }else {
+                        Toast.makeText(getApplicationContext(), "The email you entered isn’t connected to an account" , Toast.LENGTH_SHORT).show();
+                        resetLoginFields();
+                    }
+
                 }
             }
         });
