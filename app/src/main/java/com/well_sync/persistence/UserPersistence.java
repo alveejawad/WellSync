@@ -12,4 +12,7 @@ public interface UserPersistence {
     Patient getPatient(UserCredentials userCredentials);
 
     void setPatient(Patient patient);
+
+    Patient getPatient(String email);
+
 }

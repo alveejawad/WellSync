@@ -34,6 +34,14 @@ public class UserPersistenceStub implements UserPersistence {
         }
         return null;
     }
+    public Patient getPatient(String email){
+        for (int  i = 0 ;i < patientList.size(); i++){
+            if(patientList.get(i).getEmail().equals(email)){
+                 return patientList.get(i);
+            }
+        }
+        return null;
+    }
 
     @Override
     public void setUserCredentials(UserCredentials user) {
@@ -77,4 +85,6 @@ public class UserPersistenceStub implements UserPersistence {
             patientList.add(patient);
         }
     }
+
+
 }
