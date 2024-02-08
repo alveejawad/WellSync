@@ -16,22 +16,31 @@ import android.graphics.Paint;
 public class LoginActivity extends AppCompatActivity {
 
     private UserCredentials userCredentials;
-    private UserValidationHandler validateUser;
+    private UserValidationHandler loginHandler;
+    TextView loginButton;
+    TextView signUpButton;
+    EditText userPassword;
+    EditText userEmail;
+
 
     @Override
     protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_login);
 
-        TextView loginButton = findViewById(R.id.Loginbutton);
-        TextView signUpButton = findViewById(R.id.SignUp);
+        loginHandler = new UserValidationHandler();
+        loginButton = findViewById(R.id.Loginbutton);
+        signUpButton = findViewById(R.id.SignUp);
+        userEmail = findViewById(R.id.editEmail);
+        userPassword = findViewById(R.id.editPassword);
+
 
         //LOG IN BUTTON
         loginButton.setOnClickListener(new View.OnClickListener(){
 
             public void onClick(View v) {
                 userCredentials=getCredentials(v);
-                if(validateUser.login(userCredentials)) {
+                if(loginHandler.login(userCredentials)) {
                     startActivity(new Intent(LoginActivity.this,HomePageActivity.class));
                 }else {
                     Toast.makeText(getApplicationContext(), "login failed" , Toast.LENGTH_SHORT).show();
@@ -55,9 +64,9 @@ public class LoginActivity extends AppCompatActivity {
 
     public UserCredentials getCredentials(View view) {
         UserCredentials returningUser;
-        EditText usernameEmail = (EditText) findViewById(R.id.editEmail);
-        EditText passwordInput = (EditText) findViewById(R.id.editPassword);
-        returningUser = new UserCredentials(usernameEmail.getText().toString(),passwordInput.getText().toString());
+        String email = userEmail.getText().toString();
+        String password = userPassword.getText().toString();
+        returningUser = new UserCredentials(email,password);
         return returningUser;
     }
 
@@ -70,3 +79,5 @@ public class LoginActivity extends AppCompatActivity {
 
 
 }
+
+
