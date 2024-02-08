@@ -10,17 +10,17 @@ public class MoodLog {
 
     private Date date;
     private int moodScore;
-    private int sleepMinutes;
+    private int sleepHours;
     private String notes;
 
     public MoodLog() {
         this.date = new Date(); // initialized to present
     }
 
-    public MoodLog(Date date, int moodScore, int sleepMinutes, String notes) {
+    public MoodLog(Date date, int moodScore, int sleepHours, String notes) {
         this.date = date;
         this.setMoodScore(moodScore); // bounds checking
-        this.setSleepMinutes(sleepMinutes); // " "
+        this.setSleepHours(sleepHours); // " "
         this.notes = notes;
     }
 
@@ -32,8 +32,8 @@ public class MoodLog {
         return moodScore;
     }
 
-    public int getSleepMinutes() {
-        return sleepMinutes;
+    public int getSleepHours() {
+        return sleepHours;
     }
 
     public String getNotes() {
@@ -53,8 +53,8 @@ public class MoodLog {
             this.moodScore = moodScore;
     }
 
-    public void setSleepMinutes(int sleepMinutes) {
-        this.sleepMinutes = Math.min(sleepMinutes, 0);
+    public void setSleepHours(int sleepHours) {
+        this.sleepHours = Math.min(sleepHours, 0);
     }
 
     public void setNotes(String notes) {
@@ -67,13 +67,13 @@ public class MoodLog {
         if (o == null || getClass() != o.getClass()) return false;
         MoodLog moodLog = (MoodLog) o;
         return moodScore == moodLog.moodScore
-                && sleepMinutes == moodLog.sleepMinutes
+                && sleepHours == moodLog.sleepHours
                 && Objects.equals(date, moodLog.date)
                 && Objects.equals(notes, moodLog.notes);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(date, moodScore, sleepMinutes, notes);
+        return Objects.hash(date, moodScore, sleepHours, notes);
     }
 }
