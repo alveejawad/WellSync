@@ -6,9 +6,10 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ImageView;
 import com.well_sync.R;
-import android.app.Activity;
 
-public class HomePageActivity extends Activity {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class HomePageActivity extends AppCompatActivity {
 
     private ImageView userAccess;
 
