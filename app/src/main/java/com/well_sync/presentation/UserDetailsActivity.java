@@ -15,15 +15,27 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.well_sync.R;
+import com.well_sync.logic.PatientHandler;
+import com.well_sync.objects.Patient;
+import com.well_sync.presentation.SignUpActivity;
+import com.well_sync.objects.UserCredentials;
+import java.util.Objects;
+
+
 import androidx.appcompat.app.AppCompatActivity;
 public class UserDetailsActivity extends AppCompatActivity {
+
+    private PatientHandler patientHandler;
+    //User data
+    private EditText userFirstName;
+    private EditText userLastName;
     private DatePicker datePicker;
 
     private RadioGroup genderPicker;
     private RadioButton selectedGender;
 
     private Spinner bloodTypeSpinner;
-    private String[] bloodTypeList = new String[]{"A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"};
+    private String[] bloodTypeList = new String[]{"A", "B", "AB", "AB"};
     private ArrayAdapter<String> adapterBloodType;
     private Button saveButton;
 
@@ -32,17 +44,26 @@ public class UserDetailsActivity extends AppCompatActivity {
     private String gender;
     private int age;
 
+    private UserCredentials newUserCredentials;
+    private SignUpActivity signUpPage;
+
+
     @Override
     protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_userdetails);
 
+        signUpPage = new SignUpActivity();
+        patientHandler = new PatientHandler();
+        userFirstName = findViewById(R.id.editFirstName);
+        userLastName = findViewById(R.id.editLastName);
         genderPicker = findViewById(R.id.GenderPicker);
         saveButton = findViewById(R.id.savebutton);
         datePicker = findViewById(R.id.datePicker);
         bloodTypeSpinner = findViewById(R.id.BloodTypes);
 
         setBloodTypeValues();
+
 
         bloodTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
@@ -56,18 +77,23 @@ public class UserDetailsActivity extends AppCompatActivity {
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                //get input from user
+                String firstName = userFirstName.getText().toString();
+                String lastName = userLastName.getText().toString();
                 gender=getGender();
                 bloodType=getBloodType();
                 age=getAge();
-                if(age<10){
-                    Toast.makeText(getApplicationContext(), "You must be at least 10 years old to use WellSync" , Toast.LENGTH_SHORT).show();
-                }else if(gender.isEmpty()){
-                    Toast.makeText(getApplicationContext(), "Please select your gender" , Toast.LENGTH_SHORT).show();
-                }else if(bloodType.isEmpty()){
-                    Toast.makeText(getApplicationContext(), "Please select your blood type" , Toast.LENGTH_SHORT).show();
-                }else{
+                newUserCredentials=signUpPage.getUserCredentials();
+
+
+                Patient newPatient= new Patient("test123@gmail.com",firstName,lastName,Patient.BloodType.TYPE_A, Patient.Sex.UNSPECIFIED,age);
+
+                if(patientHandler.editDetails(newPatient)){
                     startActivity(new Intent(UserDetailsActivity.this, HomePageActivity.class));
+                }else{
+                    Toast.makeText(getApplicationContext(), "Data is invalid" , Toast.LENGTH_SHORT).show();
                 }
+
             }
         });
 
@@ -100,7 +126,9 @@ public class UserDetailsActivity extends AppCompatActivity {
         return bloodType;
     }
 
-
-
+    private void resetNames() {
+        userFirstName = findViewById(R.id.editFirstName);
+        userLastName = findViewById(R.id.editLastName);
+    }
 
 }

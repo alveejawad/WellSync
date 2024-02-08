@@ -28,8 +28,6 @@ public class SignUpActivity extends AppCompatActivity {
         //Logic Layer Handler
         signUpHandler = new UserAuthenticationHandler();
         //User data
-        userFirstName = findViewById(R.id.editFirstName);
-        userLastName = findViewById(R.id.editLastName);
         userEmail = findViewById(R.id.editEmail);
         userPassword = findViewById(R.id.editPassword);
         userConfirmPassword = findViewById(R.id.editConfirmPassword);
@@ -40,29 +38,12 @@ public class SignUpActivity extends AppCompatActivity {
         nextButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
                 //get input from user
-                String firstName = userFirstName.getText().toString();
-                String lastName = userLastName.getText().toString();
                 String email = userEmail.getText().toString();
                 String password = userPassword.getText().toString();
                 String confirmPassword = userConfirmPassword.getText().toString();
 
-                //If any field is empty
-                if (firstName.isEmpty() || lastName.isEmpty()) {
-                    userFirstName.setError("Name can't be blank");
-                    userFirstName.requestFocus();
-                    userLastName.setError("Name can't be blank");
-                    userLastName.requestFocus();
-                } else if (email.isEmpty()) {
-                    userEmail.setError("Enter your email");
-                    userEmail.requestFocus();
-                } else if (password.isEmpty()) {
-                    userPassword.setError("Enter your password");
-                    userPassword.requestFocus();
-                } else if (confirmPassword.isEmpty()) {
-                    userConfirmPassword.setError("Confirm your password");
-                    userConfirmPassword.requestFocus();
-                }else if(!password.equals(confirmPassword)) {
-                //if passwords don't match
+                if(!password.equals(confirmPassword)) {
+                    //if passwords don't match
                     userPassword.setError("Passwords don't match. Try again");
                     userPassword.requestFocus();
                     resetPasswords();
@@ -74,6 +55,9 @@ public class SignUpActivity extends AppCompatActivity {
                     if (registered){
                         startActivity(new Intent(SignUpActivity.this, UserDetailsActivity.class));
                     }else{
+                        userPassword.setError("Email or Password invalid");
+                        userPassword.requestFocus();
+                        userEmail.requestFocus();
                         resetSignUpFields();
                         Toast.makeText(getApplicationContext(), "Not Registered. Invalid values, try again" , Toast.LENGTH_SHORT).show();
                     }
@@ -95,16 +79,15 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     /**
-    Function: reset all of the data entry fields in case registration fails
-    */
+     Function: reset all of the data entry fields in case registration fails
+     */
     private void resetSignUpFields(){
-        userFirstName = findViewById(R.id.editFirstName);
-        userLastName = findViewById(R.id.editLastName);
         userEmail = findViewById(R.id.editEmail);
-        userFirstName.setText("");
-        userLastName.setText("");
         userEmail.setText("");
         resetPasswords();
 
+    }
+    public UserCredentials getUserCredentials(){
+        return newUser;
     }
 }

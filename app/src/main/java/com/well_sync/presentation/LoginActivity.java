@@ -41,26 +41,15 @@ public class LoginActivity extends AppCompatActivity {
 
             public void onClick(View v) {
                 userCredentials=getCredentials(v);
-                String currEmail= userCredentials.getEmail();
-                String currPassword = userCredentials.getPassword();
-                if(currEmail.isEmpty() && currPassword.isEmpty()){
-                    userEmail.setError("Enter your email");
-                    userEmail.requestFocus();
-                    userPassword.setError("Enter your password");
-                } else if (currEmail.isEmpty()) {
-                    userEmail.setError("Enter your email");
-                    userEmail.requestFocus();
-                } else if (currPassword.isEmpty()) {
-                    userPassword.setError("Enter your password");
-                    userPassword.requestFocus();
-                }else{
-                    if(loginHandler.login(userCredentials)) {
-                        startActivity(new Intent(LoginActivity.this,HomePageActivity.class));
-                    }else {
-                        Toast.makeText(getApplicationContext(), "The email you entered isn’t connected to an account" , Toast.LENGTH_SHORT).show();
-                        resetLoginFields();
-                    }
-
+                String currEmail = userEmail.getText().toString();
+                String currPassword = userPassword.getText().toString();
+                if(loginHandler.login(userCredentials)) {
+                    startActivity(new Intent(LoginActivity.this,HomePageActivity.class));
+                }else {
+                    Toast.makeText(getApplicationContext(), "The email you entered isn’t connected to an account" , Toast.LENGTH_SHORT).show();
+                    resetLoginFields();
+                    userPassword.setError("Email or Password invalid");
+                    userEmail.setError("Email or Password invalid");
                 }
             }
         });
@@ -96,5 +85,3 @@ public class LoginActivity extends AppCompatActivity {
 
 
 }
-
-
