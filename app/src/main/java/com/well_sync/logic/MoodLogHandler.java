@@ -1,7 +1,9 @@
 package com.well_sync.logic;
 
 import com.well_sync.application.Services;
+import com.well_sync.logic.exceptions.InvalidMoodLogException;
 import com.well_sync.objects.MoodLog;
+import com.well_sync.objects.MoodLogValidator;
 import com.well_sync.objects.Patient;
 import com.well_sync.persistence.MoodLogPersistence;
 
@@ -19,8 +21,15 @@ public class MoodLogHandler {
         persistLog = persistence;
     }
 
-    public void setMoodLog(Patient patient, MoodLog moodLog) {
-        persistLog.setMoodLog(patient, moodLog);
+    public boolean setMoodLog(Patient patient, MoodLog moodLog) {
+        try {
+            MoodLogValidator.validateMoodLog(moodLog);
+            persistLog.setMoodLog(patient, moodLog);
+        } catch (InvalidMoodLogException e) {
+            return false;
+        }
+
+        return true;
     }
 
     public MoodLog getMoodLog(Patient patient, Date date) {
