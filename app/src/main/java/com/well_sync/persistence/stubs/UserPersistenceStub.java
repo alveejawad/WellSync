@@ -42,8 +42,17 @@ public class UserPersistenceStub implements UserPersistence {
 
     @Override
     public Patient getPatient(UserCredentials userCredentials) {
-        for(int i = 0; i < patientList.size(); i ++) {
-            if(patientList.get(i).getEmail().equals(userCredentials.getEmail())) {
+        for (int i = 0; i < patientList.size(); i ++) {
+            if (patientList.get(i).getEmail().equals(userCredentials.getEmail())) {
+                return patientList.get(i);
+            }
+        }
+        return null;
+    }
+
+    public Patient getPatient(Patient patient) {
+        for (int i = 0; i < patientList.size(); i ++) {
+            if (patientList.get(i).getEmail().equals(patient.getEmail())) {
                 return patientList.get(i);
             }
         }
@@ -52,6 +61,20 @@ public class UserPersistenceStub implements UserPersistence {
 
     @Override
     public void setPatient(Patient patient) {
-        patientList.add(patient);
+        boolean patientExists = false;
+
+        // Check if a patient with the same email already exists
+        for (int i = 0; i < patientList.size(); i++) {
+            if (patientList.get(i).getEmail().equals(patient.getEmail())) {
+                patientList.set(i, patient);
+                patientExists = true;
+                break;
+            }
+        }
+
+        // If no patient with the same email is found, add the new patient
+        if (!patientExists) {
+            patientList.add(patient);
+        }
     }
 }
