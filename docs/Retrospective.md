@@ -18,10 +18,10 @@
 
 ### What to improve?
 
-**1. Branch names-** Fix the naming of our branches according to branching convention.
+**1. Branch names-** By being more consistent and including details the team deems necessary, we are able to improve our branch naming convention.
 
-**2. Group meetings-** Meet at least twice a week to check up on everyone's progress and to assist each other.
+**2. Group meetings-** By having meetings at least twice a week, we are able to improve our communication by being on the same page.
 
-**3. Review merge requests-** Review as a group before merging 
+**3. Review merge requests-** By assigning reviewers or reviewing merge requests during meetings, the team is able to improve the quality of the project.
 
-**4. Smaller commits -** Make smaller commits instead of doing all of it in one commit.
+**4. Smaller commits -** By creating smaller commits, the team is able to improve upon work productivity as members would have immediate access instead of waiting for a big commit to be pushed into the main branch.
