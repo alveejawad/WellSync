@@ -42,6 +42,15 @@ public class HomePageActivity extends AppCompatActivity {
                 HomePageActivity.this.startActivity(moodIntent);
             }
         });
+
+        symptomLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent symptomIntent = new Intent(HomePageActivity.this, SymptomsTrackerActivity.class);
+                HomePageActivity.this.startActivity(symptomIntent);
+            }
+        });
+
     }
 }
 
