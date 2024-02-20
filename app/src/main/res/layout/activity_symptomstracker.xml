@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="409dp"
+    android:layout_height="729dp"
+    tools:layout_editor_absoluteX="1dp"
+    tools:layout_editor_absoluteY="1dp"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout2"
+        tools:context=".presentation.SymptomsTrackerActivity">
+
+
+        <TextView
+            android:id="@+id/Sadness"
+            android:layout_width="110dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="69dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:text="Sadness/Despair"
+            app:layout_constraintBottom_toTopOf="@+id/Helplessness"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.871" />
+
+        <RatingBar
+            android:id="@+id/ratingSadness"
+            android:layout_width="197dp"
+            android:layout_height="51dp"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="69dp"
+            android:layout_marginBottom="20dp"
+            android:numStars="4"
+            android:scaleX="0.6"
+            android:scaleY="0.6"
+            app:layout_constraintBottom_toTopOf="@+id/ratingHelplessness"
+            app:layout_constraintStart_toEndOf="@+id/Sadness"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/Helplessness"
+            android:layout_width="110dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:text="Helplessness/Hopelessness"
+            app:layout_constraintBottom_toTopOf="@+id/LowSelfEsteem"
+            tools:layout_editor_absoluteX="32dp" />
+
+        <RatingBar
+            android:id="@+id/ratingHelplessness"
+            android:layout_width="197dp"
+            android:layout_height="51dp"
+            android:layout_marginBottom="20dp"
+            android:numStars="4"
+            android:scaleX="0.6"
+            android:scaleY="0.6"
+            app:layout_constraintBottom_toTopOf="@+id/ratingSelfEsteem"
+            tools:layout_editor_absoluteX="187dp" />
+
+
+
+        <TextView
+            android:id="@+id/Isolation"
+            android:layout_width="110dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="34dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:text="Feeling isolated"
+            app:layout_constraintBottom_toTopOf="@+id/LowMotivation"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <RatingBar
+            android:id="@+id/ratingIsolation"
+            android:layout_width="197dp"
+            android:layout_height="51dp"
+            android:layout_marginBottom="20dp"
+            android:numStars="4"
+            android:scaleX="0.6"
+            android:scaleY="0.6"
+            app:layout_constraintBottom_toTopOf="@+id/ratingLowMotivation"
+            tools:layout_editor_absoluteX="187dp" />
+
+        <TextView
+            android:id="@+id/LowSelfEsteem"
+            android:layout_width="110dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="34dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:text="Low Self-Esteem"
+            app:layout_constraintBottom_toTopOf="@+id/Isolation"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <RatingBar
+            android:id="@+id/ratingSelfEsteem"
+            android:layout_width="197dp"
+            android:layout_height="51dp"
+            android:layout_marginBottom="20dp"
+            android:numStars="4"
+            android:scaleX="0.6"
+            android:scaleY="0.6"
+            app:layout_constraintBottom_toTopOf="@+id/ratingIsolation"
+            tools:layout_editor_absoluteX="187dp" />
+
+        <TextView
+            android:id="@+id/LowMotivation"
+            android:layout_width="110dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="34dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:text="Low Motivation/ Loss of Interest"
+            app:layout_constraintBottom_toTopOf="@+id/Impulsivity"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <RatingBar
+            android:id="@+id/ratingLowMotivation"
+            android:layout_width="197dp"
+            android:layout_height="51dp"
+            android:layout_marginBottom="19dp"
+            android:numStars="4"
+            android:scaleX="0.6"
+            android:scaleY="0.6"
+            app:layout_constraintBottom_toTopOf="@+id/ratingImpulsivity"
+            tools:layout_editor_absoluteX="187dp" />
+
+        <TextView
+            android:id="@+id/Impulsivity"
+            android:layout_width="110dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="34dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:text="Impulsivity"
+            app:layout_constraintBottom_toTopOf="@+id/Concentration"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <RatingBar
+            android:id="@+id/ratingImpulsivity"
+            android:layout_width="197dp"
+            android:layout_height="51dp"
+            android:numStars="4"
+            android:scaleX="0.6"
+            android:scaleY="0.6"
+            tools:layout_editor_absoluteX="187dp"
+            tools:layout_editor_absoluteY="420dp" />
+
+        <TextView
+            android:id="@+id/Concentration"
+            android:layout_width="110dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="34dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:text="Inability to Concentrate"
+            app:layout_constraintBottom_toTopOf="@+id/Aggressiveness"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <RatingBar
+            android:id="@+id/ratingConcentration"
+            android:layout_width="197dp"
+            android:layout_height="51dp"
+            android:numStars="4"
+            android:scaleX="0.6"
+            android:scaleY="0.6"
+            tools:layout_editor_absoluteX="187dp"
+            tools:layout_editor_absoluteY="490dp" />
+
+        <TextView
+            android:id="@+id/Aggressiveness"
+            android:layout_width="110dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="34dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:text="Aggressive Behavior"
+            app:layout_constraintBottom_toTopOf="@+id/GrandioseIdeas"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <RatingBar
+            android:id="@+id/ratingAggressiveness"
+            android:layout_width="197dp"
+            android:layout_height="51dp"
+            android:numStars="4"
+            android:scaleX="0.6"
+            android:scaleY="0.6"
+            tools:layout_editor_absoluteX="187dp"
+            tools:layout_editor_absoluteY="561dp" />
+
+        <TextView
+            android:id="@+id/GrandioseIdeas"
+            android:layout_width="110dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="32dp"
+            android:gravity="center"
+            android:text="Feeling like you can do anything"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="631dp" />
+
+        <RatingBar
+            android:id="@+id/ratingGrandioseIdeas"
+            android:layout_width="197dp"
+            android:layout_height="51dp"
+            android:numStars="4"
+            android:scaleX="0.6"
+            android:scaleY="0.6"
+            tools:layout_editor_absoluteX="187dp"
+            tools:layout_editor_absoluteY="631dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</ScrollView>
