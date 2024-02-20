@@ -5,7 +5,7 @@ import com.well_sync.objects.MoodLog;
 
 import java.util.*;
 
-public interface iMoodLogPersistence {
+public interface IMoodLogPersistence {
     void setMoodLog(Patient patient, MoodLog moodLog);
 
     MoodLog getMoodLog(Patient patient, Date date);

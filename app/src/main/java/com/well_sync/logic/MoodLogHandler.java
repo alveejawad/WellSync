@@ -5,19 +5,19 @@ import com.well_sync.logic.exceptions.InvalidMoodLogException;
 import com.well_sync.objects.MoodLog;
 import com.well_sync.objects.MoodLogValidator;
 import com.well_sync.objects.Patient;
-import com.well_sync.persistence.iMoodLogPersistence;
+import com.well_sync.persistence.IMoodLogPersistence;
 
 import java.util.Date;
 
 public class MoodLogHandler {
 
-    private final iMoodLogPersistence persistLog;
+    private final IMoodLogPersistence persistLog;
 
     public MoodLogHandler() {
         persistLog = Services.getMoodLogPersistence();
     }
 
-    public MoodLogHandler(iMoodLogPersistence persistence){
+    public MoodLogHandler(IMoodLogPersistence persistence){
         persistLog = persistence;
     }
 
