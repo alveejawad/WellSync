@@ -1,23 +1,23 @@
 package com.well_sync.application;
 
-import com.well_sync.persistence.iMoodLogPersistence;
-import com.well_sync.persistence.iUserPersistence;
+import com.well_sync.persistence.IMoodLogPersistence;
+import com.well_sync.persistence.IUserPersistence;
 import com.well_sync.persistence.stubs.UserPersistenceStub;
 
 
 public class Services {
-    private static iUserPersistence userPersistence = null;
+    private static IUserPersistence userPersistence = null;
 
-    private static final iMoodLogPersistence moodLogPersistence = null;
+    private static final IMoodLogPersistence moodLogPersistence = null;
 
-    public static synchronized iUserPersistence getUserPersistence() {
+    public static synchronized IUserPersistence getUserPersistence() {
         if (userPersistence == null) {
             userPersistence = new UserPersistenceStub();
         }
         return userPersistence;
     }
 
-    public static synchronized iMoodLogPersistence getMoodLogPersistence() {
+    public static synchronized IMoodLogPersistence getMoodLogPersistence() {
         if (moodLogPersistence == null) {
             //Need a mood log persistence stub
             //moodLogPersistence = new MoodLogPersistenceStub() {
