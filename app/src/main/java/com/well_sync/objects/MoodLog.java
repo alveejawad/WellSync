@@ -6,7 +6,7 @@ import java.util.Objects;
 /**
  * Represents observations of patient mood for one specific date.
  */
-public class MoodLog {
+public class MoodLog implements IDailyLog {
 
     private Date date;
     private int moodScore;
