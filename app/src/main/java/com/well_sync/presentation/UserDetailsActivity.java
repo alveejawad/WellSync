@@ -86,7 +86,7 @@ public class UserDetailsActivity extends AppCompatActivity {
                 newUserCredentials=signUpPage.getUserCredentials();
 
 
-                Patient newPatient= new Patient("test123@gmail.com",firstName,lastName,Patient.BloodType.TYPE_A, Patient.Sex.UNSPECIFIED,age);
+                Patient newPatient= new Patient("test123@gmail.com",firstName,lastName,bloodType,gender,age);
 
                 if(patientHandler.editDetails(newPatient)){
                     startActivity(new Intent(UserDetailsActivity.this, HomePageActivity.class));

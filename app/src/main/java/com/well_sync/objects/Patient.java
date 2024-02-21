@@ -8,13 +8,38 @@ public class Patient {
         TYPE_A,
         TYPE_B,
         TYPE_AB,
-        TYPE_O
+        TYPE_O,
+        UNKNOWN;
+
+        public static BloodType fromString(String type) {
+            if (type == null) return BloodType.UNKNOWN;
+            switch (type.toUpperCase()) {
+                case "A": return BloodType.TYPE_A;
+                case "B": return BloodType.TYPE_B;
+                case "AB": return BloodType.TYPE_AB;
+                case "O": return BloodType.TYPE_O;
+                default: return BloodType.UNKNOWN;
+            }
+        }
     }
 
     public enum Sex {
         MALE,
         FEMALE,
-        UNSPECIFIED
+        UNSPECIFIED;
+
+        public static Sex fromString(String sex) {
+            if (sex == null) return Sex.UNSPECIFIED;
+            switch (sex.toUpperCase()) {
+                case "M":
+                case "MALE":
+                    return Sex.MALE;
+                case "F":
+                case "FEMALE":
+                    return Sex.FEMALE;
+                default: return Sex.UNSPECIFIED;
+            }
+        }
     }
 
     private final String email;
@@ -28,13 +53,13 @@ public class Patient {
         this.email = email;
     }
 
-    public Patient(final String email, final String firstName, final String lastName, final BloodType bloodType,
-                   final Sex sex, final int age) {
+    public Patient(final String email, final String firstName, final String lastName,
+                   final String bloodType, final String sex, final int age) {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.bloodType = bloodType;
-        this.sex = sex;
+        this.bloodType = BloodType.fromString(bloodType);
+        this.sex = Sex.fromString(sex);
         this.age = age;
     }
 

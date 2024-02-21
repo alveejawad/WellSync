@@ -35,7 +35,7 @@ public class PatientHandlerTest {
     public void testEditDetails() {
         System.out.println("\nStarting testEditDetails");
 
-        Patient patient = new Patient("new-patient@example.com", "Jane", "Newman", Patient.BloodType.TYPE_O, Patient.Sex.FEMALE, 0);
+        Patient patient = new Patient("new-patient@example.com", "Jane", "Newman", "O", "F", 0);
         assertTrue(patientHandler.editDetails(patient));
 
         patient = new Patient("invalid email address!");
