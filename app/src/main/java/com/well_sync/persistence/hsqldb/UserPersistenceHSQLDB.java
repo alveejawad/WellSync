@@ -151,8 +151,8 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
         String email = resultSet.getString("email");
         String firstName = resultSet.getString("firstName");
         String lastName = resultSet.getString("lastName");
-        Patient.BloodType bloodType = Patient.BloodType.valueOf(resultSet.getString("bloodType"));
-        Patient.Sex sex = Patient.Sex.valueOf(resultSet.getString("sex"));
+        String bloodType = resultSet.getString("bloodType");
+        String sex = resultSet.getString("sex");
         int age = resultSet.getInt("age");
 
         return new Patient(email, firstName, lastName, bloodType, sex, age);
