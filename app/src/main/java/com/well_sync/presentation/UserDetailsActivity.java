@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.well_sync.R;
 import com.well_sync.logic.PatientHandler;
+import com.well_sync.logic.exceptions.InvalidPatientException;
 import com.well_sync.objects.Patient;
 import com.well_sync.presentation.SignUpActivity;
 import com.well_sync.objects.UserCredentials;
@@ -26,42 +27,39 @@ import androidx.appcompat.app.AppCompatActivity;
 public class UserDetailsActivity extends AppCompatActivity {
 
     private PatientHandler patientHandler;
+
     //User data
     private EditText userFirstName;
     private EditText userLastName;
     private DatePicker datePicker;
-
     private RadioGroup genderPicker;
     private RadioButton selectedGender;
-
-    private Spinner bloodTypeSpinner;
-    private String[] bloodTypeList = new String[]{"A", "B", "AB", "AB"};
-    private ArrayAdapter<String> adapterBloodType;
     private Button saveButton;
 
+    private Spinner bloodTypeSpinner;
+    private String[] bloodTypeList = new String[]{"A+","A-", "B+", "B-", "O+","O-", "AB+","AB-"};
+    private ArrayAdapter<String> adapterBloodType;
 
+    private Intent intent;
     private String bloodType;
     private String gender;
+    private String firstName;
+    private String lastName;
+    private String email;
     private int age;
-
-    private UserCredentials newUserCredentials;
-    private SignUpActivity signUpPage;
-
 
     @Override
     protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_userdetails);
 
-        signUpPage = new SignUpActivity();
-        patientHandler = new PatientHandler();
         userFirstName = findViewById(R.id.editFirstName);
         userLastName = findViewById(R.id.editLastName);
         genderPicker = findViewById(R.id.GenderPicker);
         saveButton = findViewById(R.id.savebutton);
         datePicker = findViewById(R.id.datePicker);
         bloodTypeSpinner = findViewById(R.id.BloodTypes);
-
+        patientHandler = new PatientHandler();
         setBloodTypeValues();
 
 
@@ -77,23 +75,24 @@ public class UserDetailsActivity extends AppCompatActivity {
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                //get email from Sign Up Activity
+                intent = getIntent();
+                email = intent.getStringExtra("email");
                 //get input from user
-                String firstName = userFirstName.getText().toString();
-                String lastName = userLastName.getText().toString();
+                firstName = userFirstName.getText().toString();
+                lastName = userLastName.getText().toString();
                 gender=getGender();
                 bloodType=getBloodType();
                 age=getAge();
-                newUserCredentials=signUpPage.getUserCredentials();
 
 
-                Patient newPatient= new Patient("test123@gmail.com",firstName,lastName,bloodType,gender,age);
+                Patient newPatient= new Patient(email,firstName,lastName,bloodType,gender,age);
 
                 if(patientHandler.editDetails(newPatient)){
                     startActivity(new Intent(UserDetailsActivity.this, HomePageActivity.class));
                 }else{
-                    Toast.makeText(getApplicationContext(), "Data is invalid" , Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Data is invalid", Toast.LENGTH_SHORT).show();
                 }
-
             }
         });
 

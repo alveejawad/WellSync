@@ -53,7 +53,10 @@ public class SignUpActivity extends AppCompatActivity {
                     boolean registered= signUpHandler.register(newUser);
                     //if fields were valid
                     if (registered){
-                        startActivity(new Intent(SignUpActivity.this, UserDetailsActivity.class));
+                    Intent openUserDetails=  new Intent(SignUpActivity.this, UserDetailsActivity.class);
+                    openUserDetails.putExtra("email",email);
+                    startActivity(openUserDetails);
+
                     }else{
                         userPassword.setError("Email or Password invalid");
                         userPassword.requestFocus();

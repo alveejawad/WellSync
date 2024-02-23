@@ -13,12 +13,23 @@ public class Patient {
 
         public static BloodType fromString(String type) {
             if (type == null) return BloodType.UNKNOWN;
-            switch (type.toUpperCase()) {
-                case "A": return BloodType.TYPE_A;
-                case "B": return BloodType.TYPE_B;
-                case "AB": return BloodType.TYPE_AB;
-                case "O": return BloodType.TYPE_O;
-                default: return BloodType.UNKNOWN;
+
+            switch (type){
+                case "A+":
+                case "A-":
+                    return BloodType.TYPE_A;
+                case "B+":
+                case "B-":
+                    return BloodType.TYPE_B;
+                case "AB+":
+                case "AB-":
+                    return BloodType.TYPE_AB;
+                case "O+":
+                case "O-":
+                    return BloodType.TYPE_O;
+
+                default:
+                    return BloodType.UNKNOWN;
             }
         }
     }
