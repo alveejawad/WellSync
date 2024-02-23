@@ -28,6 +28,14 @@
             android:exported="false">
         </activity>
         <activity
+            android:name=".presentation.MedicationTrackerActivity"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".presentation.SubstanceUseTrackerActivity"
+            android:exported="false">
+        </activity>
+        <activity
             android:name=".presentation.LoginActivity"
             android:exported="true"
             android:label="WELLSYNC">
