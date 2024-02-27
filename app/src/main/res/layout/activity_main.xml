@@ -115,8 +115,7 @@
                 android:layout_marginTop="30dp"
                 android:background="@drawable/medication_bg"
                 android:orientation="horizontal"
-                android:padding="3dp"
-                android:visibility="invisible">
+                android:padding="3dp">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -153,14 +152,13 @@
 
             <LinearLayout
                 android:id="@+id/substanceUseID"
-                android:layout_width="350dp"
-                android:layout_height="100dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="30dp"
                 android:background="@drawable/substance_bg"
                 android:orientation="horizontal"
-                android:padding="3dp"
-                android:visibility="invisible">
+                android:padding="3dp">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
