@@ -48,4 +48,9 @@ public class MoodLogPersistenceStub implements IMoodLogPersistence {
         }
         return null;
     }
+
+    @Override
+    public List<MoodLog> getAllMoodLogs(Patient patient) {
+        return null;
+    }
 }
