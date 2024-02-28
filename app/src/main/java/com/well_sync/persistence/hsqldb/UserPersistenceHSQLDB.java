@@ -2,6 +2,7 @@ package com.well_sync.persistence.hsqldb;
 
 import android.util.Log;
 
+import com.well_sync.objects.Doctor;
 import com.well_sync.objects.Patient;
 import com.well_sync.objects.UserCredentials;
 import com.well_sync.persistence.IUserPersistence;
@@ -20,14 +21,17 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
     private IUserPersistence userPersistence;
     private List<UserCredentials> userCredentialsList;
     private List<Patient> patientsList;
+    private List<Doctor> doctorsList;
 
     public UserPersistenceHSQLDB(IUserPersistence userPersistence, String dbPath) {
         this.dbPath = dbPath;
         this.userPersistence = userPersistence;
         this.userCredentialsList = new ArrayList<>();
         this.patientsList = new ArrayList<>();
+        this.doctorsList = new ArrayList<>();
         loadUserCredentials();
         loadPatients();
+        loadDoctors();
     }
 
     private Connection connect() throws SQLException {
@@ -54,6 +58,20 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
             while (resultSet.next()) {
                 Patient patient = createPatientFromResultSet(resultSet);
                 patientsList.add(patient);
+            }
+        } catch (final SQLException e) {
+            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
+            e.printStackTrace();
+        }
+    }
+
+    private void loadDoctors() {
+        try (Connection connection = connect()) {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM DOCTORS");
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                Doctor doctor = createDoctorFromResultSet(resultSet);
+                doctorsList.add(doctor);
             }
         } catch (final SQLException e) {
             Log.e("Connect SQL", e.getMessage() + e.getSQLState());
@@ -139,12 +157,64 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
         return null;
     }
 
-    public List<Patient> getPatientsList(){
-        return this.patientsList;
+    @Override
+    public void setDoctor(Doctor doctor) {
+        try (Connection connection = connect()) {
+            PreparedStatement doctorStatement = connection.prepareStatement("INSERT INTO DOCTORS VALUES (?, ?, ?)");
+            doctorStatement.setString(1, doctor.getEmail());
+            doctorStatement.setString(2, doctor.getFirstName());
+            doctorStatement.setString(3, doctor.getLastName());
+            doctorStatement.executeUpdate();
+
+            List<Patient> doctorPatients = doctor.getPatients();
+            if (doctorPatients != null && !doctorPatients.isEmpty()) {
+                PreparedStatement assignStatement = connection.prepareStatement("INSERT INTO ASSIGNED_PATIENTS VALUES (?, ?)");
+                for (Patient patient : doctorPatients) {
+                    assignStatement.setString(1, doctor.getEmail());
+                    assignStatement.setString(2, patient.getEmail());
+                    assignStatement.executeUpdate();
+                }
+            }
+        } catch (final SQLException e) {
+            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
+            e.printStackTrace();
+        }
     }
 
-    public List<UserCredentials> getUserCredentialsList() {
-        return this.userCredentialsList;
+    @Override
+    public Doctor getDoctor(UserCredentials userCredentials) {
+        try (Connection connection = connect()) {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM DOCTORS WHERE email = ?");
+            statement.setString(1, userCredentials.getEmail());
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return createDoctorFromResultSet(resultSet);
+            }
+        } catch (final SQLException e) {
+            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public Doctor getDoctor(String email) {
+        try (Connection connection = connect()) {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM DOCTORS WHERE email = ?");
+            statement.setString(1, email);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return createDoctorFromResultSet(resultSet);
+            }
+        } catch (final SQLException e) {
+            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<Patient> getPatientsList(){
+        return this.patientsList;
     }
 
     private Patient createPatientFromResultSet(ResultSet resultSet) throws SQLException {
@@ -156,5 +226,34 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
         int age = resultSet.getInt("age");
 
         return new Patient(email, firstName, lastName, bloodType, sex, age);
+    }
+
+    private Doctor createDoctorFromResultSet(ResultSet resultSet) throws SQLException {
+        String email = resultSet.getString("email");
+        String firstName = resultSet.getString("firstName");
+        String lastName = resultSet.getString("lastName");
+
+        Doctor doctor = new Doctor(email, firstName, lastName);
+        loadDoctorPatients(doctor);
+
+        return doctor;
+    }
+
+    private void loadDoctorPatients(Doctor doctor) {
+        try (Connection connection = connect()) {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM ASSIGNED_PATIENTS WHERE doctor_email = ?");
+            statement.setString(1, doctor.getEmail());
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                String patientEmail = resultSet.getString("patient_email");
+                Patient patient = getPatient(patientEmail);
+                if (patient != null) {
+                    doctor.addPatient(patient);
+                }
+            }
+        } catch (final SQLException e) {
+            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
+            e.printStackTrace();
+        }
     }
 }

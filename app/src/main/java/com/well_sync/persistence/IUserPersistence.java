@@ -1,7 +1,10 @@
 package com.well_sync.persistence;
 
+import com.well_sync.objects.Doctor;
 import com.well_sync.objects.Patient;
 import com.well_sync.objects.UserCredentials;
+
+import java.util.List;
 
 public interface IUserPersistence {
 
@@ -14,5 +17,13 @@ public interface IUserPersistence {
     void setPatient(Patient patient);
 
     Patient getPatient(String email);
+
+    void setDoctor(Doctor doctor);
+
+    Doctor getDoctor(UserCredentials userCredentials);
+
+    Doctor getDoctor(String email);
+
+    List<Patient> getPatientsList();
 
 }
