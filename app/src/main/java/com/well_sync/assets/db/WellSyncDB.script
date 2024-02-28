@@ -31,6 +31,40 @@ CREATE MEMORY TABLE PUBLIC.ASSIGNED_PATIENTS (
     PRIMARY KEY (doctor_email, patient_email)
 );
 
+CREATE MEMORY TABLE PUBLIC.DAILY_LOG (
+    patient_email VARCHAR(255) NOT NULL,
+    log_date DATE NOT NULL,
+    mood_score INTEGER,
+    sleep_hours INTEGER,
+    notes VARCHAR(7999),
+    PRIMARY KEY (patient_email, log_date),
+    FOREIGN KEY (patient_email) REFERENCES PATIENTS(email)
+);
+
+CREATE MEMORY TABLE PUBLIC.SYMPTOM (
+    patient_email VARCHAR(255) NOT NULL,
+    log_date DATE NOT NULL,
+    symptom VARCHAR(255),
+    intensity INTEGER,
+    FOREIGN KEY (patient_email, log_date) REFERENCES DAILY_LOG(patient_email, log_date)
+);
+
+CREATE MEMORY TABLE PUBLIC.MEDICATION (
+    patient_email VARCHAR(255) NOT NULL,
+    log_date DATE NOT NULL,
+    medication VARCHAR(255),
+    quantity INTEGER,
+    FOREIGN KEY (patient_email, log_date) REFERENCES DAILY_LOG(patient_email, log_date)
+);
+
+CREATE MEMORY TABLE PUBLIC.SUBSTANCE (
+    patient_email VARCHAR(255) NOT NULL,
+    log_date DATE NOT NULL,
+    substance VARCHAR(255),
+    quantity INTEGER,
+    FOREIGN KEY (patient_email, log_date) REFERENCES DAILY_LOG(patient_email, log_date)
+);
+
 CREATE USER MD PASSWORD DIGEST 'd41d8cd98f00b204e9800998ecf8427e'
 ALTER USER MD SET LOCAL TRUE
 CREATE SCHEMA PUBLIC AUTHORIZATION DBA
@@ -52,7 +86,27 @@ INSERT INTO PATIENTS VALUES ('patient2@example.com', 'Jane', 'Smith', 'TYPE_O', 
 INSERT INTO DOCTORS VALUES ('doctor1@example.com', 'Dr. Gabriel', 'Young');
 INSERT INTO DOCTORS VALUES ('doctor2@example.com', 'Dr. Alvee', 'Jawad');
 
--- Sample entries for ASSIGNED_PATIENTS table
+-- Sample data for ASSIGNED_PATIENTS table
 INSERT INTO ASSIGNED_PATIENTS VALUES ('doctor1@example.com', 'patient1@example.com');
 INSERT INTO ASSIGNED_PATIENTS VALUES ('doctor1@example.com', 'patient2@example.com');
 INSERT INTO ASSIGNED_PATIENTS VALUES ('doctor2@example.com', 'patient1@example.com');
+
+-- Sample data for DAILY_LOG table
+INSERT INTO DAILY_LOG VALUES ('patient1@example.com', '2023-01-01', 7, 8, 'Feeling good today');
+INSERT INTO DAILY_LOG VALUES ('patient1@example.com', '2023-01-02', 5, 7, 'Had trouble sleeping');
+INSERT INTO DAILY_LOG VALUES ('patient2@example.com', '2023-01-01', 6, 7, 'Normal day');
+
+-- Sample data for SYMPTOMS table
+INSERT INTO SYMPTOMS VALUES ('patient1@example.com', '2023-01-01', 'Headache', 5);
+INSERT INTO SYMPTOMS VALUES ('patient1@example.com', '2023-01-02', 'Fatigue', 4);
+INSERT INTO SYMPTOMS VALUES ('patient2@example.com', '2023-01-01', 'Sore throat', 8);
+
+-- Sample data for MEDICATIONS table
+INSERT INTO MEDICATIONS VALUES ('patient1@example.com', '2023-01-01', 'Tylenol', 2);
+INSERT INTO MEDICATIONS VALUES ('patient1@example.com', '2023-01-02', 'Melatonin', 1);
+INSERT INTO MEDICATIONS VALUES ('patient2@example.com', '2023-01-01', 'Cough syrup', 3);
+
+-- Sample data for SUBSTANCES table
+INSERT INTO SUBSTANCES VALUES ('patient1@example.com', '2023-01-01', 'Alcohol', 2);
+INSERT INTO SUBSTANCES VALUES ('patient1@example.com', '2023-01-02', 'Caffeine', 3);
+INSERT INTO SUBSTANCES VALUES ('patient2@example.com', '2023-01-01', 'Coke', 100);
