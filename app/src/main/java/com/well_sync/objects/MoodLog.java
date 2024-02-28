@@ -5,8 +5,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-import com.well_sync.objects.Symptom;
-
 /**
  * Represents observations of patient mood for one specific date.
  */
@@ -16,8 +14,8 @@ public class MoodLog implements IDailyLog {
     private int moodScore;
     private int sleepHours;
     private String notes;
-
     private List<Symptom> symptomList;
+    private List<Medication> medicationList;
 
     public MoodLog() {
         this.date = new Date(); // initialized to present
@@ -25,6 +23,7 @@ public class MoodLog implements IDailyLog {
 
     public MoodLog(Date date, int moodScore, int sleepHours, String notes) {
         this.symptomList = new ArrayList<>();
+        this.medicationList = new ArrayList<>();
         this.date = date;
         this.setMoodScore(moodScore); // bounds checking
         this.setSleepHours(sleepHours); // " "
@@ -93,6 +92,27 @@ public class MoodLog implements IDailyLog {
 
     public List<Symptom> getSymptoms() {
         return this.symptomList;
+    }
+
+    public void addMedication(String name, int quantity) {
+        Medication med = new Medication(name, quantity);
+        // insert call to symptom validator here
+        this.medicationList.add(med);
+
+    }
+
+    public void removeMedication(Medication medication) {
+        this.medicationList.remove(medication);
+    }
+
+    public void removeMedication(String name) {
+        this.medicationList.forEach(med -> {
+            if (med.name.equals(name)) this.medicationList.remove(med);
+        });
+    }
+
+    public List<Medication> getMedications() {
+        return this.medicationList;
     }
 
     @Override
