@@ -78,6 +78,7 @@ public class MoodLog implements IDailyLog {
         Symptom symptom = new Symptom(name, intensity);
         // insert call to symptom validator here
         this.symptomList.add(symptom);
+
     }
 
     public void removeSymptom(Symptom symptom) {
