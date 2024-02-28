@@ -9,4 +9,6 @@ public interface IMoodLogPersistence {
     void setMoodLog(Patient patient, MoodLog moodLog);
 
     MoodLog getMoodLog(Patient patient, Date date);
+
+    List<MoodLog> getAllMoodLogs(Patient patient);
 }
