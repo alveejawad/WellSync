@@ -15,4 +15,12 @@ public interface IUserPersistence {
 
     Patient getPatient(String email);
 
+    void setDoctor(Doctor doctor);
+
+    Doctor getDoctor(UserCredentials userCredentials);
+
+    Doctor getDoctor(String email);
+
+    List getAllPatients();
+
 }
