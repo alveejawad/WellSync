@@ -16,6 +16,7 @@ public class MoodLog implements IDailyLog {
     private String notes;
     private List<Symptom> symptomList;
     private List<Medication> medicationList;
+    private List<Substance> substanceList;
 
     public MoodLog() {
         this.date = new Date(); // initialized to present
@@ -24,6 +25,7 @@ public class MoodLog implements IDailyLog {
     public MoodLog(Date date, int moodScore, int sleepHours, String notes) {
         this.symptomList = new ArrayList<>();
         this.medicationList = new ArrayList<>();
+        this.substanceList = new ArrayList<>();
         this.date = date;
         this.setMoodScore(moodScore); // bounds checking
         this.setSleepHours(sleepHours); // " "
@@ -77,7 +79,6 @@ public class MoodLog implements IDailyLog {
         Symptom symptom = new Symptom(name, intensity);
         // insert call to symptom validator here
         this.symptomList.add(symptom);
-
     }
 
     public void removeSymptom(Symptom symptom) {
@@ -96,9 +97,8 @@ public class MoodLog implements IDailyLog {
 
     public void addMedication(String name, int quantity) {
         Medication med = new Medication(name, quantity);
-        // insert call to symptom validator here
+        // insert call to medication validator here
         this.medicationList.add(med);
-
     }
 
     public void removeMedication(Medication medication) {
@@ -113,6 +113,26 @@ public class MoodLog implements IDailyLog {
 
     public List<Medication> getMedications() {
         return this.medicationList;
+    }
+
+    public void addSubstance(String name, int quantity) {
+        Substance sub = new Substance(name, quantity);
+        // insert call to substance validator here
+        this.substanceList.add(sub);
+    }
+
+    public void removeSubstance(Substance sub) {
+        this.substanceList.remove(sub);
+    }
+
+    public void removeSubstance(String name) {
+        this.substanceList.forEach(sub -> {
+            if (sub.name.equals(name)) this.substanceList.remove(sub);
+        });
+    }
+
+    public List<Substance> getSubstances() {
+        return this.substanceList;
     }
 
     @Override
