@@ -1,5 +1,6 @@
 package com.well_sync.persistence.stubs;
 
+import com.well_sync.objects.Doctor;
 import com.well_sync.objects.Patient;
 import com.well_sync.objects.UserCredentials;
 import com.well_sync.persistence.IUserPersistence;
@@ -39,6 +40,26 @@ public class UserPersistenceStub implements IUserPersistence {
                  return patientList.get(i);
             }
         }
+        return null;
+    }
+
+    @Override
+    public void setDoctor(Doctor doctor) {
+
+    }
+
+    @Override
+    public Doctor getDoctor(UserCredentials userCredentials) {
+        return null;
+    }
+
+    @Override
+    public Doctor getDoctor(String email) {
+        return null;
+    }
+
+    @Override
+    public List<Patient> getPatientsList() {
         return null;
     }
 

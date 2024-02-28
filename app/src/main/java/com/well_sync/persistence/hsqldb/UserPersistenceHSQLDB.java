@@ -2,6 +2,7 @@ package com.well_sync.persistence.hsqldb;
 
 import android.util.Log;
 
+import com.well_sync.objects.Doctor;
 import com.well_sync.objects.Patient;
 import com.well_sync.objects.UserCredentials;
 import com.well_sync.persistence.IUserPersistence;
@@ -20,14 +21,17 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
     private IUserPersistence userPersistence;
     private List<UserCredentials> userCredentialsList;
     private List<Patient> patientsList;
+    private List<Doctor> doctorsList;
 
     public UserPersistenceHSQLDB(IUserPersistence userPersistence, String dbPath) {
         this.dbPath = dbPath;
         this.userPersistence = userPersistence;
         this.userCredentialsList = new ArrayList<>();
         this.patientsList = new ArrayList<>();
+        this.doctorsList = new ArrayList<>();
         loadUserCredentials();
         loadPatients();
+        loadDoctors();
     }
 
     private Connection connect() throws SQLException {
@@ -59,6 +63,10 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
             Log.e("Connect SQL", e.getMessage() + e.getSQLState());
             e.printStackTrace();
         }
+    }
+
+    private void loadDoctors() {
+
     }
 
     @Override
@@ -136,6 +144,21 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
             Log.e("Connect SQL", e.getMessage() + e.getSQLState());
             e.printStackTrace();
         }
+        return null;
+    }
+
+    @Override
+    public void setDoctor(Doctor doctor) {
+
+    }
+
+    @Override
+    public Doctor getDoctor(UserCredentials userCredentials) {
+        return null;
+    }
+
+    @Override
+    public Doctor getDoctor(String email) {
         return null;
     }
 
