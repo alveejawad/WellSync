@@ -11,10 +11,12 @@ import java.util.List;
 public class UserPersistenceStub implements IUserPersistence {
     private final List<Patient> patientList;
     private final List<UserCredentials> userCredentialsList;
+    private final List<Doctor> doctorList;
 
     public UserPersistenceStub() {
         this.patientList = new ArrayList<>();
         this.userCredentialsList = new ArrayList<>();
+        this.doctorList = new ArrayList<>();
 
         // Sample data for USER_CREDENTIALS table
         userCredentialsList.add(new UserCredentials("test1@example.com", "password1"));
@@ -23,6 +25,10 @@ public class UserPersistenceStub implements IUserPersistence {
         // Sample data for PATIENTS table
         patientList.add(new Patient("patient1@example.com", "John", "Doe", "TYPE_A", "MALE", 30));
         patientList.add(new Patient("patient2@example.com", "Jane", "Smith", "TYPE_O", "FEMALE", 25));
+
+        // Sample data for DOCTORS table
+        doctorList.add(new Doctor("doctor1@example.com", "Dr. Gabriel", "Young"));
+        doctorList.add(new Doctor("doctor2@example.com", "Dr. Alvee", "Jawad"));
     }
 
     @Override
@@ -45,16 +51,36 @@ public class UserPersistenceStub implements IUserPersistence {
 
     @Override
     public void setDoctor(Doctor doctor) {
-
+        boolean doctorExists = false;
+        for (int i = 0; i < doctorList.size(); i++) {
+            if (doctorList.get(i).getEmail().equals(doctor.getEmail())) {
+                doctorList.set(i, doctor);
+                doctorExists = true;
+                break;
+            }
+        }
+        if (!doctorExists) {
+            doctorList.add(doctor);
+        }
     }
 
     @Override
     public Doctor getDoctor(UserCredentials userCredentials) {
+        for (Doctor doctor : doctorList) {
+            if (doctor.getEmail().equals(userCredentials.getEmail())) {
+                return doctor;
+            }
+        }
         return null;
     }
 
     @Override
     public Doctor getDoctor(String email) {
+        for (Doctor doctor : doctorList) {
+            if (doctor.getEmail().equals(email)) {
+                return doctor;
+            }
+        }
         return null;
     }
 
@@ -72,15 +98,6 @@ public class UserPersistenceStub implements IUserPersistence {
     public Patient getPatient(UserCredentials userCredentials) {
         for (int i = 0; i < patientList.size(); i ++) {
             if (patientList.get(i).getEmail().equals(userCredentials.getEmail())) {
-                return patientList.get(i);
-            }
-        }
-        return null;
-    }
-
-    public Patient getPatient(Patient patient) {
-        for (int i = 0; i < patientList.size(); i ++) {
-            if (patientList.get(i).getEmail().equals(patient.getEmail())) {
                 return patientList.get(i);
             }
         }
