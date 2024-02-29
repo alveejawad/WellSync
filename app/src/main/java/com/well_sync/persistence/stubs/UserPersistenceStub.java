@@ -11,18 +11,32 @@ import java.util.List;
 public class UserPersistenceStub implements IUserPersistence {
     private final List<Patient> patientList;
     private final List<UserCredentials> userCredentialsList;
+    private final List<Doctor> doctorList;
 
     public UserPersistenceStub() {
         this.patientList = new ArrayList<>();
         this.userCredentialsList = new ArrayList<>();
+        this.doctorList = new ArrayList<>();
 
-        patientList.add(new Patient("test123@umanitoba.ca", "Test", "123", "A", null, 21));
-        patientList.add(new Patient("muhammad@umanitoba.ca", "Muhammad", "Dawood", "A", "M", 23));
-        patientList.add(new Patient("test456@umanitoba.ca", "Test", "456", "A", "not sure", 20));
+        // Sample data for USER_CREDENTIALS table
+        UserCredentials userCredentials1 = new UserCredentials("test1@example.com", "password1");
+        UserCredentials userCredentials2 = new UserCredentials("test2@example.com", "password2");
+        userCredentialsList.add(userCredentials1);
+        userCredentialsList.add(userCredentials2);
 
-        userCredentialsList.add(new UserCredentials("test123@umanitoba.ca", "test123"));
-        userCredentialsList.add(new UserCredentials("muhammad@umanitoba.ca", "gossipzilla"));
-        userCredentialsList.add(new UserCredentials("test456@umanitoba.ca", "test456"));
+        // Sample data for PATIENTS table
+        Patient patient1 = new Patient("patient1@example.com", "John", "Doe", "TYPE_A", "MALE", 30);
+        Patient patient2 = new Patient("patient2@example.com", "Jane", "Smith", "TYPE_O", "FEMALE", 25);
+        patientList.add(patient1);
+        patientList.add(patient2);
+
+        // Sample data for DOCTORS table
+        Doctor doctor1 = new Doctor("doctor1@example.com", "Dr. Gabriel", "Young");
+        Doctor doctor2 = new Doctor("doctor2@example.com", "Dr. Alvee", "Jawad");
+        doctor1.addPatient(patient1);
+        doctor2.addPatient(patient2);
+        doctorList.add(doctor1);
+        doctorList.add(doctor2);
     }
 
     @Override
@@ -45,22 +59,42 @@ public class UserPersistenceStub implements IUserPersistence {
 
     @Override
     public void setDoctor(Doctor doctor) {
-
+        boolean doctorExists = false;
+        for (int i = 0; i < doctorList.size(); i++) {
+            if (doctorList.get(i).getEmail().equals(doctor.getEmail())) {
+                doctorList.set(i, doctor);
+                doctorExists = true;
+                break;
+            }
+        }
+        if (!doctorExists) {
+            doctorList.add(doctor);
+        }
     }
 
     @Override
     public Doctor getDoctor(UserCredentials userCredentials) {
+        for (Doctor doctor : doctorList) {
+            if (doctor.getEmail().equals(userCredentials.getEmail())) {
+                return doctor;
+            }
+        }
         return null;
     }
 
     @Override
     public Doctor getDoctor(String email) {
+        for (Doctor doctor : doctorList) {
+            if (doctor.getEmail().equals(email)) {
+                return doctor;
+            }
+        }
         return null;
     }
 
     @Override
     public List<Patient> getPatientsList() {
-        return null;
+        return this.patientList;
     }
 
     @Override
@@ -72,15 +106,6 @@ public class UserPersistenceStub implements IUserPersistence {
     public Patient getPatient(UserCredentials userCredentials) {
         for (int i = 0; i < patientList.size(); i ++) {
             if (patientList.get(i).getEmail().equals(userCredentials.getEmail())) {
-                return patientList.get(i);
-            }
-        }
-        return null;
-    }
-
-    public Patient getPatient(Patient patient) {
-        for (int i = 0; i < patientList.size(); i ++) {
-            if (patientList.get(i).getEmail().equals(patient.getEmail())) {
                 return patientList.get(i);
             }
         }
@@ -105,6 +130,5 @@ public class UserPersistenceStub implements IUserPersistence {
             patientList.add(patient);
         }
     }
-
 
 }

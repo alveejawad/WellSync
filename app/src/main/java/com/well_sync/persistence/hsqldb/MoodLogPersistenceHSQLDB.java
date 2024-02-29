@@ -86,6 +86,7 @@ public class MoodLogPersistenceHSQLDB implements IMoodLogPersistence {
         }
     }
 
+    @Override
     public MoodLog getMoodLog(Patient patient, Date date) {
         MoodLog moodLog = null;
         try (Connection connection = connect()) {

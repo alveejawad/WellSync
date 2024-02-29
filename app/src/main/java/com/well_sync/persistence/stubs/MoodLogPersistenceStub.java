@@ -15,16 +15,36 @@ public class MoodLogPersistenceStub implements IMoodLogPersistence {
 
     public MoodLogPersistenceStub() {
         moodLogList = new HashMap<>();
-        userPersistence = new UserPersistenceStub();
+        this.userPersistence = new UserPersistenceStub();
 
-        Patient patient1 = userPersistence.getPatient(new UserCredentials("test123@umanitoba.ca", "test123"));
+        // Default Sample Data
+        Patient patient1 = userPersistence.getPatient("patient1@example.com");
+        Patient patient2 = userPersistence.getPatient("patient2@example.com");
+
         List<MoodLog> moodLogsPatient1 = new ArrayList<>();
-        moodLogsPatient1.add(new MoodLog(new Date(124, Calendar.FEBRUARY, 7), 3, 6, "Anxious"));
-        moodLogList.put(patient1, moodLogsPatient1);
-
-        Patient patient2 = userPersistence.getPatient(new UserCredentials("muhammad@umanitoba.ca", "gossipzilla"));
         List<MoodLog> moodLogsPatient2 = new ArrayList<>();
-        moodLogsPatient1.add(new MoodLog(new Date(124, Calendar.JANUARY, 31), 4, 7, "Sad"));
+
+        MoodLog patient1Day1 = new MoodLog(new Date(2023, Calendar.JANUARY, 1), 7, 8, "Feeling good today");
+        MoodLog patient1Day2 = new MoodLog(new Date(2023, Calendar.JANUARY, 2), 5, 7, "Had trouble sleeping");
+        MoodLog patient2Day1 = new MoodLog(new Date(2023, Calendar.JANUARY, 1), 6, 7, "Normal day");
+
+        patient1Day1.addSymptom("Headache", 5);
+        patient1Day2.addSymptom("Fatigue", 4);
+        patient2Day1.addSymptom("Sore throat", 8);
+
+        patient1Day1.addMedication("Tylenol", 2);
+        patient1Day2.addMedication("Melatonin", 1);
+        patient2Day1.addMedication("Cough syrup", 3);
+
+        patient1Day1.addSubstance("Alcohol", 2);
+        patient1Day2.addSubstance("Caffiene", 2);
+        patient2Day1.addSubstance("Caffiene", 2);
+
+        moodLogsPatient1.add(patient1Day1);
+        moodLogsPatient1.add(patient1Day2);
+        moodLogsPatient2.add(patient2Day1);
+
+        moodLogList.put(patient1, moodLogsPatient1);
         moodLogList.put(patient2, moodLogsPatient2);
     }
 
@@ -33,7 +53,7 @@ public class MoodLogPersistenceStub implements IMoodLogPersistence {
         if (!moodLogList.containsKey(patient)) {
             moodLogList.put(patient, new ArrayList<>());
         }
-        moodLogList.get(patient).add(moodLog);
+        Objects.requireNonNull(moodLogList.get(patient)).add(moodLog);
     }
 
     @Override
@@ -51,6 +71,6 @@ public class MoodLogPersistenceStub implements IMoodLogPersistence {
 
     @Override
     public List<MoodLog> getAllMoodLogs(Patient patient) {
-        return null;
+        return moodLogList.getOrDefault(patient, new ArrayList<>());
     }
 }
