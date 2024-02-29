@@ -19,16 +19,24 @@ public class UserPersistenceStub implements IUserPersistence {
         this.doctorList = new ArrayList<>();
 
         // Sample data for USER_CREDENTIALS table
-        userCredentialsList.add(new UserCredentials("test1@example.com", "password1"));
-        userCredentialsList.add(new UserCredentials("test2@example.com", "password2"));
+        UserCredentials userCredentials1 = new UserCredentials("test1@example.com", "password1");
+        UserCredentials userCredentials2 = new UserCredentials("test2@example.com", "password2");
+        userCredentialsList.add(userCredentials1);
+        userCredentialsList.add(userCredentials2);
 
         // Sample data for PATIENTS table
-        patientList.add(new Patient("patient1@example.com", "John", "Doe", "TYPE_A", "MALE", 30));
-        patientList.add(new Patient("patient2@example.com", "Jane", "Smith", "TYPE_O", "FEMALE", 25));
+        Patient patient1 = new Patient("patient1@example.com", "John", "Doe", "TYPE_A", "MALE", 30);
+        Patient patient2 = new Patient("patient2@example.com", "Jane", "Smith", "TYPE_O", "FEMALE", 25);
+        patientList.add(patient1);
+        patientList.add(patient2);
 
         // Sample data for DOCTORS table
-        doctorList.add(new Doctor("doctor1@example.com", "Dr. Gabriel", "Young"));
-        doctorList.add(new Doctor("doctor2@example.com", "Dr. Alvee", "Jawad"));
+        Doctor doctor1 = new Doctor("doctor1@example.com", "Dr. Gabriel", "Young");
+        Doctor doctor2 = new Doctor("doctor2@example.com", "Dr. Alvee", "Jawad");
+        doctor1.addPatient(patient1);
+        doctor2.addPatient(patient2);
+        doctorList.add(doctor1);
+        doctorList.add(doctor2);
     }
 
     @Override
@@ -122,6 +130,5 @@ public class UserPersistenceStub implements IUserPersistence {
             patientList.add(patient);
         }
     }
-
 
 }
