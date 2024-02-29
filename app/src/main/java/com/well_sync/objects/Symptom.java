@@ -8,4 +8,21 @@ public class Symptom {
         this.name = name;
         this.intensity = intensity;
     }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getIntensity() {
+        return this.intensity;
+    }
+
+    public void setIntensity(int intensity) {
+        this.intensity = intensity;
+    }
+
 }
