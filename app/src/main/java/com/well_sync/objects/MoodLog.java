@@ -10,6 +10,7 @@ import java.util.Objects;
  */
 public class MoodLog implements IDailyLog {
 
+    private String email;
     private Date date;
     private int moodScore;
     private int sleepHours;
@@ -54,6 +55,14 @@ public class MoodLog implements IDailyLog {
 
     public void setMoodScore(int moodScore) {
         this.moodScore = moodScore;
+    }
+
+    public String getEmail(){
+        return this.email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public void setSleepHours(int sleepHours) {
