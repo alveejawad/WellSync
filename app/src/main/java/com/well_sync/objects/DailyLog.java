@@ -3,13 +3,11 @@ package com.well_sync.objects;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 
 /**
- * Represents observations of patient mood for one specific date.
+ * Represents observations of patient health for one specific date.
  */
-public class MoodLog implements IDailyLog {
-
+public class DailyLog {
     private Date date;
     private int moodScore;
     private int sleepHours;
@@ -18,18 +16,19 @@ public class MoodLog implements IDailyLog {
     private List<Medication> medicationList;
     private List<Substance> substanceList;
 
-    public MoodLog() {
+    public DailyLog() {
         this.date = new Date(); // initialized to present
     }
 
-    public MoodLog(Date date, int moodScore, int sleepHours, String notes) {
-        this.symptomList = new ArrayList<>();
-        this.medicationList = new ArrayList<>();
-        this.substanceList = new ArrayList<>();
+    public DailyLog(Date date, int moodScore, int sleepHours, String notes) {
         this.date = date;
         this.setMoodScore(moodScore); // bounds checking
         this.setSleepHours(sleepHours); // " "
         this.notes = notes;
+
+        this.symptomList = new ArrayList<>();
+        this.medicationList = new ArrayList<>();
+        this.substanceList = new ArrayList<>();
     }
 
     public Date getDate() {
@@ -62,17 +61,6 @@ public class MoodLog implements IDailyLog {
 
     public void setNotes(String notes) {
         this.notes = notes;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        MoodLog moodLog = (MoodLog) o;
-        return moodScore == moodLog.moodScore
-                && sleepHours == moodLog.sleepHours
-                && Objects.equals(date, moodLog.date)
-                && Objects.equals(notes, moodLog.notes);
     }
 
     public void addSymptom(String name, int intensity) {
@@ -135,8 +123,4 @@ public class MoodLog implements IDailyLog {
         return this.substanceList;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(date, moodScore, sleepHours, notes);
-    }
 }

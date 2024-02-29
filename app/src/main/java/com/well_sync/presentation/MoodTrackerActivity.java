@@ -13,7 +13,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.well_sync.R;
 import com.well_sync.objects.*;
-import com.well_sync.logic.MoodLogHandler;
+import com.well_sync.logic.DailyLogHandler;
 import java.util.Date;
 import java.time.LocalDate;
 
@@ -24,10 +24,10 @@ public class MoodTrackerActivity extends AppCompatActivity {
     private Button saveButton;
     private TextView emotionText;
 
-    private MoodLog moodLog;
+    private DailyLog dailyLog;
     private Patient patient;
     private String email;
-    private MoodLogHandler moodLogHandler;
+    private DailyLogHandler dailyLogHandler;
 
     protected String emotion, sleepHoursText, userNotes;
     private Date date;
@@ -134,9 +134,9 @@ public class MoodTrackerActivity extends AppCompatActivity {
                 // Get the data from patient
                 patient = getPatientDetail(view);
                 // Get the data from mood
-                moodLog = getMoodLogDetails(view);
+                dailyLog = getDailyLogDetails(view);
 
-                if(moodLog != null) {
+                if(dailyLog != null) {
                     // Save date to show on the next page
                     Intent saveIntent = new Intent(MoodTrackerActivity.this, DisplayDataActivity.class);
                     saveIntent.putExtra("emotion", emotion);
@@ -147,7 +147,7 @@ public class MoodTrackerActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Save failed", Toast.LENGTH_SHORT).show();
                 }
                 // Call the logic layer
-                moodLogHandler.setMoodLog(patient, moodLog);
+                dailyLogHandler.setDailyLog(patient, dailyLog);
             }
         });
     }
@@ -158,8 +158,8 @@ public class MoodTrackerActivity extends AppCompatActivity {
         result = new Patient(email);
         return result;
     }
-    public MoodLog getMoodLogDetails(View view) {
-        MoodLog result;
+    public DailyLog getDailyLogDetails(View view) {
+        DailyLog result;
         // Create a LocalDate instance and convert it to date
         LocalDate localDate = LocalDate.now();
         date = java.sql.Date.valueOf(localDate.toString());
@@ -167,7 +167,7 @@ public class MoodTrackerActivity extends AppCompatActivity {
         sleepHoursText = sleepHoursEditText.getText().toString();
         sleepHours = Integer.parseInt(sleepHoursText);
         userNotes = userNotesEditText.getText().toString();
-        result = new MoodLog(new Date(), moodScores, sleepHours, userNotes);
+        result = new DailyLog(new Date(), moodScores, sleepHours, userNotes);
         return result;
     }
     private void resetColorFilter() {
