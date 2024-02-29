@@ -86,7 +86,7 @@ public class UserPersistenceStub implements IUserPersistence {
 
     @Override
     public List<Patient> getPatientsList() {
-        return null;
+        return this.patientList;
     }
 
     @Override
