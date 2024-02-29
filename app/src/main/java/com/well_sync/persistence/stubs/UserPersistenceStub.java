@@ -16,13 +16,13 @@ public class UserPersistenceStub implements IUserPersistence {
         this.patientList = new ArrayList<>();
         this.userCredentialsList = new ArrayList<>();
 
-        patientList.add(new Patient("test123@umanitoba.ca", "Test", "123", "A", null, 21));
-        patientList.add(new Patient("muhammad@umanitoba.ca", "Muhammad", "Dawood", "A", "M", 23));
-        patientList.add(new Patient("test456@umanitoba.ca", "Test", "456", "A", "not sure", 20));
+        // Sample data for USER_CREDENTIALS table
+        userCredentialsList.add(new UserCredentials("test1@example.com", "password1"));
+        userCredentialsList.add(new UserCredentials("test2@example.com", "password2"));
 
-        userCredentialsList.add(new UserCredentials("test123@umanitoba.ca", "test123"));
-        userCredentialsList.add(new UserCredentials("muhammad@umanitoba.ca", "gossipzilla"));
-        userCredentialsList.add(new UserCredentials("test456@umanitoba.ca", "test456"));
+        // Sample data for PATIENTS table
+        patientList.add(new Patient("patient1@example.com", "John", "Doe", "TYPE_A", "MALE", 30));
+        patientList.add(new Patient("patient2@example.com", "Jane", "Smith", "TYPE_O", "FEMALE", 25));
     }
 
     @Override
