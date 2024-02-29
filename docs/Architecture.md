@@ -6,10 +6,7 @@
 Objects that represent data that is passed around between the layers.<br> 
 **- UserCredentials:** Consists of the  username and password used during the login process to verify and authenticate a user's identity.<br>
 **- UserDetails:** Includes information like name, age, height and contact details, and any other relevant personal data.<br>
-**- MoodLog:** Corresponds to a single day's input from the mood tracker such as mood rating, hours of sleep, and possibly additional notes.<br>
-**- SymptomLog:** Corresponds to a single day's input from the Symptoms Tracker such as mental and physical health symptoms.<br>
-**- MedicationLog:** Corresponds to a single day's record of a user's medication usage from the Medication Tracker.<br>
-**- SubstanceUseLog:** Corresponds to a single day's input from the Substance Use Tracker such as the consumption of substances like alcohol, tobacco, or other substances.<br>
+**- DailyLog:** Corresponds to a single day's input from the patient health trackers, including mood rating, hours of sleep, and lists of symptoms, medications, and substances used.<br>
 
 ### Presentation Layer
 Responsible for handling the user interface (UI) and user experience (UX). It is the part of the system that users directly interact with, providing a means for them to input data, receive information, and interact with the application's features.<br>
@@ -25,10 +22,7 @@ Responsible for handling the user interface (UI) and user experience (UX). It is
 Responsible for implementing the business rules, processing data, and coordinating the flow of information between the user interface (presentation layer) and the data storage (persistence layer). The Logic Layer contains the core functionality and rules that define how the application operates.<br>
 **- UserValidationHandler:** Verify user credentials, and provide access to the app's secured features upon successful authentication.<br>
 **- UserDetailsHandler:**  Manages and retrieves user-related information.<br>
-**- MoodTrackerHandler:** Handles the recording and retrieval of mood-related entries. May include logic for analyzing and presenting trends or insights based on mood data.<br>
-**- SymptomTrackerHandler:** Manages the tracking and processing of user-reported symptoms. May include logic for analyzing and presenting trends or patterns in symptom data.<br>
-**- MedicationTrackerHandler:** Manages the tracking and processing of user medication-related data.<br>
-**- SubstanceUseTrackerHandler:** Manages the tracking and processing of user substance use-related data.<br>
+**- DailyLogHandler:** Handles the recording and retrieval of patients' health journal entries. May include logic for analyzing and presenting trends or insights based on health data.<br>
 
 ### Data/Persistence Layer
 Responsible for managing the storage and retrieval of data. The primary role of the Persistence Layer is to abstract the details of data storage, providing a clean and consistent interface for the Logic Layer to interact with data.<br> 
