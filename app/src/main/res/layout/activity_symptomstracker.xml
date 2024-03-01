@@ -17,7 +17,6 @@
         app:layout_constraintTop_toTopOf="@+id/linearLayout2"
         tools:context=".presentation.SymptomsTrackerActivity">
 
-
         <TextView
             android:id="@+id/Sadness"
             android:layout_width="110dp"
@@ -31,23 +30,21 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <RatingBar
+        <RatingBar style="@style/customRatingBar"
             android:id="@+id/ratingSadness"
-            android:layout_width="197dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="45dp"
             android:layout_marginTop="100dp"
             android:layout_marginEnd="23dp"
             android:layout_marginBottom="20dp"
             android:numStars="4"
-            android:scaleX="0.6"
-            android:scaleY="0.6"
+            android:stepSize="1"
             app:layout_constraintBottom_toTopOf="@+id/ratingHelplessness"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.494"
             app:layout_constraintStart_toEndOf="@+id/Sadness"
-            app:layout_constraintTop_toTopOf="parent"
-            android:progressTint="@color/mood_end" />
+            app:layout_constraintTop_toTopOf="parent" />
 
 
         <TextView
@@ -62,16 +59,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/Sadness" />
 
-        <RatingBar
+        <RatingBar style="@style/customRatingBar"
             android:id="@+id/ratingHelplessness"
-            android:layout_width="197dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="43dp"
             android:layout_marginEnd="25dp"
             android:layout_marginBottom="25dp"
             android:numStars="4"
-            android:scaleX="0.6"
-            android:scaleY="0.6"
             app:layout_constraintBottom_toTopOf="@+id/ratingSelfEsteem"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/Helplessness"
@@ -90,16 +85,14 @@
             app:layout_constraintTop_toBottomOf="@+id/Helplessness" />
 
 
-        <RatingBar
+        <RatingBar style="@style/customRatingBar"
             android:id="@+id/ratingSelfEsteem"
-            android:layout_width="197dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="43dp"
             android:layout_marginEnd="25dp"
             android:layout_marginBottom="20dp"
             android:numStars="4"
-            android:scaleX="0.6"
-            android:scaleY="0.6"
             app:layout_constraintBottom_toTopOf="@+id/ratingIsolation"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.505"
@@ -118,16 +111,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/LowSelfEsteem" />
 
-        <RatingBar
+        <RatingBar style="@style/customRatingBar"
             android:id="@+id/ratingIsolation"
-            android:layout_width="197dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="43dp"
             android:layout_marginEnd="25dp"
             android:layout_marginBottom="20dp"
             android:numStars="4"
-            android:scaleX="0.6"
-            android:scaleY="0.6"
             app:layout_constraintBottom_toTopOf="@+id/ratingLowMotivation"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/Isolation"
@@ -146,16 +137,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/Isolation" />
 
-        <RatingBar
+        <RatingBar style="@style/customRatingBar"
             android:id="@+id/ratingLowMotivation"
-            android:layout_width="197dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="43dp"
             android:layout_marginEnd="25dp"
             android:layout_marginBottom="25dp"
             android:numStars="4"
-            android:scaleX="0.6"
-            android:scaleY="0.6"
             app:layout_constraintBottom_toTopOf="@+id/ratingImpulsivity"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/LowMotivation"
@@ -173,16 +162,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/LowMotivation" />
 
-        <RatingBar
+        <RatingBar style="@style/customRatingBar"
             android:id="@+id/ratingImpulsivity"
-            android:layout_width="197dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="43dp"
             android:layout_marginEnd="25dp"
             android:layout_marginBottom="20dp"
             android:numStars="4"
-            android:scaleX="0.6"
-            android:scaleY="0.6"
             app:layout_constraintBottom_toTopOf="@+id/ratingConcentration"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/Impulsivity"
@@ -200,16 +187,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/Impulsivity" />
 
-        <RatingBar
+        <RatingBar style="@style/customRatingBar"
             android:id="@+id/ratingConcentration"
-            android:layout_width="197dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="43dp"
             android:layout_marginEnd="25dp"
             android:layout_marginBottom="20dp"
             android:numStars="4"
-            android:scaleX="0.6"
-            android:scaleY="0.6"
             app:layout_constraintBottom_toTopOf="@+id/ratingAggressiveness"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/Concentration"
@@ -227,16 +212,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/Concentration" />
 
-        <RatingBar
+        <RatingBar style="@style/customRatingBar"
             android:id="@+id/ratingAggressiveness"
-            android:layout_width="197dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="43dp"
             android:layout_marginEnd="25dp"
             android:layout_marginBottom="25dp"
             android:numStars="4"
-            android:scaleX="0.6"
-            android:scaleY="0.6"
             app:layout_constraintBottom_toTopOf="@+id/ratingGrandioseIdeas"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/Aggressiveness"
@@ -254,16 +237,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/Aggressiveness" />
 
-        <RatingBar
+        <RatingBar style="@style/customRatingBar"
             android:id="@+id/ratingGrandioseIdeas"
-            android:layout_width="197dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="45dp"
             android:layout_marginEnd="25dp"
             android:layout_marginBottom="20dp"
             android:numStars="4"
-            android:scaleX="0.6"
-            android:scaleY="0.6"
             app:layout_constraintBottom_toTopOf="@+id/ratingRacingThoughts"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/GrandioseIdeas"
@@ -281,16 +262,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/GrandioseIdeas" />
 
-        <RatingBar
+        <RatingBar style="@style/customRatingBar"
             android:id="@+id/ratingRacingThoughts"
-            android:layout_width="197dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="43dp"
             android:layout_marginEnd="25dp"
             android:layout_marginBottom="20dp"
             android:numStars="4"
-            android:scaleX="0.6"
-            android:scaleY="0.6"
             app:layout_constraintBottom_toTopOf="@+id/ratingAnxiety"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/RacingThoughts"
@@ -307,16 +286,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/RacingThoughts" />
 
-        <RatingBar
+        <RatingBar style="@style/customRatingBar"
             android:id="@+id/ratingAnxiety"
-            android:layout_width="197dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="43dp"
             android:layout_marginEnd="25dp"
             android:layout_marginBottom="20dp"
             android:numStars="4"
-            android:scaleX="0.6"
-            android:scaleY="0.6"
             app:layout_constraintBottom_toTopOf="@+id/ratingSleep"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/Anxiety"
@@ -333,16 +310,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/Anxiety" />
 
-        <RatingBar
+        <RatingBar style="@style/customRatingBar"
             android:id="@+id/ratingSleep"
-            android:layout_width="197dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="43dp"
             android:layout_marginEnd="25dp"
             android:layout_marginBottom="20dp"
             android:numStars="4"
-            android:scaleX="0.6"
-            android:scaleY="0.6"
             app:layout_constraintBottom_toTopOf="@+id/ratingHeadache"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/Sleep"
@@ -360,16 +335,14 @@
             app:layout_constraintTop_toBottomOf="@+id/Sleep"
             app:layout_constraintVertical_bias="1.0" />
 
-        <RatingBar
+        <RatingBar style="@style/customRatingBar"
             android:id="@+id/ratingHeadache"
-            android:layout_width="197dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="43dp"
             android:layout_marginEnd="25dp"
             android:layout_marginBottom="20dp"
             android:numStars="4"
-            android:scaleX="0.6"
-            android:scaleY="0.6"
             app:layout_constraintBottom_toTopOf="@+id/ratingPain"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/Headache"
@@ -387,16 +360,14 @@
             app:layout_constraintTop_toBottomOf="@+id/Headache"
             app:layout_constraintVertical_bias="1.0" />
 
-        <RatingBar
+        <RatingBar style="@style/customRatingBar"
             android:id="@+id/ratingPain"
-            android:layout_width="197dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="43dp"
             android:layout_marginEnd="25dp"
             android:layout_marginBottom="20dp"
             android:numStars="4"
-            android:scaleX="0.6"
-            android:scaleY="0.6"
             app:layout_constraintBottom_toTopOf="@+id/ratingAppetite"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/Pain"
@@ -414,16 +385,14 @@
             app:layout_constraintTop_toBottomOf="@+id/Pain"
             app:layout_constraintVertical_bias="1.0" />
 
-        <RatingBar
+        <RatingBar style="@style/customRatingBar"
             android:id="@+id/ratingAppetite"
-            android:layout_width="197dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="43dp"
             android:layout_marginEnd="25dp"
             android:layout_marginBottom="25dp"
             android:numStars="4"
-            android:scaleX="0.6"
-            android:scaleY="0.6"
             app:layout_constraintBottom_toTopOf="@+id/ratingGuilt"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/Appetite"
@@ -441,15 +410,13 @@
             app:layout_constraintTop_toBottomOf="@+id/Appetite"
             app:layout_constraintVertical_bias="1.0" />
 
-        <RatingBar
+        <RatingBar style="@style/customRatingBar"
             android:id="@+id/ratingGuilt"
-            android:layout_width="197dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="43dp"
             android:layout_marginEnd="25dp"
             android:numStars="4"
-            android:scaleX="0.6"
-            android:scaleY="0.6"
             app:layout_constraintBottom_toTopOf="@+id/ratingSuicide"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/Guilt"
@@ -467,21 +434,21 @@
             app:layout_constraintTop_toBottomOf="@+id/Guilt"
             app:layout_constraintVertical_bias="1.0" />
 
-        <RatingBar
+        <RatingBar style="@style/customRatingBar"
             android:id="@+id/ratingSuicide"
-            android:layout_width="197dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="43dp"
             android:layout_marginTop="18dp"
             android:layout_marginEnd="25dp"
             android:layout_marginBottom="50dp"
             android:numStars="4"
-            android:scaleX="0.6"
-            android:scaleY="0.6"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/Suicide"
             app:layout_constraintTop_toBottomOf="@+id/ratingGuilt" />
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
