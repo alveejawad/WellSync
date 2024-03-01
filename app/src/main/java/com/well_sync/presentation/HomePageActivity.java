@@ -42,7 +42,6 @@ public class HomePageActivity extends AppCompatActivity {
                 HomePageActivity.this.startActivity(moodIntent);
             }
         });
-
         symptomLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,7 +49,20 @@ public class HomePageActivity extends AppCompatActivity {
                 HomePageActivity.this.startActivity(symptomIntent);
             }
         });
-
+        medicationLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent medicationIntent = new Intent(HomePageActivity.this, MedicationTrackerActivity.class);
+                HomePageActivity.this.startActivity(medicationIntent);
+            }
+        });
+        substanceLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent substanceIntent = new Intent(HomePageActivity.this, SubstanceUseTrackerActivity.class);
+                HomePageActivity.this.startActivity(substanceIntent);
+            }
+        });
     }
 }
 
