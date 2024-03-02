@@ -22,6 +22,13 @@
     <string name="guilt">Feelings of Guilt or Self-Blame: </string>
     <string name="suicide">Thoughts of Death or Suicide: </string>
 
+    <string name="pills_name">Pills Name: </string>
+    <string name="pills_amount">Pills Amount: </string>
+    <string name="pills_dosage">Pills Dosage: </string>
+
+    <string name="subs_name">Substance Name: </string>
+    <string name="amount">Amount: </string>
+
 
 
 

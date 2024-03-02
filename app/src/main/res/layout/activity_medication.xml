@@ -38,7 +38,7 @@
         android:layout_width="155dp"
         android:layout_height="60dp"
         android:layout_marginTop="32dp"
-        android:text="Add medication (supplyments)"
+        android:text="Add medication (supplements)"
         android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -52,7 +52,7 @@
         android:layout_height="40dp"
         android:layout_marginStart="52dp"
         android:layout_marginTop="32dp"
-        android:text="Pills Name:"
+        android:text="@string/pills_name"
         android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
@@ -76,7 +76,7 @@
         android:layout_height="40dp"
         android:layout_marginStart="52dp"
         android:layout_marginTop="24dp"
-        android:text="Pills Amount:"
+        android:text="@string/pills_amount"
         android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
@@ -101,7 +101,7 @@
         android:layout_height="40dp"
         android:layout_marginStart="52dp"
         android:layout_marginTop="24dp"
-        android:text="Date:"
+        android:text="@string/Date"
         android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
