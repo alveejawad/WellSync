@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.UserSettingsActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/header_icon"
+                android:layout_width="220dp"
+                android:layout_height="200dp"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/user_settings" />
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/header_icon"
+                android:layout_centerHorizontal="true"
+                android:text="User Details"
+                android:textColor="@color/black"
+                android:textSize="35sp"
+                android:textStyle="bold"/>
+
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="85dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:padding="15dp">
+
+            <ImageView
+                android:id="@+id/ic_user"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@drawable/user" />
+
+            <TextView
+                android:id="@+id/lab_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="96dp"
+                android:layout_marginTop="13dp"
+                android:text="Name: "
+                android:textColor="@color/black"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="200dp"
+                android:layout_marginTop="13dp"
+                android:hint="Loading..."
+                android:textSize="25dp" />
+
+            <View
+                android:layout_width="300dp"
+                android:layout_height="2dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="50dp"
+                android:layout_marginRight="57dp"
+                android:background="@color/grey" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="85dp"
+            android:layout_marginLeft="10dp"
+            android:padding="15dp">
+
+            <ImageView
+                android:id="@+id/ic_bday"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@drawable/bday" />
+
+            <TextView
+                android:id="@+id/lab_bday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="96dp"
+                android:layout_marginTop="13dp"
+                android:text="Birthday: "
+                android:textColor="@color/black"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/birthday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="230dp"
+                android:layout_marginTop="13dp"
+                android:hint="Loading..."
+                android:textSize="25dp" />
+
+            <View
+                android:layout_width="275dp"
+                android:layout_height="2dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="50dp"
+                android:layout_marginRight="57dp"
+                android:background="@color/grey" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="85dp"
+            android:layout_marginLeft="10dp"
+            android:padding="15dp">
+
+            <ImageView
+                android:id="@+id/ic_gender"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@drawable/gender" />
+
+            <TextView
+                android:id="@+id/lab_gender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="96dp"
+                android:layout_marginTop="13dp"
+                android:text="Gender: "
+                android:textColor="@color/black"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/gender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="200dp"
+                android:layout_marginTop="13dp"
+                android:hint="Loading..."
+                android:textSize="25dp" />
+
+            <View
+                android:layout_width="300dp"
+                android:layout_height="2dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="50dp"
+                android:layout_marginRight="57dp"
+                android:background="@color/grey" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="85dp"
+            android:layout_marginLeft="10dp"
+            android:padding="15dp">
+
+            <ImageView
+                android:id="@+id/ic_bloodtype"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@drawable/blood_type" />
+
+            <TextView
+                android:id="@+id/lab_bloodtype"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="96dp"
+                android:layout_marginTop="13dp"
+                android:text="Blood type: "
+                android:textColor="@color/black"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/bloodtype"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="250dp"
+                android:layout_marginTop="13dp"
+                android:hint="Loading..."
+                android:textSize="25dp" />
+
+            <View
+                android:layout_width="260dp"
+                android:layout_height="2dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="50dp"
+                android:layout_marginRight="57dp"
+                android:background="@color/grey" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="85dp"
+            android:layout_marginLeft="10dp"
+            android:padding="15dp">
+
+            <ImageView
+                android:id="@+id/ic_doctor"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@drawable/doctor" />
+
+            <TextView
+                android:id="@+id/lab_doctor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="96dp"
+                android:layout_marginTop="13dp"
+                android:text="Doctor: "
+                android:textColor="@color/black"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/doctor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="200dp"
+                android:layout_marginTop="13dp"
+                android:hint="Loading..."
+                android:textSize="25dp" />
+
+            <View
+                android:layout_width="300dp"
+                android:layout_height="2dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="50dp"
+                android:layout_marginRight="57dp"
+                android:background="@color/grey" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="70dp">
+
+            <androidx.appcompat.widget.AppCompatButton style="@android:style/Widget.Button"
+                android:id="@+id/Backbutton"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_bg"
+                android:letterSpacing="0.2"
+                android:text="BACK"
+                android:textStyle="bold"
+                android:layout_marginLeft="100dp"/>
+
+            <androidx.appcompat.widget.AppCompatButton style="@android:style/Widget.Button"
+                android:id="@+id/Editbutton"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_bg"
+                android:letterSpacing="0.2"
+                android:layout_marginLeft="100dp"
+                android:text="EDIT"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
