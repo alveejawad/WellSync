@@ -2,10 +2,12 @@ package com.well_sync.presentation;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.Spinner;
 import android.widget.Toast;
-
+import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import com.well_sync.R;
 import com.well_sync.logic.UserAuthenticationHandler;
@@ -14,12 +16,12 @@ import com.well_sync.objects.UserCredentials;
 public class SignUpActivity extends AppCompatActivity {
     private UserCredentials newUser;
     private UserAuthenticationHandler signUpHandler;
-    TextView nextButton;
-    EditText userFirstName;
-    EditText userLastName;
-    EditText userEmail;
-    EditText userPassword;
-    EditText userConfirmPassword;
+    private EditText userEmail;
+    private EditText userPassword;
+    private EditText userConfirmPassword;
+    private Spinner roleSpinner;
+    private final String[] roleList = new String[]{"Patient","Doctor"};
+    private String role;
 
     @Override
     protected void onCreate(Bundle saveInstanceState) {
@@ -31,45 +33,73 @@ public class SignUpActivity extends AppCompatActivity {
         userEmail = findViewById(R.id.editEmail);
         userPassword = findViewById(R.id.editPassword);
         userConfirmPassword = findViewById(R.id.editConfirmPassword);
+        //Roles
+        roleSpinner = findViewById(R.id.Roles);
         //next Button
-        TextView nextButton = findViewById(R.id.Nextbutton);
+        Button nextButton = findViewById(R.id.Nextbutton);
+        setRoles();
+
+        //ROLES SPINNER
+        roleSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+                role = adapterView.getItemAtPosition(position).toString();
+            }
+            public void onNothingSelected(AdapterView<?> parent) {
+                role = null;
+                Toast.makeText(getApplicationContext(), "Please select role", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         //NEXT BUTTON
-        nextButton.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v) {
-                //get input from user
-                String email = userEmail.getText().toString();
-                String password = userPassword.getText().toString();
-                String confirmPassword = userConfirmPassword.getText().toString();
+        nextButton.setOnClickListener(v -> {
+            //get input from user
+            String email = userEmail.getText().toString();
+            String password = userPassword.getText().toString();
+            String confirmPassword = userConfirmPassword.getText().toString();
 
-                if(!password.equals(confirmPassword)) {
-                    //if passwords don't match
-                    userPassword.setError("Passwords don't match. Try again");
-                    userPassword.requestFocus();
-                    resetPasswords();
-                }else{
-                    //create user credentials
-                    newUser = new UserCredentials(email,password);
-                    boolean registered= signUpHandler.register(newUser);
-                    //if fields were valid
-                    if (registered){
-                    Intent openUserDetails=  new Intent(SignUpActivity.this, UserDetailsActivity.class);
-                    openUserDetails.putExtra("email",email);
-                    startActivity(openUserDetails);
+            if(!password.equals(confirmPassword)) {
+                //if passwords don't match
+                userPassword.setError("Passwords don't match. Try again");
+                userPassword.requestFocus();
+                resetPasswords();
+            }else{
+                //create user credentials
+                newUser = new UserCredentials(email,password);
+                boolean registered= signUpHandler.register(newUser);
+                //if fields were valid
+                if (registered){
+                    if(role.equals(roleList[0])){
+                        Intent openUserDetails=  new Intent(SignUpActivity.this, UserDetailsActivity.class);
+                        openUserDetails.putExtra("email",email);
+                        startActivity(openUserDetails);
 
                     }else{
-                        userPassword.setError("Email or Password invalid");
-                        userPassword.requestFocus();
-                        userEmail.requestFocus();
-                        resetSignUpFields();
-                        Toast.makeText(getApplicationContext(), "Not Registered. Invalid values, try again" , Toast.LENGTH_SHORT).show();
+                        Intent openDoctorView=  new Intent(SignUpActivity.this, HomePageActivity.class);
+                        openDoctorView.putExtra("email",email);
+                        startActivity(openDoctorView);
                     }
 
+
+
+                }else{
+                    userPassword.setError("Email or Password invalid");
+                    userPassword.requestFocus();
+                    userEmail.requestFocus();
+                    resetSignUpFields();
+                    Toast.makeText(getApplicationContext(), "Not Registered. Invalid values, try again" , Toast.LENGTH_SHORT).show();
                 }
+
             }
         });
 
 
+    }
+    /**
+     Function: Set values for roles
+     */
+    private void setRoles(){
+        ArrayAdapter<String> adapterRole = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, roleList);
+        roleSpinner.setAdapter(adapterRole);
     }
     /**
      Function: reset the password entry fields in case passwords don't match
@@ -90,7 +120,6 @@ public class SignUpActivity extends AppCompatActivity {
         resetPasswords();
 
     }
-    public UserCredentials getUserCredentials(){
-        return newUser;
-    }
+
+
 }

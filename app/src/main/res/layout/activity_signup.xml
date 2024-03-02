@@ -94,6 +94,24 @@
             android:inputType="textPassword"
             android:padding="12dp"
             android:textStyle="italic" />
+        <TextView
+            android:id="@+id/lab_role"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Sign up as:"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <Spinner
+            android:id="@+id/Roles"
+            android:layout_width="wrap_content"
+            android:layout_height="62dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:contentDescription="@string/select_role"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/Nextbutton"
