@@ -15,6 +15,7 @@ public class UserCredentialsValidator {
 
         validateEmail(credentials.getEmail());
         validatePassword(credentials.getPassword());
+        validateRole(credentials.getRole());
     }
 
     /**
@@ -36,6 +37,11 @@ public class UserCredentialsValidator {
             throw new InvalidCredentialsException("No password specified.");
         if (!Pattern.matches("((?=.)[^ ]){8,64}", password))
             throw new InvalidCredentialsException("Invalid password.");
+    }
+
+    public static void validateRole(Boolean role) throws InvalidCredentialsException {
+        if (role == null)
+            throw new InvalidCredentialsException("No role selected.");
     }
 
 }
