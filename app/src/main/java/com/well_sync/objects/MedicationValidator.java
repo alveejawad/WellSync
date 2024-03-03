@@ -6,11 +6,11 @@ import com.well_sync.logic.exceptions.InvalidDailyLogException;
 import java.util.regex.Pattern;
 
 public class MedicationValidator {
-    public static void validateMedication (Medication M) {
-        if (M == null)
+    public static void validateMedication (Medication Medicine) {
+        if (Medicine == null)
             throw new InvalidDailyLogException("Medication details object undefined.");
-        validateName(M.getName());
-        validateQuantity(M.getQuantity());
+        validateName(Medicine.getName());
+        validateQuantity(Medicine.getQuantity());
     }
     public static void validateQuantity(int quantity) throws InvalidDailyLogException {
         // https://en.wikipedia.org/wiki/Jeanne_Calment
