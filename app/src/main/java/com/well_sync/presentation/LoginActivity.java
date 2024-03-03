@@ -16,10 +16,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private UserCredentials userCredentials;
     private UserAuthenticationHandler loginHandler;
-    TextView loginButton;
-    TextView signUpButton;
-    EditText userPassword;
-    EditText userEmail;
+    TextView loginButton, signUpButton;
+    EditText userPassword, userEmail;
 
 
     @Override
@@ -41,8 +39,6 @@ public class LoginActivity extends AppCompatActivity {
 
             public void onClick(View v) {
                 userCredentials=getCredentials(v);
-                String currEmail = userEmail.getText().toString();
-                String currPassword = userPassword.getText().toString();
                 if(loginHandler.login(userCredentials)) {
                     startActivity(new Intent(LoginActivity.this,HomePageActivity.class));
                 }else {

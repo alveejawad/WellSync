@@ -45,7 +45,7 @@ public class HomePageActivity extends AppCompatActivity {
         symptomLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent symptomIntent = new Intent(HomePageActivity.this, SymptomTrackerActivity.class);
+                Intent symptomIntent = new Intent(HomePageActivity.this, SymptomsTrackerActivity.class);
                 HomePageActivity.this.startActivity(symptomIntent);
             }
         });
