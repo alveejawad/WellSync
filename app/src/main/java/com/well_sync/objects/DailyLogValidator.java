@@ -3,7 +3,6 @@ package com.well_sync.objects;
 import com.well_sync.logic.exceptions.InvalidDailyLogException;
 
 import java.util.Date;
-import java.util.List;
 
 /**
  * Parent validator for any daily log object.
