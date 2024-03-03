@@ -694,6 +694,8 @@
 
 
 
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -719,9 +721,58 @@
                     android:textStyle="bold" />
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="15dp"
+                android:background="@drawable/edittext_bg">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="51dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingStart="40dp"
+                        android:text="@string/subs_name"
+                        android:textSize="20sp"
+                        android:textStyle="bold"/>
 
+                    <TextView
+                        android:id="@+id/SubsName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="Loading..."
+                        android:textSize="20sp"/>
+                </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:paddingTop="5dp">
+                    <TextView
+                        android:layout_width="51dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingStart="40dp"
+                        android:text="@string/amount"
+                        android:textSize="20sp"
+                        android:textStyle="bold"/>
 
+                    <TextView
+                        android:id="@+id/amount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="Loading..."
+                        android:textSize="20sp"/>
+                </LinearLayout>
+
+            </LinearLayout>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/Loginbutton"
@@ -732,7 +783,7 @@
                 android:layout_marginTop="50dp"
                 android:background="@drawable/button_bg"
                 android:letterSpacing="0.2"
-                android:text="LOGIN"
+                android:text="BACK"
                 android:textStyle="bold" />
 
 
