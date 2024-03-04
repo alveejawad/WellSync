@@ -35,7 +35,7 @@ public class PatientValidator {
 
     // Helper method to validate object references that shouldn't be null, e.g. strings and enums.
     // The `subject` field is just to format the exception message with the correct field.
-    private static void validateNonNullObject(Object object, String subject) throws InvalidPatientException {
+    public static void validateNonNullObject(Object object, String subject) throws InvalidPatientException {
         if (object == null)
             throw new InvalidPatientException("No " + subject + " specified.");
     }

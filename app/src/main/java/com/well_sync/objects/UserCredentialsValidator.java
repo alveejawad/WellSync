@@ -1,5 +1,7 @@
 package com.well_sync.objects;
 
+import static com.well_sync.objects.PatientValidator.validateNonNullObject;
+
 import com.well_sync.logic.exceptions.InvalidCredentialsException;
 
 import java.util.regex.Pattern;
@@ -15,7 +17,8 @@ public class UserCredentialsValidator {
 
         validateEmail(credentials.getEmail());
         validatePassword(credentials.getPassword());
-        validateRole(credentials.getRole());
+        validateNonNullObject(credentials.getRole(), "role");
+
     }
 
     /**
@@ -39,9 +42,5 @@ public class UserCredentialsValidator {
             throw new InvalidCredentialsException("Invalid password.");
     }
 
-    public static void validateRole(Boolean role) throws InvalidCredentialsException {
-        if (role == null)
-            throw new InvalidCredentialsException("No role selected.");
-    }
 
 }

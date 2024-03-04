@@ -3,11 +3,8 @@ package com.well_sync.objects;
 import java.util.Objects;
 
 public class UserCredentials {
-
     public enum Role {
-
         DOCTOR,
-
         PATIENT;
 
         public static Role fromString(String type){
@@ -19,7 +16,6 @@ public class UserCredentials {
     }
     private final String email;
     private final String password;
-
     private final Role role;
 
     public UserCredentials(final String email, final String password, final String role) {
@@ -36,12 +32,16 @@ public class UserCredentials {
         return password;
     }
 
+    public Role getRole() { return role; }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        UserCredentials that = (UserCredentials) o;
-        return Objects.equals(email, that.email) && Objects.equals(password, that.password) && Objects.equals(role, that.role);
+        UserCredentials credentials = (UserCredentials) o;
+        return Objects.equals(email, credentials.email)
+                && Objects.equals(password, credentials.password)
+                && role == credentials.role;
     }
 
     @Override
