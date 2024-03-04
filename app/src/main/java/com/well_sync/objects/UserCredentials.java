@@ -4,15 +4,28 @@ import java.util.Objects;
 
 public class UserCredentials {
 
+    public enum Role {
+
+        DOCTOR,
+
+        PATIENT;
+
+        public static Role fromString(String type){
+            if (type.equals("Doctor")) {
+                return Role.DOCTOR;
+            }
+            return Role.PATIENT;
+        }
+    }
     private final String email;
     private final String password;
 
-    private final Boolean role;
+    private final Role role;
 
-    public UserCredentials(final String email, final String password, final Boolean role) {
+    public UserCredentials(final String email, final String password, final String role) {
         this.email = email;
         this.password = password;
-        this.role = role;
+        this.role = Role.fromString(role);
     }
 
     public String getEmail() {
