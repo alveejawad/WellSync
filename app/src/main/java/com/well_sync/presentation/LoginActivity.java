@@ -7,6 +7,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.well_sync.R;
+import com.well_sync.logic.exceptions.InvalidCredentialsException;
 import com.well_sync.objects.UserCredentials;
 import com.well_sync.logic.UserAuthenticationHandler;
 import android.graphics.Paint;
@@ -38,10 +39,11 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener(){
 
             public void onClick(View v) {
-                userCredentials=getCredentials(v);
-                if(loginHandler.login(userCredentials)) {
+                userCredentials = getCredentials(v);
+                try {
+                    loginHandler.login(userCredentials);
                     startActivity(new Intent(LoginActivity.this,HomePageActivity.class));
-                }else {
+                } catch (InvalidCredentialsException e) {
                     Toast.makeText(getApplicationContext(), "The email you entered isn’t connected to an account" , Toast.LENGTH_SHORT).show();
                     resetLoginFields();
                     userPassword.setError("Email or Password invalid");

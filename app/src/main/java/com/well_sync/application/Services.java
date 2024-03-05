@@ -26,11 +26,4 @@ public class Services {
         return dailyLogPersistence;
     }
 
-    /**
-     * clean
-     * Reset all services so to be reloaded from scratch next time they are referenced
-     */
-    public static synchronized void clean() {
-        userPersistence = null;
-    }
 }

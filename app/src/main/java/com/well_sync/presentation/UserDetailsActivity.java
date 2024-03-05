@@ -88,9 +88,10 @@ public class UserDetailsActivity extends AppCompatActivity {
 
                 Patient newPatient= new Patient(email,firstName,lastName,bloodType,gender,age);
 
-                if(patientHandler.editDetails(newPatient)){
+                try {
+                    patientHandler.editDetails(newPatient);
                     startActivity(new Intent(UserDetailsActivity.this, HomePageActivity.class));
-                }else{
+                } catch (InvalidPatientException e) {
                     Toast.makeText(getApplicationContext(), "Data is invalid", Toast.LENGTH_SHORT).show();
                 }
             }
