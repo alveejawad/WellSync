@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#3EC2FA">
+    android:background="#526AEE">
 
     <ImageView
         android:id="@+id/exit"
@@ -38,7 +38,7 @@
         android:layout_width="155dp"
         android:layout_height="60dp"
         android:layout_marginTop="32dp"
-        android:text="Add medication (supplements)"
+        android:text="Add medication (supplyments)"
         android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -52,7 +52,7 @@
         android:layout_height="40dp"
         android:layout_marginStart="52dp"
         android:layout_marginTop="32dp"
-        android:text="@string/pills_name"
+        android:text="Name:"
         android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
@@ -76,7 +76,7 @@
         android:layout_height="40dp"
         android:layout_marginStart="52dp"
         android:layout_marginTop="24dp"
-        android:text="@string/pills_amount"
+        android:text="Amount:"
         android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
@@ -94,30 +94,6 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/textView8"
         app:layout_constraintTop_toBottomOf="@+id/name_of_pills" />
-
-    <TextView
-        android:id="@+id/textView12"
-        android:layout_width="150dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="24dp"
-        android:text="@string/Date"
-        android:textSize="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8" />
-
-    <EditText
-        android:id="@+id/date_have_pill"
-        android:layout_width="150dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="44dp"
-        android:ems="10"
-        android:inputType="date"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/textView12"
-        app:layout_constraintTop_toBottomOf="@+id/num_of_pills" />
 
     <Button
         android:id="@+id/save"
