@@ -7,21 +7,15 @@ public class UserCredentials {
         DOCTOR,
         PATIENT;
 
-        public static Role fromString(String type){
-            if (type.equals("Doctor")) {
-                return Role.DOCTOR;
-            }
-            return Role.PATIENT;
-        }
     }
     private final String email;
     private final String password;
     private final Role role;
 
-    public UserCredentials(final String email, final String password, final String role) {
+    public UserCredentials(final String email, final String password, final UserCredentials.Role role) {
         this.email = email;
         this.password = password;
-        this.role = Role.fromString(role);
+        this.role = role;
     }
 
     public String getEmail() {
