@@ -21,15 +21,9 @@ public class DailyLogHandler {
         persistLog = persistence;
     }
 
-    public boolean setDailyLog(Patient patient, DailyLog dailyLog) {
-        try {
-            DailyLogValidator.validateLog(dailyLog);
-            persistLog.setDailyLog(patient, dailyLog);
-        } catch (InvalidDailyLogException e) {
-            return false;
-        }
-
-        return true;
+    public void setDailyLog(Patient patient, DailyLog dailyLog) throws InvalidDailyLogException {
+        DailyLogValidator.validateLog(dailyLog);
+        persistLog.setDailyLog(patient, dailyLog);
     }
 
     public DailyLog getDailyLog(Patient patient, Date date) {

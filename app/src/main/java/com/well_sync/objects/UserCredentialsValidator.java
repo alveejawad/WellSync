@@ -1,7 +1,5 @@
 package com.well_sync.objects;
 
-import static com.well_sync.objects.PatientValidator.validateNonNullObject;
-
 import com.well_sync.logic.exceptions.InvalidCredentialsException;
 
 import java.util.regex.Pattern;
@@ -18,7 +16,6 @@ public class UserCredentialsValidator {
         validateEmail(credentials.getEmail());
         validatePassword(credentials.getPassword());
         validateNonNullObject(credentials.getRole(), "role");
-
     }
 
     /**
@@ -42,5 +39,10 @@ public class UserCredentialsValidator {
             throw new InvalidCredentialsException("Invalid password.");
     }
 
-
+    // Helper method to validate object references that shouldn't be null, e.g. strings and enums.
+    // The `subject` field is just to format the exception message with the correct field.
+    public static void validateNonNullObject(Object object, String subject) throws InvalidCredentialsException {
+        if (object == null)
+            throw new InvalidCredentialsException("No " + subject + " specified.");
+    }
 }
