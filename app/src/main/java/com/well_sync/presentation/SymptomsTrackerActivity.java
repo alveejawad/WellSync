@@ -12,39 +12,16 @@ import com.well_sync.objects.UserCredentials;
 import com.well_sync.logic.UserAuthenticationHandler;
 import android.graphics.Paint;
 import android.widget.RatingBar;
-
+import java.util.ArrayList;
 
 public class SymptomsTrackerActivity extends AppCompatActivity {
-
+    private  ArrayList<Integer> symptomsList = new ArrayList<>();
     private ImageView closeIcon;
-    private RatingBar viewSadness, viewHelplessness, viewLowSelfEsteem, viewIsolated, viewMotivation, viewImpulsivity;
-    private RatingBar viewFocus, viewAggressiveness, viewInability, viewRacing, viewAnxiety, viewLowSleep, viewHeadache, viewBodyache, viewAppetite, viewGuilt, viewSuicide;
     private Button saveButton;
-    private int  sleep, sadness, helplessness, lowSelfEsteem, isolated, motivation, impulsivity, inability, focus, aggresivity;
-    private int  racing, anxiety, lowSleep, headache, bodyache, appetite, guilt, suicide;
-
     protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_symptomstracker);
 
-        closeIcon = findViewById(R.id.close);
-        viewSadness=findViewById(R.id.ratingSadness);
-        viewHelplessness=findViewById(R.id.ratingHelplessness);
-        viewLowSelfEsteem=findViewById(R.id.ratingSelfEsteem;
-        viewIsolated=findViewById(R.id.ratingIsolation);
-        viewMotivation=findViewById(R.id.ratingLowMotivation);
-        viewImpulsivity=findViewById(R.id.ratingImpulsivity);
-        viewFocus=findViewById(R.id.ratingConcentration);
-        viewAggressiveness=findViewById(R.id.ratingAggressiveness);
-        viewInability=findViewById(R.id.ratingGrandioseIdeas);
-        viewRacing=findViewById(R.id.ratingRacingThoughts);
-        viewAnxiety=findViewById(R.id.ratingAnxiety);
-        viewLowSleep=findViewById(R.id.ratingSleep);
-        viewHeadache=findViewById(R.id.ratingHeadache);
-        viewBodyache=findViewById(R.id.ratingPain);
-        viewAppetite=findViewById(R.id.ratingAppetite);
-        viewGuilt=findViewById(R.id.ratingGuilt);
-        viewSuicide=findViewById(R.id.ratingSuicide);
 
 
         // Set click listeners or any other event listeners as needed
@@ -60,13 +37,33 @@ public class SymptomsTrackerActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Handle save button click
-
+                addSymptom(R.id.close);
+                addSymptom(R.id.ratingSadness);
+                addSymptom(R.id.ratingHelplessness);
+                addSymptom(R.id.ratingSelfEsteem);
+                addSymptom(R.id.ratingIsolation);
+                addSymptom(R.id.ratingLowMotivation);
+                addSymptom(R.id.ratingImpulsivity);
+                addSymptom(R.id.ratingConcentration);
+                addSymptom(R.id.ratingAggressiveness);
+                addSymptom(R.id.ratingGrandioseIdeas);
+                addSymptom(R.id.ratingRacingThoughts);
+                addSymptom(R.id.ratingAnxiety);
+                addSymptom(R.id.ratingSleep);
+                addSymptom(R.id.ratingHeadache);
+                addSymptom(R.id.ratingPain);
+                addSymptom(R.id.ratingAppetite);
+                addSymptom(R.id.ratingGuilt);
+                addSymptom(R.id.ratingSuicide);
             }
         });
 
+    }
 
-
+    public void addSymptom(int idSymptom){
+        RatingBar symptom = findViewById(idSymptom); // Assuming you have a RatingBar in your layout with id "ratingBar"
+        int valueSymptom=  (int)symptom.getRating();
+        symptomsList.add(valueSymptom);
     }
 
 }
