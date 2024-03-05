@@ -9,10 +9,10 @@ public abstract class SymptomValidator {
         if (symptoms == null)
             throw new InvalidDailyLogException("Medication details object undefined.");
         validateName(symptoms.getName());
-        validateQuantity(symptoms.getIntensity());
+        validateQuantity(symptoms.getIntensity(), symptoms.maxIntensity);
     }
-    private static void validateQuantity(int intensity) throws InvalidDailyLogException {
-        if (intensity < 0 || intensity > 10)
+    private static void validateQuantity(int intensity, int maxIntensity) throws InvalidDailyLogException {
+        if (intensity < 0 || intensity > maxIntensity)
             throw new InvalidDailyLogException("Invalid intensity specified.");
     }
     private static void validateName(String name) throws InvalidDailyLogException {

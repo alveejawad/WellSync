@@ -19,7 +19,7 @@ public class PatientValidator {
 
         validateName(patient.getFirstName());
         validateName(patient.getLastName());
-        validateAge(patient.getAge());
+        validateAge(patient.getAge(), patient.MAX_AGE);
         validateNonNullObject(patient.getBloodType(), "blood type");
         validateNonNullObject(patient.getSex(), "sex");
     }
@@ -33,9 +33,8 @@ public class PatientValidator {
             throw new InvalidPatientException("Invalid name specified.");
     }
 
-    public static void validateAge(int age) throws InvalidPatientException {
-        // https://en.wikipedia.org/wiki/Jeanne_Calment
-        if (age < 0 || age > 122)
+    public static void validateAge(int age, int maxAge) throws InvalidPatientException {
+        if (age < 0 || age > maxAge)
             throw new InvalidPatientException("Invalid age specified.");
     }
 
