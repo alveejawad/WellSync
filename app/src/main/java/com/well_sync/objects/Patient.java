@@ -53,6 +53,10 @@ public class Patient {
         }
     }
 
+    // defined here in case future extensions of Patient want to change this value,
+    // and the validator will still work
+    public final int MAX_AGE = 122;
+
     private final String email;
     private String firstName;
     private String lastName;

@@ -1,8 +1,9 @@
 package com.well_sync.objects;
 
 public class Symptom {
-    String name;
-    int intensity; // from 0 to 10
+    public final int maxIntensity = 10;
+    private String name;
+    private int intensity; // from 0 to 10
 
     public Symptom(String name, int intensity) {
         this.name = name;

@@ -1,8 +1,9 @@
 package com.well_sync.objects;
 
 public class Medication {
-    String name;
-    int quantity; // number of tablets?
+    public final int maxQuantity = 5;
+    private String name;
+    private int quantity; // number of tablets?
 
     public Medication(String name, int quantity) {
         this.name = name;

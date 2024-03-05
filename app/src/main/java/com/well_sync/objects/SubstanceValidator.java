@@ -6,14 +6,14 @@ import java.util.regex.Pattern;
 
 public abstract class SubstanceValidator {
 
-    public static void validateSubstance(Substance drugs) throws InvalidDailyLogException {
-        if (drugs == null)
+    public static void validateSubstance(Substance substance) throws InvalidDailyLogException {
+        if (substance == null)
             throw new InvalidDailyLogException("Medication details object undefined.");
-        validateName(drugs.getName());
-        validateQuantity(drugs.getQuantity());
+        validateName(substance.getName());
+        validateQuantity(substance.getQuantity(), substance.maxQuantity);
     }
-    private static void validateQuantity(int quantity) throws InvalidDailyLogException {
-        if (quantity < 0)
+    private static void validateQuantity(int quantity, int maxQuantity) throws InvalidDailyLogException {
+        if (quantity < 0 || quantity > maxQuantity)
             throw new InvalidDailyLogException("Invalid quantity specified.");
     }
     private static void validateName(String name) throws InvalidDailyLogException {
