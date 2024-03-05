@@ -35,6 +35,17 @@
                 android:textSize="35sp"
                 android:textStyle="bold"/>
 
+            <ImageView
+                android:id="@+id/close"
+                android:layout_width="25dp"
+                android:layout_height="28dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_weight="1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/close" />
+
 
         </RelativeLayout>
 
@@ -248,27 +259,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="70dp">
+            android:layout_marginTop="70dp"
+            android:gravity="center_horizontal">
 
-            <androidx.appcompat.widget.AppCompatButton style="@android:style/Widget.Button"
-                android:id="@+id/Backbutton"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/button_bg"
-                android:letterSpacing="0.2"
-                android:text="BACK"
-                android:textStyle="bold"
-                android:layout_marginLeft="100dp"/>
-
-            <androidx.appcompat.widget.AppCompatButton style="@android:style/Widget.Button"
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/Editbutton"
+                style="@android:style/Widget.Button"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_bg"
                 android:letterSpacing="0.2"
-                android:layout_marginLeft="100dp"
                 android:text="EDIT"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+              />
+
         </LinearLayout>
 
 
