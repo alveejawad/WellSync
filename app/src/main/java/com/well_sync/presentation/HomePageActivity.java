@@ -30,7 +30,7 @@ public class HomePageActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Handle close button click
-                Intent closeIntent = new Intent(HomePageActivity.this, UserDetailsActivity.class);
+                Intent closeIntent = new Intent(HomePageActivity.this, UserSettingsActivity.class);
                 HomePageActivity.this.startActivity(closeIntent);
             }
         });
