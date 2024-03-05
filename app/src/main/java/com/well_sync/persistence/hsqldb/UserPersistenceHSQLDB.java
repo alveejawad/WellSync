@@ -18,14 +18,12 @@ import java.util.List;
 public class UserPersistenceHSQLDB implements IUserPersistence {
 
     private final String dbPath;
-    private IUserPersistence userPersistence;
-    private List<UserCredentials> userCredentialsList;
-    private List<Patient> patientsList;
-    private List<Doctor> doctorsList;
+    private final List<UserCredentials> userCredentialsList;
+    private final List<Patient> patientsList;
+    private final List<Doctor> doctorsList;
 
-    public UserPersistenceHSQLDB(IUserPersistence userPersistence, String dbPath) {
+    public UserPersistenceHSQLDB(String dbPath) {
         this.dbPath = dbPath;
-        this.userPersistence = userPersistence;
         this.userCredentialsList = new ArrayList<>();
         this.patientsList = new ArrayList<>();
         this.doctorsList = new ArrayList<>();
