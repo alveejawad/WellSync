@@ -1,6 +1,5 @@
 package com.well_sync.presentation;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,16 +14,16 @@ import com.well_sync.R;
 public class MedicationTrackerActivity extends AppCompatActivity {
 
     private ImageView closeIcon;
-    private EditText nameOfPills, pillAmount, date;
+    private EditText nameMed, amountMed;
+    protected String name, amount;
     private Button saveButton;
     protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_medication);
 
         closeIcon = findViewById(R.id.exit);
-        nameOfPills = findViewById(R.id.name_of_pills);
-        pillAmount = findViewById(R.id.num_of_pills);
-        date = findViewById(R.id.date_have_pill);
+        nameMed = findViewById(R.id.name_of_pills);
+        amountMed = findViewById(R.id.num_of_pills);
         saveButton = findViewById(R.id.save);
 
 
@@ -42,6 +41,17 @@ public class MedicationTrackerActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Handle save button click
+
+                // Initialize the data from user
+                name = nameMed.getText().toString();
+                amount = amountMed.getText().toString();
+
+                Intent saveIntent = new Intent(MedicationTrackerActivity.this, DisplayMedicationActivity.class);
+                saveIntent.putExtra("name", name);
+                saveIntent.putExtra("amount", amount);
+
+
+                MedicationTrackerActivity.this.startActivity(saveIntent);
 
             }
         });

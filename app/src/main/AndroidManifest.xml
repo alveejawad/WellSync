@@ -8,6 +8,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".presentation.DisplaySubstanceUseActivity"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".presentation.DisplayMedicationActivity"
+            android:exported="false">
+        </activity>
+        <activity
             android:name=".presentation.DisplayDataActivity"
             android:exported="false">
         </activity>
@@ -33,6 +41,10 @@
         </activity>
         <activity
             android:name=".presentation.SubstanceUseTrackerActivity"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".presentation.DoctorPageActivity"
             android:exported="false">
         </activity>
         <activity

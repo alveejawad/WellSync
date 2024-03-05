@@ -83,6 +83,8 @@ public class Patient {
     }
 
     public String getLastName() { return lastName; }
+    
+    public String getName() {return firstName + lastName;}
 
     public BloodType getBloodType() {
         return bloodType;
