@@ -1,5 +1,7 @@
 package com.well_sync.objects;
 
+import static com.well_sync.objects.PatientValidator.validateNonNullObject;
+
 import com.well_sync.logic.exceptions.InvalidCredentialsException;
 
 import java.util.regex.Pattern;
@@ -15,6 +17,8 @@ public class UserCredentialsValidator {
 
         validateEmail(credentials.getEmail());
         validatePassword(credentials.getPassword());
+        validateNonNullObject(credentials.getRole(), "role");
+
     }
 
     /**
@@ -37,5 +41,6 @@ public class UserCredentialsValidator {
         if (!Pattern.matches("((?=.)[^ ]){8,64}", password))
             throw new InvalidCredentialsException("Invalid password.");
     }
+
 
 }
