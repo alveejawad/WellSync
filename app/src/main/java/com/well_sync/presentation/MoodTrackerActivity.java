@@ -12,8 +12,10 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import com.well_sync.R;
+import com.well_sync.logic.exceptions.InvalidDailyLogException;
 import com.well_sync.objects.*;
 import com.well_sync.logic.DailyLogHandler;
+import com.well_sync.logic.*;
 import java.util.Date;
 import java.time.LocalDate;
 
@@ -25,18 +27,21 @@ public class MoodTrackerActivity extends AppCompatActivity {
     private TextView emotionText;
 
     private DailyLog dailyLog;
+    private DailyLogHandler dailyLogHandler;
     private Patient patient;
     private String email;
-    private DailyLogHandler dailyLogHandler;
-
     protected String emotion, sleepHoursText, userNotes;
     private Date date;
+    private Intent intent;
     private int moodScores;
     private int sleepHours;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mood); // Replace with your actual layout file name
+        dailyLogHandler = new DailyLogHandler();
+        dailyLog = new DailyLog();
+        moodScores = 0;
 
         // Initialize views
         closeImageView = findViewById(R.id.close);
@@ -56,7 +61,7 @@ public class MoodTrackerActivity extends AppCompatActivity {
                 // Reset color filter for all image views
                 resetColorFilter();
                 // Set color filter for the selected image view
-                smileImageView.setColorFilter(Color.RED);
+                smileImageView.setColorFilter(Color.BLUE);
                 selectedImageView = smileImageView;
 
                 // Set the emotion text below the selected image view
@@ -64,6 +69,7 @@ public class MoodTrackerActivity extends AppCompatActivity {
 
                 // Set the mood score
                 moodScores = 4;
+                dailyLog.setMoodScore(moodScores);
             }
         });
 
@@ -71,13 +77,14 @@ public class MoodTrackerActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 resetColorFilter();
-                neutralImageView.setColorFilter(Color.RED);
+                neutralImageView.setColorFilter(Color.BLUE);
                 selectedImageView = neutralImageView;
                 // Set the emotion text below the selected image view
                 emotionText.setText("Neutral - Your mood score is 3");
 
                 // Set the mood score
                 moodScores = 3;
+                dailyLog.setMoodScore(moodScores);
             }
         });
 
@@ -85,13 +92,14 @@ public class MoodTrackerActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 resetColorFilter();
-                angryImageView.setColorFilter(Color.RED);
+                angryImageView.setColorFilter(Color.BLUE);
                 selectedImageView = angryImageView;
                 // Set the emotion text below the selected image view
                 emotionText.setText("Angry - Your mood score is 2");
 
                 // Set the mood score
                 moodScores = 2;
+                dailyLog.setMoodScore(moodScores);
             }
         });
 
@@ -99,13 +107,14 @@ public class MoodTrackerActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 resetColorFilter();
-                sickImageView.setColorFilter(Color.RED);
+                sickImageView.setColorFilter(Color.BLUE);
                 selectedImageView = sickImageView;
                 // Set the emotion text below the selected image view
                 emotionText.setText("Sick - Your mood score is 1");
 
                 // Set the mood score
                 moodScores = 1;
+                dailyLog.setMoodScore(moodScores);
             }
         });
         // Set click listeners or any other event listeners as needed
@@ -128,37 +137,68 @@ public class MoodTrackerActivity extends AppCompatActivity {
                 date = java.sql.Date.valueOf(localDate.toString());
                 // Initialize the data from user
                 emotion = emotionText.getText().toString();
+                // check if emotion is empty before parsing
+                if (emotion.isEmpty()) {
+                    // Show a Toast or handle the validation error as needed
+                    Toast.makeText(MoodTrackerActivity.this, "Emotion cannot be empty.", Toast.LENGTH_SHORT).show();
+                    return; // Exit the onClick method to prevent further execution
+                }
                 sleepHoursText = sleepHoursEditText.getText().toString();
+                // check if sleepHoursText is empty before parsing
+                if (sleepHoursText.isEmpty()) {
+                    // Show a Toast or handle the validation error as needed
+                    Toast.makeText(MoodTrackerActivity.this, "Sleep hours cannot be empty.", Toast.LENGTH_SHORT).show();
+                    return; // Exit the onClick method to prevent further execution
+                }
                 userNotes = userNotesEditText.getText().toString();
+                // check if userNotes is empty before parsing
+                if (userNotes.isEmpty()) {
+                    // Show a Toast or handle the validation error as needed
+                    Toast.makeText(MoodTrackerActivity.this, "User notes cannot be empty.", Toast.LENGTH_SHORT).show();
+                    return; // Exit the onClick method to prevent further execution
+                }
+                sleepHours = Integer.parseInt(sleepHoursText);
+
+                dailyLog.setMoodScore(sleepHours);
+                dailyLog.setNotes(userNotes);
+
+                // Validate mood score before setting it in the dailylog
+                if (moodScores < 1 || moodScores > 4) {
+                    // Show a Toast or handle the validation error as needed
+                    Toast.makeText(MoodTrackerActivity.this, "Invalid mood score; must be between 1 and 4 inclusive.", Toast.LENGTH_SHORT).show();
+                    return; // Exit the onClick method to prevent further execution
+                }
+                // Validate sleep hours before setting it in the dailylog
+                if (sleepHours < 0 || sleepHours > 16) {
+                    // Show a Toast or handle the validation error as needed
+                    Toast.makeText(MoodTrackerActivity.this, "Invalid sleep hours; must be between 0 and 16 inclusive.", Toast.LENGTH_SHORT).show();
+                    return; // Exit the onClick method to prevent further execution
+                }
+                dailyLog.setSleepHours(sleepHours);
 
                 // Get the data from patient
-                patient = getPatientDetail(view);
-                // Get the data from mood
-                dailyLog = getDailyLogDetails(view);
+                patient = new Patient("test123@umanitoba.ca");
+                // email = intent.getStringExtra("email");
+                email = "test123@umanitoba.ca";
+                Patient newPatient = new Patient(email);
 
-                if(dailyLog != null) {
-                    // Save date to show on the next page
+                try {
+                    // Get the data from mood
+                    dailyLogHandler.setDailyLog(newPatient, dailyLog);
                     Intent saveIntent = new Intent(MoodTrackerActivity.this, DisplayDataActivity.class);
                     saveIntent.putExtra("emotion", emotion);
                     saveIntent.putExtra("sleepHours", sleepHoursText);
                     saveIntent.putExtra("userNotes", userNotes);
                     MoodTrackerActivity.this.startActivity(saveIntent);
-                } else {
-                    Toast.makeText(getApplicationContext(), "Save failed", Toast.LENGTH_SHORT).show();
+                } catch (InvalidDailyLogException e) {
+                    Toast.makeText(getApplicationContext(), "Save error", Toast.LENGTH_SHORT).show();
                 }
-                // Call the logic layer
-                dailyLogHandler.setDailyLog(patient, dailyLog);
+
             }
         });
     }
 
-    public Patient getPatientDetail(View view) {
-        Patient result;
-        email = "test123@umanitoba.ca";
-        result = new Patient(email);
-        return result;
-    }
-    public DailyLog getDailyLogDetails(View view) {
+    public DailyLog getMoodLogDetails(View view) {
         DailyLog result;
         // Create a LocalDate instance and convert it to date
         LocalDate localDate = LocalDate.now();
