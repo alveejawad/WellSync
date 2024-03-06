@@ -16,10 +16,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.well_sync.R;
 import com.well_sync.logic.PatientHandler;
-import com.well_sync.logic.exceptions.InvalidPatientException;
 import com.well_sync.objects.Patient;
-import com.well_sync.presentation.SignUpActivity;
 import com.well_sync.objects.UserCredentials;
+import com.well_sync.logic.exceptions.InvalidPatientException;
+
+import com.well_sync.presentation.SignUpActivity;
+
 import java.util.Objects;
 
 
@@ -90,9 +92,11 @@ public class UserDetailsActivity extends AppCompatActivity {
 
                 try {
                     patientHandler.editDetails(newPatient);
-                    startActivity(new Intent(UserDetailsActivity.this, HomePageActivity.class));
+                    Intent homeIntent =new Intent(UserDetailsActivity.this, HomePageActivity.class);
+                    homeIntent.putExtra("email",email);
+                    startActivity(homeIntent);
                 } catch (InvalidPatientException e) {
-                    Toast.makeText(getApplicationContext(), "Data is invalid", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Invalid patient details", Toast.LENGTH_SHORT).show();
                 }
             }
         });

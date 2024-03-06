@@ -1,5 +1,4 @@
 package com.well_sync.presentation;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,11 +11,17 @@ import androidx.appcompat.app.AppCompatActivity;
 public class HomePageActivity extends AppCompatActivity {
 
     private ImageView userAccess;
+    private Intent intent;
+    private String email;
 
     @Override
     protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_main);
+
+        //get email from Login Activity
+        intent = getIntent();
+        email = intent.getStringExtra("email");
 
         // Find your widgets by their IDs
         LinearLayout moodLayout = findViewById(R.id.moodID);
@@ -30,8 +35,9 @@ public class HomePageActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Handle close button click
-                Intent closeIntent = new Intent(HomePageActivity.this, UserDetailsActivity.class);
-                HomePageActivity.this.startActivity(closeIntent);
+                Intent userIntent = new Intent(HomePageActivity.this, UserSettingsActivity.class);
+                userIntent.putExtra("email",email);
+                HomePageActivity.this.startActivity(userIntent);
             }
         });
         // Set click listeners for each widget

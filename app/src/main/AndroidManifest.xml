@@ -17,32 +17,28 @@
         </activity>
         <activity
             android:name=".presentation.DisplayDataActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".presentation.UserDetailsActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".presentation.MoodTrackerActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".presentation.HomePageActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".presentation.SignUpActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".presentation.MedicationTrackerActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".presentation.SubstanceUseTrackerActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false"></activity>
+        <activity
+            android:name=".presentation.UserSettingsActivity"
+            android:exported="false"></activity>
         <activity
             android:name=".presentation.DoctorPageActivity"
             android:exported="false">

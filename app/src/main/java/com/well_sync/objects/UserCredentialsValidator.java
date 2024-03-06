@@ -15,7 +15,6 @@ public class UserCredentialsValidator {
 
         validateEmail(credentials.getEmail());
         validatePassword(credentials.getPassword());
-        validateNonNullObject(credentials.getRole(), "role");
     }
 
     /**
