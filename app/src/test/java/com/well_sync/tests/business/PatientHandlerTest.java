@@ -24,7 +24,7 @@ public class PatientHandlerTest {
     public void testGetDetails() {
         System.out.println("\nStarting testGetDetails");
 
-        UserCredentials creds = new UserCredentials("test456@umanitoba.ca", "test456", UserCredentials.Role.PATIENT);
+        UserCredentials creds = new UserCredentials("test456@umanitoba.ca", "test456");
         Patient patient = patientHandler.getDetails(creds);
 
         assertEquals(patient.getEmail(), creds.getEmail());
