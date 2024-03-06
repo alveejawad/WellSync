@@ -10,9 +10,10 @@ public class UserCredentials {
     }
     private final String email;
     private final String password;
-    private final Role role;
+    //private final Role role;
+    private final String role;
 
-    public UserCredentials(final String email, final String password, final UserCredentials.Role role) {
+    public UserCredentials(final String email, final String password, final String role) {
         this.email = email;
         this.password = password;
         this.role = role;
@@ -26,7 +27,7 @@ public class UserCredentials {
         return password;
     }
 
-    public Role getRole() { return role; }
+    public String getRole() { return role; }
 
     @Override
     public boolean equals(Object o) {

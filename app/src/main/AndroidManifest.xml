@@ -48,6 +48,10 @@
             android:exported="false">
         </activity>
         <activity
+            android:name=".presentation.PatientInfoActivity"
+            android:exported="false">
+        </activity>
+        <activity
             android:name=".presentation.LoginActivity"
             android:exported="true"
             android:label="WELLSYNC">

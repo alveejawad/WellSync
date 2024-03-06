@@ -11,11 +11,15 @@ import java.util.List;
 
 public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHolder> {
     private List<Patient> patientList;
+    protected static OnItemClickListener onItemClickListener;
 
     public PatientAdapter(List<Patient> patientList) {
         this.patientList = patientList;
     }
 
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.onItemClickListener = listener;
+    }
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -37,6 +41,10 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHold
         return patientList.size();
     }
 
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView nameTextView;
         TextView emailTextView;
@@ -45,6 +53,17 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHold
             super(itemView);
             nameTextView = itemView.findViewById(R.id.patient_name);
             emailTextView = itemView.findViewById(R.id.patient_email);
+
+            // set click listener for the item
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if(position != RecyclerView.NO_POSITION && onItemClickListener != null) {
+                        onItemClickListener.onItemClick(position);
+                    }
+                }
+            });
         }
     }
 }
