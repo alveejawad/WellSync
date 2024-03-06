@@ -24,6 +24,9 @@ public class PatientHandler {
 	public Patient getDetails(UserCredentials credentials) {
 		return persistUsers.getPatient(credentials);
 	}
+	public Patient getDetails(String email) {
+		return persistUsers.getPatient(email);
+	}
 
 	//editDetails function will get the userInput and set the details into the persistence layer
 	public boolean editDetails(Patient inputDetails) {
