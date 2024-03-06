@@ -40,11 +40,14 @@ public class LoginActivity extends AppCompatActivity {
 
             public void onClick(View v) {
                 userCredentials=getCredentials(v);
-                if(loginHandler.login(userCredentials)) {
-                    Intent openHome=new Intent(LoginActivity.this,HomePageActivity.class);
-                    openHome.putExtra("email", userCredentials.getEmail());
-                    startActivity(openHome);
-                }else {
+
+
+                try {
+                    loginHandler.login(userCredentials);
+                        Intent openHome=new Intent(LoginActivity.this,HomePageActivity.class);
+                        openHome.putExtra("email", userCredentials.getEmail());
+                        startActivity(openHome);
+                } catch (InvalidCredentialsException e) {
                     Toast.makeText(getApplicationContext(), "The email you entered isn’t connected to an account" , Toast.LENGTH_SHORT).show();
                     resetLoginFields();
                     userPassword.setError("Email or Password invalid");
