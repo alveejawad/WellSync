@@ -10,8 +10,12 @@ public class UserCredentials {
     }
     private final String email;
     private final String password;
-    private final Role role;
+    private Role role;
 
+    public UserCredentials(final String email, final String password) {
+        this.email = email;
+        this.password = password;
+    }
     public UserCredentials(final String email, final String password, final UserCredentials.Role role) {
         this.email = email;
         this.password = password;
