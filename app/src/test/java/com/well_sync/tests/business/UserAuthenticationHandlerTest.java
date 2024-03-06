@@ -20,7 +20,7 @@ public class UserAuthenticationHandlerTest {
     }
 
     @Test
-    public void testLogin() {
+    public void testLogin() throws InvalidCredentialsException {
         System.out.println("\nStarting testLogin...");
         UserCredentials creds;
 
@@ -44,7 +44,7 @@ public class UserAuthenticationHandlerTest {
     }
 
     @Test
-    public void testRegister() {
+    public void testRegister() throws InvalidCredentialsException {
         System.out.println("\nStarting testRegister");
         UserCredentials creds;
 

@@ -33,7 +33,7 @@ public class PatientHandlerTest {
     }
 
     @Test
-    public void testEditDetails() {
+    public void testEditDetails() throws InvalidPatientException {
         System.out.println("\nStarting testEditDetails");
 
         Patient patient = new Patient("new-patient@example.com", "Jane", "Newman", "O", "F", 0);

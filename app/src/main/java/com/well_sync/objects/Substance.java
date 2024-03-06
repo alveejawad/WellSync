@@ -1,8 +1,9 @@
 package com.well_sync.objects;
 
 public class Substance {
-    String name;
-    int quantity; // grams? puffs? lines of coke?
+    public final int maxQuantity = 5;
+    private String name;
+    private int quantity;
 
     public Substance(String name, int quantity) {
         this.name = name;

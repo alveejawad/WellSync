@@ -1,15 +1,15 @@
 package com.well_sync.objects;
+
 import java.util.Objects;
 
 public class UserCredentials {
     public enum Role {
         DOCTOR,
         PATIENT;
-
     }
+
     private final String email;
     private final String password;
-
     private Role role;
 
     public UserCredentials(final String email, final String password) {

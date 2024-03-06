@@ -15,7 +15,6 @@ import com.well_sync.R;
 import com.well_sync.logic.exceptions.InvalidDailyLogException;
 import com.well_sync.objects.*;
 import com.well_sync.logic.DailyLogHandler;
-import com.well_sync.logic.*;
 import java.util.Date;
 import java.time.LocalDate;
 
@@ -27,9 +26,10 @@ public class MoodTrackerActivity extends AppCompatActivity {
     private TextView emotionText;
 
     private DailyLog dailyLog;
-    private DailyLogHandler dailyLogHandler;
     private Patient patient;
     private String email;
+    private DailyLogHandler dailyLogHandler;
+
     protected String emotion, sleepHoursText, userNotes;
     private Date date;
     private Intent intent;
@@ -193,7 +193,6 @@ public class MoodTrackerActivity extends AppCompatActivity {
                 } catch (InvalidDailyLogException e) {
                     Toast.makeText(getApplicationContext(), "Save error", Toast.LENGTH_SHORT).show();
                 }
-
             }
         });
     }
