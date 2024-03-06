@@ -15,7 +15,9 @@ import com.well_sync.objects.UserCredentials;
 
 
 public class UserSettingsActivity extends AppCompatActivity {
-    private TextView doctor;
+    //private TextView doctor;
+    private Intent intent;
+    private String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,9 +27,12 @@ public class UserSettingsActivity extends AppCompatActivity {
         ImageView closeIcon = findViewById(R.id.close);
         Button editButton = findViewById(R.id.Editbutton);
 
+        //get email from Sign Up Activity
+        intent = getIntent();
+        email = intent.getStringExtra("email");
+
         PatientHandler patientHandler = new PatientHandler();
-        UserCredentials userCredentials = new UserCredentials("patient1@example.com", "123");
-        Patient patient = patientHandler.getDetails(userCredentials);
+        Patient patient = patientHandler.getDetails(email);
 
         setData(R.id.name, patient.getFirstName()+" "+patient.getLastName());
         setData(R.id.birthday, patient.getAge()+"");
