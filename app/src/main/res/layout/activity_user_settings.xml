@@ -79,15 +79,7 @@
                 android:layout_marginStart="200dp"
                 android:layout_marginTop="13dp"
                 android:hint="Loading..."
-                android:textSize="25dp" />
-
-            <View
-                android:layout_width="300dp"
-                android:layout_height="2dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="50dp"
-                android:layout_marginRight="57dp"
-                android:background="@color/grey" />
+                android:textSize="25dp"/>
         </RelativeLayout>
 
         <RelativeLayout
@@ -121,14 +113,6 @@
                 android:layout_marginTop="13dp"
                 android:hint="Loading..."
                 android:textSize="25dp" />
-
-            <View
-                android:layout_width="275dp"
-                android:layout_height="2dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="50dp"
-                android:layout_marginRight="90dp"
-                android:background="@color/grey" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -163,13 +147,6 @@
                 android:hint="Loading..."
                 android:textSize="25dp" />
 
-            <View
-                android:layout_width="300dp"
-                android:layout_height="2dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="50dp"
-                android:layout_marginRight="57dp"
-                android:background="@color/grey" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -204,19 +181,14 @@
                 android:hint="Loading..."
                 android:textSize="25dp" />
 
-            <View
-                android:layout_width="260dp"
-                android:layout_height="2dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="50dp"
-                android:layout_marginRight="57dp"
-                android:background="@color/grey" />
+
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="85dp"
             android:layout_marginLeft="10dp"
-            android:padding="15dp">
+            android:padding="15dp"
+            android:visibility="invisible">
 
             <ImageView
                 android:id="@+id/ic_doctor"
@@ -243,14 +215,6 @@
                 android:layout_marginTop="13dp"
                 android:hint="Loading..."
                 android:textSize="25dp" />
-
-            <View
-                android:layout_width="300dp"
-                android:layout_height="2dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="50dp"
-                android:layout_marginRight="57dp"
-                android:background="@color/grey" />
         </RelativeLayout>
 
         <LinearLayout
