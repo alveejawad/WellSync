@@ -22,8 +22,8 @@
 
     <TextView
         android:id="@+id/textView11"
-        android:layout_width="296dp"
-        android:layout_height="66dp"
+        android:layout_width="300dp"
+        android:layout_height="70dp"
         android:layout_marginTop="20dp"
         android:text="Your medication details are:"
         android:textSize="20dp"
@@ -34,25 +34,25 @@
 
     <TextView
         android:id="@+id/med_name_result"
-        android:layout_width="260dp"
-        android:layout_height="84dp"
+        android:layout_width="300dp"
+        android:layout_height="70dp"
         android:layout_marginTop="8dp"
         android:text="Meication name: "
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.271"
+        app:layout_constraintHorizontal_bias="0.288"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
     <TextView
         android:id="@+id/med_amount_result"
-        android:layout_width="249dp"
-        android:layout_height="79dp"
-        android:layout_marginTop="12dp"
+        android:layout_width="300dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="16dp"
         android:text="Amount: "
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.253"
+        app:layout_constraintHorizontal_bias="0.288"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/med_name_result" />
 
@@ -68,5 +68,18 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/med_amount_result" />
+
+    <TextView
+        android:id="@+id/med_dosage_result"
+        android:layout_width="300dp"
+        android:layout_height="70dp"
+        android:text="Dosage:"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/button_continue_1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.288"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/med_amount_result"
+        app:layout_constraintVertical_bias="0.195" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,7 +12,7 @@ import com.well_sync.R;
 
 public class DisplayMedicationActivity extends Activity {
 
-    private TextView nameText, amountText;
+    private TextView nameText, amountText, dosageText;
     private Button buttonContinue;
 
     @Override
@@ -23,14 +23,16 @@ public class DisplayMedicationActivity extends Activity {
         // Initialize TextViews
         nameText = findViewById(R.id.med_name_result);
         amountText = findViewById(R.id.med_amount_result);
+        dosageText = findViewById(R.id.med_dosage_result);
         buttonContinue = findViewById(R.id.button_continue_1);
 
         Intent intent = getIntent();
         String name = intent.getStringExtra("name");
         String amount = intent.getStringExtra("amount");
-        String date = intent.getStringExtra("date");
+        String dosage = intent.getStringExtra("dosage");
         nameText.setText("Medication Name: " + name);
         amountText.setText("Amount: " + amount);
+        dosageText.setText("Dosage: " + dosage);
 
         buttonContinue.setOnClickListener(new View.OnClickListener() {
             @Override

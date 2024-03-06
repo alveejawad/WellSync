@@ -13,7 +13,7 @@ public class PatientHandler {
 	private final IUserPersistence persistUsers;
 
 	public PatientHandler() {
-		persistUsers = Services.getUserPersistence();
+		persistUsers = Services.getUserPersistence(true);
 	}
 
 	public PatientHandler(IUserPersistence persistence){
@@ -23,6 +23,9 @@ public class PatientHandler {
 	//getDetails function will get the patient and give the patient to the UI layer
 	public Patient getDetails(UserCredentials credentials) {
 		return persistUsers.getPatient(credentials);
+	}
+	public Patient getDetails(String email) {
+		return persistUsers.getPatient(email);
 	}
 
 	//editDetails function will get the userInput and set the details into the persistence layer

@@ -38,12 +38,12 @@ public class UserCredentials {
         if (o == null || getClass() != o.getClass()) return false;
         UserCredentials credentials = (UserCredentials) o;
         return Objects.equals(email, credentials.email)
-                && Objects.equals(password, credentials.password)
-                && role == credentials.role;
+                && Objects.equals(password, credentials.password);
+
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(email, password, role);
+        return Objects.hash(email, password);
     }
 }

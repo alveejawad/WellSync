@@ -15,6 +15,7 @@ import com.well_sync.R;
 import com.well_sync.logic.exceptions.InvalidDailyLogException;
 import com.well_sync.objects.*;
 import com.well_sync.logic.DailyLogHandler;
+import com.well_sync.logic.*;
 import java.util.Date;
 import java.time.LocalDate;
 
@@ -32,6 +33,7 @@ public class MoodTrackerActivity extends AppCompatActivity {
 
     protected String emotion, sleepHoursText, userNotes;
     private Date date;
+    private Intent intent;
     private int moodScores;
     private int sleepHours;
     @Override
@@ -60,7 +62,7 @@ public class MoodTrackerActivity extends AppCompatActivity {
                 // Reset color filter for all image views
                 resetColorFilter();
                 // Set color filter for the selected image view
-                smileImageView.setColorFilter(Color.RED);
+                smileImageView.setColorFilter(Color.BLUE);
                 selectedImageView = smileImageView;
 
                 // Set the emotion text below the selected image view
@@ -76,7 +78,7 @@ public class MoodTrackerActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 resetColorFilter();
-                neutralImageView.setColorFilter(Color.RED);
+                neutralImageView.setColorFilter(Color.BLUE);
                 selectedImageView = neutralImageView;
                 // Set the emotion text below the selected image view
                 emotionText.setText("Neutral - Your mood score is 3");
@@ -91,7 +93,7 @@ public class MoodTrackerActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 resetColorFilter();
-                angryImageView.setColorFilter(Color.RED);
+                angryImageView.setColorFilter(Color.BLUE);
                 selectedImageView = angryImageView;
                 // Set the emotion text below the selected image view
                 emotionText.setText("Angry - Your mood score is 2");
@@ -106,7 +108,7 @@ public class MoodTrackerActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 resetColorFilter();
-                sickImageView.setColorFilter(Color.RED);
+                sickImageView.setColorFilter(Color.BLUE);
                 selectedImageView = sickImageView;
                 // Set the emotion text below the selected image view
                 emotionText.setText("Sick - Your mood score is 1");
@@ -136,18 +138,54 @@ public class MoodTrackerActivity extends AppCompatActivity {
                 date = java.sql.Date.valueOf(localDate.toString());
                 // Initialize the data from user
                 emotion = emotionText.getText().toString();
+                // check if emotion is empty before parsing
+                if (emotion.isEmpty()) {
+                    // Show a Toast or handle the validation error as needed
+                    Toast.makeText(MoodTrackerActivity.this, "Emotion cannot be empty.", Toast.LENGTH_SHORT).show();
+                    return; // Exit the onClick method to prevent further execution
+                }
                 sleepHoursText = sleepHoursEditText.getText().toString();
+                // check if sleepHoursText is empty before parsing
+                if (sleepHoursText.isEmpty()) {
+                    // Show a Toast or handle the validation error as needed
+                    Toast.makeText(MoodTrackerActivity.this, "Sleep hours cannot be empty.", Toast.LENGTH_SHORT).show();
+                    return; // Exit the onClick method to prevent further execution
+                }
                 userNotes = userNotesEditText.getText().toString();
+                // check if userNotes is empty before parsing
+                if (userNotes.isEmpty()) {
+                    // Show a Toast or handle the validation error as needed
+                    Toast.makeText(MoodTrackerActivity.this, "User notes cannot be empty.", Toast.LENGTH_SHORT).show();
+                    return; // Exit the onClick method to prevent further execution
+                }
                 sleepHours = Integer.parseInt(sleepHoursText);
 
                 dailyLog.setMoodScore(sleepHours);
                 dailyLog.setNotes(userNotes);
 
+                // Validate mood score before setting it in the dailylog
+                if (moodScores < 1 || moodScores > 4) {
+                    // Show a Toast or handle the validation error as needed
+                    Toast.makeText(MoodTrackerActivity.this, "Invalid mood score; must be between 1 and 4 inclusive.", Toast.LENGTH_SHORT).show();
+                    return; // Exit the onClick method to prevent further execution
+                }
+                // Validate sleep hours before setting it in the dailylog
+                if (sleepHours < 0 || sleepHours > 16) {
+                    // Show a Toast or handle the validation error as needed
+                    Toast.makeText(MoodTrackerActivity.this, "Invalid sleep hours; must be between 0 and 16 inclusive.", Toast.LENGTH_SHORT).show();
+                    return; // Exit the onClick method to prevent further execution
+                }
+                dailyLog.setSleepHours(sleepHours);
+
                 // Get the data from patient
                 patient = new Patient("test123@umanitoba.ca");
-                // Get the data from mood
+                // email = intent.getStringExtra("email");
+                email = "test123@umanitoba.ca";
+                Patient newPatient = new Patient(email);
+
                 try {
-                    dailyLogHandler.setDailyLog(patient, dailyLog);
+                    // Get the data from mood
+                    dailyLogHandler.setDailyLog(newPatient, dailyLog);
                     Intent saveIntent = new Intent(MoodTrackerActivity.this, DisplayDataActivity.class);
                     saveIntent.putExtra("emotion", emotion);
                     saveIntent.putExtra("sleepHours", sleepHoursText);
