@@ -19,11 +19,9 @@ import java.util.List;
 public class DailyLogPersistenceHSQLDB implements IDailyLogPersistence {
 
     private final String dbPath;
-    private IDailyLogPersistence dailyLogPersistence;
 
-    public DailyLogPersistenceHSQLDB(IDailyLogPersistence dailyLogPersistence, String dbPath) {
+    public DailyLogPersistenceHSQLDB(String dbPath) {
         this.dbPath = dbPath;
-        this.dailyLogPersistence = dailyLogPersistence;
     }
 
     private Connection connect() throws SQLException {

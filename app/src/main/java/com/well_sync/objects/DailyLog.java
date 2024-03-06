@@ -8,6 +8,10 @@ import java.util.List;
  * Represents observations of patient health for one specific date.
  */
 public class DailyLog {
+    // Defined here in case future extensions want to change this
+    public final int maxMoodScore = 4;
+    public final int maxSleepHours = 16;
+
     private Date date;
     private int moodScore;
     private int sleepHours;
@@ -75,7 +79,7 @@ public class DailyLog {
 
     public void removeSymptom(String name) {
         this.symptomList.forEach(symptom -> {
-            if (symptom.name.equals(name)) this.symptomList.remove(symptom);
+            if (symptom.getName().equals(name)) this.symptomList.remove(symptom);
         });
     }
 
@@ -95,7 +99,7 @@ public class DailyLog {
 
     public void removeMedication(String name) {
         this.medicationList.forEach(med -> {
-            if (med.name.equals(name)) this.medicationList.remove(med);
+            if (med.getName().equals(name)) this.medicationList.remove(med);
         });
     }
 
@@ -115,7 +119,7 @@ public class DailyLog {
 
     public void removeSubstance(String name) {
         this.substanceList.forEach(sub -> {
-            if (sub.name.equals(name)) this.substanceList.remove(sub);
+            if (sub.getName().equals(name)) this.substanceList.remove(sub);
         });
     }
 

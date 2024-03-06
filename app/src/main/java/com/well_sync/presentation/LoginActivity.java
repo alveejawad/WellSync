@@ -7,6 +7,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.well_sync.R;
+import com.well_sync.logic.exceptions.InvalidCredentialsException;
 import com.well_sync.objects.UserCredentials;
 import com.well_sync.logic.UserAuthenticationHandler;
 import android.graphics.Paint;

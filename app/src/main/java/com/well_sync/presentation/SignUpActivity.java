@@ -11,6 +11,7 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import com.well_sync.R;
 import com.well_sync.logic.UserAuthenticationHandler;
+import com.well_sync.logic.exceptions.InvalidCredentialsException;
 import com.well_sync.objects.UserCredentials;
 
 public class SignUpActivity extends AppCompatActivity {
@@ -64,24 +65,22 @@ public class SignUpActivity extends AppCompatActivity {
                 resetPasswords();
             }else{
                 //create user credentials
-                newUser = new UserCredentials(email,password);
-                boolean registered= signUpHandler.register(newUser);
-                //if fields were valid
-                if (registered){
-                    if(role.equals(roleList[0])){
+                newUser = new UserCredentials(email, password);
+                try {
+                    signUpHandler.register(newUser);
+
+                    // if fields were valid
+                    if (role.equals(roleList[0])) {
                         Intent openUserDetails=  new Intent(SignUpActivity.this, UserDetailsActivity.class);
                         openUserDetails.putExtra("email",email);
                         startActivity(openUserDetails);
 
-                    }else{
+                    } else {
                         Intent openDoctorView=  new Intent(SignUpActivity.this, HomePageActivity.class);
                         openDoctorView.putExtra("email",email);
                         startActivity(openDoctorView);
                     }
-
-
-
-                }else{
+                } catch (InvalidCredentialsException e) {
                     userPassword.setError("Email or Password invalid");
                     userPassword.requestFocus();
                     userEmail.requestFocus();
