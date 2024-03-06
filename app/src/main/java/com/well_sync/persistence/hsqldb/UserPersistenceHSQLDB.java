@@ -41,7 +41,7 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM USER_CREDENTIALS");
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                userCredentialsList.add(new UserCredentials(resultSet.getString("email"), resultSet.getString("password")));
+                userCredentialsList.add(new UserCredentials(resultSet.getString("email"), resultSet.getString("password"), resultSet.getString("role")));
             }
         } catch (final SQLException e) {
             Log.e("Connect SQL", e.getMessage() + e.getSQLState());
@@ -84,7 +84,7 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
             statement.setString(1, userCredentials.getEmail());
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                return new UserCredentials(resultSet.getString("email"), resultSet.getString("password"));
+                return new UserCredentials(resultSet.getString("email"), resultSet.getString("password"), resultSet.getString("role"));
             }
         } catch (final SQLException e) {
             Log.e("Connect SQL", e.getMessage() + e.getSQLState());

@@ -64,8 +64,9 @@ public class SignUpActivity extends AppCompatActivity {
                 userPassword.requestFocus();
                 resetPasswords();
             }else{
+
                 //create user credentials
-                newUser = new UserCredentials(email, password);
+                newUser = new UserCredentials(email, password, role);
                 try {
                     signUpHandler.register(newUser);
 
@@ -76,7 +77,7 @@ public class SignUpActivity extends AppCompatActivity {
                         startActivity(openUserDetails);
 
                     } else {
-                        Intent openDoctorView=  new Intent(SignUpActivity.this, HomePageActivity.class);
+                        Intent openDoctorView=  new Intent(SignUpActivity.this, DoctorPageActivity.class);
                         openDoctorView.putExtra("email",email);
                         startActivity(openDoctorView);
                     }

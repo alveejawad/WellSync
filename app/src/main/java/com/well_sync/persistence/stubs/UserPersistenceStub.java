@@ -19,8 +19,8 @@ public class UserPersistenceStub implements IUserPersistence {
         this.doctorList = new ArrayList<>();
 
         // Sample data for USER_CREDENTIALS table
-        UserCredentials userCredentials1 = new UserCredentials("test1@example.com", "password1");
-        UserCredentials userCredentials2 = new UserCredentials("test2@example.com", "password2");
+        UserCredentials userCredentials1 = new UserCredentials("test1@example.com", "password1", "Doctor");
+        UserCredentials userCredentials2 = new UserCredentials("test2@example.com", "password2", "Patient");
         userCredentialsList.add(userCredentials1);
         userCredentialsList.add(userCredentials2);
 
