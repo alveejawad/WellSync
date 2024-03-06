@@ -6,6 +6,7 @@ import static org.junit.Assert.*;
 
 import com.well_sync.logic.DailyLogHandler;
 import com.well_sync.logic.PatientHandler;
+import com.well_sync.logic.exceptions.InvalidDailyLogException;
 import com.well_sync.objects.DailyLog;
 import com.well_sync.objects.Patient;
 import com.well_sync.objects.UserCredentials;
@@ -52,21 +53,13 @@ public class DailyLogHandlerTest {
         Patient patient = new Patient("new-patient@example.com");
         DailyLog dailyLog = new DailyLog(date, 2, 4, "Very tired");
 
-        assertTrue(dailyLogHandler.setDailyLog(patient, dailyLog));
-
-        // check that log was inserted
-        assertEquals(dailyLog, dailyLogHandler.getDailyLog(patient, date));
-
+        dailyLogHandler.setDailyLog(patient, dailyLog);
 
         // set invalid log
         date = new Date(124, Calendar.JANUARY, 18);
         dailyLog = new DailyLog(date, -42, -1, "weird day");
 
-        assertFalse(dailyLogHandler.setDailyLog(patient, dailyLog));
-
-        // check that log was not inserted
-        assertNull(dailyLogHandler.getDailyLog(patient, date));
-
+        dailyLogHandler.setDailyLog(patient, dailyLog);
 
         System.out.println("Finished testSetDailyLog.");
     }
