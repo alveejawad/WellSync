@@ -36,7 +36,7 @@ public class DailyLogHandlerTest {
         Date date = new Date(124, Calendar.FEBRUARY, 7);
         DailyLog knownLog = new DailyLog(date, 3, 6, "Anxious");
         DailyLog retrievedLog = dailyLogHandler.getDailyLog(
-                patientHandler.getDetails(new UserCredentials("test123@umanitoba.ca", "test123", UserCredentials.Role.PATIENT)),
+                patientHandler.getDetails(new UserCredentials("test123@umanitoba.ca", "test123")),
                 date
         );
         assertEquals(knownLog, retrievedLog);
