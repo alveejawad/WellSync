@@ -6,6 +6,7 @@ import static org.junit.Assert.*;
 
 import com.well_sync.logic.DailyLogHandler;
 import com.well_sync.logic.PatientHandler;
+import com.well_sync.logic.exceptions.InvalidDailyLogException;
 import com.well_sync.objects.DailyLog;
 import com.well_sync.objects.Patient;
 import com.well_sync.objects.UserCredentials;
@@ -44,7 +45,7 @@ public class DailyLogHandlerTest {
     }
 
     @Test
-    public void testSetDailyLog() {
+    public void testSetDailyLog() throws InvalidDailyLogException {
         System.out.println("\nStarting testSetDailyLog...");
 
         // set valid log for patient
