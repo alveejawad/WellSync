@@ -16,6 +16,7 @@ public class UserCredentials {
         this.email = email;
         this.password = password;
     }
+
     public UserCredentials(final String email, final String password, final UserCredentials.Role role) {
         this.email = email;
         this.password = password;
@@ -31,6 +32,8 @@ public class UserCredentials {
     }
 
     public Role getRole() { return role; }
+
+    public void setRole(String role) { this.role = Role.valueOf(role.toUpperCase()); }
 
     @Override
     public boolean equals(Object o) {
