@@ -14,22 +14,16 @@ public class DailyLogHandler {
     private final IDailyLogPersistence persistLog;
 
     public DailyLogHandler() {
-        persistLog = Services.getDailyLogPersistence();
+        persistLog = Services.getDailyLogPersistence(true);
     }
 
     public DailyLogHandler(IDailyLogPersistence persistence){
         persistLog = persistence;
     }
 
-    public boolean setDailyLog(Patient patient, DailyLog dailyLog) {
-        try {
-            DailyLogValidator.validateLog(dailyLog);
-            persistLog.setDailyLog(patient, dailyLog);
-        } catch (InvalidDailyLogException e) {
-            return false;
-        }
-
-        return true;
+    public void setDailyLog(Patient patient, DailyLog dailyLog) throws InvalidDailyLogException {
+        DailyLogValidator.validateLog(dailyLog);
+        persistLog.setDailyLog(patient, dailyLog);
     }
 
     public DailyLog getDailyLog(Patient patient, Date date) {

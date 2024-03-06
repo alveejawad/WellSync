@@ -38,4 +38,10 @@ public class UserCredentialsValidator {
             throw new InvalidCredentialsException("Invalid password.");
     }
 
+    // Helper method to validate object references that shouldn't be null, e.g. strings and enums.
+    // The `subject` field is just to format the exception message with the correct field.
+    public static void validateNonNullObject(Object object, String subject) throws InvalidCredentialsException {
+        if (object == null)
+            throw new InvalidCredentialsException("No " + subject + " specified.");
+    }
 }

@@ -18,14 +18,12 @@ import java.util.List;
 public class UserPersistenceHSQLDB implements IUserPersistence {
 
     private final String dbPath;
-    private IUserPersistence userPersistence;
-    private List<UserCredentials> userCredentialsList;
-    private List<Patient> patientsList;
-    private List<Doctor> doctorsList;
+    private final List<UserCredentials> userCredentialsList;
+    private final List<Patient> patientsList;
+    private final List<Doctor> doctorsList;
 
-    public UserPersistenceHSQLDB(IUserPersistence userPersistence, String dbPath) {
+    public UserPersistenceHSQLDB(String dbPath) {
         this.dbPath = dbPath;
-        this.userPersistence = userPersistence;
         this.userCredentialsList = new ArrayList<>();
         this.patientsList = new ArrayList<>();
         this.doctorsList = new ArrayList<>();
@@ -43,7 +41,7 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM USER_CREDENTIALS");
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                userCredentialsList.add(new UserCredentials(resultSet.getString("email"), resultSet.getString("password")));
+                userCredentialsList.add(new UserCredentials(resultSet.getString("email"), resultSet.getString("password"), resultSet.getString("role")));
             }
         } catch (final SQLException e) {
             Log.e("Connect SQL", e.getMessage() + e.getSQLState());
@@ -86,7 +84,7 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
             statement.setString(1, userCredentials.getEmail());
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                return new UserCredentials(resultSet.getString("email"), resultSet.getString("password"));
+                return new UserCredentials(resultSet.getString("email"), resultSet.getString("password"), resultSet.getString("role"));
             }
         } catch (final SQLException e) {
             Log.e("Connect SQL", e.getMessage() + e.getSQLState());

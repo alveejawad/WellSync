@@ -13,7 +13,7 @@ public class PatientHandler {
 	private final IUserPersistence persistUsers;
 
 	public PatientHandler() {
-		persistUsers = Services.getUserPersistence();
+		persistUsers = Services.getUserPersistence(true);
 	}
 
 	public PatientHandler(IUserPersistence persistence){
@@ -24,27 +24,23 @@ public class PatientHandler {
 	public Patient getDetails(UserCredentials credentials) {
 		return persistUsers.getPatient(credentials);
 	}
+	public Patient getDetails(String email) {
+		return persistUsers.getPatient(email);
+	}
 
 	//editDetails function will get the userInput and set the details into the persistence layer
-	public boolean editDetails(Patient inputDetails) {
+	public void editDetails(Patient inputDetails) throws InvalidPatientException {
+		PatientValidator.validatePatient(inputDetails);
 
-		try {
-			PatientValidator.validatePatient(inputDetails);
+		//user info
+		String email = inputDetails.getEmail();
+		//got from the database
+		Patient p = persistUsers.getPatient(email);
 
-			//user info
-			String email = inputDetails.getEmail();
-			//got from the database
-			Patient p = persistUsers.getPatient(email);
-
-			//compare p wih inputDetails
-			if (p == null || !p.equals(inputDetails)) {
-				persistUsers.setPatient(inputDetails);
-			}
-		} catch (InvalidPatientException | InvalidCredentialsException e) {
-			return false;
+		//compare p wih inputDetails
+		if (p == null || !p.equals(inputDetails)) {
+			persistUsers.setPatient(inputDetails);
 		}
-
-		return true;
 	}
 
 }

@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#526AEE">
+    android:background="#3EC2FA">
 
     <ImageView
-        android:id="@+id/exit"
+        android:id="@+id/exit_1"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="16dp"
@@ -25,7 +25,7 @@
         android:layout_height="74dp"
         android:layout_marginTop="88dp"
         android:gravity="center"
-        android:text="MEDICATION"
+        android:text="SUBSTANCE USE"
         android:textSize="35dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -38,7 +38,8 @@
         android:layout_width="155dp"
         android:layout_height="60dp"
         android:layout_marginTop="32dp"
-        android:text="Add medication (supplyments)"
+        android:gravity="center"
+        android:text="Add Substance"
         android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -52,19 +53,19 @@
         android:layout_height="40dp"
         android:layout_marginStart="52dp"
         android:layout_marginTop="32dp"
-        android:text="Pills Name:"
+        android:text="Name:"
         android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <EditText
-        android:id="@+id/name_of_pills"
+        android:id="@+id/name_of_subs"
         android:layout_width="150dp"
         android:layout_height="40dp"
         android:layout_marginTop="124dp"
         android:ems="10"
         android:inputType="text"
-        android:hint="E.g:Melatonin, Losartan"
+        android:hint="E.g:Alcohol, Nicotine"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/textView7"
@@ -76,13 +77,13 @@
         android:layout_height="40dp"
         android:layout_marginStart="52dp"
         android:layout_marginTop="24dp"
-        android:text="Pills Amount:"
+        android:text="Amount:"
         android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
     <EditText
-        android:id="@+id/num_of_pills"
+        android:id="@+id/num_of_subs"
         android:layout_width="150dp"
         android:layout_height="40dp"
         android:layout_marginTop="24dp"
@@ -93,10 +94,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/textView8"
-        app:layout_constraintTop_toBottomOf="@+id/name_of_pills" />
+        app:layout_constraintTop_toBottomOf="@+id/name_of_subs" />
 
     <Button
-        android:id="@+id/save"
+        android:id="@+id/save_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="116dp"
@@ -104,27 +105,4 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="150dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="24dp"
-        android:text="Pills Dosage:"
-        android:textSize="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8" />
-
-    <EditText
-        android:id="@+id/num_of_dosage"
-        android:layout_width="150dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="24dp"
-        android:ems="10"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/num_of_pills" />
 </androidx.constraintlayout.widget.ConstraintLayout>
