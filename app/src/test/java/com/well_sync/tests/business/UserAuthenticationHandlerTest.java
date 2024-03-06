@@ -25,19 +25,19 @@ public class UserAuthenticationHandlerTest {
         UserCredentials creds;
 
         // these credentials are known to be in the database stub
-        creds = new UserCredentials("test123@umanitoba.ca", "test123", UserCredentials.Role.PATIENT);
+        creds = new UserCredentials("test123@umanitoba.ca", "test123");
         userAuthHandler.login(creds);
 
         // these credentials are known to be in the database stub
-        creds = new UserCredentials("test123@umanitoba.ca", "test123", UserCredentials.Role.DOCTOR);
+        creds = new UserCredentials("test123@umanitoba.ca", "test123");
         userAuthHandler.login(creds);
 
         // this email is valid, but not the password
-        creds = new UserCredentials("test123@umanitoba.ca", "idontknow", UserCredentials.Role.DOCTOR);
+        creds = new UserCredentials("test123@umanitoba.ca", "idontknow");
         userAuthHandler.login(creds);
 
         // email does not exist
-        creds = new UserCredentials("unknown@imaginary.com", "foobar", UserCredentials.Role.DOCTOR);
+        creds = new UserCredentials("unknown@imaginary.com", "foobar");
         userAuthHandler.login(creds);
 
         System.out.println("Finished testLogin.");
