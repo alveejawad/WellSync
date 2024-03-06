@@ -16,10 +16,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.well_sync.R;
 import com.well_sync.logic.PatientHandler;
-import com.well_sync.logic.exceptions.InvalidPatientException;
 import com.well_sync.objects.Patient;
-import com.well_sync.presentation.SignUpActivity;
 import com.well_sync.objects.UserCredentials;
+import com.well_sync.logic.exceptions.InvalidPatientException;
+
+import com.well_sync.presentation.SignUpActivity;
+
 import java.util.Objects;
 
 

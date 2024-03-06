@@ -108,7 +108,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="96dp"
                 android:layout_marginTop="13dp"
-                android:text="Birthday: "
+                android:text="Age: "
                 android:textColor="@color/black"
                 android:textSize="25dp"
                 android:textStyle="bold" />
@@ -117,7 +117,7 @@
                 android:id="@+id/birthday"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="230dp"
+                android:layout_marginStart="200dp"
                 android:layout_marginTop="13dp"
                 android:hint="Loading..."
                 android:textSize="25dp" />
@@ -127,7 +127,7 @@
                 android:layout_height="2dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="50dp"
-                android:layout_marginRight="57dp"
+                android:layout_marginRight="90dp"
                 android:background="@color/grey" />
         </RelativeLayout>
 
