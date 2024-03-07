@@ -29,7 +29,17 @@ public class DailyLogHandler {
         persistLog.setDailyLog(patient, dailyLog);
     }
     public void setMedication(Patient patient, DailyLog dailyLog) throws InvalidDailyLogException {
+        DailyLogValidator.validateLog(dailyLog);
         persistLog.setMedication(patient, dailyLog);
+    }
+
+    public void setSubstances(Patient patient, DailyLog dailyLog) throws InvalidDailyLogException {
+        DailyLogValidator.validateLog(dailyLog);
+        persistLog.setSubstances(patient, dailyLog);
+    }
+    public void setSymptoms(Patient patient, DailyLog dailyLog) throws InvalidDailyLogException {
+        DailyLogValidator.validateLog(dailyLog);
+        persistLog.setSymptoms(patient, dailyLog);
     }
 
 

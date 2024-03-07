@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.well_sync.R;
 import com.well_sync.logic.DailyLogHandler;
 import com.well_sync.logic.PatientHandler;
+import com.well_sync.logic.exceptions.InvalidDailyLogException;
 import com.well_sync.objects.DailyLog;
 import com.well_sync.objects.Patient;
 import com.well_sync.objects.UserCredentials;
@@ -74,6 +75,11 @@ public class SymptomsTrackerActivity extends AppCompatActivity {
                 addSymptom("Decreased or Increased Appetit",R.id.ratingAppetite);
                 addSymptom("Feelings of Guilt or Self-Blame",R.id.ratingGuilt);
                 addSymptom("Thoughts of Death or Suicide",R.id.ratingSuicide);
+                try {
+                    dailyLogHandler.setSymptoms(newPatient,dailyLog);
+                } catch (InvalidDailyLogException e) {
+                    throw new RuntimeException(e);
+                }
 
                 // Handle close button click
                 Intent continueIntent = new Intent(SymptomsTrackerActivity.this, HomePageActivity.class);
