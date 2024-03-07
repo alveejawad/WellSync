@@ -27,14 +27,13 @@ public class PatientInfoActivity extends AppCompatActivity {
     private List<Substance> substanceList;
     private DailyLog dailyLog;
     private DailyLogHandler dailyLogHandler;
-    private Date date;
     private Patient patient;
-
     private TextView nameTextView, ageTextView, genderTextView, bloodTypeTextView;
     private EditText adviseEditText;
     private Button currentButton, saveButton;
     private int moodScore, sleepHours, pillsAmount, pillsDosage, subAmount;
     private String moodNotes, pillsName, substanceName, doctorEmail;
+    private String date;
 
 
     @Override
@@ -59,6 +58,7 @@ public class PatientInfoActivity extends AppCompatActivity {
         // Retrieve the selected patient's information from the intent
         Intent intent = getIntent();
         doctorEmail = intent.getStringExtra("email");
+        date = intent.getStringExtra("date");
         patient = (Patient) intent.getSerializableExtra("patient");
         String name = intent.getStringExtra("name");
         int age = intent.getIntExtra("age", 1);
@@ -75,13 +75,13 @@ public class PatientInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                dailyLog = dailyLogHandler.getDailyLog(patient, new Date(2023, Calendar.JANUARY, 1));
+                dailyLog = dailyLogHandler.getDailyLog(patient, dailyLogHandler.DateFromString(date));
                 if(dailyLog == null) {
                     // Show a Toast or handle the validation error as needed
                     Toast.makeText(PatientInfoActivity.this, "Daily Log is null.", Toast.LENGTH_SHORT).show();
                     return; // Exit the onClick method to prevent further execution
                 }
-                date = dailyLog.getDate();
+                Date date = dailyLog.getDate();
                 moodScore = dailyLog.getMoodScore();
                 sleepHours = dailyLog.getSleepHours();
                 moodNotes = dailyLog.getNotes();
@@ -89,13 +89,13 @@ public class PatientInfoActivity extends AppCompatActivity {
                 symptomList = dailyLog.getSymptoms();
 
                 medicationList = dailyLog.getMedications();
-                pillsName = "Melatonin";
-                pillsAmount = 5;
+                pillsName = medicationList.get(0).getName();
+                pillsAmount = medicationList.get(0).getQuantity();
                 pillsDosage = 5;
 
                 substanceList = dailyLog.getSubstances();
-                substanceName = "Alcohol, Caffiene";
-                subAmount = 2;
+                substanceName = substanceList.get(0).getName();
+                subAmount = substanceList.get(0).getQuantity();
 
 
                 Intent currentIntent = new Intent(PatientInfoActivity.this, DailyLogPatientActivity.class);
@@ -116,13 +116,14 @@ public class PatientInfoActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // Implement save functionality here
                 String advise = adviseEditText.toString();
-                if(advise == null) {
+                if(advise.isEmpty()) {
                     // Show a Toast or handle the validation error as needed
                     Toast.makeText(PatientInfoActivity.this, "Advise can not be empty.", Toast.LENGTH_SHORT).show();
                     return; // Exit the onClick method to prevent further execution
                 }
                 Toast.makeText(getApplicationContext(), "Data saved successfully!", Toast.LENGTH_SHORT).show();
                 Intent saveIntent = new Intent(PatientInfoActivity.this, DoctorPageActivity.class);
+                saveIntent.putExtra("email", doctorEmail);
                 PatientInfoActivity.this.startActivity(saveIntent);
             }
         });
