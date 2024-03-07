@@ -23,9 +23,9 @@ public class DailyLogPersistenceStub implements IDailyLogPersistence {
         List<DailyLog> dailyLogsPatient1 = new ArrayList<>();
         List<DailyLog> dailyLogsPatient2 = new ArrayList<>();
 
-        DailyLog patient1Day1 = new DailyLog(new Date(2023, Calendar.JANUARY, 1), 7, 8, "Feeling good today");
-        DailyLog patient1Day2 = new DailyLog(new Date(2023, Calendar.JANUARY, 2), 5, 7, "Had trouble sleeping");
-        DailyLog patient2Day1 = new DailyLog(new Date(2023, Calendar.JANUARY, 1), 6, 7, "Normal day");
+        DailyLog patient1Day1 = new DailyLog(new Date(123, Calendar.JANUARY, 1), 7, 8, "Feeling good today");
+        DailyLog patient1Day2 = new DailyLog(new Date(123, Calendar.JANUARY, 2), 5, 7, "Had trouble sleeping");
+        DailyLog patient2Day1 = new DailyLog(new Date(123, Calendar.JANUARY, 1), 6, 7, "Normal day");
 
         patient1Day1.addSymptom("Headache", 5);
         patient1Day2.addSymptom("Fatigue", 4);

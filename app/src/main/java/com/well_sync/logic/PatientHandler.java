@@ -20,10 +20,6 @@ public class PatientHandler {
 		persistUsers = persistence;
 	}
 
-	//getDetails function will get the patient and give the patient to the UI layer
-	public Patient getDetails(UserCredentials credentials) {
-		return persistUsers.getPatient(credentials);
-	}
 	public Patient getDetails(String email) {
 		return persistUsers.getPatient(email);
 	}

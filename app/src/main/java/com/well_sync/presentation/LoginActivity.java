@@ -10,6 +10,8 @@ import com.well_sync.R;
 import com.well_sync.logic.exceptions.InvalidCredentialsException;
 import com.well_sync.objects.UserCredentials;
 import com.well_sync.logic.UserAuthenticationHandler;
+import com.well_sync.persistence.utils.DBHelper;
+
 import android.graphics.Paint;
 
 
@@ -25,6 +27,8 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_login);
+
+        DBHelper.copyDatabaseToDevice(this);
 
         loginHandler = new UserAuthenticationHandler();
         loginButton = findViewById(R.id.Loginbutton);

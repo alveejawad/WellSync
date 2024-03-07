@@ -6,6 +6,7 @@ import com.well_sync.objects.Symptom;
 import com.well_sync.objects.Medication;
 import com.well_sync.objects.Substance;
 import com.well_sync.persistence.IDailyLogPersistence;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
