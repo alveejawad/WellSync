@@ -7,6 +7,7 @@ import java.util.*;
 
 public interface IDailyLogPersistence {
     void setDailyLog(Patient patient, DailyLog dailyLog);
+    void setMedication(Patient patient, DailyLog dailyLog);
 
     DailyLog getDailyLog(Patient patient, Date date);
 
