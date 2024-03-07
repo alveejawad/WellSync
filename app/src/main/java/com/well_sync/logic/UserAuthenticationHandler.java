@@ -30,7 +30,7 @@ public class UserAuthenticationHandler {
         // matching credentials found, check equality with DSO's equals() method
         // (note persistence matches only on email, we do this to check that the credentials
         // match fully, per the DSO's internal definition of equality)
-        else if (!inputCreds.equals(savedCreds))
+        else if (!inputCreds.getEmail().equals(savedCreds.getEmail()) && !inputCreds.getPassword().equals(savedCreds.getPassword()))
             throw new InvalidCredentialsException("Invalid email or password.");
     }
 

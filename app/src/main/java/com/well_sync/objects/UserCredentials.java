@@ -22,10 +22,6 @@ public class UserCredentials {
     private final String password;
     private Role role;
 
-    public UserCredentials(final String email, final String password) {
-        this.email = email;
-        this.password = password;
-    }
     public UserCredentials(final String email, final String password, final String role) {
         this.email = email;
         this.password = password;
@@ -35,7 +31,6 @@ public class UserCredentials {
     public String getEmail() {
         return email;
     }
-
     public String getPassword() {
         return password;
     }
