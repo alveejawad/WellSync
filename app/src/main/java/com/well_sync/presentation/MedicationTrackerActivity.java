@@ -96,7 +96,12 @@ public class MedicationTrackerActivity extends AppCompatActivity {
                     return; // Exit the onClick method to prevent further execution
                 }
                     dailyLog.addMedication(name, amountInt);
-                    Intent saveIntent = new Intent(MedicationTrackerActivity.this, DisplayMedicationActivity.class);
+                try {
+                    dailyLogHandler.setMedication(newPatient,dailyLog);
+                } catch (InvalidDailyLogException e) {
+                    throw new RuntimeException(e);
+                }
+                Intent saveIntent = new Intent(MedicationTrackerActivity.this, DisplayMedicationActivity.class);
                     saveIntent.putExtra("name", name);
                     saveIntent.putExtra("amount", amount);
                     saveIntent.putExtra("dosage", dosage);

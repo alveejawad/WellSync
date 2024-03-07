@@ -86,12 +86,12 @@ public class PatientInfoActivity extends AppCompatActivity {
                 sleepHours = dailyLog.getSleepHours();
                 moodNotes = dailyLog.getNotes();
 
-                symptomList = dailyLog.getSymptoms();
+               // symptomList = dailyLog.getSymptoms();
 
-                medicationList = dailyLog.getMedications();
-                pillsName = medicationList.get(0).getName();
-                pillsAmount = medicationList.get(0).getQuantity();
-                pillsDosage = 5;
+               // medicationList = dailyLog.getMedications();
+               // pillsName = medicationList.get(0).getName();
+               // pillsAmount = medicationList.get(0).getQuantity();
+                //pillsDosage = 5;
 
                 substanceList = dailyLog.getSubstances();
                 substanceName = substanceList.get(0).getName();

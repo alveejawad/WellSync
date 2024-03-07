@@ -84,6 +84,26 @@ public class DailyLogPersistenceHSQLDB implements IDailyLogPersistence {
         }
     }
 
+    public void setMedication(Patient patient, DailyLog dailyLog){
+        try (Connection connection = connect()) {
+        // Insert Medications into MEDICATIONS table
+        for (Medication medication : dailyLog.getMedications()) {
+            PreparedStatement medicationStatement = connection.prepareStatement(
+                    "INSERT INTO MEDICATIONS (patient_email, log_date, medication, quantity) VALUES (?, ?, ?, ?)"
+            );
+            medicationStatement.setString(1, patient.getEmail());
+            medicationStatement.setDate(2, new java.sql.Date(dailyLog.getDate().getTime()));
+            medicationStatement.setString(3, medication.getName());
+            medicationStatement.setInt(4, medication.getQuantity());
+            medicationStatement.executeUpdate();
+        }
+        } catch (final SQLException e) {
+
+            e.printStackTrace();
+        }
+
+    }
+
     @Override
     public DailyLog getDailyLog(Patient patient, Date date) {
         DailyLog dailyLog = null;

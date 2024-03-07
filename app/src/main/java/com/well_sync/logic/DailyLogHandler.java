@@ -28,6 +28,10 @@ public class DailyLogHandler {
         DailyLogValidator.validateLog(dailyLog);
         persistLog.setDailyLog(patient, dailyLog);
     }
+    public void setMedication(Patient patient, DailyLog dailyLog) throws InvalidDailyLogException {
+        persistLog.setMedication(patient, dailyLog);
+    }
+
 
     public DailyLog getDailyLog(Patient patient, Date date) {
         return persistLog.getDailyLog(patient, date);
