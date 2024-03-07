@@ -14,7 +14,7 @@ public class DailyLogHandler {
     private final IDailyLogPersistence persistLog;
 
     public DailyLogHandler() {
-        persistLog = Services.getDailyLogPersistence(true);
+        persistLog = Services.getDailyLogPersistence(false);
     }
 
     public DailyLogHandler(IDailyLogPersistence persistence){
