@@ -45,6 +45,7 @@ public class HomePageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent moodIntent = new Intent(HomePageActivity.this, MoodTrackerActivity.class);
+                moodIntent.putExtra("email", email);
                 HomePageActivity.this.startActivity(moodIntent);
             }
         });
