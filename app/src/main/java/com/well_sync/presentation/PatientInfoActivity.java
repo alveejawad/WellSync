@@ -107,6 +107,7 @@ public class PatientInfoActivity extends AppCompatActivity {
                 currentIntent.putExtra("pilldosage", pillsDosage);
                 currentIntent.putExtra("substancename", substanceName);
                 currentIntent.putExtra("substanceamount", subAmount);
+                currentIntent.putExtra("doctorEmail",doctorEmail);
                 PatientInfoActivity.this.startActivity(currentIntent);
             }
         });

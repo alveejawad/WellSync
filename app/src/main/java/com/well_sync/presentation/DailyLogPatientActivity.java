@@ -47,8 +47,10 @@ public class DailyLogPatientActivity extends AppCompatActivity {
         DailyLogHandler dailyLogHandler = new DailyLogHandler();
         Intent intent = getIntent();
         date = (Date) intent.getSerializableExtra("date");
+
         //get email and date from HomePage Activity
         String email = intent.getStringExtra("email");
+        String doctorEmail = intent.getStringExtra("email");
         // Get the data from patient
         PatientHandler patientHandler = new PatientHandler();
         Patient newPatient = patientHandler.getDetails(email);
@@ -106,7 +108,9 @@ public class DailyLogPatientActivity extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(DailyLogPatientActivity.this,DoctorPageActivity.class));
+                Intent saveIntent = new Intent(DailyLogPatientActivity.this, DoctorPageActivity.class);
+                saveIntent.putExtra("email", doctorEmail);
+                DailyLogPatientActivity.this.startActivity(saveIntent);
             }
         });
 
