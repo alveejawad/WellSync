@@ -21,7 +21,7 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText userPassword;
     private EditText userConfirmPassword;
     private Spinner roleSpinner;
-    private final String[] roleList = new String[]{"Patient","Doctor"};
+    private final String[] roleList = new String[]{"PATIENT","DOCTOR"};
     private String role;
 
     @Override
@@ -67,11 +67,12 @@ public class SignUpActivity extends AppCompatActivity {
 
                 //create user credentials
                 newUser = new UserCredentials(email, password);
+                newUser.setRole(role);
                 try {
                     signUpHandler.register(newUser);
 
                     // if fields were valid
-                    if (role.equals(roleList[0])) {
+                    if (newUser.getRole() == UserCredentials.Role.PATIENT) {
                         Intent openUserDetails=  new Intent(SignUpActivity.this, UserDetailsActivity.class);
                         openUserDetails.putExtra("email",email);
                         startActivity(openUserDetails);
