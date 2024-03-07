@@ -48,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 try {
                     loginHandler.login(userCredentials);
-                        Intent openHome=new Intent(LoginActivity.this,HomePageActivity.class);
+                        Intent openHome=new Intent(LoginActivity.this,DoctorPageActivity.class);
                         openHome.putExtra("email", userCredentials.getEmail());
                         startActivity(openHome);
                 } catch (InvalidCredentialsException e) {
