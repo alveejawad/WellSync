@@ -45,6 +45,7 @@ public class MedicationTrackerActivity extends AppCompatActivity {
         Intent intent = getIntent();
         email = intent.getStringExtra("email");
         date = intent.getStringExtra("date");
+        dailyLogHandler = new DailyLogHandler();
         Date currDate = dailyLogHandler.DateFromString(date);
 
         // Get the data from patient
@@ -94,20 +95,13 @@ public class MedicationTrackerActivity extends AppCompatActivity {
                     Toast.makeText(MedicationTrackerActivity.this, "Invalid amount; must be between 0 and 5 inclusive.", Toast.LENGTH_SHORT).show();
                     return; // Exit the onClick method to prevent further execution
                 }
-                medication = new Medication(name, amountInt);
-
-                try {
-                    MedicationValidator.validateMedication(medication);
+                    dailyLog.addMedication(name, amountInt);
                     Intent saveIntent = new Intent(MedicationTrackerActivity.this, DisplayMedicationActivity.class);
                     saveIntent.putExtra("name", name);
                     saveIntent.putExtra("amount", amount);
                     saveIntent.putExtra("dosage", dosage);
                     saveIntent.putExtra("email", email);
                     MedicationTrackerActivity.this.startActivity(saveIntent);
-                } catch (InvalidDailyLogException e) {
-                    throw new RuntimeException(e);
-                }
-
             }
         });
     }
