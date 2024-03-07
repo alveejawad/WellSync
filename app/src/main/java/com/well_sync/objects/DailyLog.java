@@ -60,7 +60,7 @@ public class DailyLog {
     }
 
     public void setSleepHours(int sleepHours) {
-        this.sleepHours = Math.min(sleepHours, 0);
+        this.sleepHours = Math.max(sleepHours, 0);
     }
 
     public void setNotes(String notes) {

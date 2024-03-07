@@ -24,10 +24,15 @@ public class PatientHandlerTest {
     public void testGetDetails() {
         System.out.println("\nStarting testGetDetails");
 
-        UserCredentials creds = new UserCredentials("test456@umanitoba.ca", "test456");
-        Patient patient = patientHandler.getDetails(creds);
+        String email = "patient1@example.com";
+        Patient patient = patientHandler.getDetails(email);
 
-        assertEquals(patient.getEmail(), creds.getEmail());
+        assertEquals(patient.getEmail(), email);
+        assertEquals(patient.getFirstName(), "John");
+        assertEquals(patient.getLastName(), "Doe");
+        assertEquals(patient.getBloodType(), Patient.BloodType.TYPE_A);
+        assertEquals(patient.getSex(), Patient.Sex.MALE);
+        assertEquals(patient.getAge(), 30);
 
         System.out.println("Finished testGetDetails");
     }
@@ -39,8 +44,13 @@ public class PatientHandlerTest {
         Patient patient = new Patient("new-patient@example.com", "Jane", "Newman", "O", "F", 0);
         patientHandler.editDetails(patient);
 
-        patient = new Patient("invalid email address!");
-        patientHandler.editDetails(patient);
+        try {
+            patient = new Patient("invalid email address!");
+            patientHandler.editDetails(patient);
+            fail("Creating patient with malformed email address did not throw an exception.");
+        } catch (InvalidPatientException e) {
+            // pass!
+        }
 
         System.out.println("Finished testEditDetails");
     }
