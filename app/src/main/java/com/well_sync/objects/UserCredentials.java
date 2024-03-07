@@ -8,19 +8,20 @@ public class UserCredentials {
         PATIENT,
         UNSPECIFIED;
         public static UserCredentials.Role fromString(String role) {
-            if (role.toUpperCase() == "DOCTOR") {
+            switch (role.toUpperCase()) {
+            case "DOCTOR":
                 return DOCTOR;
-            }
-            else if (role.toUpperCase() == "PATIENT"){
+            case "PATIENT":
                 return PATIENT;
+            default:
+                return UNSPECIFIED;
             }
-            return UNSPECIFIED;
         }
     }
 
     private final String email;
     private final String password;
-    private Role role;
+    private final Role role;
 
     public UserCredentials(final String email, final String password, final String role) {
         this.email = email;

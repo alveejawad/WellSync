@@ -43,10 +43,19 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(v -> {
             userCredentials=getCredentials(v);
             try {
-                loginHandler.login(userCredentials);
-                    Intent openHome=new Intent(LoginActivity.this,HomePageActivity.class);
-                    openHome.putExtra("email", userCredentials.getEmail());
-                    startActivity(openHome);
+                UserCredentials.Role loginRole = loginHandler.login(userCredentials);
+
+                Intent openHome;
+
+                if (loginRole == UserCredentials.Role.PATIENT) {
+                    openHome = new Intent(LoginActivity.this, HomePageActivity.class);
+                } else {
+                    openHome = new Intent(LoginActivity.this, DoctorPageActivity.class);
+                }
+
+                openHome.putExtra("email", userCredentials.getEmail());
+                startActivity(openHome);
+
             } catch (InvalidCredentialsException e) {
                 Toast.makeText(getApplicationContext(), "The email you entered isn’t connected to an account" , Toast.LENGTH_SHORT).show();
                 resetLoginFields();
