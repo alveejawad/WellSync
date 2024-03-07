@@ -60,6 +60,42 @@ public class SymptomsTrackerActivity extends AppCompatActivity {
             }
         });
 
+
+
+        // Set click listeners or any other event listeners as needed
+        closeIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Handle close button click
+                Intent closeIntent = new Intent(SymptomsTrackerActivity.this, HomePageActivity.class);
+                SymptomsTrackerActivity.this.startActivity(closeIntent);
+            }
+        });
+
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addSymptom(R.id.close);
+                addSymptom(R.id.ratingSadness);
+                addSymptom(R.id.ratingHelplessness);
+                addSymptom(R.id.ratingSelfEsteem);
+                addSymptom(R.id.ratingIsolation);
+                addSymptom(R.id.ratingLowMotivation);
+                addSymptom(R.id.ratingImpulsivity);
+                addSymptom(R.id.ratingConcentration);
+                addSymptom(R.id.ratingAggressiveness);
+                addSymptom(R.id.ratingGrandioseIdeas);
+                addSymptom(R.id.ratingRacingThoughts);
+                addSymptom(R.id.ratingAnxiety);
+                addSymptom(R.id.ratingSleep);
+                addSymptom(R.id.ratingHeadache);
+                addSymptom(R.id.ratingPain);
+                addSymptom(R.id.ratingAppetite);
+                addSymptom(R.id.ratingGuilt);
+                addSymptom(R.id.ratingSuicide);
+            }
+        });
+
     }
 
     public void addSymptom(int idSymptom){
