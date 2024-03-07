@@ -129,6 +129,7 @@ public class MoodTrackerActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // Handle close button click
                 Intent closeIntent = new Intent(MoodTrackerActivity.this, HomePageActivity.class);
+                closeIntent.putExtra("email",email);
                 MoodTrackerActivity.this.startActivity(closeIntent);
             }
         });
@@ -185,6 +186,7 @@ public class MoodTrackerActivity extends AppCompatActivity {
                     // Get the data from mood
                     dailyLogHandler.setDailyLog(newPatient, dailyLog);
                     Intent saveIntent = new Intent(MoodTrackerActivity.this, DisplayDataActivity.class);
+                    saveIntent.putExtra("email", email);
                     saveIntent.putExtra("emotion", emotion);
                     saveIntent.putExtra("sleepHours", sleepHoursText);
                     saveIntent.putExtra("userNotes", userNotes);

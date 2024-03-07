@@ -23,7 +23,7 @@ public class HomePageActivity extends AppCompatActivity {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_main);
 
-        //get email from Login Activity
+        //get email from Activity
         Intent intent = getIntent();
         email = intent.getStringExtra("email");
         String date = getCurrentDate();
