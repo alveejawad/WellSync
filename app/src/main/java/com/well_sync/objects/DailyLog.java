@@ -1,5 +1,7 @@
 package com.well_sync.objects;
 
+import com.well_sync.logic.exceptions.InvalidDailyLogException;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -87,10 +89,11 @@ public class DailyLog {
         return this.symptomList;
     }
 
-    public void addMedication(String name, int quantity) {
-        Medication med = new Medication(name, quantity);
-        // insert call to medication validator here
-        this.medicationList.add(med);
+    public void addMedication(String name, int quantity){
+            MedicationValidator medicationValidator;
+            Medication med = new Medication(name, quantity);
+            //MedicationValidator.validateMedication(med);
+            this.medicationList.add(med);
     }
 
     public void removeMedication(Medication medication) {

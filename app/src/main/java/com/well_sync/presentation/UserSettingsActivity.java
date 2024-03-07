@@ -42,6 +42,7 @@ public class UserSettingsActivity extends AppCompatActivity {
         closeIcon.setOnClickListener(view -> {
             // Handle close button click
             Intent closeIntent = new Intent(UserSettingsActivity.this, HomePageActivity.class);
+            closeIntent.putExtra("email",email);
             UserSettingsActivity.this.startActivity(closeIntent);
         });
 
@@ -50,6 +51,7 @@ public class UserSettingsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // Handle close button click
                 Intent editIntent = new Intent(UserSettingsActivity.this, UserDetailsActivity.class);
+                editIntent.putExtra("email",email);
                 UserSettingsActivity.this.startActivity(editIntent);
             }
         });
