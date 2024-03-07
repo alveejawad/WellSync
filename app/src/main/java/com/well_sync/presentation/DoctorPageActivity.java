@@ -57,6 +57,9 @@ public class DoctorPageActivity extends AppCompatActivity{
         userAuthenticationHandler = new UserAuthenticationHandler();
 
         doctor = doctorHandler.getDetails(email);
+        if (doctor == null) {
+            doctor = new Doctor(email);
+        }
         patientList = doctor.getPatients();
         patientAdapter = new PatientAdapter(patientList);
 
