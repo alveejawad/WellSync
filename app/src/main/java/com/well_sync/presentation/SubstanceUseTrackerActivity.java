@@ -87,19 +87,13 @@ public class SubstanceUseTrackerActivity extends AppCompatActivity {
                     Toast.makeText(SubstanceUseTrackerActivity.this, "Invalid amount; must be between 0 and 5 inclusive.", Toast.LENGTH_SHORT).show();
                     return; // Exit the onClick method to prevent further execution
                 }
-
-                substance = new Substance(name, amountInt);
-
-                try {
-                    SubstanceValidator.validateSubstance(substance);
+                    dailyLog.addSubstance(name,amountInt);
                     Intent saveIntent = new Intent(SubstanceUseTrackerActivity.this, DisplaySubstanceUseActivity.class);
                     saveIntent.putExtra("email",email);
                     saveIntent.putExtra("name", name);
                     saveIntent.putExtra("amount", amount);
                     SubstanceUseTrackerActivity.this.startActivity(saveIntent);
-                } catch (InvalidDailyLogException e) {
-                    throw new RuntimeException(e);
-                }
+
             }
         });
     }
