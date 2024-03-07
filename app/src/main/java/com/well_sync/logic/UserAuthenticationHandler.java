@@ -42,15 +42,5 @@ public class UserAuthenticationHandler {
     public void register(UserCredentials credentials) throws InvalidCredentialsException {
         UserCredentialsValidator.validateCredentials(credentials);
         persistUsers.setUserCredentials(credentials);
-        if (credentials.getRole() != null){
-            if (credentials.getRole() == UserCredentials.Role.PATIENT){
-                Patient patient = new Patient(credentials.getEmail());
-                persistUsers.setPatient(patient);
-            }
-            else{
-                Doctor doctor = new Doctor(credentials.getEmail());
-                persistUsers.setDoctor(doctor);
-            }
-        }
     }
 }

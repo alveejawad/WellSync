@@ -1,5 +1,6 @@
 package com.well_sync.tests.business;
 
+import com.well_sync.application.Services;
 import com.well_sync.logic.PatientHandler;
 import com.well_sync.logic.exceptions.InvalidPatientException;
 import com.well_sync.objects.Patient;
@@ -54,6 +55,7 @@ public class PatientHandlerIT {
     public void tearDown() {
         System.out.println("Reset database.");
         this.tempDB.delete();
+        Services.clean();
     }
 
 }
