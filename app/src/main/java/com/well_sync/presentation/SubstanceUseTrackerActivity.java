@@ -42,6 +42,7 @@ public class SubstanceUseTrackerActivity extends AppCompatActivity {
         Intent intent = getIntent();
         email = intent.getStringExtra("email");
         date = intent.getStringExtra("date");
+        dailyLogHandler = new DailyLogHandler();
         Date currDate = dailyLogHandler.DateFromString(date);
 
         // Get the data from patient
