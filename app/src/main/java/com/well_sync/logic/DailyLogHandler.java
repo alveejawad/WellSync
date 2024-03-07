@@ -7,7 +7,10 @@ import com.well_sync.objects.DailyLogValidator;
 import com.well_sync.objects.Patient;
 import com.well_sync.persistence.IDailyLogPersistence;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class DailyLogHandler {
 
@@ -28,5 +31,14 @@ public class DailyLogHandler {
 
     public DailyLog getDailyLog(Patient patient, Date date) {
         return persistLog.getDailyLog(patient, date);
+    }
+
+    public Date DateFromString(String dateString) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.CANADA);
+        try {
+            return formatter.parse(dateString);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

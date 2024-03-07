@@ -26,6 +26,7 @@ public class DisplaySubstanceUseActivity extends Activity {
         buttonContinue = findViewById(R.id.button_continue_2);
 
         Intent intent = getIntent();
+        String email = intent.getStringExtra("email");
         String name = intent.getStringExtra("name");
         String amount = intent.getStringExtra("amount");
         String date = intent.getStringExtra("date");
@@ -38,6 +39,7 @@ public class DisplaySubstanceUseActivity extends Activity {
             public void onClick(View view) {
                 // Handle close button click
                 Intent continueIntent = new Intent(DisplaySubstanceUseActivity.this, HomePageActivity.class);
+                continueIntent.putExtra("email",email);
                 DisplaySubstanceUseActivity.this.startActivity(continueIntent);
             }
         });

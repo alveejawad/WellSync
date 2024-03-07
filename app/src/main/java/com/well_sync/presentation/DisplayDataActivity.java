@@ -27,6 +27,7 @@ public class DisplayDataActivity extends Activity {
         buttonContinue = findViewById(R.id.button_continue);
 
         Intent intent = getIntent();
+        String email = intent.getStringExtra("email");
         String emotion = intent.getStringExtra("emotion");
         String sleepHours = intent.getStringExtra("sleepHours");
         String userNotes = intent.getStringExtra("userNotes");
@@ -39,6 +40,7 @@ public class DisplayDataActivity extends Activity {
             public void onClick(View view) {
                 // Handle close button click
                 Intent continueIntent = new Intent(DisplayDataActivity.this, HomePageActivity.class);
+                continueIntent.putExtra("email",email);
                 DisplayDataActivity.this.startActivity(continueIntent);
             }
         });
