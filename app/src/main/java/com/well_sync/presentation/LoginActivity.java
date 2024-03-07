@@ -75,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
         String email = userEmail.getText().toString();
         String password = userPassword.getText().toString();
         String role = "Patient";
-        returningUser = new UserCredentials(email,password, role);
+        returningUser = new UserCredentials(email,password);
         return returningUser;
     }
 
