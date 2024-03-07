@@ -3,13 +3,24 @@ package com.well_sync.objects;
 import java.util.Objects;
 
 public class UserCredentials {
+    public enum Role {
+        DOCTOR,
+        PATIENT;
+    }
+
     private final String email;
     private final String password;
-
+    private Role role;
 
     public UserCredentials(final String email, final String password) {
         this.email = email;
         this.password = password;
+    }
+
+    public UserCredentials(final String email, final String password, final UserCredentials.Role role) {
+        this.email = email;
+        this.password = password;
+        this.role = role;
     }
 
     public String getEmail() {
@@ -19,6 +30,10 @@ public class UserCredentials {
     public String getPassword() {
         return password;
     }
+
+    public Role getRole() { return role; }
+
+    public void setRole(String role) { this.role = Role.valueOf(role.toUpperCase()); }
 
     @Override
     public boolean equals(Object o) {

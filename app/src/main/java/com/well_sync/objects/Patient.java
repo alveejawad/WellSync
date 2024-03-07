@@ -1,9 +1,10 @@
 package com.well_sync.objects;
 
+import java.io.Serializable;
 import java.util.Locale;
 import java.util.Objects;
 
-public class Patient {
+public class Patient implements Serializable {
     public enum BloodType {
         TYPE_A,
         TYPE_B,

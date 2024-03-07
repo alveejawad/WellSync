@@ -175,8 +175,8 @@ public class MoodTrackerActivity extends AppCompatActivity {
                 moodLog.setSleepHours(sleepHours);
 
                 // Get the data from patient
-                // email = intent.getStringExtra("email");
-                email = "test123@umanitoba.ca";
+                intent = getIntent();
+                email = intent.getStringExtra("email");
                 Patient newPatient = new Patient(email);
 
                 try {
@@ -200,3 +200,4 @@ public class MoodTrackerActivity extends AppCompatActivity {
         }
     }
 }
+

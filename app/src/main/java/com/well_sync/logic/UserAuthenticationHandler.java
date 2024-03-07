@@ -2,6 +2,8 @@ package com.well_sync.logic;
 
 import com.well_sync.application.Services;
 import com.well_sync.logic.exceptions.InvalidCredentialsException;
+import com.well_sync.objects.Doctor;
+import com.well_sync.objects.Patient;
 import com.well_sync.objects.UserCredentials;
 import com.well_sync.objects.UserCredentialsValidator;
 import com.well_sync.persistence.IUserPersistence;
@@ -40,5 +42,15 @@ public class UserAuthenticationHandler {
     public void register(UserCredentials credentials) throws InvalidCredentialsException {
         UserCredentialsValidator.validateCredentials(credentials);
         persistUsers.setUserCredentials(credentials);
+        if (credentials.getRole() != null){
+            if (credentials.getRole() == UserCredentials.Role.PATIENT){
+                Patient patient = new Patient(credentials.getEmail());
+                persistUsers.setPatient(patient);
+            }
+            else{
+                Doctor doctor = new Doctor(credentials.getEmail());
+                persistUsers.setDoctor(doctor);
+            }
+        }
     }
 }

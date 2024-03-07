@@ -15,6 +15,7 @@
             android:name=".presentation.DisplayMedicationActivity"
             android:exported="false">
         </activity>
+
         <activity
             android:name=".presentation.DisplayDataActivity"
             android:exported="false"></activity>
@@ -31,6 +32,9 @@
             android:name=".presentation.SignUpActivity"
             android:exported="false"></activity>
         <activity
+            android:name=".presentation.SymptomsTrackerActivity"
+            android:exported="false"></activity>
+        <activity
             android:name=".presentation.MedicationTrackerActivity"
             android:exported="false"></activity>
         <activity
@@ -45,6 +49,10 @@
         </activity>
         <activity
             android:name=".presentation.PatientInfoActivity"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".presentation.DailyLogPatientActivity"
             android:exported="false">
         </activity>
         <activity
