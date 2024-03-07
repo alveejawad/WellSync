@@ -9,7 +9,6 @@ import com.well_sync.logic.PatientHandler;
 import com.well_sync.logic.exceptions.InvalidDailyLogException;
 import com.well_sync.objects.DailyLog;
 import com.well_sync.objects.Patient;
-import com.well_sync.objects.UserCredentials;
 import com.well_sync.persistence.stubs.DailyLogPersistenceStub;
 import com.well_sync.persistence.stubs.UserPersistenceStub;
 

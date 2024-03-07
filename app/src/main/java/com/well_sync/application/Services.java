@@ -33,4 +33,8 @@ public class Services {
         return dailyLogPersistence;
     }
 
+    public static synchronized void clean() {
+        userPersistence = null;
+        dailyLogPersistence = null;
+    }
 }
