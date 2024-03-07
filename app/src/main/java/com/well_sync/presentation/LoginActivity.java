@@ -68,8 +68,8 @@ public class LoginActivity extends AppCompatActivity {
         UserCredentials returningUser;
         String email = userEmail.getText().toString();
         String password = userPassword.getText().toString();
-        String role = "Patient";
-        returningUser = new UserCredentials(email,password);
+        String role = "UNSPECIFIED";
+        returningUser = new UserCredentials(email,password,role);
         return returningUser;
     }
 

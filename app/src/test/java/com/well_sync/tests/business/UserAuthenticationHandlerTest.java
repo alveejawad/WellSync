@@ -25,16 +25,16 @@ public class UserAuthenticationHandlerTest {
         UserCredentials creds;
 
         // these credentials are known to be in the database stub
-        creds = new UserCredentials("test1@example.com", "password1");
+        creds = new UserCredentials("test1@example.com", "password1", "PATIENT");
         userAuthHandler.login(creds);
 
         // these credentials are known to be in the database stub
-        creds = new UserCredentials("test2@example.com", "password2");
+        creds = new UserCredentials("test2@example.com", "password2", "DOCTOR");
         userAuthHandler.login(creds);
 
         // this email is valid, but not the password
         try {
-            creds = new UserCredentials("test1@example.com", "idontknow");
+            creds = new UserCredentials("test1@example.com", "idontknow", "PATIENT");
             userAuthHandler.login(creds);
             fail("Invalid password did not throw an exception.");
         } catch (InvalidCredentialsException e) {
@@ -43,7 +43,7 @@ public class UserAuthenticationHandlerTest {
 
         // email does not exist
         try {
-            creds = new UserCredentials("unknown@imaginary.com", "foobar");
+            creds = new UserCredentials("unknown@imaginary.com", "foobar","PATIENT");
             userAuthHandler.login(creds);
             fail("Invalid email & password did not throw an exception.");
         } catch (InvalidCredentialsException e) {
@@ -58,16 +58,16 @@ public class UserAuthenticationHandlerTest {
         System.out.println("\nStarting testRegister");
         UserCredentials creds;
 
-        creds = new UserCredentials("new-user@umanitoba.ca", "nicepassword123", UserCredentials.Role.PATIENT);
+        creds = new UserCredentials("new-user@umanitoba.ca", "nicepassword123", "PATIENT");
         userAuthHandler.register(creds);
 
         // these credentials are well-formed
-        creds = new UserCredentials("new-user@umanitoba.ca", "nicepassword123", UserCredentials.Role.DOCTOR);
+        creds = new UserCredentials("new-user@umanitoba.ca", "nicepassword123", "DOCTOR");
         userAuthHandler.register(creds);
 
         // malformed email address
         try {
-            creds = new UserCredentials("cash$$$money@scam.co.uk", "nicepassword123", UserCredentials.Role.DOCTOR);
+            creds = new UserCredentials("cash$$$money@scam.co.uk", "nicepassword123", "DOCTOR");
             userAuthHandler.register(creds);
             fail("Malformed email did not throw an exception.");
         } catch (InvalidCredentialsException e) {
@@ -76,7 +76,7 @@ public class UserAuthenticationHandlerTest {
 
         // malformed password
         try {
-            creds = new UserCredentials("new-user-2@umanitoba.ca", "no spaces allowed", UserCredentials.Role.DOCTOR);
+            creds = new UserCredentials("new-user-2@umanitoba.ca", "no spaces allowed", "DOCTOR");
             userAuthHandler.register(creds);
             fail("Malformed password did not throw an exception.");
         } catch (InvalidCredentialsException e) {
