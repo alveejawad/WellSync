@@ -90,9 +90,10 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
     @Override
     public void setUserCredentials(UserCredentials user) {
         try (Connection connection = connect()) {
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO USER_CREDENTIALS VALUES (?, ?)");
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO USER_CREDENTIALS VALUES (?, ?, ?)");
             statement.setString(1, user.getEmail());
             statement.setString(2, user.getPassword());
+            statement.setString(3, user.getRole().toString());
             statement.executeUpdate();
         } catch (final SQLException e) {
             e.printStackTrace();

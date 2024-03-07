@@ -13,14 +13,14 @@ public class UserAuthenticationHandler {
     private final IUserPersistence persistUsers;
 
     public UserAuthenticationHandler() {
-        persistUsers = Services.getUserPersistence(false);
+        persistUsers = Services.getUserPersistence(true);
     }
 
     public UserAuthenticationHandler(IUserPersistence persistence) {
         persistUsers = persistence;
     }
 
-    public void login(UserCredentials inputCreds) throws InvalidCredentialsException {
+    public UserCredentials.Role login(UserCredentials inputCreds) throws InvalidCredentialsException {
         UserCredentials savedCreds = persistUsers.getUserCredentials(inputCreds);
 
         // no matching credentials found
@@ -32,6 +32,8 @@ public class UserAuthenticationHandler {
         // match fully, per the DSO's internal definition of equality)
         else if (!inputCreds.getEmail().equals(savedCreds.getEmail()) && !inputCreds.getPassword().equals(savedCreds.getPassword()))
             throw new InvalidCredentialsException("Invalid email or password.");
+
+        else return savedCreds.getRole();
     }
 
     /**
