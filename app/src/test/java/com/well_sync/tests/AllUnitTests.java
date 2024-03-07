@@ -5,6 +5,7 @@ import org.junit.runners.Suite;
 
 // Import the individual test files
 import com.well_sync.tests.business.DailyLogHandlerTest;
+import com.well_sync.tests.business.DoctorHandlerTest;
 import com.well_sync.tests.business.PatientHandlerTest;
 import com.well_sync.tests.business.UserAuthenticationHandlerTest;
 
@@ -12,6 +13,7 @@ import com.well_sync.tests.business.UserAuthenticationHandlerTest;
 @Suite.SuiteClasses({
         UserAuthenticationHandlerTest.class,
         DailyLogHandlerTest.class,
-        PatientHandlerTest.class
+        PatientHandlerTest.class,
+        DoctorHandlerTest.class
 })
 public class AllUnitTests {}

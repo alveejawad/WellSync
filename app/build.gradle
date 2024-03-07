@@ -27,8 +27,8 @@ dependencies {
     implementation 'androidx.core:core:1.5.0'
     implementation 'com.google.guava:guava:32+'
     implementation 'org.hsqldb:hsqldb:2+'
-    testImplementation 'junit:junit:4.12'
-    testImplementation 'junit:junit:4.12'
+    implementation 'com.google.guava:guava:30.1-android'
+    implementation 'org.hsqldb:hsqldb:2.4.1'
     testImplementation 'junit:junit:4.12'// Use the latest version
 
 }

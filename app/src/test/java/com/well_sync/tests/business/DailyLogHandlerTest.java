@@ -32,14 +32,14 @@ public class DailyLogHandlerTest {
     public void testGetDailyLog() {
         System.out.println("\nStarting testGetDailyLog");
 
-        // replicating known DailyLog in database stub, and retrieving it
-        Date date = new Date(124, Calendar.FEBRUARY, 7);
-        DailyLog knownLog = new DailyLog(date, 3, 6, "Anxious");
-        DailyLog retrievedLog = dailyLogHandler.getDailyLog(
-                patientHandler.getDetails(new UserCredentials("test123@umanitoba.ca", "test123")),
-                date
-        );
-        assertEquals(knownLog, retrievedLog);
+        // retrieving known DailyLog
+        Date date = new Date(123, Calendar.JANUARY, 1);
+        DailyLog log = dailyLogHandler.getDailyLog(patientHandler.getDetails("patient1@example.com"), date);
+
+        assertEquals(date, log.getDate());
+        assertEquals(7, log.getMoodScore());
+        assertEquals(8, log.getSleepHours());
+        assertEquals("Feeling good today", log.getNotes());
 
         System.out.println("Finished testGetDailyLog");
     }
@@ -59,7 +59,12 @@ public class DailyLogHandlerTest {
         date = new Date(124, Calendar.JANUARY, 18);
         dailyLog = new DailyLog(date, -42, -1, "weird day");
 
-        dailyLogHandler.setDailyLog(patient, dailyLog);
+        try {
+            dailyLogHandler.setDailyLog(patient, dailyLog);
+            fail("Setting an invalid daily log did not raise an exception.");
+        } catch (InvalidDailyLogException e) {
+            // pass!
+        }
 
         System.out.println("Finished testSetDailyLog.");
     }
