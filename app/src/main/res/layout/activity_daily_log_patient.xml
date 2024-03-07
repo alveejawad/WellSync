@@ -110,7 +110,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:paddingStart="40dp"
-                        android:text="Mood:"
+                        android:text="Mood Score:"
                         android:textSize="20sp"
                         android:textStyle="bold"/>
 
