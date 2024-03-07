@@ -6,13 +6,15 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     tools:context=".presentation.HomePageActivity">
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="647dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="84dp">
+        android:layout_marginTop="84dp"
+        android:textStyle="bold">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -191,6 +193,17 @@
                     android:padding="8dp"
                     android:src="@drawable/substance_use" />
             </LinearLayout>
+
+            <Button
+                android:id="@+id/logout"
+                android:layout_width="wrap_content"
+                android:layout_height="43dp"
+                android:layout_marginTop="80dp"
+                android:text="Log Out"
+                android:layout_gravity="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
         </LinearLayout>
     </ScrollView>
     <ImageView

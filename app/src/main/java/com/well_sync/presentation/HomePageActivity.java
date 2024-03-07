@@ -2,6 +2,8 @@ package com.well_sync.presentation;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -34,6 +36,7 @@ public class HomePageActivity extends AppCompatActivity {
         LinearLayout symptomLayout = findViewById(R.id.symptomID);
         LinearLayout medicationLayout = findViewById(R.id.medicationID);
         LinearLayout substanceLayout = findViewById(R.id.substanceUseID);
+        Button logoutButton = findViewById(R.id.logout);
 
         ImageView userAccess = findViewById(R.id.user);
         // Set click listeners for each widget
@@ -68,6 +71,9 @@ public class HomePageActivity extends AppCompatActivity {
             substanceIntent.putExtra("date",date);
             HomePageActivity.this.startActivity(substanceIntent);
         });
+
+        logoutButton.setOnClickListener(v ->
+                startActivity(new Intent(HomePageActivity.this,LoginActivity.class)));
     }
     private String getCurrentDate(){
         //get current date
