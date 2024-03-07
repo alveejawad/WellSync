@@ -22,6 +22,9 @@ public class DoctorHandler {
     public Doctor getDetails(UserCredentials credentials) {
         return persistUsers.getDoctor(credentials);
     }
+    public Doctor getDetails(String email) {
+        return persistUsers.getDoctor(email);
+    }
 
     //editDetails function will get the userInput and set the details into the persistence layer
     public void editDetails(Doctor inputDetails) throws InvalidDoctorException {
