@@ -52,14 +52,20 @@ public class HomePageActivity extends AppCompatActivity {
         });
         symptomLayout.setOnClickListener(v -> {
             Intent symptomIntent = new Intent(HomePageActivity.this, SymptomsTrackerActivity.class);
+            symptomIntent.putExtra("email",email);
+            symptomIntent.putExtra("date",date);
             HomePageActivity.this.startActivity(symptomIntent);
         });
         medicationLayout.setOnClickListener(v -> {
             Intent medicationIntent = new Intent(HomePageActivity.this, MedicationTrackerActivity.class);
+            medicationIntent.putExtra("email",email);
+            medicationIntent.putExtra("date",date);
             HomePageActivity.this.startActivity(medicationIntent);
         });
         substanceLayout.setOnClickListener(v -> {
             Intent substanceIntent = new Intent(HomePageActivity.this, SubstanceUseTrackerActivity.class);
+            substanceIntent.putExtra("email",email);
+            substanceIntent.putExtra("date",date);
             HomePageActivity.this.startActivity(substanceIntent);
         });
     }
