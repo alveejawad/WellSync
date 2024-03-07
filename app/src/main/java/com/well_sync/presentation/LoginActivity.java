@@ -40,31 +40,23 @@ public class LoginActivity extends AppCompatActivity {
 
 
         //LOG IN BUTTON
-        loginButton.setOnClickListener(new View.OnClickListener(){
-
-            public void onClick(View v) {
-                userCredentials=getCredentials(v);
-                try {
-                    loginHandler.login(userCredentials);
-                        Intent openHome=new Intent(LoginActivity.this,HomePageActivity.class);
-                        openHome.putExtra("email", userCredentials.getEmail());
-                        startActivity(openHome);
-                } catch (InvalidCredentialsException e) {
-                    Toast.makeText(getApplicationContext(), "The email you entered isn’t connected to an account" , Toast.LENGTH_SHORT).show();
-                    resetLoginFields();
-                    userPassword.setError("Email or Password invalid");
-                    userEmail.setError("Email or Password invalid");
-                }
+        loginButton.setOnClickListener(v -> {
+            userCredentials=getCredentials(v);
+            try {
+                loginHandler.login(userCredentials);
+                    Intent openHome=new Intent(LoginActivity.this,HomePageActivity.class);
+                    openHome.putExtra("email", userCredentials.getEmail());
+                    startActivity(openHome);
+            } catch (InvalidCredentialsException e) {
+                Toast.makeText(getApplicationContext(), "The email you entered isn’t connected to an account" , Toast.LENGTH_SHORT).show();
+                resetLoginFields();
+                userPassword.setError("Email or Password invalid");
+                userEmail.setError("Email or Password invalid");
             }
         });
 
         //SIGN UP BUTTON
-        signUpButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this,SignUpActivity.class));
-            }
-        });
+        signUpButton.setOnClickListener(v -> startActivity(new Intent(LoginActivity.this,SignUpActivity.class)));
 
     }
     private void stylizeSignUpLink() {
@@ -82,8 +74,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void resetLoginFields(){
-        EditText usernameInput = (EditText) findViewById(R.id.editEmail);
-        EditText passwordInput = (EditText) findViewById(R.id.editPassword);
+        EditText usernameInput = findViewById(R.id.editEmail);
+        EditText passwordInput = findViewById(R.id.editPassword);
         usernameInput.setText("");
         passwordInput.setText("");
     }
