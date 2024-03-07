@@ -33,7 +33,7 @@ public class DailyLogHandler {
         return persistLog.getDailyLog(patient, date);
     }
 
-    public Date DateFromString(String dateString) {
+    public static Date DateFromString(String dateString) {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.CANADA);
         try {
             return formatter.parse(dateString);

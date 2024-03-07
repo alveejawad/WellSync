@@ -67,4 +67,20 @@ public class DailyLogHandlerTest {
 
         System.out.println("Finished testSetDailyLog.");
     }
+
+    @Test
+    public void testDateFromString() {
+        Date d1 = DailyLogHandler.DateFromString("2022-04-25");
+        assertEquals(new Date(122, Calendar.APRIL, 25), d1);
+
+        Date d2 = DailyLogHandler.DateFromString("1901-01-01");
+        assertEquals(new Date(1, Calendar.JANUARY, 1), d2);
+
+        try {
+            DailyLogHandler.DateFromString("not a date");
+            fail("Invalid date did not throw an exception.");
+        } catch (RuntimeException e) {
+            // pass!
+        }
+    }
 }

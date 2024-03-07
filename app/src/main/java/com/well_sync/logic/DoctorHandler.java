@@ -19,9 +19,6 @@ public class DoctorHandler {
     }
 
     //getDetails function will get the patient and give the patient to the UI layer
-    public Doctor getDetails(UserCredentials credentials) {
-        return persistUsers.getDoctor(credentials);
-    }
     public Doctor getDetails(String email) {
         return persistUsers.getDoctor(email);
     }

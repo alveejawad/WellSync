@@ -29,7 +29,7 @@ public class DoctorHandlerTest {
         System.out.println("\nStarting testGetDetails");
 
         String email = "doctor1@example.com";
-        Doctor doctor = doctorHandler.getDetails(new UserCredentials(email, "","DOCTOR"));
+        Doctor doctor = doctorHandler.getDetails(email);
 
         assertEquals("doctor1@example.com", doctor.getEmail());
         assertEquals("Dr. Gabriel", doctor.getFirstName());
