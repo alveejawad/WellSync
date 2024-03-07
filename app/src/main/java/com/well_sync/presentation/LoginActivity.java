@@ -28,7 +28,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_login);
 
-      //  DBHelper.copyDatabaseToDevice(this);
+        DBHelper.copyDatabaseToDevice(this);
 
         loginHandler = new UserAuthenticationHandler();
         loginButton = findViewById(R.id.Loginbutton);
