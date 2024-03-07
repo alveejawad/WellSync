@@ -18,15 +18,19 @@ public class Patient implements Serializable {
             switch (type){
                 case "A+":
                 case "A-":
+                case "TYPE_A":
                     return BloodType.TYPE_A;
                 case "B+":
                 case "B-":
+                case "TYPE_B":
                     return BloodType.TYPE_B;
                 case "AB+":
                 case "AB-":
+                case "TYPE_AB":
                     return BloodType.TYPE_AB;
                 case "O+":
                 case "O-":
+                case "TYPE_O":
                     return BloodType.TYPE_O;
 
                 default:

@@ -1,7 +1,5 @@
 package com.well_sync.persistence.hsqldb;
 
-import android.util.Log;
-
 import com.well_sync.objects.Doctor;
 import com.well_sync.objects.Patient;
 import com.well_sync.objects.UserCredentials;
@@ -33,7 +31,7 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
     }
 
     private Connection connect() throws SQLException {
-        return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath, "MD", "");
+        return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "MD", "");
     }
 
     private void loadUserCredentials() {
@@ -44,7 +42,6 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
                 userCredentialsList.add(new UserCredentials(resultSet.getString("email"), resultSet.getString("password")));
             }
         } catch (final SQLException e) {
-            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
             e.printStackTrace();
         }
     }
@@ -58,7 +55,6 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
                 patientsList.add(patient);
             }
         } catch (final SQLException e) {
-            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
             e.printStackTrace();
         }
     }
@@ -72,7 +68,6 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
                 doctorsList.add(doctor);
             }
         } catch (final SQLException e) {
-            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
             e.printStackTrace();
         }
     }
@@ -87,7 +82,6 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
                 return new UserCredentials(resultSet.getString("email"), resultSet.getString("password"));
             }
         } catch (final SQLException e) {
-            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
             e.printStackTrace();
         }
         return null;
@@ -101,7 +95,6 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
             statement.setString(2, user.getPassword());
             statement.executeUpdate();
         } catch (final SQLException e) {
-            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
             e.printStackTrace();
         }
     }
@@ -116,7 +109,6 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
                 return createPatientFromResultSet(resultSet);
             }
         } catch (final SQLException e) {
-            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
             e.printStackTrace();
         }
         return null;
@@ -134,7 +126,6 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
             statement.setInt(6, patient.getAge());
             statement.executeUpdate();
         } catch (final SQLException e) {
-            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
             e.printStackTrace();
         }
     }
@@ -149,7 +140,6 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
                 return createPatientFromResultSet(resultSet);
             }
         } catch (final SQLException e) {
-            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
             e.printStackTrace();
         }
         return null;
@@ -174,7 +164,6 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
                 }
             }
         } catch (final SQLException e) {
-            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
             e.printStackTrace();
         }
     }
@@ -189,7 +178,6 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
                 return createDoctorFromResultSet(resultSet);
             }
         } catch (final SQLException e) {
-            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
             e.printStackTrace();
         }
         return null;
@@ -205,7 +193,6 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
                 return createDoctorFromResultSet(resultSet);
             }
         } catch (final SQLException e) {
-            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
             e.printStackTrace();
         }
         return null;
@@ -250,7 +237,6 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
                 }
             }
         } catch (final SQLException e) {
-            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
             e.printStackTrace();
         }
     }

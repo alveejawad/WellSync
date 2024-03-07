@@ -1,6 +1,5 @@
 package com.well_sync.persistence.hsqldb;
 
-import android.util.Log;
 import com.well_sync.objects.Patient;
 import com.well_sync.objects.DailyLog;
 import com.well_sync.objects.Symptom;
@@ -25,7 +24,7 @@ public class DailyLogPersistenceHSQLDB implements IDailyLogPersistence {
     }
 
     private Connection connect() throws SQLException {
-        return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath, "MD", "");
+        return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "MD", "");
     }
 
     @Override
@@ -79,7 +78,7 @@ public class DailyLogPersistenceHSQLDB implements IDailyLogPersistence {
             }
 
         } catch (final SQLException e) {
-            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
+            
             e.printStackTrace();
         }
     }
@@ -98,7 +97,7 @@ public class DailyLogPersistenceHSQLDB implements IDailyLogPersistence {
                 dailyLog = getDailyLogFromResultSet(connection, resultSet, patient.getEmail());
             }
         } catch (final SQLException e) {
-            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
+            
             e.printStackTrace();
         }
         return dailyLog;
@@ -121,7 +120,7 @@ public class DailyLogPersistenceHSQLDB implements IDailyLogPersistence {
                 }
             }
         } catch (final SQLException e) {
-            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
+            
             e.printStackTrace();
         }
         return dailyLogs;
