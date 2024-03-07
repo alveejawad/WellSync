@@ -21,6 +21,8 @@ public class SymptomsTrackerActivity extends AppCompatActivity {
     protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_symptomstracker);
+        closeIcon=findViewById(R.id.close);
+        saveButton=findViewById(R.id.savebutton);
 
 
 

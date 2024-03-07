@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="linearLayout3"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -80,6 +80,7 @@
                 android:padding="10dp"
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
+                android:layout_marginBottom="20dp"
                 android:text="@string/symptoms_instructions" />
         </LinearLayout>
 
@@ -97,15 +98,13 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:gravity="center">
 
                 <TextView
                     android:id="@+id/Sadness"
                     android:layout_width="110dp"
                     android:layout_height="50dp"
-                    android:layout_marginStart="80dp"
-                    android:layout_marginBottom="20dp"
-                    android:gravity="center"
                     android:text="@string/Sadness"
                     app:layout_constraintBottom_toTopOf="@+id/Helplessness"
                     app:layout_constraintStart_toStartOf="parent"
@@ -119,7 +118,6 @@
                     android:layout_marginStart="45dp"
 
                     android:layout_marginEnd="23dp"
-                    android:layout_marginBottom="20dp"
                     android:numStars="4"
                     android:stepSize="1"
                     app:layout_constraintBottom_toTopOf="@+id/ratingHelplessness"
@@ -135,15 +133,13 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:gravity="center">
 
                 <TextView
                     android:id="@+id/Helplessness"
                     android:layout_width="110dp"
                     android:layout_height="50dp"
-                    android:layout_marginStart="80dp"
-                    android:layout_marginBottom="20dp"
-                    android:gravity="center"
                     android:text="@string/Helplessness"
                     app:layout_constraintBottom_toTopOf="@+id/LowSelfEsteem"
                     app:layout_constraintStart_toStartOf="parent"
@@ -156,7 +152,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="43dp"
                     android:layout_marginEnd="25dp"
-                    android:layout_marginBottom="25dp"
                     android:numStars="4"
                     app:layout_constraintBottom_toTopOf="@+id/ratingSelfEsteem"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -168,15 +163,13 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:gravity="center">
 
                 <TextView
                     android:id="@+id/LowSelfEsteem"
                     android:layout_width="110dp"
                     android:layout_height="50dp"
-                    android:layout_marginStart="80dp"
-                    android:layout_marginBottom="20dp"
-                    android:gravity="center"
                     android:text="@string/LowSelfEsteem"
                     app:layout_constraintBottom_toTopOf="@+id/Isolation"
                     app:layout_constraintStart_toStartOf="parent"
@@ -190,7 +183,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="43dp"
                     android:layout_marginEnd="25dp"
-                    android:layout_marginBottom="20dp"
                     android:numStars="4"
                     app:layout_constraintBottom_toTopOf="@+id/ratingIsolation"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -203,15 +195,13 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:gravity="center">
 
                 <TextView
                     android:id="@+id/Isolation"
                     android:layout_width="110dp"
                     android:layout_height="50dp"
-                    android:layout_marginStart="80dp"
-                    android:layout_marginBottom="20dp"
-                    android:gravity="center"
                     android:text="@string/isolated"
                     app:layout_constraintBottom_toTopOf="@+id/LowMotivation"
                     app:layout_constraintStart_toStartOf="parent"
@@ -224,7 +214,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="43dp"
                     android:layout_marginEnd="25dp"
-                    android:layout_marginBottom="20dp"
                     android:numStars="4"
                     app:layout_constraintBottom_toTopOf="@+id/ratingLowMotivation"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -235,15 +224,13 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:gravity="center">
 
                 <TextView
                     android:id="@+id/LowMotivation"
                     android:layout_width="110dp"
                     android:layout_height="50dp"
-                    android:layout_marginStart="80dp"
-                    android:layout_marginBottom="20dp"
-                    android:gravity="center"
                     android:text="@string/motivation"
                     app:layout_constraintBottom_toTopOf="@+id/Impulsivity"
                     app:layout_constraintStart_toStartOf="parent"
@@ -256,7 +243,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="43dp"
                     android:layout_marginEnd="25dp"
-                    android:layout_marginBottom="25dp"
                     android:numStars="4"
                     app:layout_constraintBottom_toTopOf="@+id/ratingImpulsivity"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -267,15 +253,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:gravity="center">
 
                 <TextView
                     android:id="@+id/Impulsivity"
                     android:layout_width="110dp"
                     android:layout_height="50dp"
-                    android:layout_marginStart="80dp"
-                    android:layout_marginBottom="20dp"
-                    android:gravity="center"
+
                     android:text="@string/impulsivity"
                     app:layout_constraintBottom_toTopOf="@+id/Concentration"
                     app:layout_constraintStart_toStartOf="parent"
@@ -288,7 +273,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="43dp"
                     android:layout_marginEnd="25dp"
-                    android:layout_marginBottom="20dp"
                     android:numStars="4"
                     app:layout_constraintBottom_toTopOf="@+id/ratingConcentration"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -300,15 +284,13 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:gravity="center">
 
                 <TextView
                     android:id="@+id/Concentration"
                     android:layout_width="110dp"
                     android:layout_height="50dp"
-                    android:layout_marginStart="80dp"
-                    android:layout_marginBottom="20dp"
-                    android:gravity="center"
                     android:text="@string/focus"
                     app:layout_constraintBottom_toTopOf="@+id/Aggressiveness"
                     app:layout_constraintStart_toStartOf="parent"
@@ -321,7 +303,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="43dp"
                     android:layout_marginEnd="25dp"
-                    android:layout_marginBottom="20dp"
                     android:numStars="4"
                     app:layout_constraintBottom_toTopOf="@+id/ratingAggressiveness"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -333,15 +314,13 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:gravity="center">
 
                 <TextView
                     android:id="@+id/Aggressiveness"
                     android:layout_width="110dp"
                     android:layout_height="50dp"
-                    android:layout_marginStart="80dp"
-                    android:layout_marginBottom="20dp"
-                    android:gravity="center"
                     android:text="@string/aggresivity"
                     app:layout_constraintBottom_toTopOf="@+id/GrandioseIdeas"
                     app:layout_constraintStart_toStartOf="parent"
@@ -354,7 +333,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="43dp"
                     android:layout_marginEnd="25dp"
-                    android:layout_marginBottom="25dp"
                     android:numStars="4"
                     app:layout_constraintBottom_toTopOf="@+id/ratingGrandioseIdeas"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -366,14 +344,13 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:gravity="center">
 
                 <TextView
                     android:id="@+id/GrandioseIdeas"
                     android:layout_width="110dp"
                     android:layout_height="50dp"
-                    android:layout_marginStart="80dp"
-                    android:layout_marginBottom="20dp"
                     android:gravity="center"
                     android:text="@string/inability"
                     app:layout_constraintBottom_toTopOf="@+id/RacingThoughts"
@@ -387,7 +364,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="45dp"
                     android:layout_marginEnd="25dp"
-                    android:layout_marginBottom="20dp"
                     android:numStars="4"
                     app:layout_constraintBottom_toTopOf="@+id/ratingRacingThoughts"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -399,14 +375,13 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:gravity="center">
 
                 <TextView
                     android:id="@+id/RacingThoughts"
                     android:layout_width="110dp"
                     android:layout_height="50dp"
-                    android:layout_marginStart="80dp"
-                    android:layout_marginBottom="20dp"
                     android:gravity="center"
                     android:text="@string/racing"
                     app:layout_constraintBottom_toTopOf="@+id/Anxiety"
@@ -420,7 +395,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="43dp"
                     android:layout_marginEnd="25dp"
-                    android:layout_marginBottom="20dp"
                     android:numStars="4"
                     app:layout_constraintBottom_toTopOf="@+id/ratingAnxiety"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -432,14 +406,13 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:gravity="center">
 
                 <TextView
                     android:id="@+id/Anxiety"
                     android:layout_width="110dp"
                     android:layout_height="50dp"
-                    android:layout_marginStart="80dp"
-                    android:layout_marginBottom="20dp"
                     android:text="@string/anxiety"
                     app:layout_constraintBottom_toTopOf="@+id/Sleep"
                     app:layout_constraintStart_toStartOf="parent"
@@ -452,7 +425,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="43dp"
                     android:layout_marginEnd="25dp"
-                    android:layout_marginBottom="20dp"
                     android:numStars="4"
                     app:layout_constraintBottom_toTopOf="@+id/ratingSleep"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -464,14 +436,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:gravity="center">
 
                 <TextView
                     android:id="@+id/Sleep"
                     android:layout_width="110dp"
                     android:layout_height="50dp"
-                    android:layout_marginStart="80dp"
-                    android:layout_marginBottom="20dp"
+
                     android:text="@string/sleep"
                     app:layout_constraintBottom_toTopOf="@+id/Headache"
                     app:layout_constraintStart_toStartOf="parent"
@@ -484,7 +456,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="43dp"
                     android:layout_marginEnd="25dp"
-                    android:layout_marginBottom="20dp"
+
                     android:numStars="4"
                     app:layout_constraintBottom_toTopOf="@+id/ratingHeadache"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -496,14 +468,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:gravity="center">
 
                 <TextView
                     android:id="@+id/Headache"
                     android:layout_width="110dp"
                     android:layout_height="50dp"
-                    android:layout_marginStart="80dp"
-                    android:layout_marginBottom="20dp"
+
                     android:text="@string/headache"
                     app:layout_constraintBottom_toTopOf="@+id/Pain"
                     app:layout_constraintStart_toStartOf="parent"
@@ -517,7 +489,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="43dp"
                     android:layout_marginEnd="25dp"
-                    android:layout_marginBottom="20dp"
                     android:numStars="4"
                     app:layout_constraintBottom_toTopOf="@+id/ratingPain"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -528,14 +499,13 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:gravity="center">
 
                 <TextView
                     android:id="@+id/Pain"
                     android:layout_width="110dp"
                     android:layout_height="50dp"
-                    android:layout_marginStart="80dp"
-                    android:layout_marginBottom="20dp"
                     android:text="@string/body_ache"
                     app:layout_constraintBottom_toTopOf="@+id/Appetite"
                     app:layout_constraintStart_toStartOf="parent"
@@ -549,7 +519,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="43dp"
                     android:layout_marginEnd="25dp"
-                    android:layout_marginBottom="20dp"
+
                     android:numStars="4"
                     app:layout_constraintBottom_toTopOf="@+id/ratingAppetite"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -561,14 +531,13 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:gravity="center">
 
                 <TextView
                     android:id="@+id/Appetite"
                     android:layout_width="110dp"
                     android:layout_height="50dp"
-                    android:layout_marginStart="80dp"
-                    android:layout_marginBottom="20dp"
                     android:text="@string/appetite"
                     app:layout_constraintBottom_toTopOf="@+id/Guilt"
                     app:layout_constraintStart_toStartOf="parent"
@@ -582,7 +551,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="43dp"
                     android:layout_marginEnd="25dp"
-                    android:layout_marginBottom="25dp"
+
                     android:numStars="4"
                     app:layout_constraintBottom_toTopOf="@+id/ratingGuilt"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -594,14 +563,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:gravity="center">
 
                 <TextView
                     android:id="@+id/Guilt"
                     android:layout_width="110dp"
                     android:layout_height="50dp"
-                    android:layout_marginStart="80dp"
-                    android:layout_marginBottom="20dp"
+
                     android:text="@string/guilt"
                     app:layout_constraintBottom_toTopOf="@+id/Suicide"
                     app:layout_constraintStart_toStartOf="parent"
@@ -626,13 +595,13 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:gravity="center">
 
                 <TextView
                     android:id="@+id/Suicide"
                     android:layout_width="110dp"
                     android:layout_height="50dp"
-                    android:layout_marginStart="80dp"
                     android:text="@string/suicide"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -662,7 +631,7 @@
                 android:orientation="vertical">
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/backbutton"
+                    android:id="@+id/savebutton"
                     style="@android:style/Widget.Button"
                     android:layout_width="160dp"
                     android:layout_height="wrap_content"
