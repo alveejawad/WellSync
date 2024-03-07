@@ -10,12 +10,11 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import java.util.ArrayList;
+
+import com.well_sync.logic.exceptions.InvalidCredentialsException;
 import com.well_sync.objects.*;
 import com.well_sync.logic.*;
-import com.well_sync.persistence.IUserPersistence;
 import com.well_sync.R;
-import com.well_sync.persistence.stubs.UserPersistenceStub;
 
 import java.util.List;
 
@@ -23,13 +22,15 @@ import java.util.List;
 
 public class DoctorPageActivity extends AppCompatActivity{
 
+    private UserCredentials userCredentials;
+    private UserAuthenticationHandler userAuthenticationHandler;
     private Doctor doctor;
+    private List<DailyLog> dailyLogList;
     private Intent intent;
-    private String email;
-    private IUserPersistence userPersistence;
+    private String email, password;
     private List<Patient> patientList;
-    private PatientHandler patientHandler;
     private DoctorHandler doctorHandler;
+    private PatientHandler patientHandler;
     private PatientAdapter patientAdapter;
 
     private EditText emailEditText;
@@ -39,7 +40,6 @@ public class DoctorPageActivity extends AppCompatActivity{
     private int age;
     private String bloodType;
     private String gender;
-    private Patient patient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,11 +48,14 @@ public class DoctorPageActivity extends AppCompatActivity{
 
         intent = getIntent();
         email = intent.getStringExtra("email");
-        doctor = new Doctor(email);
+        //password = intent.getStringExtra("password");
 
-        patientHandler = new PatientHandler();
-        userPersistence = new UserPersistenceStub();
-        patientList = userPersistence.getPatientsList();
+         patientHandler = new PatientHandler();
+        doctorHandler = new DoctorHandler();
+        userAuthenticationHandler = new UserAuthenticationHandler();
+
+        doctor = doctorHandler.getDetails(email);
+        patientList = doctor.getPatients();
         patientAdapter = new PatientAdapter(patientList);
 
         RecyclerView recyclerView = findViewById(R.id.patientList);
@@ -68,6 +71,7 @@ public class DoctorPageActivity extends AppCompatActivity{
                 age = selectedPatient.getAge();
                 bloodType = selectedPatient.getBloodType().toString();
                 gender = selectedPatient.getSex().toString();
+
                 // Start the PatientInfoActivity and pass the selected patient's information
                 Intent intent = new Intent(DoctorPageActivity.this, PatientInfoActivity.class);
                 intent.putExtra("patient", selectedPatient);
@@ -75,6 +79,7 @@ public class DoctorPageActivity extends AppCompatActivity{
                 intent.putExtra("age", age);
                 intent.putExtra("sex", gender);
                 intent.putExtra("bloodtype", bloodType);
+                intent.putExtra("email", email);
                 DoctorPageActivity.this.startActivity(intent);
             }
         });
@@ -92,9 +97,7 @@ public class DoctorPageActivity extends AppCompatActivity{
                     Toast.makeText(DoctorPageActivity.this, "Email cannot be empty.", Toast.LENGTH_SHORT).show();
                     return; // Exit the onClick method to prevent further execution
                 }
-
-                // check if patient is not existing
-                Patient existedPatient = userPersistence.getPatient(email);
+                Patient existedPatient = patientHandler.getDetails(email);
                 if(existedPatient == null) {
                     // Show a Toast or handle the validation error as needed
                     Toast.makeText(DoctorPageActivity.this, "Sorry, the patient does not exist.", Toast.LENGTH_SHORT).show();
@@ -107,7 +110,6 @@ public class DoctorPageActivity extends AppCompatActivity{
                         return; // Exit the onClick method to prevent further execution
                     }
                 }
-
                 patientList.add(existedPatient);
                 doctor.addPatient(existedPatient);
 
@@ -117,6 +119,10 @@ public class DoctorPageActivity extends AppCompatActivity{
         });
     }
 }
+
+
+
+
 
 
 

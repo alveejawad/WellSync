@@ -13,7 +13,7 @@ public class UserAuthenticationHandler {
     private final IUserPersistence persistUsers;
 
     public UserAuthenticationHandler() {
-        persistUsers = Services.getUserPersistence(true);
+        persistUsers = Services.getUserPersistence(false);
     }
 
     public UserAuthenticationHandler(IUserPersistence persistence) {

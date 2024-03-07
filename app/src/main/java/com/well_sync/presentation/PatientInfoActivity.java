@@ -1,6 +1,7 @@
 package com.well_sync.presentation;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import android.content.Intent;
@@ -11,37 +12,41 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.well_sync.logic.exceptions.InvalidDailyLogException;
 import com.well_sync.objects.*;
-import com.well_sync.persistence.IDailyLogPersistence;
+import com.well_sync.logic.*;
+import com.well_sync.R;
+
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.well_sync.R;
-import com.well_sync.objects.Patient;
-import com.well_sync.persistence.stubs.DailyLogPersistenceStub;
-
 public class PatientInfoActivity extends AppCompatActivity {
-    private IDailyLogPersistence dailyLogPersistence;
+
+    private List<Symptom> symptomList;
     private List<Medication> medicationList;
     private List<Substance> substanceList;
-    private DailyLog dailyLog = new DailyLog();
+    private DailyLog dailyLog;
+    private DailyLogHandler dailyLogHandler;
+    private Date date;
     private Patient patient;
 
     private TextView nameTextView, ageTextView, genderTextView, bloodTypeTextView;
     private EditText adviseEditText;
     private Button currentButton, saveButton;
     private int moodScore, sleepHours, pillsAmount, pillsDosage, subAmount;
-    private String moodNotes, pillsName, substanceName;
-    private Date date;
+    private String moodNotes, pillsName, substanceName, doctorEmail;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_info);
 
-        dailyLogPersistence = new DailyLogPersistenceStub();
+        dailyLogHandler = new DailyLogHandler();
+        symptomList = new ArrayList<>();
         medicationList = new ArrayList<>();
         substanceList = new ArrayList<>();
+
         // Initialize views
         nameTextView = findViewById(R.id.name_patient);
         ageTextView = findViewById(R.id.age_patient);
@@ -53,6 +58,7 @@ public class PatientInfoActivity extends AppCompatActivity {
 
         // Retrieve the selected patient's information from the intent
         Intent intent = getIntent();
+        doctorEmail = intent.getStringExtra("email");
         patient = (Patient) intent.getSerializableExtra("patient");
         String name = intent.getStringExtra("name");
         int age = intent.getIntExtra("age", 1);
@@ -63,23 +69,31 @@ public class PatientInfoActivity extends AppCompatActivity {
         genderTextView.setText("Gender: " + gender);
         bloodTypeTextView.setText("BloodType: " + bloodType);
 
+
         // handle the Button click listener as needed
         currentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                dailyLogPersistence.setDailyLog(patient, dailyLog);
+                dailyLog = dailyLogHandler.getDailyLog(patient, new Date(2023, Calendar.JANUARY, 1));
+                if(dailyLog == null) {
+                    // Show a Toast or handle the validation error as needed
+                    Toast.makeText(PatientInfoActivity.this, "Daily Log is null.", Toast.LENGTH_SHORT).show();
+                    return; // Exit the onClick method to prevent further execution
+                }
                 date = dailyLog.getDate();
                 moodScore = dailyLog.getMoodScore();
                 sleepHours = dailyLog.getSleepHours();
                 moodNotes = dailyLog.getNotes();
 
-                //medicationList = dailyLog.getMedications();
-                pillsName = "Tylenol, Melatonin, Cough syrup";
+                symptomList = dailyLog.getSymptoms();
+
+                medicationList = dailyLog.getMedications();
+                pillsName = "Melatonin";
                 pillsAmount = 5;
                 pillsDosage = 5;
 
-                //substanceList = dailyLog.getSubstances();
+                substanceList = dailyLog.getSubstances();
                 substanceName = "Alcohol, Caffiene";
                 subAmount = 2;
 
@@ -114,5 +128,7 @@ public class PatientInfoActivity extends AppCompatActivity {
         });
     }
 }
+
+
 
 

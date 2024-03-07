@@ -11,7 +11,7 @@ public class DoctorHandler {
     private final IUserPersistence persistUsers;
 
     public DoctorHandler() {
-        persistUsers = Services.getUserPersistence(true);
+        persistUsers = Services.getUserPersistence(false);
     }
 
     public DoctorHandler(IUserPersistence persistence){
@@ -21,6 +21,9 @@ public class DoctorHandler {
     //getDetails function will get the patient and give the patient to the UI layer
     public Doctor getDetails(UserCredentials credentials) {
         return persistUsers.getDoctor(credentials);
+    }
+    public Doctor getDetails(String email) {
+        return persistUsers.getDoctor(email);
     }
 
     //editDetails function will get the userInput and set the details into the persistence layer

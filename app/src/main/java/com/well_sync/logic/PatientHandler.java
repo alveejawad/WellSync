@@ -13,7 +13,7 @@ public class PatientHandler {
 	private final IUserPersistence persistUsers;
 
 	public PatientHandler() {
-		persistUsers = Services.getUserPersistence(true);
+		persistUsers = Services.getUserPersistence(false);
 	}
 
 	public PatientHandler(IUserPersistence persistence){
