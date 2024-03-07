@@ -74,8 +74,9 @@ public class PatientInfoActivity extends AppCompatActivity {
         currentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Date currDate=dailyLogHandler.DateFromString(date);
 
-                dailyLog = dailyLogHandler.getDailyLog(patient, dailyLogHandler.DateFromString(date));
+                dailyLog = dailyLogHandler.getDailyLog(patient, currDate);
                 if(dailyLog == null) {
                     // Show a Toast or handle the validation error as needed
                     Toast.makeText(PatientInfoActivity.this, "Daily Log is null.", Toast.LENGTH_SHORT).show();
@@ -85,14 +86,11 @@ public class PatientInfoActivity extends AppCompatActivity {
                 moodScore = dailyLog.getMoodScore();
                 sleepHours = dailyLog.getSleepHours();
                 moodNotes = dailyLog.getNotes();
-
                 symptomList = dailyLog.getSymptoms();
-
                 medicationList = dailyLog.getMedications();
                 pillsName = medicationList.get(0).getName();
                 pillsAmount = medicationList.get(0).getQuantity();
                 pillsDosage = 5;
-
                 substanceList = dailyLog.getSubstances();
                 substanceName = substanceList.get(0).getName();
                 subAmount = substanceList.get(0).getQuantity();
@@ -100,6 +98,7 @@ public class PatientInfoActivity extends AppCompatActivity {
 
                 Intent currentIntent = new Intent(PatientInfoActivity.this, DailyLogPatientActivity.class);
                 currentIntent.putExtra("date", date);
+                currentIntent.putExtra("email",patient.getEmail());
                 currentIntent.putExtra("moodscore", moodScore);
                 currentIntent.putExtra("sleephour", sleepHours);
                 currentIntent.putExtra("moodnote", moodNotes);

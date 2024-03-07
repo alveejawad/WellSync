@@ -201,7 +201,7 @@ public class DailyLogPersistenceHSQLDB implements IDailyLogPersistence {
         while (symptomResultSet.next()) {
             String symptomName = symptomResultSet.getString("symptom");
             int symptomIntensity = symptomResultSet.getInt("intensity");
-            dailyLog.addSubstance(symptomName, symptomIntensity);
+            dailyLog.addSymptom(symptomName, symptomIntensity);
         }
 
         // Fetch Medications
