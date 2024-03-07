@@ -84,6 +84,63 @@ public class DailyLogPersistenceHSQLDB implements IDailyLogPersistence {
         }
     }
 
+    public void setMedication(Patient patient, DailyLog dailyLog){
+        try (Connection connection = connect()) {
+        // Insert Medications into MEDICATIONS table
+        for (Medication medication : dailyLog.getMedications()) {
+            PreparedStatement medicationStatement = connection.prepareStatement(
+                    "INSERT INTO MEDICATIONS (patient_email, log_date, medication, quantity) VALUES (?, ?, ?, ?)"
+            );
+            medicationStatement.setString(1, patient.getEmail());
+            medicationStatement.setDate(2, new java.sql.Date(dailyLog.getDate().getTime()));
+            medicationStatement.setString(3, medication.getName());
+            medicationStatement.setInt(4, medication.getQuantity());
+            medicationStatement.executeUpdate();
+        }
+        } catch (final SQLException e) {
+
+            e.printStackTrace();
+        }
+
+    }
+    public void setSymptoms(Patient patient, DailyLog dailyLog){
+        try (Connection connection = connect()) {
+            // Insert Symptoms into SYMPTOMS table
+            for (Symptom symptom : dailyLog.getSymptoms()) {
+                PreparedStatement symptomStatement = connection.prepareStatement(
+                        "INSERT INTO SYMPTOMS (patient_email, log_date, symptom, intensity) VALUES (?, ?, ?, ?)"
+                );
+                symptomStatement.setString(1, patient.getEmail());
+                symptomStatement.setDate(2, new java.sql.Date(dailyLog.getDate().getTime()));
+                symptomStatement.setString(3, symptom.getName());
+                symptomStatement.setInt(4, symptom.getIntensity());
+                symptomStatement.executeUpdate();
+            }
+        } catch (final SQLException e) {
+
+            e.printStackTrace();
+        }
+
+    }
+    public void setSubstances(Patient patient, DailyLog dailyLog){
+        try (Connection connection = connect()) {
+            for (Substance substance : dailyLog.getSubstances()) {
+                PreparedStatement substanceStatement = connection.prepareStatement(
+                        "INSERT INTO SUBSTANCES (patient_email, log_date, substance, quantity) VALUES (?, ?, ?, ?)"
+                );
+                substanceStatement.setString(1, patient.getEmail());
+                substanceStatement.setDate(2, new java.sql.Date(dailyLog.getDate().getTime()));
+                substanceStatement.setString(3, substance.getName());
+                substanceStatement.setInt(4, substance.getQuantity());
+                substanceStatement.executeUpdate();
+            }
+        } catch (final SQLException e) {
+
+            e.printStackTrace();
+        }
+
+    }
+
     @Override
     public DailyLog getDailyLog(Patient patient, Date date) {
         DailyLog dailyLog = null;
@@ -144,7 +201,7 @@ public class DailyLogPersistenceHSQLDB implements IDailyLogPersistence {
         while (symptomResultSet.next()) {
             String symptomName = symptomResultSet.getString("symptom");
             int symptomIntensity = symptomResultSet.getInt("intensity");
-            dailyLog.addSubstance(symptomName, symptomIntensity);
+            dailyLog.addSymptom(symptomName, symptomIntensity);
         }
 
         // Fetch Medications

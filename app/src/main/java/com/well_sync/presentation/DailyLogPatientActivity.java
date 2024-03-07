@@ -8,11 +8,17 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.well_sync.logic.DailyLogHandler;
+import com.well_sync.logic.PatientHandler;
+import com.well_sync.objects.DailyLog;
+import com.well_sync.objects.Patient;
+import com.well_sync.objects.Symptom;
 import com.well_sync.objects.UserCredentials;
 import com.well_sync.logic.UserAuthenticationHandler;
 import android.graphics.Paint;
 
 import java.util.Date;
+import java.util.List;
 
 public class DailyLogPatientActivity extends AppCompatActivity {
 
@@ -23,10 +29,12 @@ public class DailyLogPatientActivity extends AppCompatActivity {
     private Button backButton;
     private Date date;
     private String strMood, strNotess, strSubsName, strPillsName;
+    private List<Symptom> symptomList;
     private int  moodScore, sleep, sadness, helplessness, lowSelfEsteem, isolated, motivation, impulsivity, inability, focus, aggresivity;
     private int  racing, anxiety, lowSleep, headache, bodyache, appetite, guilt, suicide, pillsAmount, pillDosage, substanceAmount;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_daily_log_patient);
         //DATE
@@ -35,24 +43,46 @@ public class DailyLogPatientActivity extends AppCompatActivity {
         viewMood=findViewById(R.id.mood);
         viewSleep=findViewById(R.id.sleep);
         viewNotes=findViewById(R.id.Notes);
+
+        DailyLogHandler dailyLogHandler = new DailyLogHandler();
+        Intent intent = getIntent();
+        date = (Date) intent.getSerializableExtra("date");
+
+        //get email and date from HomePage Activity
+        String email = intent.getStringExtra("email");
+        String doctorEmail = intent.getStringExtra("email");
+        // Get the data from patient
+        PatientHandler patientHandler = new PatientHandler();
+        Patient newPatient = patientHandler.getDetails(email);
+        DailyLog dailyLog = dailyLogHandler.getDailyLog(newPatient,date);
+        moodScore = dailyLog.getMoodScore();
+        sleep = dailyLog.getSleepHours();
+        strNotess = dailyLog.getNotes();
+        symptomList = dailyLog.getSymptoms();
+
+        strPillsName = intent.getStringExtra("pillname");
+        pillsAmount = intent.getIntExtra("pillamount", 1);
+        pillDosage = intent.getIntExtra("pilldosage", 1);
+        strSubsName = intent.getStringExtra("substancename");
+        substanceAmount = intent.getIntExtra("substanceamount", 1);
         //SYMPTOMS LOG
-        viewSadness=findViewById(R.id.Sadness);
-        viewHelplessness=findViewById(R.id.Helplessness);
-        viewLowSelfEsteem=findViewById(R.id.LowSelfEsteem);
-        viewIsolated=findViewById(R.id.Isolation);
-        viewMotivation=findViewById(R.id.LowMotivation);
-        viewImpulsivity=findViewById(R.id.Impulsivity);
-        viewFocus=findViewById(R.id.Concentration);
-        viewAggressiveness=findViewById(R.id.Aggressiveness);
-        viewInability=findViewById(R.id.Inability);
-        viewRacing=findViewById(R.id.RacingThoughts);
-        viewAnxiety=findViewById(R.id.Anxiety);
-        viewLowSleep=findViewById(R.id.sleep_problems);
-        viewHeadache=findViewById(R.id.Headache);
-        viewBodyache=findViewById(R.id.Pain);
-        viewAppetite=findViewById(R.id.Appetite);
-        viewGuilt=findViewById(R.id.Guilt);
-        viewSuicide=findViewById(R.id.Suicide);
+        showSymptom(R.id.Sadness,symptomList.get(0).getIntensity());
+        showSymptom(R.id.Helplessness,symptomList.get(1).getIntensity());
+        showSymptom(R.id.LowSelfEsteem,symptomList.get(2).getIntensity());
+        showSymptom(R.id.Isolation,symptomList.get(3).getIntensity());
+        showSymptom(R.id.LowMotivation,symptomList.get(4).getIntensity());
+        showSymptom(R.id.Impulsivity,symptomList.get(5).getIntensity());
+        showSymptom(R.id.Concentration,symptomList.get(6).getIntensity());
+        showSymptom(R.id.Aggressiveness,symptomList.get(7).getIntensity());
+        showSymptom(R.id.Inability,symptomList.get(8).getIntensity());
+        showSymptom(R.id.RacingThoughts,symptomList.get(9).getIntensity());
+        showSymptom(R.id.Anxiety,symptomList.get(10).getIntensity());
+        showSymptom(R.id.sleep_problems,symptomList.get(11).getIntensity());
+        showSymptom(R.id.Headache,symptomList.get(12).getIntensity());
+        showSymptom(R.id.Pain,symptomList.get(13).getIntensity());
+        showSymptom(R.id.Appetite,symptomList.get(14).getIntensity());
+        showSymptom(R.id.Guilt,symptomList.get(15).getIntensity());
+        showSymptom(R.id.Suicide,symptomList.get(16).getIntensity());
         //MEDICATION LOG
         viewPillsName=findViewById(R.id.PillsName);
         viewPillsAmount=findViewById(R.id.PillsAmount);
@@ -60,17 +90,6 @@ public class DailyLogPatientActivity extends AppCompatActivity {
         //SUBSTANCE LOG
         viewSubsName=findViewById(R.id.SubsName);
         viewAmount=findViewById(R.id.amount);
-
-        Intent intent = getIntent();
-        date = (Date) intent.getSerializableExtra("date");
-        moodScore = intent.getIntExtra("moodscore", 1);
-        sleep = intent.getIntExtra("sleephour", 1);
-        strNotess = intent.getStringExtra("moodnote");
-        strPillsName = intent.getStringExtra("pillname");
-        pillsAmount = intent.getIntExtra("pillamount", 1);
-        pillDosage = intent.getIntExtra("pilldosage", 1);
-        strSubsName = intent.getStringExtra("substancename");
-        substanceAmount = intent.getIntExtra("substanceamount", 1);
 
         viewDate.setText(" " + date);
         viewMood.setText(" " + moodScore);
@@ -82,17 +101,24 @@ public class DailyLogPatientActivity extends AppCompatActivity {
         viewSubsName.setText(" " + strSubsName);
         viewAmount.setText(" " + substanceAmount);
 
+
         //BUTTON
         backButton=findViewById(R.id.backbutton);
 
         backButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(DailyLogPatientActivity.this,DoctorPageActivity.class));
+                Intent saveIntent = new Intent(DailyLogPatientActivity.this, DoctorPageActivity.class);
+                saveIntent.putExtra("email", doctorEmail);
+                DailyLogPatientActivity.this.startActivity(saveIntent);
             }
         });
 
     }
+    private void showSymptom(int id,int  index){
+           TextView symptom = findViewById(id);
+        symptom.setText(" " + index);
 
+    }
 
 }

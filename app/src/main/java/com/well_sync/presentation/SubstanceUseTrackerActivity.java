@@ -88,6 +88,11 @@ public class SubstanceUseTrackerActivity extends AppCompatActivity {
                     return; // Exit the onClick method to prevent further execution
                 }
                     dailyLog.addSubstance(name,amountInt);
+                try {
+                    dailyLogHandler.setSubstances(newPatient,dailyLog);
+                } catch (InvalidDailyLogException e) {
+                    throw new RuntimeException(e);
+                }
                     Intent saveIntent = new Intent(SubstanceUseTrackerActivity.this, DisplaySubstanceUseActivity.class);
                     saveIntent.putExtra("email",email);
                     saveIntent.putExtra("name", name);

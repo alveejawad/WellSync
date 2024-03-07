@@ -49,7 +49,7 @@ public class DoctorPageActivity extends AppCompatActivity{
 
         intent = getIntent();
         email = intent.getStringExtra("email");
-        String date = "2023-01-01";
+        String date = getCurrentDate();
         //password = intent.getStringExtra("password");
 
         patientHandler = new PatientHandler();

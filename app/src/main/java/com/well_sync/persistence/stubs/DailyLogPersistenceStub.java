@@ -54,6 +54,9 @@ public class DailyLogPersistenceStub implements IDailyLogPersistence {
         }
         Objects.requireNonNull(dailyLogList.get(patient)).add(dailyLog);
     }
+    public void setMedication(Patient patient, DailyLog dailyLog){}
+    public void setSymptoms(Patient patient, DailyLog dailyLog){}
+    public void setSubstances(Patient patient, DailyLog dailyLog){}
 
     @Override
     public DailyLog getDailyLog(Patient patient, Date date) {
