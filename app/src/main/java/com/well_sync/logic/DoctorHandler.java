@@ -11,7 +11,7 @@ public class DoctorHandler {
     private final IUserPersistence persistUsers;
 
     public DoctorHandler() {
-        persistUsers = Services.getUserPersistence(true);
+        persistUsers = Services.getUserPersistence(false);
     }
 
     public DoctorHandler(IUserPersistence persistence){
