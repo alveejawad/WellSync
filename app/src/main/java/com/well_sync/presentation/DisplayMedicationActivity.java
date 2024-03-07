@@ -27,6 +27,7 @@ public class DisplayMedicationActivity extends Activity {
         buttonContinue = findViewById(R.id.button_continue_1);
 
         Intent intent = getIntent();
+        String email = intent.getStringExtra("email");
         String name = intent.getStringExtra("name");
         String amount = intent.getStringExtra("amount");
         String dosage = intent.getStringExtra("dosage");
@@ -39,6 +40,7 @@ public class DisplayMedicationActivity extends Activity {
             public void onClick(View view) {
                 // Handle close button click
                 Intent continueIntent = new Intent(DisplayMedicationActivity.this, HomePageActivity.class);
+                continueIntent.putExtra("email",email);
                 DisplayMedicationActivity.this.startActivity(continueIntent);
             }
         });

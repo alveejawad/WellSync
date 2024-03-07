@@ -12,8 +12,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.well_sync.R;
+import com.well_sync.logic.DailyLogHandler;
+import com.well_sync.logic.PatientHandler;
 import com.well_sync.logic.exceptions.InvalidDailyLogException;
 import com.well_sync.objects.*;
+
+import java.util.Date;
 
 public class MedicationTrackerActivity extends AppCompatActivity {
 
@@ -24,6 +28,9 @@ public class MedicationTrackerActivity extends AppCompatActivity {
     private Medication medication;
     private MedicationValidator medicationValidator;
     private Button saveButton;
+    private DailyLogHandler dailyLogHandler;
+    private String email, date;
+    private DailyLog dailyLog;
     protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_medication);
@@ -34,6 +41,17 @@ public class MedicationTrackerActivity extends AppCompatActivity {
         dosageMed = findViewById(R.id.num_of_dosage);
         saveButton = findViewById(R.id.save);
 
+        //get email and date from HomePage Activity
+        Intent intent = getIntent();
+        email = intent.getStringExtra("email");
+        date = intent.getStringExtra("date");
+        Date currDate = dailyLogHandler.DateFromString(date);
+
+        // Get the data from patient
+        PatientHandler patientHandler = new PatientHandler();
+        Patient newPatient = patientHandler.getDetails(email);
+        dailyLog = dailyLogHandler.getDailyLog(newPatient,currDate);
+
 
         // Set click listeners or any other event listeners as needed
         closeIcon.setOnClickListener(new View.OnClickListener() {
@@ -41,6 +59,7 @@ public class MedicationTrackerActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // Handle close button click
                 Intent closeIntent = new Intent(MedicationTrackerActivity.this, HomePageActivity.class);
+                closeIntent.putExtra("email",email);
                 MedicationTrackerActivity.this.startActivity(closeIntent);
             }
         });
@@ -83,7 +102,7 @@ public class MedicationTrackerActivity extends AppCompatActivity {
                     saveIntent.putExtra("name", name);
                     saveIntent.putExtra("amount", amount);
                     saveIntent.putExtra("dosage", dosage);
-
+                    saveIntent.putExtra("email", email);
                     MedicationTrackerActivity.this.startActivity(saveIntent);
                 } catch (InvalidDailyLogException e) {
                     throw new RuntimeException(e);

@@ -11,8 +11,12 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.well_sync.R;
+import com.well_sync.logic.DailyLogHandler;
+import com.well_sync.logic.PatientHandler;
 import com.well_sync.logic.exceptions.InvalidDailyLogException;
 import com.well_sync.objects.*;
+
+import java.util.Date;
 
 public class SubstanceUseTrackerActivity extends AppCompatActivity {
 
@@ -22,6 +26,9 @@ public class SubstanceUseTrackerActivity extends AppCompatActivity {
 
     private Substance substance;
     private Button saveButton;
+    private DailyLogHandler dailyLogHandler;
+    private String email, date;
+    private DailyLog dailyLog;
     protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_substance_use);
@@ -31,6 +38,17 @@ public class SubstanceUseTrackerActivity extends AppCompatActivity {
         amountSub = findViewById(R.id.num_of_subs);
         saveButton = findViewById(R.id.save_1);
 
+        //get email and date from HomePage Activity
+        Intent intent = getIntent();
+        email = intent.getStringExtra("email");
+        date = intent.getStringExtra("date");
+        Date currDate = dailyLogHandler.DateFromString(date);
+
+        // Get the data from patient
+        PatientHandler patientHandler = new PatientHandler();
+        Patient newPatient = patientHandler.getDetails(email);
+        dailyLog = dailyLogHandler.getDailyLog(newPatient,currDate);
+
 
         // Set click listeners or any other event listeners as needed
         closeIcon.setOnClickListener(new View.OnClickListener() {
@@ -38,6 +56,7 @@ public class SubstanceUseTrackerActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // Handle close button click
                 Intent closeIntent = new Intent(SubstanceUseTrackerActivity.this, HomePageActivity.class);
+                closeIntent.putExtra("email",email);
                 SubstanceUseTrackerActivity.this.startActivity(closeIntent);
             }
         });
@@ -73,6 +92,7 @@ public class SubstanceUseTrackerActivity extends AppCompatActivity {
                 try {
                     SubstanceValidator.validateSubstance(substance);
                     Intent saveIntent = new Intent(SubstanceUseTrackerActivity.this, DisplaySubstanceUseActivity.class);
+                    saveIntent.putExtra("email",email);
                     saveIntent.putExtra("name", name);
                     saveIntent.putExtra("amount", amount);
                     SubstanceUseTrackerActivity.this.startActivity(saveIntent);
