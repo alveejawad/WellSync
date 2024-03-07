@@ -16,8 +16,10 @@ import com.well_sync.objects.*;
 import com.well_sync.logic.*;
 import com.well_sync.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
-
+import java.util.Locale;
 
 
 public class DoctorPageActivity extends AppCompatActivity{
@@ -25,9 +27,8 @@ public class DoctorPageActivity extends AppCompatActivity{
     private UserCredentials userCredentials;
     private UserAuthenticationHandler userAuthenticationHandler;
     private Doctor doctor;
-    private List<DailyLog> dailyLogList;
     private Intent intent;
-    private String email, password;
+    private String email;
     private List<Patient> patientList;
     private DoctorHandler doctorHandler;
     private PatientHandler patientHandler;
@@ -48,6 +49,7 @@ public class DoctorPageActivity extends AppCompatActivity{
 
         intent = getIntent();
         email = intent.getStringExtra("email");
+        String date = "2023-01-01";
         //password = intent.getStringExtra("password");
 
         patientHandler = new PatientHandler();
@@ -55,9 +57,6 @@ public class DoctorPageActivity extends AppCompatActivity{
         userAuthenticationHandler = new UserAuthenticationHandler();
 
         doctor = doctorHandler.getDetails(email);
-        if (doctor == null) {
-            doctor = new Doctor(email);
-        }
         patientList = doctor.getPatients();
         patientAdapter = new PatientAdapter(patientList);
 
@@ -83,6 +82,7 @@ public class DoctorPageActivity extends AppCompatActivity{
                 intent.putExtra("sex", gender);
                 intent.putExtra("bloodtype", bloodType);
                 intent.putExtra("email", email);
+                intent.putExtra("date", date);
                 DoctorPageActivity.this.startActivity(intent);
             }
         });
@@ -107,25 +107,24 @@ public class DoctorPageActivity extends AppCompatActivity{
                     return; // Exit the onClick method to prevent further execution
                 }
                 for(int i = 0; i < patientList.size(); i++) { // go over the list of patients
-                    if(existedPatient == patientList.get(i)) { // check if we add a duplicate patient
+                    if(existedPatient.equals(patientList.get(i))) { // check if we add a duplicate patient
                         // Show a Toast or handle the validation error as needed
                         Toast.makeText(DoctorPageActivity.this, "Duplicated patient, please try again", Toast.LENGTH_SHORT).show();
                         return; // Exit the onClick method to prevent further execution
                     }
                 }
-                patientList.add(existedPatient);
                 doctor.addPatient(existedPatient);
+
 
                 // Notify the adapter of the data change
                 patientAdapter.notifyDataSetChanged();
             }
         });
     }
+    private String getCurrentDate(){
+        //get current date
+        Date date = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.CANADA);
+        return dateFormat.format(date);
+    }
 }
-
-
-
-
-
-
-
