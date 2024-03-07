@@ -1,18 +1,22 @@
 package com.well_sync.presentation;
+
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.ImageView;
-import com.well_sync.R;
+import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.well_sync.R;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class HomePageActivity extends AppCompatActivity {
 
-    private ImageView userAccess;
-    private Intent intent;
     private String email;
+
 
     @Override
     protected void onCreate(Bundle saveInstanceState) {
@@ -20,8 +24,10 @@ public class HomePageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //get email from Login Activity
-        intent = getIntent();
+        Intent intent = getIntent();
         email = intent.getStringExtra("email");
+        String date = getCurrentDate();
+
 
         // Find your widgets by their IDs
         LinearLayout moodLayout = findViewById(R.id.moodID);
@@ -29,47 +35,39 @@ public class HomePageActivity extends AppCompatActivity {
         LinearLayout medicationLayout = findViewById(R.id.medicationID);
         LinearLayout substanceLayout = findViewById(R.id.substanceUseID);
 
-        userAccess = findViewById(R.id.user);
+        ImageView userAccess = findViewById(R.id.user);
         // Set click listeners for each widget
-        userAccess.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Handle close button click
-                Intent userIntent = new Intent(HomePageActivity.this, UserSettingsActivity.class);
-                userIntent.putExtra("email",email);
-                HomePageActivity.this.startActivity(userIntent);
-            }
+        userAccess.setOnClickListener(view -> {
+            // Handle close button click
+            Intent userIntent = new Intent(HomePageActivity.this, UserSettingsActivity.class);
+            userIntent.putExtra("email",email);
+            HomePageActivity.this.startActivity(userIntent);
         });
         // Set click listeners for each widget
-        moodLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent moodIntent = new Intent(HomePageActivity.this, MoodTrackerActivity.class);
-                moodIntent.putExtra("email", email);
-                HomePageActivity.this.startActivity(moodIntent);
-            }
+        moodLayout.setOnClickListener(v -> {
+            Intent moodIntent = new Intent(HomePageActivity.this, MoodTrackerActivity.class);
+            moodIntent.putExtra("email",email);
+            moodIntent.putExtra("date",date);
+            HomePageActivity.this.startActivity(moodIntent);
         });
-        symptomLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent symptomIntent = new Intent(HomePageActivity.this, SymptomsTrackerActivity.class);
-                HomePageActivity.this.startActivity(symptomIntent);
-            }
+        symptomLayout.setOnClickListener(v -> {
+            Intent symptomIntent = new Intent(HomePageActivity.this, SymptomsTrackerActivity.class);
+            HomePageActivity.this.startActivity(symptomIntent);
         });
-        medicationLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent medicationIntent = new Intent(HomePageActivity.this, MedicationTrackerActivity.class);
-                HomePageActivity.this.startActivity(medicationIntent);
-            }
+        medicationLayout.setOnClickListener(v -> {
+            Intent medicationIntent = new Intent(HomePageActivity.this, MedicationTrackerActivity.class);
+            HomePageActivity.this.startActivity(medicationIntent);
         });
-        substanceLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent substanceIntent = new Intent(HomePageActivity.this, SubstanceUseTrackerActivity.class);
-                HomePageActivity.this.startActivity(substanceIntent);
-            }
+        substanceLayout.setOnClickListener(v -> {
+            Intent substanceIntent = new Intent(HomePageActivity.this, SubstanceUseTrackerActivity.class);
+            HomePageActivity.this.startActivity(substanceIntent);
         });
+    }
+    private String getCurrentDate(){
+        //get current date
+        Date date = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.CANADA);
+        return dateFormat.format(date);
     }
 }
 

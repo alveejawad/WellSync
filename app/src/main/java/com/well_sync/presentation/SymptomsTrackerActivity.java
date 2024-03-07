@@ -23,9 +23,6 @@ public class SymptomsTrackerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_symptomstracker);
         closeIcon=findViewById(R.id.close);
         saveButton=findViewById(R.id.savebutton);
-
-
-
         // Set click listeners or any other event listeners as needed
         closeIcon.setOnClickListener(new View.OnClickListener() {
             @Override

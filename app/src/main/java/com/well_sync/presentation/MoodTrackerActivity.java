@@ -12,11 +12,16 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import com.well_sync.R;
+import com.well_sync.logic.PatientHandler;
 import com.well_sync.logic.exceptions.InvalidDailyLogException;
 import com.well_sync.objects.*;
-import com.well_sync.logic.*;
+import com.well_sync.logic.DailyLogHandler;
+
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.util.Date;
-import java.time.LocalDate;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 public class MoodTrackerActivity extends AppCompatActivity {
 
@@ -25,12 +30,13 @@ public class MoodTrackerActivity extends AppCompatActivity {
     private Button saveButton;
     private TextView emotionText;
 
-    private DailyLog moodLog;
-    private DailyLogHandler moodLogHandler;
+    private DailyLog dailyLog;
+    private Patient patient;
+    private String email;
+    private String date;
+    private DailyLogHandler dailyLogHandler;
 
     protected String emotion, sleepHoursText, userNotes;
-    private Date date;
-    private String email;
     private Intent intent;
     private int moodScores;
     private int sleepHours;
@@ -38,9 +44,15 @@ public class MoodTrackerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mood); // Replace with your actual layout file name
-        moodLogHandler = new DailyLogHandler();
-        moodLog = new DailyLog();
+        dailyLogHandler = new DailyLogHandler();
+        dailyLog = new DailyLog();
         moodScores = 0;
+
+        //get email and date from HomePage Activity
+        Intent intent = getIntent();
+        email = intent.getStringExtra("email");
+        date = intent.getStringExtra("date");
+        Date ddate = DateFromString(date);
 
         // Initialize views
         closeImageView = findViewById(R.id.close);
@@ -68,7 +80,7 @@ public class MoodTrackerActivity extends AppCompatActivity {
 
                 // Set the mood score
                 moodScores = 4;
-                moodLog.setMoodScore(moodScores);
+                dailyLog.setMoodScore(moodScores);
             }
         });
 
@@ -83,7 +95,7 @@ public class MoodTrackerActivity extends AppCompatActivity {
 
                 // Set the mood score
                 moodScores = 3;
-                moodLog.setMoodScore(moodScores);
+                dailyLog.setMoodScore(moodScores);
             }
         });
 
@@ -98,7 +110,7 @@ public class MoodTrackerActivity extends AppCompatActivity {
 
                 // Set the mood score
                 moodScores = 2;
-                moodLog.setMoodScore(moodScores);
+                dailyLog.setMoodScore(moodScores);
             }
         });
 
@@ -113,7 +125,7 @@ public class MoodTrackerActivity extends AppCompatActivity {
 
                 // Set the mood score
                 moodScores = 1;
-                moodLog.setMoodScore(moodScores);
+                dailyLog.setMoodScore(moodScores);
             }
         });
         // Set click listeners or any other event listeners as needed
@@ -131,9 +143,6 @@ public class MoodTrackerActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Create a LocalDate instance and convert it to date
-                LocalDate localDate = LocalDate.now();
-                date = java.sql.Date.valueOf(localDate.toString());
                 // Initialize the data from user
                 emotion = emotionText.getText().toString();
                 // check if emotion is empty before parsing
@@ -157,8 +166,7 @@ public class MoodTrackerActivity extends AppCompatActivity {
                     return; // Exit the onClick method to prevent further execution
                 }
                 sleepHours = Integer.parseInt(sleepHoursText);
-
-                moodLog.setNotes(userNotes);
+                dailyLog.setNotes(userNotes);
 
                 // Validate mood score before setting it in the dailylog
                 if (moodScores < 1 || moodScores > 4) {
@@ -172,32 +180,51 @@ public class MoodTrackerActivity extends AppCompatActivity {
                     Toast.makeText(MoodTrackerActivity.this, "Invalid sleep hours; must be between 0 and 16 inclusive.", Toast.LENGTH_SHORT).show();
                     return; // Exit the onClick method to prevent further execution
                 }
-                moodLog.setSleepHours(sleepHours);
-
+                dailyLog.setMoodScore(moodScores);
+                dailyLog.setSleepHours(sleepHours);
                 // Get the data from patient
-                intent = getIntent();
-                email = intent.getStringExtra("email");
-                Patient newPatient = new Patient(email);
+                PatientHandler patientHandler = new PatientHandler();
+                Patient newPatient = patientHandler.getDetails(email);
 
                 try {
-                    moodLogHandler.setDailyLog(newPatient, moodLog);
+                    // Get the data from mood
+                    dailyLogHandler.setDailyLog(newPatient, dailyLog);
                     Intent saveIntent = new Intent(MoodTrackerActivity.this, DisplayDataActivity.class);
                     saveIntent.putExtra("emotion", emotion);
                     saveIntent.putExtra("sleepHours", sleepHoursText);
                     saveIntent.putExtra("userNotes", userNotes);
                     MoodTrackerActivity.this.startActivity(saveIntent);
                 } catch (InvalidDailyLogException e) {
-                    throw new RuntimeException(e);
+                    Toast.makeText(getApplicationContext(), "Save error", Toast.LENGTH_SHORT).show();
                 }
-
             }
         });
     }
 
+    public DailyLog getMoodLogDetails(View view) {
+        DailyLog result;
+        // Create a LocalDate instance and convert it to date
+        emotion = emotionText.getText().toString();
+        sleepHoursText = sleepHoursEditText.getText().toString();
+        sleepHours = Integer.parseInt(sleepHoursText);
+        userNotes = userNotesEditText.getText().toString();
+        result = new DailyLog(DateFromString(date), moodScores, sleepHours, userNotes);
+        return result;
+    }
     private void resetColorFilter() {
         if (selectedImageView != null) {
             selectedImageView.clearColorFilter();
         }
     }
-}
 
+    private static Date DateFromString(String dateString) {
+        try {
+            // Parse the string to obtain a Date object
+            return DateFormat.getDateInstance().parse(dateString);
+        } catch (ParseException e) {
+            // Handle parsing exception
+            System.err.println("Error parsing date: " + e.getMessage());
+            return null; // Or throw an exception if you prefer
+        }
+    }
+}
