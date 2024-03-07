@@ -24,7 +24,7 @@ INSERT INTO PATIENTS VALUES ('patient2@example.com', 'Jane', 'Smith', 'TYPE_O', 
 INSERT INTO DOCTORS VALUES ('doctor1@example.com', 'Dr. Gabriel', 'Young')
 INSERT INTO DOCTORS VALUES ('doctor2@example.com', 'Dr. Alvee', 'Jawad')
 INSERT INTO ASSIGNED_PATIENTS VALUES ('doctor1@example.com', 'patient1@example.com')
-INSERT INTO ASSIGNED_PATIENTS VALUES ('doctor1@example.com', 'patient2@example.com')
+INSERT INTO ASSIGNED_PATIENTS VALUES ('doctor2@example.com', 'patient2@example.com')
 INSERT INTO DAILY_LOG VALUES ('patient1@example.com', '2023-01-01', 7, 8, 'Feeling good today')
 INSERT INTO DAILY_LOG VALUES ('patient1@example.com', '2023-01-02', 5, 7, 'Had trouble sleeping')
 INSERT INTO DAILY_LOG VALUES ('patient2@example.com', '2023-01-01', 6, 7, 'Normal day')
