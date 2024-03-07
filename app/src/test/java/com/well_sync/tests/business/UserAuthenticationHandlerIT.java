@@ -40,13 +40,13 @@ public class UserAuthenticationHandlerIT {
 
     @Test
     public void registerThenLogin() throws InvalidCredentialsException {
-        UserCredentials creds = new UserCredentials("new-email@example.net", "top-secret-password");
+        UserCredentials creds = new UserCredentials("new-email@example.net", "top-secret-password", "DOCTOR");
         authHandler.register(creds);
 
         // this should work
         authHandler.login(creds);
 
-        UserCredentials creds2 = new UserCredentials("new-email@example.net", "wrong-password");
+        UserCredentials creds2 = new UserCredentials("new-email@example.net", "wrong-password", "DOCTOR");
         try {
             // this should not work
             authHandler.login(creds2);

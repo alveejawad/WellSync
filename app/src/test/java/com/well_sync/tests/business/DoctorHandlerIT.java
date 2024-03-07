@@ -41,7 +41,7 @@ public class DoctorHandlerIT {
             e.printStackTrace();
         }
 
-        Doctor d2 = handler.getDetails(new UserCredentials("new-doctor@example.com", ""));
+        Doctor d2 = handler.getDetails(new UserCredentials("new-doctor@example.com", "","DOCTOR"));
 
         assertEquals(d1, d2);
     }

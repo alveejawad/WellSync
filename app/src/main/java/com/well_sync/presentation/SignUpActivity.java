@@ -66,8 +66,7 @@ public class SignUpActivity extends AppCompatActivity {
             }else{
 
                 //create user credentials
-                newUser = new UserCredentials(email, password);
-                newUser.setRole(role);
+                newUser = new UserCredentials(email, password, role);
                 try {
                     signUpHandler.register(newUser);
 

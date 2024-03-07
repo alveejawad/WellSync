@@ -45,7 +45,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 userCredentials=getCredentials(v);
 
-
                 try {
                     loginHandler.login(userCredentials);
                         Intent openHome=new Intent(LoginActivity.this,HomePageActivity.class);
@@ -78,7 +77,6 @@ public class LoginActivity extends AppCompatActivity {
         UserCredentials returningUser;
         String email = userEmail.getText().toString();
         String password = userPassword.getText().toString();
-        String role = "Patient";
         returningUser = new UserCredentials(email,password);
         return returningUser;
     }
