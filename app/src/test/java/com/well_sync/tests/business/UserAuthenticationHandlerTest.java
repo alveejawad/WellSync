@@ -25,16 +25,16 @@ public class UserAuthenticationHandlerTest {
         UserCredentials creds;
 
         // these credentials are known to be in the database stub
-        creds = new UserCredentials("test1@example.com", "password1", "PATIENT");
+        creds = new UserCredentials("patient1@example.com", "password1", "PATIENT");
         userAuthHandler.login(creds);
 
         // these credentials are known to be in the database stub
-        creds = new UserCredentials("test2@example.com", "password2", "DOCTOR");
+        creds = new UserCredentials("doctor2@example.com", "password2", "DOCTOR");
         userAuthHandler.login(creds);
 
         // this email is valid, but not the password
         try {
-            creds = new UserCredentials("test1@example.com", "idontknow", "PATIENT");
+            creds = new UserCredentials("patient1@example.com", "idontknow", "PATIENT");
             userAuthHandler.login(creds);
             fail("Invalid password did not throw an exception.");
         } catch (InvalidCredentialsException e) {

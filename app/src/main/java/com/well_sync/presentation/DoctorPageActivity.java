@@ -50,11 +50,14 @@ public class DoctorPageActivity extends AppCompatActivity{
         email = intent.getStringExtra("email");
         //password = intent.getStringExtra("password");
 
-         patientHandler = new PatientHandler();
+        patientHandler = new PatientHandler();
         doctorHandler = new DoctorHandler();
         userAuthenticationHandler = new UserAuthenticationHandler();
 
         doctor = doctorHandler.getDetails(email);
+        if (doctor == null) {
+            doctor = new Doctor(email);
+        }
         patientList = doctor.getPatients();
         patientAdapter = new PatientAdapter(patientList);
 
