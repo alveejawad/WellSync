@@ -28,7 +28,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_login);
 
-        DBHelper.copyDatabaseToDevice(this);
+      //  DBHelper.copyDatabaseToDevice(this);
 
         loginHandler = new UserAuthenticationHandler();
         loginButton = findViewById(R.id.Loginbutton);
@@ -44,11 +44,9 @@ public class LoginActivity extends AppCompatActivity {
 
             public void onClick(View v) {
                 userCredentials=getCredentials(v);
-
-
                 try {
                     loginHandler.login(userCredentials);
-                        Intent openHome=new Intent(LoginActivity.this,DoctorPageActivity.class);
+                        Intent openHome=new Intent(LoginActivity.this,HomePageActivity.class);
                         openHome.putExtra("email", userCredentials.getEmail());
                         startActivity(openHome);
                 } catch (InvalidCredentialsException e) {
