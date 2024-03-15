@@ -229,7 +229,7 @@
         android:layout_marginEnd="68dp"
         android:fontFamily="sans-serif-black"
         android:gravity="center"
-        android:text="WELLSYNC"
+        android:text="@string/app_name"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="45sp" />
 </RelativeLayout>
