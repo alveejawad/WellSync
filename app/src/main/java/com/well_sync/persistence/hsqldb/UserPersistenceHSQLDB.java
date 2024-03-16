@@ -170,6 +170,22 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
         }
     }
 
+    public void removePatient(Doctor doctor, Patient patient) {
+        try (Connection connection = connect()) {
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM ASSIGNED_PATIENTS WHERE doctor_email = ? AND patient_email = ?");
+            statement.setString(1, doctor.getEmail());
+            statement.setString(2, patient.getEmail());
+            int rowsAffected = statement.executeUpdate();
+            if (rowsAffected == 0) {
+                System.out.println("Patient not found in the assigned patients list for the doctor.");
+            } else {
+                System.out.println("Patient removed successfully from the assigned patients list for the doctor.");
+            }
+        } catch (final SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public Doctor getDoctor(UserCredentials userCredentials) {
         try (Connection connection = connect()) {
