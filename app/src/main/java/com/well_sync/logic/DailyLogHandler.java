@@ -46,6 +46,10 @@ public class DailyLogHandler {
         return persistLog.getDailyLog(patient, date);
     }
 
+    public List<Date> getAllDates(Patient patient) {
+        return persistLog.getAllDates(patient);
+    }
+
     public static Date DateFromString(String dateString) {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.CANADA);
         try {
