@@ -63,6 +63,7 @@ public class DailyLogPersistenceHSQLDB implements IDailyLogPersistence {
                 medicationStatement.setDate(2, new java.sql.Date(dailyLog.getDate().getTime()));
                 medicationStatement.setString(3, medication.getName());
                 medicationStatement.setInt(4, medication.getQuantity());
+                medicationStatement.setInt(5, medication.getDosage());
                 medicationStatement.executeUpdate();
             }
 
@@ -95,6 +96,7 @@ public class DailyLogPersistenceHSQLDB implements IDailyLogPersistence {
             medicationStatement.setDate(2, new java.sql.Date(dailyLog.getDate().getTime()));
             medicationStatement.setString(3, medication.getName());
             medicationStatement.setInt(4, medication.getQuantity());
+            medicationStatement.setInt(5, medication.getDosage());
             medicationStatement.executeUpdate();
         }
         } catch (final SQLException e) {

@@ -5,7 +5,7 @@ CREATE MEMORY TABLE PUBLIC.DOCTORS ( email VARCHAR(255) NOT NULL, firstName VARC
 CREATE MEMORY TABLE PUBLIC.ASSIGNED_PATIENTS ( doctor_email VARCHAR(255) NOT NULL, patient_email VARCHAR(255) NOT NULL, FOREIGN KEY (doctor_email) REFERENCES DOCTORS(email), FOREIGN KEY (patient_email) REFERENCES PATIENTS(email), PRIMARY KEY (doctor_email, patient_email) )
 CREATE MEMORY TABLE PUBLIC.DAILY_LOG ( patient_email VARCHAR(255) NOT NULL, log_date DATE NOT NULL, mood_score INTEGER, sleep_hours INTEGER, notes VARCHAR(7999), PRIMARY KEY (patient_email, log_date), FOREIGN KEY (patient_email) REFERENCES PATIENTS(email) )
 CREATE MEMORY TABLE PUBLIC.SYMPTOMS ( patient_email VARCHAR(255) NOT NULL, log_date DATE NOT NULL, symptom VARCHAR(255), intensity INTEGER, FOREIGN KEY (patient_email, log_date) REFERENCES DAILY_LOG(patient_email, log_date) )
-CREATE MEMORY TABLE PUBLIC.MEDICATIONS ( patient_email VARCHAR(255) NOT NULL, log_date DATE NOT NULL, medication VARCHAR(255), quantity INTEGER, FOREIGN KEY (patient_email, log_date) REFERENCES DAILY_LOG(patient_email, log_date) )
+CREATE MEMORY TABLE PUBLIC.MEDICATIONS ( patient_email VARCHAR(255) NOT NULL, log_date DATE NOT NULL, medication VARCHAR(255), quantity INTEGER, dosage INTEGER, FOREIGN KEY (patient_email, log_date) REFERENCES DAILY_LOG(patient_email, log_date) )
 CREATE MEMORY TABLE PUBLIC.SUBSTANCES ( patient_email VARCHAR(255) NOT NULL, log_date DATE NOT NULL, substance VARCHAR(255), quantity INTEGER, FOREIGN KEY (patient_email, log_date) REFERENCES DAILY_LOG(patient_email, log_date) )
 CREATE USER MD PASSWORD DIGEST 'd41d8cd98f00b204e9800998ecf8427e'
 ALTER USER MD SET LOCAL TRUE
@@ -31,9 +31,9 @@ INSERT INTO DAILY_LOG VALUES ('patient2@example.com', '2023-01-01', 6, 7, 'Norma
 INSERT INTO SYMPTOMS VALUES ('patient1@example.com', '2023-01-01', 'Headache', 5)
 INSERT INTO SYMPTOMS VALUES ('patient1@example.com', '2023-01-02', 'Fatigue', 4)
 INSERT INTO SYMPTOMS VALUES ('patient2@example.com', '2023-01-01', 'Sore throat', 8)
-INSERT INTO MEDICATIONS VALUES ('patient1@example.com', '2023-01-01', 'Tylenol', 2)
-INSERT INTO MEDICATIONS VALUES ('patient1@example.com', '2023-01-02', 'Melatonin', 1)
-INSERT INTO MEDICATIONS VALUES ('patient2@example.com', '2023-01-01', 'Cough syrup', 3)
+INSERT INTO MEDICATIONS VALUES ('patient1@example.com', '2023-01-01', 'Tylenol', 2, 3)
+INSERT INTO MEDICATIONS VALUES ('patient1@example.com', '2023-01-02', 'Melatonin', 1, 1)
+INSERT INTO MEDICATIONS VALUES ('patient2@example.com', '2023-01-01', 'Cough syrup', 3, 5)
 INSERT INTO SUBSTANCES VALUES ('patient1@example.com', '2023-01-01', 'Alcohol', 2)
 INSERT INTO SUBSTANCES VALUES ('patient1@example.com', '2023-01-02', 'Caffeine', 3)
 INSERT INTO SUBSTANCES VALUES ('patient2@example.com', '2023-01-01', 'Coke', 100)
