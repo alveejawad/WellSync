@@ -11,17 +11,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.well_sync.R;
+import com.well_sync.logic.DailyLogHandler;
 import com.well_sync.logic.PatientHandler;
 import com.well_sync.logic.exceptions.InvalidDailyLogException;
-import com.well_sync.objects.*;
-import com.well_sync.logic.DailyLogHandler;
+import com.well_sync.objects.DailyLog;
+import com.well_sync.objects.Patient;
 
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.util.Date;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
 
 public class MoodTrackerActivity extends AppCompatActivity {
 
@@ -198,21 +196,10 @@ public class MoodTrackerActivity extends AppCompatActivity {
         });
     }
 
-    public DailyLog getMoodLogDetails(View view) {
-        DailyLog result;
-        emotion = emotionText.getText().toString();
-        sleepHoursText = sleepHoursEditText.getText().toString();
-        sleepHours = Integer.parseInt(sleepHoursText);
-        userNotes = userNotesEditText.getText().toString();
-        result = new DailyLog(dailyLogHandler.DateFromString(date), moodScores, sleepHours, userNotes);
-        return result;
-    }
     private void resetColorFilter() {
-        if (selectedImageView != null) {
+        if (selectedImageView != null)
             selectedImageView.clearColorFilter();
-        }
     }
-
 }
 
 

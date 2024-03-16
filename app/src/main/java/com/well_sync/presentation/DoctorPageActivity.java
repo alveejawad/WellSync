@@ -15,6 +15,11 @@ import com.well_sync.logic.exceptions.InvalidCredentialsException;
 import com.well_sync.objects.*;
 import com.well_sync.logic.*;
 import com.well_sync.R;
+import com.well_sync.logic.DoctorHandler;
+import com.well_sync.logic.PatientHandler;
+import com.well_sync.logic.exceptions.InvalidDoctorException;
+import com.well_sync.objects.Doctor;
+import com.well_sync.objects.Patient;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -27,101 +32,87 @@ public class DoctorPageActivity extends AppCompatActivity{
     private UserCredentials userCredentials;
     private UserAuthenticationHandler userAuthenticationHandler;
     private Doctor doctor;
-    private Intent intent;
-    private String email;
+    private String doctorEmail;
     private List<Patient> patientList;
-    private DoctorHandler doctorHandler;
     private PatientHandler patientHandler;
     private PatientAdapter patientAdapter;
 
     private EditText emailEditText;
-    private Button addPatientButton;
-
-    private String name;
+    private String name, bloodType, gender;
     private int age;
-    private String bloodType;
-    private String gender;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_main);
 
-        intent = getIntent();
-        email = intent.getStringExtra("email");
+        //Get doctor's email
+        Intent intent = getIntent();
+        doctorEmail = intent.getStringExtra("email");
         String date = getCurrentDate();
-        //password = intent.getStringExtra("password");
 
+        //Initialize handler
         patientHandler = new PatientHandler();
-        doctorHandler = new DoctorHandler();
-        userAuthenticationHandler = new UserAuthenticationHandler();
+        DoctorHandler doctorHandler = new DoctorHandler();
 
-        doctor = doctorHandler.getDetails(email);
+        doctor = doctorHandler.getDetails(doctorEmail);
         if (doctor == null) {
-            doctor = new Doctor(email);
+            doctor = new Doctor(doctorEmail);
         }
+        //Get doctor's patients
+        doctor = doctorHandler.getDetails(doctorEmail);
         patientList = doctor.getPatients();
-        patientAdapter = new PatientAdapter(patientList);
 
+        //show list of patients
         RecyclerView recyclerView = findViewById(R.id.patientList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        patientAdapter = new PatientAdapter(patientList);
         recyclerView.setAdapter(patientAdapter);
 
         // Set a click listener for RecyclerView items
-        patientAdapter.setOnItemClickListener(new PatientAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                Patient selectedPatient = patientList.get(position);
-                name = selectedPatient.getName();
-                age = selectedPatient.getAge();
-                bloodType = selectedPatient.getBloodType().toString();
-                gender = selectedPatient.getSex().toString();
-
-                // Start the PatientInfoActivity and pass the selected patient's information
-                Intent intent = new Intent(DoctorPageActivity.this, PatientInfoActivity.class);
-                intent.putExtra("patient", selectedPatient);
-                intent.putExtra("name", name);
-                intent.putExtra("age", age);
-                intent.putExtra("sex", gender);
-                intent.putExtra("bloodtype", bloodType);
-                intent.putExtra("email", email);
-                intent.putExtra("date", date);
-                DoctorPageActivity.this.startActivity(intent);
-            }
+        patientAdapter.setOnItemClickListener(position -> {
+            Patient selectedPatient = patientList.get(position);
+            // Start the PatientInfoActivity and pass the selected patient's information
+            Intent patientIntent = new Intent(DoctorPageActivity.this, PatientInfoActivity.class);
+            patientIntent.putExtra("patientEmail",selectedPatient.getEmail());
+            //doctor's information
+            patientIntent.putExtra("doctorEmail", doctorEmail);
+            patientIntent.putExtra("date", date);
+            DoctorPageActivity.this.startActivity(patientIntent);
         });
 
         emailEditText = findViewById(R.id.patient_email_input);
-        addPatientButton = findViewById(R.id.add_patient);
+        Button addPatientButton = findViewById(R.id.add_patient);
 
-        addPatientButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String email = emailEditText.getText().toString();
-                // check if the input for email is empty
-                if(email.isEmpty()) {
-                    // Show a Toast or handle the validation error as needed
-                    Toast.makeText(DoctorPageActivity.this, "Email cannot be empty.", Toast.LENGTH_SHORT).show();
-                    return; // Exit the onClick method to prevent further execution
-                }
-                Patient existedPatient = patientHandler.getDetails(email);
-                if(existedPatient == null) {
-                    // Show a Toast or handle the validation error as needed
-                    Toast.makeText(DoctorPageActivity.this, "Sorry, the patient does not exist.", Toast.LENGTH_SHORT).show();
-                    return; // Exit the onClick method to prevent further execution
-                }
-                for(int i = 0; i < patientList.size(); i++) { // go over the list of patients
-                    if(existedPatient.equals(patientList.get(i))) { // check if we add a duplicate patient
-                        // Show a Toast or handle the validation error as needed
-                        Toast.makeText(DoctorPageActivity.this, "Duplicated patient, please try again", Toast.LENGTH_SHORT).show();
-                        return; // Exit the onClick method to prevent further execution
-                    }
-                }
-                doctor.addPatient(existedPatient);
-
-
-                // Notify the adapter of the data change
-                patientAdapter.notifyDataSetChanged();
+        addPatientButton.setOnClickListener(v -> {
+            String email = emailEditText.getText().toString();
+            // check if the input for email is empty
+            if(email.isEmpty()) {
+                // Show a Toast or handle the validation error as needed
+                Toast.makeText(DoctorPageActivity.this, "Email cannot be empty.", Toast.LENGTH_SHORT).show();
+                return; // Exit the onClick method to prevent further execution
             }
+            Patient existedPatient = patientHandler.getDetails(email);
+            if(existedPatient == null) {
+                // Show a Toast or handle the validation error as needed
+                Toast.makeText(DoctorPageActivity.this, "Sorry, the patient does not exist.", Toast.LENGTH_SHORT).show();
+                return; // Exit the onClick method to prevent further execution
+            }
+            for(int i = 0; i < patientList.size(); i++) { // go over the list of patients
+                if(existedPatient.equals(patientList.get(i))) { // check if we add a duplicate patient
+                    // Show a Toast or handle the validation error as needed
+                    Toast.makeText(DoctorPageActivity.this, "Duplicated patient, please try again", Toast.LENGTH_SHORT).show();
+                    return; // Exit the onClick method to prevent further execution
+                }
+            }
+            doctor.addPatient(existedPatient);
+            try {
+              doctorHandler.addPatient(existedPatient,doctor);
+            } catch (InvalidDoctorException e) {
+               throw new RuntimeException(e);
+            }
+            //Notify the adapter of the data change
+            patientAdapter.notifyDataSetChanged();
         });
     }
     private String getCurrentDate(){

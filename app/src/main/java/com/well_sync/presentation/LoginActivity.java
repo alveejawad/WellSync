@@ -1,18 +1,20 @@
 package com.well_sync.presentation;
+
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.well_sync.R;
+import com.well_sync.logic.UserAuthenticationHandler;
 import com.well_sync.logic.exceptions.InvalidCredentialsException;
 import com.well_sync.objects.UserCredentials;
-import com.well_sync.logic.UserAuthenticationHandler;
 import com.well_sync.persistence.utils.DBHelper;
-
-import android.graphics.Paint;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -49,6 +51,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 if (loginRole == UserCredentials.Role.PATIENT) {
                     openHome = new Intent(LoginActivity.this, HomePageActivity.class);
+
                 } else {
                     openHome = new Intent(LoginActivity.this, DoctorPageActivity.class);
                 }
