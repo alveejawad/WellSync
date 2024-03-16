@@ -95,6 +95,7 @@ public class UserPersistenceStub implements IUserPersistence {
         }
         return null;
     }
+    public void setPatientToDoctor(Patient patient,Doctor doctor){}
 
     @Override
     public List<Patient> getPatientsList() {

@@ -28,4 +28,6 @@ public interface IUserPersistence {
 
     List<Patient> getPatientsList();
 
+    void setPatientToDoctor(Patient patient,Doctor doctor);
+
 }
