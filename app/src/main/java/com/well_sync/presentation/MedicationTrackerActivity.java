@@ -79,8 +79,9 @@ public class MedicationTrackerActivity extends AppCompatActivity {
                 return; // Exit the onClick method to prevent further execution
             }
             int amountInt = Integer.parseInt(amount);
+            int dosageInt = Integer.parseInt(dosage);
 
-                dailyLog.addMedication(name, amountInt);
+                dailyLog.addMedication(name, amountInt,dosageInt);
             try {
                 dailyLogHandler.setMedication(newPatient,dailyLog);
             } catch (InvalidDailyLogException e) {

@@ -67,7 +67,7 @@ public class UserDetailsActivity extends AppCompatActivity {
             bloodType=getBloodType();
             age=getAge();
 
-            Patient newPatient= new Patient(email,firstName,lastName,bloodType,gender,age);
+            Patient newPatient= new Patient(email,firstName,lastName,bloodType,gender,age," ");
             try {
                 patientHandler.editDetails(newPatient);
                 Intent homeIntent =new Intent(UserDetailsActivity.this, HomePageActivity.class);

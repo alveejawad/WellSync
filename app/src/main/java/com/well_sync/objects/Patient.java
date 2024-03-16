@@ -81,7 +81,7 @@ public class Patient{
         this.bloodType = BloodType.fromString(bloodType);
         this.sex = Sex.fromString(sex);
         this.age = age;
-        this.dosctorNotes = doctorNotes;
+        this.doctorNotes = doctorNotes;
     }
 
     public String getEmail() {
