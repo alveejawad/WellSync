@@ -135,4 +135,26 @@ public class UserPersistenceStub implements IUserPersistence {
         }
     }
 
+    @Override
+    public void removePatient(Doctor doctor, Patient patient) {
+        Doctor doctorToRemoveFrom = null;
+        for (Doctor d : doctorList) {
+            if (d.getEmail().equals(doctor.getEmail())) {
+                doctorToRemoveFrom = d;
+                break;
+            }
+        }
+
+        if (doctorToRemoveFrom != null) {
+            boolean removed = doctorToRemoveFrom.removePatient(patient);
+            if (removed) {
+                System.out.println("Patient removed successfully from the doctor's list.");
+            } else {
+                System.out.println("Patient not found in the doctor's list.");
+            }
+        } else {
+            System.out.println("Doctor not found.");
+        }
+    }
+
 }

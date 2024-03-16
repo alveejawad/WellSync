@@ -170,6 +170,7 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
         }
     }
 
+    @Override
     public void removePatient(Doctor doctor, Patient patient) {
         try (Connection connection = connect()) {
             PreparedStatement statement = connection.prepareStatement("DELETE FROM ASSIGNED_PATIENTS WHERE doctor_email = ? AND patient_email = ?");
