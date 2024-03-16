@@ -24,7 +24,7 @@ public class PatientInfoActivity extends AppCompatActivity {
     private Patient patient;
     private TextView nameTextView, ageTextView, genderTextView, bloodTypeTextView;
     private EditText adviseEditText;
-    private Button currentButton, saveButton;
+    private Button logsButton, sendButton;
     private String doctorEmail, patientEmail;
     private String date;
 
@@ -38,8 +38,8 @@ public class PatientInfoActivity extends AppCompatActivity {
 
         // Initialize views
         adviseEditText = findViewById(R.id.advise_from_doctor);
-        currentButton = findViewById(R.id.current_button);
-        saveButton = findViewById(R.id.save_patient);
+        logsButton = findViewById(R.id.daily_logs);
+        sendButton = findViewById(R.id.send_rec);
 
         // Retrieve the selected patient's information from the intent
         Intent intent = getIntent();
@@ -49,13 +49,13 @@ public class PatientInfoActivity extends AppCompatActivity {
         PatientHandler patientHandler = new PatientHandler();
         Patient patient = patientHandler.getDetails(patientEmail);
 
-        setData(R.id.name_patient,"Name: " + patient.getFirstName()+" "+patient.getLastName());
-        setData(R.id.age_patient, "Age: " +patient.getAge());
-        setData(R.id.gender_patient,"Gender: " +  patient.getSex().name());
-        setData(R.id.bloodtype_patient,"Blood Type: " + patient.getBloodType().name());
+        setData(R.id.name,patient.getFirstName()+" "+patient.getLastName());
+        setData(R.id.birthday, String.valueOf(patient.getAge()));
+        setData(R.id.gender,patient.getSex().name());
+        setData(R.id.bloodtype,patient.getBloodType().name());
 
         // handle the Button click listener as needed
-        currentButton.setOnClickListener(new View.OnClickListener() {
+        logsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Date currDate=DailyLogHandler.DateFromString(date);
@@ -73,7 +73,7 @@ public class PatientInfoActivity extends AppCompatActivity {
                 PatientInfoActivity.this.startActivity(currentIntent);
             }
         });
-        saveButton.setOnClickListener(new View.OnClickListener() {
+        sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Implement save functionality here

@@ -44,7 +44,6 @@ public class DoctorHandler {
             persistUsers.setDoctor(inputDetails);
         }
     }
-
     public void addPatient(Patient patient, Doctor doctor)throws InvalidDoctorException {
         persistUsers.setPatientToDoctor(patient,doctor);
     }

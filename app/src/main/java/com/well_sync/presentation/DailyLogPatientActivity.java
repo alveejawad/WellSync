@@ -15,12 +15,10 @@ import com.well_sync.objects.Medication;
 import com.well_sync.objects.Patient;
 import com.well_sync.objects.Substance;
 import com.well_sync.objects.Symptom;
-
 import java.util.Date;
 import java.util.List;
 
 public class DailyLogPatientActivity extends AppCompatActivity {
-    private String date;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +26,7 @@ public class DailyLogPatientActivity extends AppCompatActivity {
 
         DailyLogHandler dailyLogHandler = new DailyLogHandler();
         Intent intent = getIntent();
-        date = intent.getStringExtra("date");
+        String date = intent.getStringExtra("date");
         Date currDate=DailyLogHandler.DateFromString(date);
 
         //get email and date from HomePage Activity
