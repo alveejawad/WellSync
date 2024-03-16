@@ -1,9 +1,5 @@
 package com.well_sync.presentation;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,27 +8,24 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.well_sync.logic.exceptions.InvalidDailyLogException;
-import com.well_sync.objects.*;
-import com.well_sync.logic.*;
-import com.well_sync.R;
-
-
 import androidx.appcompat.app.AppCompatActivity;
 
-public class PatientInfoActivity extends AppCompatActivity {
+import com.well_sync.R;
+import com.well_sync.logic.DailyLogHandler;
+import com.well_sync.logic.PatientHandler;
+import com.well_sync.objects.DailyLog;
+import com.well_sync.objects.Patient;
 
-    private List<Symptom> symptomList;
-    private List<Medication> medicationList;
-    private List<Substance> substanceList;
+import java.util.Date;
+
+public class PatientInfoActivity extends AppCompatActivity {
     private DailyLog dailyLog;
     private DailyLogHandler dailyLogHandler;
     private Patient patient;
     private TextView nameTextView, ageTextView, genderTextView, bloodTypeTextView;
     private EditText adviseEditText;
     private Button currentButton, saveButton;
-    private int moodScore, sleepHours, pillsAmount, pillsDosage, subAmount;
-    private String moodNotes, pillsName, substanceName, doctorEmail;
+    private String doctorEmail, patientEmail;
     private String date;
 
 
@@ -42,40 +35,30 @@ public class PatientInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_patient_info);
 
         dailyLogHandler = new DailyLogHandler();
-        symptomList = new ArrayList<>();
-        medicationList = new ArrayList<>();
-        substanceList = new ArrayList<>();
 
         // Initialize views
-        nameTextView = findViewById(R.id.name_patient);
-        ageTextView = findViewById(R.id.age_patient);
-        genderTextView = findViewById(R.id.gender_patient);
-        bloodTypeTextView = findViewById(R.id.bloodtype_patient);
         adviseEditText = findViewById(R.id.advise_from_doctor);
         currentButton = findViewById(R.id.current_button);
         saveButton = findViewById(R.id.save_patient);
 
         // Retrieve the selected patient's information from the intent
         Intent intent = getIntent();
-        doctorEmail = intent.getStringExtra("email");
+        doctorEmail = intent.getStringExtra("doctorEmail");
         date = intent.getStringExtra("date");
-        patient = (Patient) intent.getSerializableExtra("patient");
-        String name = intent.getStringExtra("name");
-        int age = intent.getIntExtra("age", 1);
-        String gender = intent.getStringExtra("sex");
-        String bloodType = intent.getStringExtra("bloodtype");
-        nameTextView.setText("Name: " + name);
-        ageTextView.setText("Age: " + age);
-        genderTextView.setText("Gender: " + gender);
-        bloodTypeTextView.setText("BloodType: " + bloodType);
+        patientEmail = intent.getStringExtra("patientEmail");
+        PatientHandler patientHandler = new PatientHandler();
+        Patient patient = patientHandler.getDetails(patientEmail);
 
+        setData(R.id.name_patient,"Name: " + patient.getFirstName()+" "+patient.getLastName());
+        setData(R.id.age_patient, "Age: " +patient.getAge());
+        setData(R.id.gender_patient,"Gender: " +  patient.getSex().name());
+        setData(R.id.bloodtype_patient,"Blood Type: " + patient.getBloodType().name());
 
         // handle the Button click listener as needed
         currentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Date currDate=dailyLogHandler.DateFromString(date);
-
+                Date currDate=DailyLogHandler.DateFromString(date);
                 dailyLog = dailyLogHandler.getDailyLog(patient, currDate);
                 if(dailyLog == null) {
                     // Show a Toast or handle the validation error as needed
@@ -83,31 +66,10 @@ public class PatientInfoActivity extends AppCompatActivity {
                     return; // Exit the onClick method to prevent further execution
                 }
                 Date date = dailyLog.getDate();
-                moodScore = dailyLog.getMoodScore();
-                sleepHours = dailyLog.getSleepHours();
-                moodNotes = dailyLog.getNotes();
-                symptomList = dailyLog.getSymptoms();
-                medicationList = dailyLog.getMedications();
-                pillsName = medicationList.get(0).getName();
-                pillsAmount = medicationList.get(0).getQuantity();
-                pillsDosage = 5;
-                substanceList = dailyLog.getSubstances();
-                substanceName = substanceList.get(0).getName();
-                subAmount = substanceList.get(0).getQuantity();
-
-
                 Intent currentIntent = new Intent(PatientInfoActivity.this, DailyLogPatientActivity.class);
                 currentIntent.putExtra("date", date);
-                currentIntent.putExtra("email",patient.getEmail());
-                currentIntent.putExtra("moodscore", moodScore);
-                currentIntent.putExtra("sleephour", sleepHours);
-                currentIntent.putExtra("moodnote", moodNotes);
-                currentIntent.putExtra("pillname", pillsName);
-                currentIntent.putExtra("pillamount", pillsAmount);
-                currentIntent.putExtra("pilldosage", pillsDosage);
-                currentIntent.putExtra("substancename", substanceName);
-                currentIntent.putExtra("substanceamount", subAmount);
-                currentIntent.putExtra("doctorEmail",doctorEmail);
+                currentIntent.putExtra("patientEmail",patientEmail);
+                currentIntent.putExtra("doctorEmail", doctorEmail);
                 PatientInfoActivity.this.startActivity(currentIntent);
             }
         });
@@ -127,6 +89,10 @@ public class PatientInfoActivity extends AppCompatActivity {
                 PatientInfoActivity.this.startActivity(saveIntent);
             }
         });
+    }
+    public void setData(int id, String data){
+        TextView field = findViewById(id);
+        field.setText(data);
     }
 }
 

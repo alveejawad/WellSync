@@ -1,22 +1,19 @@
 package com.well_sync.presentation;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.well_sync.R;
-import com.well_sync.objects.Patient;
 import com.well_sync.logic.PatientHandler;
-import com.well_sync.objects.UserCredentials;
+import com.well_sync.objects.Patient;
 
 
 public class UserSettingsActivity extends AppCompatActivity {
-    //private TextView doctor;
-    private Intent intent;
     private String email;
 
     @Override
@@ -28,14 +25,15 @@ public class UserSettingsActivity extends AppCompatActivity {
         Button editButton = findViewById(R.id.Editbutton);
 
         //get email from Sign Up Activity
-        intent = getIntent();
+        //private TextView doctor;
+        Intent intent = getIntent();
         email = intent.getStringExtra("email");
 
         PatientHandler patientHandler = new PatientHandler();
         Patient patient = patientHandler.getDetails(email);
 
         setData(R.id.name, patient.getFirstName()+" "+patient.getLastName());
-        setData(R.id.birthday, patient.getAge()+"");
+        setData(R.id.birthday, patient.getAge()+" ");
         setData(R.id.gender, patient.getSex().name());
         setData(R.id.bloodtype, patient.getBloodType().name());
 
@@ -46,14 +44,11 @@ public class UserSettingsActivity extends AppCompatActivity {
             UserSettingsActivity.this.startActivity(closeIntent);
         });
 
-        editButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Handle close button click
-                Intent editIntent = new Intent(UserSettingsActivity.this, UserDetailsActivity.class);
-                editIntent.putExtra("email",email);
-                UserSettingsActivity.this.startActivity(editIntent);
-            }
+        editButton.setOnClickListener(view -> {
+            // Handle close button click
+            Intent editIntent = new Intent(UserSettingsActivity.this, UserDetailsActivity.class);
+            editIntent.putExtra("email",email);
+            UserSettingsActivity.this.startActivity(editIntent);
         });
 
     }

@@ -1,10 +1,9 @@
 package com.well_sync.objects;
 
-import java.io.Serializable;
 import java.util.Locale;
 import java.util.Objects;
 
-public class Patient implements Serializable {
+public class Patient{
     public enum BloodType {
         TYPE_A,
         TYPE_B,
@@ -95,7 +94,7 @@ public class Patient implements Serializable {
 
     public String getLastName() { return lastName; }
     
-    public String getName() {return firstName + lastName;}
+    public String getName() {return firstName +" "+ lastName;}
 
     public BloodType getBloodType() {
         return bloodType;
