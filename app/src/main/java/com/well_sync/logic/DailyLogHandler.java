@@ -42,7 +42,6 @@ public class DailyLogHandler {
         persistLog.setSymptoms(patient, dailyLog);
     }
 
-
     public DailyLog getDailyLog(Patient patient, Date date) {
         return persistLog.getDailyLog(patient, date);
     }

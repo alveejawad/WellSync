@@ -68,19 +68,21 @@ public class Patient implements Serializable {
     private BloodType bloodType;
     private Sex sex;
     private int age;
+    private String doctorNotes;
 
     public Patient(final String email) {
         this.email = email;
     }
 
     public Patient(final String email, final String firstName, final String lastName,
-                   final String bloodType, final String sex, final int age) {
+                   final String bloodType, final String sex, final int age, final String doctorNotes) {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
         this.bloodType = BloodType.fromString(bloodType);
         this.sex = Sex.fromString(sex);
         this.age = age;
+        this.dosctorNotes = doctorNotes;
     }
 
     public String getEmail() {
@@ -107,6 +109,10 @@ public class Patient implements Serializable {
         return age;
     }
 
+    public String getDoctorNotes(){
+        return this.doctorNotes;
+    }
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -124,6 +130,10 @@ public class Patient implements Serializable {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public void setDoctorNotes(String doctorNotes) {
+        this.doctorNotes = doctorNotes;
     }
 
     @Override
