@@ -14,4 +14,6 @@ public interface IDailyLogPersistence {
     DailyLog getDailyLog(Patient patient, Date date);
 
     List<DailyLog> getAllDailyLogs(Patient patient);
+
+    List<Date> getAllDates(Patient patient);
 }
