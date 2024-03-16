@@ -31,9 +31,9 @@ public class DailyLogPersistenceStub implements IDailyLogPersistence {
         patient1Day2.addSymptom("Fatigue", 4);
         patient2Day1.addSymptom("Sore throat", 8);
 
-        patient1Day1.addMedication("Tylenol", 2);
-        patient1Day2.addMedication("Melatonin", 1);
-        patient2Day1.addMedication("Cough syrup", 3);
+        patient1Day1.addMedication("Tylenol", 2, 3);
+        patient1Day2.addMedication("Melatonin", 1, 1);
+        patient2Day1.addMedication("Cough syrup", 3, 5);
 
         patient1Day1.addSubstance("Alcohol", 2);
         patient1Day2.addSubstance("Caffiene", 2);
