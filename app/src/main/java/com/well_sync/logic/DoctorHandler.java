@@ -5,7 +5,7 @@ import com.well_sync.logic.exceptions.InvalidDoctorException;
 import com.well_sync.objects.Doctor;
 import com.well_sync.objects.Patient;
 import com.well_sync.objects.DoctorValidator;
-import com.well_sync.objects.UserCredentials;
+import com.well_sync.objects.Patient;
 import com.well_sync.persistence.IUserPersistence;
 
 import javax.print.Doc;
@@ -43,5 +43,9 @@ public class DoctorHandler {
         if (d == null || !d.equals(inputDetails)) {
             persistUsers.setDoctor(inputDetails);
         }
+    }
+
+    public void addPatient(Patient patient, Doctor doctor)throws InvalidDoctorException {
+        persistUsers.setPatientToDoctor(patient,doctor);
     }
 }
