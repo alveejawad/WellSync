@@ -75,4 +75,18 @@ public class DailyLogPersistenceStub implements IDailyLogPersistence {
     public List<DailyLog> getAllDailyLogs(Patient patient) {
         return dailyLogList.getOrDefault(patient, new ArrayList<>());
     }
+
+    @Override
+    public List<Date> getAllDates(Patient patient) {
+        List<DailyLog> patientDailyLogs = dailyLogList.get(patient);
+        List<Date> allDates = new ArrayList<>();
+
+        if (patientDailyLogs != null) {
+            for (DailyLog dailyLog : patientDailyLogs) {
+                allDates.add(dailyLog.getDate());
+            }
+        }
+
+        return allDates;
+    }
 }

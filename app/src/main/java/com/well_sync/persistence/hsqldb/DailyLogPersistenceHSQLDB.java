@@ -186,6 +186,27 @@ public class DailyLogPersistenceHSQLDB implements IDailyLogPersistence {
         return dailyLogs;
     }
 
+    @Override
+    public List<Date> getAllDates(Patient patient) {
+        List<Date> allDates = new ArrayList<>();
+        try (Connection connection = connect()) {
+            PreparedStatement statement = connection.prepareStatement(
+                    "SELECT DISTINCT log_date FROM DAILY_LOG WHERE patient_email = ?"
+            );
+            statement.setString(1, patient.getEmail());
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                Date date = resultSet.getDate("log_date");
+                if (date != null) {
+                    allDates.add(date);
+                }
+            }
+        } catch (final SQLException e) {
+            e.printStackTrace();
+        }
+        return allDates;
+    }
+
     private DailyLog getDailyLogFromResultSet(Connection connection, ResultSet resultSet, String email) throws SQLException {
         int moodScore = resultSet.getInt("mood_score");
         int sleepHours = resultSet.getInt("sleep_hours");
