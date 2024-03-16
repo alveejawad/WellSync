@@ -118,13 +118,14 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
     @Override
     public void setPatient(Patient patient) {
         try (Connection connection = connect()) {
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO PATIENTS VALUES (?, ?, ?, ?, ?, ?)");
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO PATIENTS VALUES (?, ?, ?, ?, ?, ?, ?)");
             statement.setString(1, patient.getEmail());
             statement.setString(2, patient.getFirstName());
             statement.setString(3, patient.getLastName());
             statement.setString(4, patient.getBloodType().toString());
             statement.setString(5, patient.getSex().toString());
             statement.setInt(6, patient.getAge());
+            statement.setString(7, patient.getDoctorNotes().toString());
             statement.executeUpdate();
         } catch (final SQLException e) {
             e.printStackTrace();
@@ -210,8 +211,9 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
         String bloodType = resultSet.getString("bloodType");
         String sex = resultSet.getString("sex");
         int age = resultSet.getInt("age");
+        String doctorNotes = resultSet.getString("doctorNotes");
 
-        return new Patient(email, firstName, lastName, bloodType, sex, age);
+        return new Patient(email, firstName, lastName, bloodType, sex, age, doctorNotes);
     }
 
     private Doctor createDoctorFromResultSet(ResultSet resultSet) throws SQLException {
