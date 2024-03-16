@@ -51,7 +51,7 @@
     <EditText
         android:id="@+id/num_of_subs"
         android:layout_width="261dp"
-        android:layout_height="39dp"
+        android:layout_height="48dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="28dp"
         android:background="@drawable/edittext_bg"
@@ -70,7 +70,7 @@
     <EditText
         android:id="@+id/name_of_subs"
         android:layout_width="261dp"
-        android:layout_height="42dp"
+        android:layout_height="48dp"
         android:layout_marginTop="140dp"
         android:background="@drawable/edittext_bg"
         android:ems="10"
