@@ -29,8 +29,8 @@ public class UserPersistenceStub implements IUserPersistence {
         userCredentialsList.add(userCredentials4);
 
         // Sample data for PATIENTS table
-        Patient patient1 = new Patient("patient1@example.com", "John", "Doe", "TYPE_A", "MALE", 30);
-        Patient patient2 = new Patient("patient2@example.com", "Jane", "Smith", "TYPE_O", "FEMALE", 25);
+        Patient patient1 = new Patient("patient1@example.com", "John", "Doe", "TYPE_A", "MALE", 30, 'Sleep more');
+        Patient patient2 = new Patient("patient2@example.com", "Jane", "Smith", "TYPE_O", "FEMALE", 25, "Stop Studying");
         patientList.add(patient1);
         patientList.add(patient2);
 
