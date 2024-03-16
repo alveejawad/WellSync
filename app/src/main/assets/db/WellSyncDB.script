@@ -1,6 +1,6 @@
 CREATE SCHEMA PUBLIC AUTHORIZATION DBA
 CREATE MEMORY TABLE PUBLIC.USER_CREDENTIALS ( email VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL, role VARCHAR(16) NOT NULL, PRIMARY KEY (email) )
-CREATE MEMORY TABLE PUBLIC.PATIENTS ( email VARCHAR(255) NOT NULL, firstName VARCHAR(255), lastName VARCHAR(255), bloodType VARCHAR(20), sex VARCHAR(20), age INTEGER, PRIMARY KEY (email) )
+CREATE MEMORY TABLE PUBLIC.PATIENTS ( email VARCHAR(255) NOT NULL, firstName VARCHAR(255), lastName VARCHAR(255), bloodType VARCHAR(20), sex VARCHAR(20), age INTEGER , doctorNotes VARCHAR(7999), PRIMARY KEY (email) )
 CREATE MEMORY TABLE PUBLIC.DOCTORS ( email VARCHAR(255) NOT NULL, firstName VARCHAR(255), lastName VARCHAR(255), PRIMARY KEY (email) )
 CREATE MEMORY TABLE PUBLIC.ASSIGNED_PATIENTS ( doctor_email VARCHAR(255) NOT NULL, patient_email VARCHAR(255) NOT NULL, FOREIGN KEY (doctor_email) REFERENCES DOCTORS(email), FOREIGN KEY (patient_email) REFERENCES PATIENTS(email), PRIMARY KEY (doctor_email, patient_email) )
 CREATE MEMORY TABLE PUBLIC.DAILY_LOG ( patient_email VARCHAR(255) NOT NULL, log_date DATE NOT NULL, mood_score INTEGER, sleep_hours INTEGER, notes VARCHAR(7999), PRIMARY KEY (patient_email, log_date), FOREIGN KEY (patient_email) REFERENCES PATIENTS(email) )
@@ -19,8 +19,8 @@ INSERT INTO USER_CREDENTIALS VALUES ('patient1@example.com', 'password1', 'PATIE
 INSERT INTO USER_CREDENTIALS VALUES ('patient2@example.com', 'password2', 'PATIENT')
 INSERT INTO USER_CREDENTIALS VALUES ('doctor1@example.com', 'password1', 'DOCTOR')
 INSERT INTO USER_CREDENTIALS VALUES ('doctor2@example.com', 'password2', 'DOCTOR')
-INSERT INTO PATIENTS VALUES ('patient1@example.com', 'John', 'Doe', 'TYPE_A', 'MALE', 30)
-INSERT INTO PATIENTS VALUES ('patient2@example.com', 'Jane', 'Smith', 'TYPE_O', 'FEMALE', 25)
+INSERT INTO PATIENTS VALUES ('patient1@example.com', 'John', 'Doe', 'TYPE_A', 'MALE', 30, 'Sleep more')
+INSERT INTO PATIENTS VALUES ('patient2@example.com', 'Jane', 'Smith', 'TYPE_O', 'FEMALE', 25, 'Stop Studying')
 INSERT INTO DOCTORS VALUES ('doctor1@example.com', 'Dr. Gabriel', 'Young')
 INSERT INTO DOCTORS VALUES ('doctor2@example.com', 'Dr. Alvee', 'Jawad')
 INSERT INTO ASSIGNED_PATIENTS VALUES ('doctor1@example.com', 'patient1@example.com')
