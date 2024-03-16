@@ -57,7 +57,7 @@ public class DailyLogPersistenceHSQLDB implements IDailyLogPersistence {
             // Insert Medications into MEDICATIONS table
             for (Medication medication : dailyLog.getMedications()) {
                 PreparedStatement medicationStatement = connection.prepareStatement(
-                        "INSERT INTO MEDICATIONS (patient_email, log_date, medication, quantity) VALUES (?, ?, ?, ?)"
+                        "INSERT INTO MEDICATIONS (patient_email, log_date, medication, quantity, dosage) VALUES (?, ?, ?, ?, ?)"
                 );
                 medicationStatement.setString(1, patient.getEmail());
                 medicationStatement.setDate(2, new java.sql.Date(dailyLog.getDate().getTime()));
@@ -237,7 +237,8 @@ public class DailyLogPersistenceHSQLDB implements IDailyLogPersistence {
         while (medicationResultSet.next()) {
             String medicationName = medicationResultSet.getString("medication");
             int medicationQuantity = medicationResultSet.getInt("quantity");
-            dailyLog.addMedication(medicationName, medicationQuantity);
+            int medicationDosage =medicationResultSet.getInt("dosage");
+            dailyLog.addMedication(medicationName, medicationQuantity,medicationDosage);
         }
 
         // Fetch Substances

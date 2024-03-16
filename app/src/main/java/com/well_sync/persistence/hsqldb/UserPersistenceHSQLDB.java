@@ -216,6 +216,16 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
         }
         return null;
     }
+    public void setPatientToDoctor(Patient patient,Doctor doctor){
+        try (Connection connection = connect()) {
+            PreparedStatement assignStatement = connection.prepareStatement("INSERT INTO ASSIGNED_PATIENTS VALUES (?, ?)");
+            assignStatement.setString(1, doctor.getEmail());
+            assignStatement.setString(2, patient.getEmail());
+            assignStatement.executeUpdate();
+        } catch (final SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     public List<Patient> getPatientsList(){
         return this.patientsList;
@@ -237,7 +247,6 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
         String email = resultSet.getString("email");
         String firstName = resultSet.getString("firstName");
         String lastName = resultSet.getString("lastName");
-
         Doctor doctor = new Doctor(email, firstName, lastName);
         loadDoctorPatients(doctor);
 

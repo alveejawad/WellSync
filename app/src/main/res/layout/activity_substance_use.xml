@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#3EC2FA">
+    android:background="#59C5D0">
 
     <ImageView
         android:id="@+id/exit_1"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="31dp"
+        android:layout_height="32dp"
         android:layout_marginTop="16dp"
         app:layout_constraintBottom_toTopOf="@+id/textView6"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,13 +21,14 @@
 
     <TextView
         android:id="@+id/textView5"
-        android:layout_width="276dp"
-        android:layout_height="74dp"
+        android:layout_width="355dp"
+        android:layout_height="88dp"
         android:layout_marginTop="88dp"
         android:gravity="center"
-        android:text="SUBSTANCE USE"
+        android:text="Substance Use Tracker"
         android:textSize="35dp"
         android:textStyle="bold"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.471"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,37 +36,49 @@
 
     <TextView
         android:id="@+id/textView6"
-        android:layout_width="155dp"
-        android:layout_height="60dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="30dp"
         android:layout_marginTop="32dp"
         android:gravity="center"
-        android:text="Add Substance"
-        android:textSize="20dp"
-        android:textStyle="bold"
+        android:text="Add any substance you used along with the amount in mg/ml."
+        android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="150dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="32dp"
-        android:text="Name:"
-        android:textSize="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+    <EditText
+        android:id="@+id/num_of_subs"
+        android:layout_width="261dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="28dp"
+        android:background="@drawable/edittext_bg"
+        android:ems="10"
+        android:hint="mg or ml"
+        android:inputType="number"
+        android:padding="10dp"
+        android:textSize="15sp"
+        android:textStyle="italic"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/textView8"
+        app:layout_constraintTop_toBottomOf="@+id/name_of_subs" />
 
     <EditText
         android:id="@+id/name_of_subs"
-        android:layout_width="150dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="124dp"
+        android:layout_width="261dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="140dp"
+        android:background="@drawable/edittext_bg"
         android:ems="10"
-        android:inputType="text"
         android:hint="E.g:Alcohol, Nicotine"
+        android:inputType="text"
+        android:padding="10dp"
+        android:textSize="15sp"
+        android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/textView7"
@@ -73,34 +86,36 @@
 
     <TextView
         android:id="@+id/textView8"
-        android:layout_width="150dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="135dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="110dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center_horizontal"
         android:text="Amount:"
+        android:textColor="@color/black"
         android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
-    <EditText
-        android:id="@+id/num_of_subs"
-        android:layout_width="150dp"
-        android:layout_height="40dp"
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="134dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="110dp"
         android:layout_marginTop="24dp"
-        android:layout_marginEnd="28dp"
-        android:ems="10"
-        android:inputType="number"
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/textView8"
-        app:layout_constraintTop_toBottomOf="@+id/name_of_subs" />
+        android:gravity="center_horizontal"
+        android:text="Name:"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <Button
         android:id="@+id/save_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="113dp"
+        android:layout_height="49dp"
         android:layout_marginBottom="116dp"
+        android:background="@drawable/edittext_bg"
         android:text="Save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

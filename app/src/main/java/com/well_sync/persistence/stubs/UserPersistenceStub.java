@@ -29,7 +29,7 @@ public class UserPersistenceStub implements IUserPersistence {
         userCredentialsList.add(userCredentials4);
 
         // Sample data for PATIENTS table
-        Patient patient1 = new Patient("patient1@example.com", "John", "Doe", "TYPE_A", "MALE", 30, 'Sleep more');
+        Patient patient1 = new Patient("patient1@example.com", "John", "Doe", "TYPE_A", "MALE", 30, "Sleep more");
         Patient patient2 = new Patient("patient2@example.com", "Jane", "Smith", "TYPE_O", "FEMALE", 25, "Stop Studying");
         patientList.add(patient1);
         patientList.add(patient2);
@@ -95,6 +95,7 @@ public class UserPersistenceStub implements IUserPersistence {
         }
         return null;
     }
+    public void setPatientToDoctor(Patient patient,Doctor doctor){}
 
     @Override
     public List<Patient> getPatientsList() {
@@ -144,14 +145,8 @@ public class UserPersistenceStub implements IUserPersistence {
                 break;
             }
         }
-
         if (doctorToRemoveFrom != null) {
-            boolean removed = doctorToRemoveFrom.removePatient(patient);
-            if (removed) {
-                System.out.println("Patient removed successfully from the doctor's list.");
-            } else {
-                System.out.println("Patient not found in the doctor's list.");
-            }
+            doctorToRemoveFrom.removePatient(patient);
         } else {
             System.out.println("Doctor not found.");
         }

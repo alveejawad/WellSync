@@ -24,8 +24,10 @@ public interface IUserPersistence {
 
     Doctor getDoctor(String email);
 
-    voic removePatient(Doctor doctor, Patient patient);
+    void removePatient(Doctor doctor, Patient patient);
 
     List<Patient> getPatientsList();
+
+    void setPatientToDoctor(Patient patient,Doctor doctor);
 
 }
