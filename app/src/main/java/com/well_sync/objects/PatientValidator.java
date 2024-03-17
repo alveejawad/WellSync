@@ -23,6 +23,7 @@ public class PatientValidator {
         validateAge(patient.getAge(), patient.MAX_AGE);
         validateNonNullObject(patient.getBloodType(), "blood type");
         validateNonNullObject(patient.getSex(), "sex");
+        validateDoctorNotes(patient.getDoctorNotes(), patient.MAX_NOTES_LENGTH);
     }
 
     /**
@@ -38,10 +39,9 @@ public class PatientValidator {
         if (age < 0 || age > maxAge)
             throw new InvalidPatientException("Invalid age specified.");
     }
-    public static void validateDoctorNotes (String notes) throws InvalidNotesException {
-
-            if (notes.length() > 1000) {
-                throw new InvalidNotesException("Exceeded word limit.");
+    public static void validateDoctorNotes(String notes, int maxLen) throws InvalidNotesException {
+        if (notes == null || notes.length() > maxLen) {
+            throw new InvalidNotesException("Exceeded word limit.");
         }
 
     }
