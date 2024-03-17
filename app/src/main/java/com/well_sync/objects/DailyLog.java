@@ -3,6 +3,7 @@ package com.well_sync.objects;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Represents observations of patient health for one specific date.
@@ -126,6 +127,20 @@ public class DailyLog {
 
     public List<Substance> getSubstances() {
         return this.substanceList;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DailyLog dailyLog = (DailyLog) o;
+        return moodScore == dailyLog.moodScore
+                && sleepHours == dailyLog.sleepHours
+                && Objects.equals(date, dailyLog.date)
+                && Objects.equals(notes, dailyLog.notes)
+                && Objects.equals(symptomList, dailyLog.symptomList)
+                && Objects.equals(medicationList, dailyLog.medicationList)
+                && Objects.equals(substanceList, dailyLog.substanceList);
     }
 
 }

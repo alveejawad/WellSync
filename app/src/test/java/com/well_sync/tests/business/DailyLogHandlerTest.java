@@ -12,8 +12,10 @@ import com.well_sync.objects.Patient;
 import com.well_sync.persistence.stubs.DailyLogPersistenceStub;
 import com.well_sync.persistence.stubs.UserPersistenceStub;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class DailyLogHandlerTest {
 
@@ -82,5 +84,29 @@ public class DailyLogHandlerTest {
         } catch (RuntimeException e) {
             // pass!
         }
+    }
+
+    @Test
+    public void testGetAllDates() {
+        Patient p1 = patientHandler.getDetails("patient1@example.com");
+        List<Date> datesActual = dailyLogHandler.getAllDates(p1);
+        List<Date> datesExpected = new ArrayList<Date>() {{
+            add(new Date(123, Calendar.JANUARY, 1));
+            add(new Date(123, Calendar.JANUARY, 2));
+        }};
+
+        assertEquals(datesExpected, datesActual);
+
+        Date newDate = new Date(123, Calendar.JANUARY, 17);
+        DailyLog newLog = new DailyLog(newDate, 2, 6, "meh");
+        try {
+            dailyLogHandler.setDailyLog(p1, newLog);
+        } catch (InvalidDailyLogException e) {
+            fail(e.getMessage());
+        }
+
+        datesActual = dailyLogHandler.getAllDates(p1);
+        datesExpected.add(newDate);
+        assertEquals(datesExpected, datesActual);
     }
 }
