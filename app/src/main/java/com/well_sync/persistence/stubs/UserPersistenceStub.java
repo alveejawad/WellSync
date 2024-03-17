@@ -137,7 +137,7 @@ public class UserPersistenceStub implements IUserPersistence {
     }
 
     @Override
-    public void editDetails(Patient patient) {
+    public void editPatientDetails(Patient patient) {
         for (int i = 0; i < patientList.size(); i++) {
             if (patientList.get(i).getEmail().equals(patient.getEmail())) {
                 Patient updatedPatient = patientList.get(i);

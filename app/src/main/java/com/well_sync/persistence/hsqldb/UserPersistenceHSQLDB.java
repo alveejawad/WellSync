@@ -133,7 +133,7 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
     }
 
     @Override
-    public void editDetails(Patient patient) {
+    public void editPatientDetails(Patient patient) {
         try (Connection connection = connect()) {
             PreparedStatement statement = connection.prepareStatement("UPDATE PATIENTS " +
                     "SET firstName = ?, lastName = ?, bloodType = ?, sex = ?, age = ?, doctorNotes = ? " +

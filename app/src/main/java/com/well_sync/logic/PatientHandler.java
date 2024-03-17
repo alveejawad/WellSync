@@ -25,7 +25,7 @@ public class PatientHandler {
 	}
 
 	//editDetails function will get the userInput and set the details into the persistence layer
-	public void editDetails(Patient inputDetails) throws InvalidPatientException {
+	public void editPatientDetails(Patient inputDetails) throws InvalidPatientException {
 		PatientValidator.validatePatient(inputDetails);
 
 		//user info
@@ -35,7 +35,7 @@ public class PatientHandler {
 
 		//compare p wih inputDetails
 		if (p == null || !p.equals(inputDetails)) {
-			persistUsers.setPatient(inputDetails);
+			persistUsers.editPatientDetails(inputDetails);
 		}
 	}
 
