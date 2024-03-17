@@ -1,6 +1,7 @@
 package com.well_sync.objects;
 
 import com.well_sync.logic.exceptions.InvalidCredentialsException;
+import com.well_sync.logic.exceptions.InvalidNotesException;
 import com.well_sync.logic.exceptions.InvalidPatientException;
 
 import java.util.regex.Pattern;
@@ -37,7 +38,13 @@ public class PatientValidator {
         if (age < 0 || age > maxAge)
             throw new InvalidPatientException("Invalid age specified.");
     }
+    public static void validateDoctorNotes (String notes) throws InvalidNotesException {
 
+            if (notes.length() > 1000) {
+                throw new InvalidNotesException("Exceeded word limit.");
+        }
+
+    }
     // Helper method to validate object references that shouldn't be null, e.g. strings and enums.
     // The `subject` field is just to format the exception message with the correct field.
     public static void validateNonNullObject(Object object, String subject) throws InvalidPatientException {
