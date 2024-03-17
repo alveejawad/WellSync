@@ -132,6 +132,8 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
         }
     }
 
+
+
     @Override
     public Patient getPatient(String email) {
         try (Connection connection = connect()) {
