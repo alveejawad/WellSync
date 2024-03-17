@@ -137,6 +137,25 @@ public class UserPersistenceStub implements IUserPersistence {
     }
 
     @Override
+    public void editDetails(Patient patient) {
+        for (int i = 0; i < patientList.size(); i++) {
+            if (patientList.get(i).getEmail().equals(patient.getEmail())) {
+                Patient updatedPatient = patientList.get(i);
+                updatedPatient.setFirstName(patient.getFirstName());
+                updatedPatient.setLastName(patient.getLastName());
+                updatedPatient.setBloodType(patient.getBloodType());
+                updatedPatient.setSex(patient.getSex());
+                updatedPatient.setAge(patient.getAge());
+                updatedPatient.setDoctorNotes(patient.getDoctorNotes());
+
+                System.out.println("Patient details updated successfully.");
+                return;
+            }
+        }
+        System.out.println("Patient not found, details not updated.");
+    }
+
+    @Override
     public void removePatient(Doctor doctor, Patient patient) {
         Doctor doctorToRemoveFrom = null;
         for (Doctor d : doctorList) {
