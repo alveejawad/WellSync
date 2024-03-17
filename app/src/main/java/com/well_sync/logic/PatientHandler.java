@@ -24,9 +24,12 @@ public class PatientHandler {
 		return persistUsers.getPatient(email);
 	}
 
+	/**
+	 * Edit existing patient details.
+	 */
 	public void editPatientDetails(Patient patient) throws InvalidPatientException {
 		PatientValidator.validatePatient(patient);
-		String email = inputDetails.getEmail();
+		String email = patient.getEmail();
 		Patient existingPatient = persistUsers.getPatient(email);
 
 		if (existingPatient != null) {
@@ -36,12 +39,15 @@ public class PatientHandler {
 		}
 	}
 
+	/**
+	 * Register new patient details in the database.
+	 */
 	public void addPatient(Patient patient) throws InvalidPatientException {
 		PatientValidator.validatePatient(patient);
 		Patient existingPatient = persistUsers.getPatient(patient.getEmail());
 
 		if (existingPatient == null) {
-			persistUsers.setPatient(patient);
+			persistUsers.createPatient(patient);
 			System.out.println("Patient added successfully.");
 		} else {
 			throw new InvalidPatientException("Patient with email " + patient.getEmail() + " already exists.");

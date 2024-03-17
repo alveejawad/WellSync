@@ -30,18 +30,19 @@ public class PatientHandlerIT {
     }
 
     @Test
-    public void setAndGetPatient() {
+    public void addAndGetPatient() {
         Patient p1 = new Patient(
                 "integration@test.com",
                 "Integration",
                 "Test",
                 "A+",
                 "decline to specify",
-                22
+                22,
+                "doctor approves of this test"
         );
 
         try {
-            handler.editDetails(p1);
+            handler.addPatient(p1);
         } catch (InvalidPatientException e) {
             e.printStackTrace();
         }
@@ -49,6 +50,24 @@ public class PatientHandlerIT {
         Patient p2 = handler.getDetails("integration@test.com");
 
         assertEquals(p1, p2);
+    }
+
+    @Test
+    public void editAndGetPatient() {
+        String email = "patient1@example.com";
+        Patient p1 = handler.getDetails(email);
+        Patient p2 = new Patient(email, "New", "Name", "AB-", "M", 44, "doctor approves of this test");
+
+        try {
+            handler.editPatientDetails(p2);
+        } catch (InvalidPatientException e) {
+            fail(e.getMessage());
+        }
+
+        Patient p3 = handler.getDetails(email);
+
+        assertEquals(p2, p3);
+        assertNotEquals(p1, p3);
     }
 
     @After

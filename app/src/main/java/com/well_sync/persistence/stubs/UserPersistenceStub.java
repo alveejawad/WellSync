@@ -62,7 +62,7 @@ public class UserPersistenceStub implements IUserPersistence {
     }
 
     @Override
-    public void setDoctor(Doctor doctor) {
+    public void createDoctor(Doctor doctor) {
         boolean doctorExists = false;
         for (int i = 0; i < doctorList.size(); i++) {
             if (doctorList.get(i).getEmail().equals(doctor.getEmail())) {
@@ -77,16 +77,6 @@ public class UserPersistenceStub implements IUserPersistence {
     }
 
     @Override
-    public Doctor getDoctor(UserCredentials userCredentials) {
-        for (Doctor doctor : doctorList) {
-            if (doctor.getEmail().equals(userCredentials.getEmail())) {
-                return doctor;
-            }
-        }
-        return null;
-    }
-
-    @Override
     public Doctor getDoctor(String email) {
         for (Doctor doctor : doctorList) {
             if (doctor.getEmail().equals(email)) {
@@ -95,10 +85,10 @@ public class UserPersistenceStub implements IUserPersistence {
         }
         return null;
     }
-    public void setPatientToDoctor(Patient patient,Doctor doctor){}
+    public void assignPatientToDoctor(Patient patient, Doctor doctor){}
 
     @Override
-    public List<Patient> getPatientsList() {
+    public List<Patient> getAllPatientsList() {
         return this.patientList;
     }
 
@@ -108,17 +98,7 @@ public class UserPersistenceStub implements IUserPersistence {
     }
 
     @Override
-    public Patient getPatient(UserCredentials userCredentials) {
-        for (int i = 0; i < patientList.size(); i ++) {
-            if (patientList.get(i).getEmail().equals(userCredentials.getEmail())) {
-                return patientList.get(i);
-            }
-        }
-        return null;
-    }
-
-    @Override
-    public void setPatient(Patient patient) {
+    public void createPatient(Patient patient) {
         boolean patientExists = false;
 
         // Check if a patient with the same email already exists
@@ -156,7 +136,7 @@ public class UserPersistenceStub implements IUserPersistence {
     }
 
     @Override
-    public void removePatient(Doctor doctor, Patient patient) {
+    public void removePatientFromDoctor(Doctor doctor, Patient patient) {
         Doctor doctorToRemoveFrom = null;
         for (Doctor d : doctorList) {
             if (d.getEmail().equals(doctor.getEmail())) {

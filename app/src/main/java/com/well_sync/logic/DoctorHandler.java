@@ -24,7 +24,7 @@ public class DoctorHandler {
     }
 
     public void removePatient(Doctor doctor, Patient patient) {
-        persistUsers.removePatient(doctor, patient);
+        persistUsers.removePatientFromDoctor(doctor, patient);
     }
 
     //editDetails function will get the userInput and set the details into the persistence layer
@@ -38,10 +38,10 @@ public class DoctorHandler {
 
         //compare p wih inputDetails
         if (d == null || !d.equals(inputDetails)) {
-            persistUsers.setDoctor(inputDetails);
+            persistUsers.createDoctor(inputDetails);
         }
     }
     public void addPatient(Patient patient, Doctor doctor)throws InvalidDoctorException {
-        persistUsers.setPatientToDoctor(patient,doctor);
+        persistUsers.assignPatientToDoctor(patient,doctor);
     }
 }
