@@ -132,6 +132,30 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
         }
     }
 
+    @Override
+    public void editDetails(Patient patient) {
+        try (Connection connection = connect()) {
+            PreparedStatement statement = connection.prepareStatement("UPDATE PATIENTS " +
+                    "SET firstName = ?, lastName = ?, bloodType = ?, sex = ?, age = ?, doctorNotes = ? " +
+                    "WHERE email = ?");
+            statement.setString(1, patient.getFirstName());
+            statement.setString(2, patient.getLastName());
+            statement.setString(3, patient.getBloodType().toString());
+            statement.setString(4, patient.getSex().toString());
+            statement.setInt(5, patient.getAge());
+            statement.setString(6, patient.getDoctorNotes());
+            statement.setString(7, patient.getEmail());
+
+            int rowsUpdated = statement.executeUpdate();
+            if (rowsUpdated > 0) {
+                System.out.println("Patient details updated successfully.");
+            } else {
+                System.out.println("Patient not found, details not updated.");
+            }
+        } catch (final SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 
     @Override
