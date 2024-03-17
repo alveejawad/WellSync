@@ -16,7 +16,7 @@ public class PatientHandler {
 		persistUsers = Services.getUserPersistence(true);
 	}
 
-	public PatientHandler(IUserPersistence persistence){
+	public PatientHandler(IUserPersistence persistence) {
 		persistUsers = persistence;
 	}
 
@@ -24,21 +24,27 @@ public class PatientHandler {
 		return persistUsers.getPatient(email);
 	}
 
-	//editDetails function will get the userInput and set the details into the persistence layer
-	public void editDetails(Patient inputDetails) throws InvalidPatientException {
-		PatientValidator.validatePatient(inputDetails);
-
-		//user info
+	public void editPatientDetails(Patient patient) throws InvalidPatientException {
+		PatientValidator.validatePatient(patient);
 		String email = inputDetails.getEmail();
-		//got from the database
-		Patient p = persistUsers.getPatient(email);
+		Patient existingPatient = persistUsers.getPatient(email);
 
-		//compare p wih inputDetails
-		if (p == null || !p.equals(inputDetails)) {
-			persistUsers.setPatient(inputDetails);
+		if (existingPatient != null) {
+			persistUsers.editPatientDetails(patient);
+		} else {
+			throw new InvalidPatientException("Patient with email " + patient.getEmail() + " doesn't exists.");
 		}
 	}
 
+	public void addPatient(Patient patient) throws InvalidPatientException {
+		PatientValidator.validatePatient(patient);
+		Patient existingPatient = persistUsers.getPatient(patient.getEmail());
+
+		if (existingPatient == null) {
+			persistUsers.setPatient(patient);
+			System.out.println("Patient added successfully.");
+		} else {
+			throw new InvalidPatientException("Patient with email " + patient.getEmail() + " already exists.");
+		}
+	}
 }
-
-

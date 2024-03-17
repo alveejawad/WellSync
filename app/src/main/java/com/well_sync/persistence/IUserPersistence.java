@@ -20,6 +20,8 @@ public interface IUserPersistence {
 
     void setDoctor(Doctor doctor);
 
+    void editPatientDetails(Patient patient);
+
     Doctor getDoctor(UserCredentials userCredentials);
 
     Doctor getDoctor(String email);
