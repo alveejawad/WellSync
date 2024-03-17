@@ -47,32 +47,37 @@ public class DailyLogPatientActivity extends AppCompatActivity {
         showValue(R.id.mood,dailyLog.getMoodScore());
         showValue(R.id.sleep,dailyLog.getSleepHours());
         showText(R.id.Notes,dailyLog.getNotes());
-        //SYMPTOMS LOG
-        showValue(R.id.Sadness, symptomList.get(0).getIntensity());
-        showValue(R.id.Helplessness, symptomList.get(1).getIntensity());
-        showValue(R.id.LowSelfEsteem, symptomList.get(2).getIntensity());
-        showValue(R.id.Isolation, symptomList.get(3).getIntensity());
-        showValue(R.id.LowMotivation, symptomList.get(4).getIntensity());
-        showValue(R.id.Impulsivity, symptomList.get(5).getIntensity());
-        showValue(R.id.Concentration, symptomList.get(6).getIntensity());
-        showValue(R.id.Aggressiveness, symptomList.get(7).getIntensity());
-        showValue(R.id.Inability, symptomList.get(8).getIntensity());
-        showValue(R.id.RacingThoughts, symptomList.get(9).getIntensity());
-        showValue(R.id.Anxiety, symptomList.get(10).getIntensity());
-        showValue(R.id.sleep_problems, symptomList.get(11).getIntensity());
-        showValue(R.id.Headache, symptomList.get(12).getIntensity());
-        showValue(R.id.Pain, symptomList.get(13).getIntensity());
-        showValue(R.id.Appetite, symptomList.get(14).getIntensity());
-        showValue(R.id.Guilt, symptomList.get(15).getIntensity());
-        showValue(R.id.Suicide, symptomList.get(16).getIntensity());
+        if(symptomList.size()>0) {
+            //SYMPTOMS LOG
+            showValue(R.id.Sadness, symptomList.get(0).getIntensity());
+            showValue(R.id.Helplessness, symptomList.get(1).getIntensity());
+            showValue(R.id.LowSelfEsteem, symptomList.get(2).getIntensity());
+            showValue(R.id.Isolation, symptomList.get(3).getIntensity());
+            showValue(R.id.LowMotivation, symptomList.get(4).getIntensity());
+            showValue(R.id.Impulsivity, symptomList.get(5).getIntensity());
+            showValue(R.id.Concentration, symptomList.get(6).getIntensity());
+            showValue(R.id.Aggressiveness, symptomList.get(7).getIntensity());
+            showValue(R.id.Inability, symptomList.get(8).getIntensity());
+            showValue(R.id.RacingThoughts, symptomList.get(9).getIntensity());
+            showValue(R.id.Anxiety, symptomList.get(10).getIntensity());
+            showValue(R.id.sleep_problems, symptomList.get(11).getIntensity());
+            showValue(R.id.Headache, symptomList.get(12).getIntensity());
+            showValue(R.id.Pain, symptomList.get(13).getIntensity());
+            showValue(R.id.Appetite, symptomList.get(14).getIntensity());
+            showValue(R.id.Guilt, symptomList.get(15).getIntensity());
+            showValue(R.id.Suicide, symptomList.get(16).getIntensity());
+        }
         //MEDICATION LOG
-        showText(R.id.PillsName,medicationList.get(0).getName());
-        showValue(R.id.PillsAmount,medicationList.get(0).getQuantity());
-        showValue(R.id.PillsDosage,medicationList.get(0).getQuantity());
-        //SUBSTANCES LOG
-        showText(R.id.SubsName,substanceList.get(0).getName());
-        showValue(R.id.amount,substanceList.get(0).getQuantity());
-
+        if(medicationList.size()>0) {
+            showText(R.id.PillsName, medicationList.get(0).getName());
+            showValue(R.id.PillsAmount, medicationList.get(0).getQuantity());
+            showValue(R.id.PillsDosage, medicationList.get(0).getQuantity());
+        }
+            //SUBSTANCES LOG
+        if(substanceList.size()>0) {
+            showText(R.id.SubsName, substanceList.get(0).getName());
+            showValue(R.id.amount, substanceList.get(0).getQuantity());
+        }
         //BUTTON
         Button backButton = findViewById(R.id.backbutton);
 
