@@ -1,7 +1,7 @@
 package com.well_sync.logic.exceptions;
 
-public class InvalidNotesException extends InvalidDoctorException{
+public class InvalidNotesException extends InvalidPatientException {
     public InvalidNotesException (String error) {
-        super("Invalid Doctor details:\n" + error);
+        super("Invalid doctor notes in Patient object:\n" + error);
     }
 }

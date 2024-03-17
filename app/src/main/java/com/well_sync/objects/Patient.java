@@ -57,9 +57,10 @@ public class Patient{
         }
     }
 
-    // defined here in case future extensions of Patient want to change this value,
+    // defined here in case future extensions of Patient want to change these values,
     // and the validator will still work
     public final int MAX_AGE = 122;
+    public final int MAX_NOTES_LENGTH = 1000;
 
     private final String email;
     private String firstName;
@@ -150,7 +151,8 @@ public class Patient{
                 && Objects.equals(firstName, patient.firstName)
                 && Objects.equals(lastName, patient.lastName)
                 && bloodType == patient.bloodType
-                && sex == patient.sex;
+                && sex == patient.sex
+                && Objects.equals(doctorNotes, patient.doctorNotes);
     }
 
     @Override
