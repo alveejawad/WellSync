@@ -12,24 +12,20 @@ public interface IUserPersistence {
 
     void setUserCredentials(UserCredentials user);
 
-    Patient getPatient(UserCredentials userCredentials);
-
-    void setPatient(Patient patient);
+    void createPatient(Patient patient);
 
     Patient getPatient(String email);
 
-    void setDoctor(Doctor doctor);
-
     void editPatientDetails(Patient patient);
 
-    Doctor getDoctor(UserCredentials userCredentials);
+    void createDoctor(Doctor doctor);
 
     Doctor getDoctor(String email);
 
-    void removePatient(Doctor doctor, Patient patient);
+    void removePatientFromDoctor(Doctor doctor, Patient patient);
 
-    List<Patient> getPatientsList();
+    void assignPatientToDoctor(Patient patient, Doctor doctor);
 
-    void setPatientToDoctor(Patient patient,Doctor doctor);
+    List<Patient> getAllPatientsList();
 
 }

@@ -69,7 +69,7 @@ public class UserDetailsActivity extends AppCompatActivity {
 
             Patient newPatient= new Patient(email,firstName,lastName,bloodType,gender,age," ");
             try {
-                patientHandler.editDetails(newPatient);
+                patientHandler.editPatientDetails(newPatient);
                 Intent homeIntent =new Intent(UserDetailsActivity.this, HomePageActivity.class);
                 homeIntent.putExtra("email",email);
                 startActivity(homeIntent);

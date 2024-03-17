@@ -101,22 +101,7 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
     }
 
     @Override
-    public Patient getPatient(UserCredentials userCredentials) {
-        try (Connection connection = connect()) {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM PATIENTS WHERE email = ?");
-            statement.setString(1, userCredentials.getEmail());
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                return createPatientFromResultSet(resultSet);
-            }
-        } catch (final SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    @Override
-    public void setPatient(Patient patient) {
+    public void createPatient(Patient patient) {
         try (Connection connection = connect()) {
             PreparedStatement statement = connection.prepareStatement("INSERT INTO PATIENTS VALUES (?, ?, ?, ?, ?, ?, ?)");
             statement.setString(1, patient.getEmail());
@@ -174,7 +159,7 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
     }
 
     @Override
-    public void setDoctor(Doctor doctor) {
+    public void createDoctor(Doctor doctor) {
         try (Connection connection = connect()) {
             PreparedStatement doctorStatement = connection.prepareStatement("INSERT INTO DOCTORS VALUES (?, ?, ?)");
             doctorStatement.setString(1, doctor.getEmail());
@@ -197,7 +182,7 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
     }
 
     @Override
-    public void removePatient(Doctor doctor, Patient patient) {
+    public void removePatientFromDoctor(Doctor doctor, Patient patient) {
         try (Connection connection = connect()) {
             PreparedStatement statement = connection.prepareStatement("DELETE FROM ASSIGNED_PATIENTS WHERE doctor_email = ? AND patient_email = ?");
             statement.setString(1, doctor.getEmail());
@@ -214,21 +199,6 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
     }
 
     @Override
-    public Doctor getDoctor(UserCredentials userCredentials) {
-        try (Connection connection = connect()) {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM DOCTORS WHERE email = ?");
-            statement.setString(1, userCredentials.getEmail());
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                return createDoctorFromResultSet(resultSet);
-            }
-        } catch (final SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    @Override
     public Doctor getDoctor(String email) {
         try (Connection connection = connect()) {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM DOCTORS WHERE email = ?");
@@ -242,7 +212,7 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
         }
         return null;
     }
-    public void setPatientToDoctor(Patient patient,Doctor doctor){
+    public void assignPatientToDoctor(Patient patient, Doctor doctor){
         try (Connection connection = connect()) {
             PreparedStatement assignStatement = connection.prepareStatement("INSERT INTO ASSIGNED_PATIENTS VALUES (?, ?)");
             assignStatement.setString(1, doctor.getEmail());
@@ -253,7 +223,7 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
         }
     }
 
-    public List<Patient> getPatientsList(){
+    public List<Patient> getAllPatientsList(){
         return this.patientsList;
     }
 
