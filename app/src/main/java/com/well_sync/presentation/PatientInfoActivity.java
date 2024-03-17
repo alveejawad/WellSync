@@ -12,9 +12,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.well_sync.R;
 import com.well_sync.logic.DailyLogHandler;
+import com.well_sync.logic.DoctorHandler;
 import com.well_sync.logic.PatientHandler;
 import com.well_sync.objects.DailyLog;
 import com.well_sync.objects.Patient;
+import com.well_sync.objects.Doctor;
 
 import java.util.Date;
 
@@ -22,9 +24,10 @@ public class PatientInfoActivity extends AppCompatActivity {
     private DailyLog dailyLog;
     private DailyLogHandler dailyLogHandler;
     private Patient patient;
+    private Doctor doctor;
     private TextView nameTextView, ageTextView, genderTextView, bloodTypeTextView;
     private EditText adviseEditText;
-    private Button logsButton, sendButton;
+    private Button logsButton, sendButton, deleteButton;
     private String doctorEmail, patientEmail;
     private String date;
 
@@ -40,6 +43,8 @@ public class PatientInfoActivity extends AppCompatActivity {
         adviseEditText = findViewById(R.id.advise_from_doctor);
         logsButton = findViewById(R.id.daily_logs);
         sendButton = findViewById(R.id.send_rec);
+        deleteButton = findViewById(R.id.delete_patient);
+
 
         // Retrieve the selected patient's information from the intent
         Intent intent = getIntent();
@@ -47,7 +52,9 @@ public class PatientInfoActivity extends AppCompatActivity {
         date = intent.getStringExtra("date");
         patientEmail = intent.getStringExtra("patientEmail");
         PatientHandler patientHandler = new PatientHandler();
-        Patient patient = patientHandler.getDetails(patientEmail);
+        patient = patientHandler.getDetails(patientEmail);
+        DoctorHandler doctorHandler = new DoctorHandler();
+        doctor = doctorHandler.getDetails(doctorEmail);
 
         setData(R.id.name,patient.getFirstName()+" "+patient.getLastName());
         setData(R.id.birthday, String.valueOf(patient.getAge()));
@@ -83,6 +90,16 @@ public class PatientInfoActivity extends AppCompatActivity {
                     return; // Exit the onClick method to prevent further execution
                 }
                 Toast.makeText(getApplicationContext(), "Data saved successfully!", Toast.LENGTH_SHORT).show();
+                Intent saveIntent = new Intent(PatientInfoActivity.this, DoctorPageActivity.class);
+                saveIntent.putExtra("email", doctorEmail);
+                PatientInfoActivity.this.startActivity(saveIntent);
+            }
+        });
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                doctorHandler.removePatient(doctor,patient);
+                Toast.makeText(getApplicationContext(), "Patient removed successfully!", Toast.LENGTH_SHORT).show();
                 Intent saveIntent = new Intent(PatientInfoActivity.this, DoctorPageActivity.class);
                 saveIntent.putExtra("email", doctorEmail);
                 PatientInfoActivity.this.startActivity(saveIntent);

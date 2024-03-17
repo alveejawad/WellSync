@@ -2,7 +2,6 @@ package com.well_sync.presentation;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -11,15 +10,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.well_sync.logic.exceptions.InvalidCredentialsException;
-import com.well_sync.objects.*;
-import com.well_sync.logic.*;
 import com.well_sync.R;
 import com.well_sync.logic.DoctorHandler;
 import com.well_sync.logic.PatientHandler;
+import com.well_sync.logic.UserAuthenticationHandler;
 import com.well_sync.logic.exceptions.InvalidDoctorException;
 import com.well_sync.objects.Doctor;
 import com.well_sync.objects.Patient;
+import com.well_sync.objects.UserCredentials;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -63,6 +61,7 @@ public class DoctorPageActivity extends AppCompatActivity{
         doctor = doctorHandler.getDetails(doctorEmail);
         patientList = doctor.getPatients();
 
+
         //show list of patients
         RecyclerView recyclerView = findViewById(R.id.patientList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -83,6 +82,7 @@ public class DoctorPageActivity extends AppCompatActivity{
 
         emailEditText = findViewById(R.id.patient_email_input);
         Button addPatientButton = findViewById(R.id.add_patient);
+        Button logoutButton = findViewById(R.id.logout);
 
         addPatientButton.setOnClickListener(v -> {
             String email = emailEditText.getText().toString();
@@ -114,6 +114,9 @@ public class DoctorPageActivity extends AppCompatActivity{
             //Notify the adapter of the data change
             patientAdapter.notifyDataSetChanged();
         });
+
+        logoutButton.setOnClickListener(v ->
+                startActivity(new Intent(DoctorPageActivity.this,LoginActivity.class)));
     }
     private String getCurrentDate(){
         //get current date
