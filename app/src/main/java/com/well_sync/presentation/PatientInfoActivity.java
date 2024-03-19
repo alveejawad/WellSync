@@ -72,7 +72,7 @@ public class PatientInfoActivity extends AppCompatActivity {
                     Toast.makeText(PatientInfoActivity.this, "Daily Log is null.", Toast.LENGTH_SHORT).show();
                     return; // Exit the onClick method to prevent further execution
                 }
-                Intent currentIntent = new Intent(PatientInfoActivity.this, DailyLogPatientActivity.class);
+                Intent currentIntent = new Intent(PatientInfoActivity.this, DateActivity.class);
                 currentIntent.putExtra("date", date);
                 currentIntent.putExtra("patientEmail",patientEmail);
                 currentIntent.putExtra("doctorEmail", doctorEmail);
