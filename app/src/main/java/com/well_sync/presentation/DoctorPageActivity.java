@@ -109,7 +109,7 @@ public class DoctorPageActivity extends AppCompatActivity{
             try {
               doctorHandler.addPatient(existedPatient,doctor);
             } catch (InvalidDoctorException e) {
-               throw new RuntimeException(e);
+                Toast.makeText(DoctorPageActivity.this, "Error, try again later", Toast.LENGTH_SHORT).show();
             }
             //Notify the adapter of the data change
             patientAdapter.notifyDataSetChanged();

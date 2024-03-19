@@ -14,6 +14,7 @@ import com.well_sync.R;
 import com.well_sync.logic.DailyLogHandler;
 import com.well_sync.logic.DoctorHandler;
 import com.well_sync.logic.PatientHandler;
+import com.well_sync.logic.exceptions.InvalidPatientException;
 import com.well_sync.objects.DailyLog;
 import com.well_sync.objects.Patient;
 import com.well_sync.objects.Doctor;
@@ -84,11 +85,17 @@ public class PatientInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Implement save functionality here
-                String advise = adviseEditText.toString();
+                String advise = adviseEditText.getText().toString();
                 if(advise.isEmpty()) {
                     // Show a Toast or handle the validation error as needed
                     Toast.makeText(PatientInfoActivity.this, "Advise can not be empty.", Toast.LENGTH_SHORT).show();
                     return; // Exit the onClick method to prevent further execution
+                }
+                patient.setDoctorNotes(advise);
+                try {
+                    patientHandler.editPatientDetails(patient);
+                } catch (InvalidPatientException e) {
+                    Toast.makeText(getApplicationContext(), "Changes weren't saved, try again later.", Toast.LENGTH_SHORT).show();
                 }
                 Toast.makeText(getApplicationContext(), "Data saved successfully!", Toast.LENGTH_SHORT).show();
                 Intent saveIntent = new Intent(PatientInfoActivity.this, DoctorPageActivity.class);

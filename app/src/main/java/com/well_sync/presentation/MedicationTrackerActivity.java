@@ -95,7 +95,8 @@ public class MedicationTrackerActivity extends AppCompatActivity {
             try {
                 dailyLogHandler.setMedication(newPatient,dailyLog);
             } catch (InvalidDailyLogException e) {
-                throw new RuntimeException(e);
+
+                Toast.makeText(MedicationTrackerActivity.this, "Your changes couldn't be saved, try again later.", Toast.LENGTH_SHORT).show();
             }
             Intent saveIntent = new Intent(MedicationTrackerActivity.this, DisplayMedicationActivity.class);
                 saveIntent.putExtra("name", name);

@@ -2,9 +2,16 @@ package com.well_sync.presentation;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +31,9 @@ public class HomePageActivity extends AppCompatActivity {
     private DailyLogHandler dailyLogHandler;
     private String email;
     private DailyLog dailyLog;
+    RelativeLayout layout;
+    Patient newPatient;
+    boolean messageOpened;
 
 
     @Override
@@ -41,23 +51,32 @@ public class HomePageActivity extends AppCompatActivity {
 
         // Get the data from patient
         PatientHandler patientHandler = new PatientHandler();
-        Patient newPatient = patientHandler.getDetails(email);
+       newPatient = patientHandler.getDetails(email);
         dailyLog = dailyLogHandler.getDailyLog(newPatient,currDate);
 
         // Find your widgets by their IDs
+        layout= findViewById(R.id.layout);
         LinearLayout moodLayout = findViewById(R.id.moodID);
         LinearLayout symptomLayout = findViewById(R.id.symptomID);
         LinearLayout medicationLayout = findViewById(R.id.medicationID);
         LinearLayout substanceLayout = findViewById(R.id.substanceUseID);
         Button logoutButton = findViewById(R.id.logout);
-
+        ImageView notification = findViewById(R.id.notification);
         ImageView userAccess = findViewById(R.id.user);
+        TextView notificationDot =findViewById(R.id.notification_count);
+        notificationDot.setText(setNotification());
+
         // Set click listeners for each widget
         userAccess.setOnClickListener(view -> {
             // Handle close button click
             Intent userIntent = new Intent(HomePageActivity.this, UserSettingsActivity.class);
             userIntent.putExtra("email",email);
             HomePageActivity.this.startActivity(userIntent);
+        });
+        notification.setOnClickListener(view -> {
+            notificationDot.setText("");
+            createPopUpWindow();
+
         });
         // Set click listeners for each widget
         moodLayout.setOnClickListener(v -> {
@@ -115,11 +134,43 @@ public class HomePageActivity extends AppCompatActivity {
 
         logoutButton.setOnClickListener(v ->
                 startActivity(new Intent(HomePageActivity.this,LoginActivity.class)));
+
+
     }
     private String getCurrentDate(){
         //get current date
         Date date = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.CANADA);
         return dateFormat.format(date);
+    }
+    private void createPopUpWindow(){
+        LayoutInflater inflater= (LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE);
+        View popUpView=inflater.inflate(R.layout.message_popup, null);
+        TextView message =  popUpView.findViewById(R.id.message);
+        ImageView close =popUpView.findViewById(R.id.close);
+        int width= ViewGroup.LayoutParams.MATCH_PARENT;
+        int height= ViewGroup.LayoutParams.WRAP_CONTENT;
+        boolean focusable=true;
+        message.setText(newPatient.getDoctorNotes());
+        PopupWindow popupWindow=new PopupWindow(popUpView, width, height,focusable);
+        layout.post(new Runnable() {
+            @Override
+            public void run() {
+                popupWindow.showAtLocation(layout, Gravity.TOP, 0, 0);
+            }
+        });
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+            }
+        });
+    }
+    private String setNotification(){
+       String text="";
+        if(newPatient.getDoctorNotes()!=null){
+            text="  1  ";
+        }
+        return text;
     }
 }

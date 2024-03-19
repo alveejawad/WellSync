@@ -1,11 +1,9 @@
 package com.well_sync.logic;
 
 import com.well_sync.application.Services;
-import com.well_sync.logic.exceptions.InvalidCredentialsException;
 import com.well_sync.logic.exceptions.InvalidPatientException;
 import com.well_sync.objects.Patient;
 import com.well_sync.objects.PatientValidator;
-import com.well_sync.objects.UserCredentials;
 import com.well_sync.persistence.IUserPersistence;
 
 public class PatientHandler {
@@ -35,7 +33,7 @@ public class PatientHandler {
 		if (existingPatient != null) {
 			persistUsers.editPatientDetails(patient);
 		} else {
-			throw new InvalidPatientException("Patient with email " + patient.getEmail() + " doesn't exists.");
+			addPatient(patient);
 		}
 	}
 

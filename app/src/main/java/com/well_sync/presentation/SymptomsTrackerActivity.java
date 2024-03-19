@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -72,7 +73,7 @@ public class SymptomsTrackerActivity extends AppCompatActivity {
             try {
                 dailyLogHandler.setSymptoms(newPatient,dailyLog);
             } catch (InvalidDailyLogException e) {
-                throw new RuntimeException(e);
+                Toast.makeText(getApplicationContext(), "Your changes couldn't be saved, try again later.", Toast.LENGTH_SHORT).show();
             }
 
             // Handle close button click

@@ -190,7 +190,7 @@ public class MoodTrackerActivity extends AppCompatActivity {
                     saveIntent.putExtra("userNotes", userNotes);
                     MoodTrackerActivity.this.startActivity(saveIntent);
                 } catch (InvalidDailyLogException e) {
-                    Toast.makeText(getApplicationContext(), "Save error", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Your changes couldn't be saved, try again later.", Toast.LENGTH_SHORT).show();
                 }
             }
         });

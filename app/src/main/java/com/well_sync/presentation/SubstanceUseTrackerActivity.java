@@ -83,7 +83,7 @@ public class SubstanceUseTrackerActivity extends AppCompatActivity {
             try {
                 dailyLogHandler.setSubstances(newPatient,dailyLog);
             } catch (InvalidDailyLogException e) {
-                throw new RuntimeException(e);
+                Toast.makeText(getApplicationContext(), "Your changes couldn't be saved, try again later.", Toast.LENGTH_SHORT).show();
             }
                 Intent saveIntent = new Intent(SubstanceUseTrackerActivity.this, DisplaySubstanceUseActivity.class);
                 saveIntent.putExtra("email",email);
