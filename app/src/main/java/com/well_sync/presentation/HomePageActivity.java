@@ -64,6 +64,7 @@ public class HomePageActivity extends AppCompatActivity {
         ImageView notification = findViewById(R.id.notification);
         ImageView userAccess = findViewById(R.id.user);
         TextView notificationDot =findViewById(R.id.notification_count);
+        notificationDot.setText(setNotification());
 
         // Set click listeners for each widget
         userAccess.setOnClickListener(view -> {
@@ -73,7 +74,7 @@ public class HomePageActivity extends AppCompatActivity {
             HomePageActivity.this.startActivity(userIntent);
         });
         notification.setOnClickListener(view -> {
-            notificationDot.setText(setNotification());
+            notificationDot.setText("");
             createPopUpWindow();
 
         });

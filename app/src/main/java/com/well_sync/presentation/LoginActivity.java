@@ -46,7 +46,6 @@ public class LoginActivity extends AppCompatActivity {
             userCredentials=getCredentials(v);
             try {
                 UserCredentials.Role loginRole = loginHandler.login(userCredentials);
-
                 Intent openHome;
 
                 if (loginRole == UserCredentials.Role.PATIENT) {
