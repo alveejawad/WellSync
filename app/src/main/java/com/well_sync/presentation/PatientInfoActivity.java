@@ -90,6 +90,7 @@ public class PatientInfoActivity extends AppCompatActivity {
                     Toast.makeText(PatientInfoActivity.this, "Advise can not be empty.", Toast.LENGTH_SHORT).show();
                     return; // Exit the onClick method to prevent further execution
                 }
+                patient.setDoctorNotes(advise);
                 Toast.makeText(getApplicationContext(), "Data saved successfully!", Toast.LENGTH_SHORT).show();
                 Intent saveIntent = new Intent(PatientInfoActivity.this, DoctorPageActivity.class);
                 saveIntent.putExtra("email", doctorEmail);
