@@ -85,7 +85,7 @@ public class PatientInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Implement save functionality here
-                String advise = adviseEditText.toString();
+                String advise = adviseEditText.getText().toString();
                 if(advise.isEmpty()) {
                     // Show a Toast or handle the validation error as needed
                     Toast.makeText(PatientInfoActivity.this, "Advise can not be empty.", Toast.LENGTH_SHORT).show();
