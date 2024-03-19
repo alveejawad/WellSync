@@ -56,4 +56,32 @@ public class DailyLogHandler {
             throw new RuntimeException(e);
         }
     }
+
+    public boolean validateMoodScore(int moodScores) {
+        if (moodScores < 1 || moodScores > 4) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean validateSleepHours(int sleepHours) {
+        if (sleepHours < 0 || sleepHours > 16) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean validateAmountInt(int amountInt) {
+        if (amountInt < 0 || amountInt > 5) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean validateDosage(int dosageInt) {
+        if (dosageInt < 0 || dosageInt > 5) {
+            return false;
+        }
+        return true;
+    }
 }

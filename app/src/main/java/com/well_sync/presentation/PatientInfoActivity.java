@@ -66,7 +66,8 @@ public class PatientInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Date currDate=DailyLogHandler.DateFromString(date);
-                dailyLog = dailyLogHandler.getDailyLog(patient, currDate);
+                dailyLog = new DailyLog(currDate, 3, 8, "ok babe");
+                        //dailyLogHandler.getDailyLog(patient, currDate);
                 if(dailyLog == null) {
                     // Show a Toast or handle the validation error as needed
                     Toast.makeText(PatientInfoActivity.this, "Daily Log is null.", Toast.LENGTH_SHORT).show();

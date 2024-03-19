@@ -74,7 +74,7 @@ public class SubstanceUseTrackerActivity extends AppCompatActivity {
             }
 
             int amountInt = Integer.parseInt(amount);
-            if (amountInt < 0 || amountInt > 5) {
+            if (!dailyLogHandler.validateAmountInt(amountInt)) {
                 // Show a Toast or handle the validation error as needed
                 Toast.makeText(SubstanceUseTrackerActivity.this, "Invalid amount; must be between 0 and 5 inclusive.", Toast.LENGTH_SHORT).show();
                 return; // Exit the onClick method to prevent further execution

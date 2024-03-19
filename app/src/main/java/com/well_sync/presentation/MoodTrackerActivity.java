@@ -162,13 +162,13 @@ public class MoodTrackerActivity extends AppCompatActivity {
                 sleepHours = Integer.parseInt(sleepHoursText);
 
                 // Validate mood score before setting it in the dailylog
-                if (moodScores < 1 || moodScores > 4) {
+                if (!dailyLogHandler.validateMoodScore(moodScores)) {
                     // Show a Toast or handle the validation error as needed
                     Toast.makeText(MoodTrackerActivity.this, "Invalid mood score; must be between 1 and 4 inclusive.", Toast.LENGTH_SHORT).show();
                     return; // Exit the onClick method to prevent further execution
                 }
                 // Validate sleep hours before setting it in the dailylog
-                if (sleepHours < 0 || sleepHours > 16) {
+                if (!dailyLogHandler.validateSleepHours(sleepHours)) {
                     // Show a Toast or handle the validation error as needed
                     Toast.makeText(MoodTrackerActivity.this, "Invalid sleep hours; must be between 0 and 16 inclusive.", Toast.LENGTH_SHORT).show();
                     return; // Exit the onClick method to prevent further execution
