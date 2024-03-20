@@ -19,8 +19,8 @@ public abstract class DailyLogValidator {
             throw new InvalidDailyLogException("Daily log object undefined.");
 
         validateDate(log.getDate());
-        validateMoodScore(log.getMoodScore(), log.maxMoodScore);
-        validateSleepHours(log.getSleepHours(), log.maxSleepHours);
+        validateMoodScore(log.getMoodScore(), DailyLog.maxMoodScore);
+        validateSleepHours(log.getSleepHours(), DailyLog.maxSleepHours);
 
         validateMedicationList(log.getMedications());
         validateSymptomList(log.getSymptoms());
