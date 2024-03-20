@@ -14,7 +14,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.well_sync.R;
 import com.well_sync.logic.DailyLogHandler;
-import com.well_sync.logic.DailyLogValidator;
 import com.well_sync.logic.PatientHandler;
 import com.well_sync.logic.exceptions.InvalidDailyLogException;
 import com.well_sync.objects.DailyLog;
@@ -161,25 +160,6 @@ public class MoodTrackerActivity extends AppCompatActivity {
                     return; // Exit the onClick method to prevent further execution
                 }
                 sleepHours = Integer.parseInt(sleepHoursText);
-
-                // Validate mood score before setting it in the dailylog
-                try {
-                    DailyLogValidator.validateMoodScore(moodScores, DailyLog.maxMoodScore);
-                } catch (InvalidDailyLogException e) {
-                    // Show a Toast or handle the validation error as needed
-                    Toast.makeText(MoodTrackerActivity.this, "Invalid mood score; must be between 1 and 4 inclusive.", Toast.LENGTH_SHORT).show();
-                    return; // Exit the onClick method to prevent further execution
-                }
-
-                // Validate sleep hours before setting it in the dailylog
-                try {
-                    DailyLogValidator.validateSleepHours(sleepHours, DailyLog.maxSleepHours);
-                } catch (InvalidDailyLogException e) {
-                    // Show a Toast or handle the validation error as needed
-                    Toast.makeText(MoodTrackerActivity.this, "Invalid sleep hours; must be between 0 and 16 inclusive.", Toast.LENGTH_SHORT).show();
-                    return; // Exit the onClick method to prevent further execution
-                }
-
 
                 DailyLog dailyLog = new DailyLog(currDate, moodScores, sleepHours, userNotes);
                 // Get the data from patient
