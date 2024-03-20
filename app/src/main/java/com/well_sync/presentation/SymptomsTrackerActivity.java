@@ -84,10 +84,15 @@ public class SymptomsTrackerActivity extends AppCompatActivity {
 
     }
 
-    public void addSymptom(String name, int idSymptom){
+    private void addSymptom(String name, int idSymptom) {
         RatingBar symptom = findViewById(idSymptom); // Assuming you have a RatingBar in your layout with id "ratingBar"
-        int valueSymptom=  (int)symptom.getRating();
-        dailyLog.addSymptom(name,valueSymptom);
+        int valueSymptom = (int)symptom.getRating();
+
+        try {
+            dailyLog.addSymptom(name, valueSymptom);
+        } catch (InvalidDailyLogException e) {
+            e.printStackTrace();
+        }
     }
 
 }

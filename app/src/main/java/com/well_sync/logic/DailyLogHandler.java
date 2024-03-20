@@ -3,7 +3,6 @@ package com.well_sync.logic;
 import com.well_sync.application.Services;
 import com.well_sync.logic.exceptions.InvalidDailyLogException;
 import com.well_sync.objects.DailyLog;
-import com.well_sync.objects.DailyLogValidator;
 import com.well_sync.objects.Patient;
 import com.well_sync.persistence.IDailyLogPersistence;
 
@@ -30,13 +29,16 @@ public class DailyLogHandler {
         persistLog.setDailyLog(patient, dailyLog);
     }
     public void setMedication(Patient patient, DailyLog dailyLog) throws InvalidDailyLogException {
+        DailyLogValidator.validateMedicationList(dailyLog.getMedications());
         persistLog.setMedication(patient, dailyLog);
     }
 
     public void setSubstances(Patient patient, DailyLog dailyLog) throws InvalidDailyLogException {
+        DailyLogValidator.validateSubstanceList(dailyLog.getSubstances());
         persistLog.setSubstances(patient, dailyLog);
     }
     public void setSymptoms(Patient patient, DailyLog dailyLog) throws InvalidDailyLogException {
+        DailyLogValidator.validateSymptomList(dailyLog.getSymptoms());
         persistLog.setSymptoms(patient, dailyLog);
     }
 
@@ -55,33 +57,5 @@ public class DailyLogHandler {
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public boolean validateMoodScore(int moodScores) {
-        if (moodScores < 1 || moodScores > 4) {
-            return false;
-        }
-        return true;
-    }
-
-    public boolean validateSleepHours(int sleepHours) {
-        if (sleepHours < 0 || sleepHours > 16) {
-            return false;
-        }
-        return true;
-    }
-
-    public boolean validateAmountInt(int amountInt) {
-        if (amountInt < 0 || amountInt > 5) {
-            return false;
-        }
-        return true;
-    }
-
-    public boolean validateDosage(int dosageInt) {
-        if (dosageInt < 0 || dosageInt > 5) {
-            return false;
-        }
-        return true;
     }
 }

@@ -6,7 +6,7 @@ package com.well_sync.logic.exceptions;
  * Note that this class extends Exception, not RuntimeException, so that it must be caught
  * explicitly by code downstream from the validation logic.
  */
-public abstract class InvalidDataException extends Exception {
+public class InvalidDataException extends Exception {
     public InvalidDataException(String error) {
         super("Invalid data entered:\n" + error);
     }

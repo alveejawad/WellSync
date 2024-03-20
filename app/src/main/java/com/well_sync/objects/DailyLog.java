@@ -1,5 +1,8 @@
 package com.well_sync.objects;
 
+import com.well_sync.logic.DailyLogValidator;
+import com.well_sync.logic.exceptions.InvalidDailyLogException;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -10,8 +13,8 @@ import java.util.Objects;
  */
 public class DailyLog {
     // Defined here in case future extensions want to change this
-    public final int maxMoodScore = 4;
-    public final int maxSleepHours = 16;
+    public static final int maxMoodScore = 4;
+    public static final int maxSleepHours = 16;
 
     private Date date;
     private int moodScore;
@@ -68,9 +71,9 @@ public class DailyLog {
         this.notes = notes;
     }
 
-    public void addSymptom(String name, int intensity) {
+    public void addSymptom(String name, int intensity) throws InvalidDailyLogException {
         Symptom symptom = new Symptom(name, intensity);
-        // insert call to symptom validator here
+        DailyLogValidator.validateSymptom(symptom);
         this.symptomList.add(symptom);
     }
 
@@ -88,11 +91,10 @@ public class DailyLog {
         return this.symptomList;
     }
 
-    public void addMedication(String name, int quantity,int dosage){
-            MedicationValidator medicationValidator;
-            Medication med = new Medication(name, quantity, dosage);
-            //MedicationValidator.validateMedication(med);
-            this.medicationList.add(med);
+    public void addMedication(String name, int quantity,int dosage) throws InvalidDailyLogException {
+        Medication med = new Medication(name, quantity, dosage);
+        DailyLogValidator.validateMedication(med);
+        this.medicationList.add(med);
     }
 
     public void removeMedication(Medication medication) {
@@ -109,9 +111,9 @@ public class DailyLog {
         return this.medicationList;
     }
 
-    public void addSubstance(String name, int quantity) {
+    public void addSubstance(String name, int quantity) throws InvalidDailyLogException {
         Substance sub = new Substance(name, quantity);
-        // insert call to substance validator here
+        DailyLogValidator.validateSubstance(sub);
         this.substanceList.add(sub);
     }
 

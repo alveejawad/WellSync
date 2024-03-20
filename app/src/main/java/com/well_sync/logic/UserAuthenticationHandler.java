@@ -2,10 +2,7 @@ package com.well_sync.logic;
 
 import com.well_sync.application.Services;
 import com.well_sync.logic.exceptions.InvalidCredentialsException;
-import com.well_sync.objects.Doctor;
-import com.well_sync.objects.Patient;
 import com.well_sync.objects.UserCredentials;
-import com.well_sync.objects.UserCredentialsValidator;
 import com.well_sync.persistence.IUserPersistence;
 
 public class UserAuthenticationHandler {
