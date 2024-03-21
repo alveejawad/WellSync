@@ -15,10 +15,6 @@ import java.util.Objects;
  * Represents observations of patient health for one specific date.
  */
 public class DailyLog {
-    // Defined here in case future extensions want to change this
-    public static final int maxMoodScore = 4;
-    public static final int maxSleepHours = 16;
-
     private Date date;
     private int moodScore;
     private int sleepHours;

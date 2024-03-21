@@ -1,7 +1,6 @@
 package com.well_sync.objects;
 
 public class Symptom {
-    public final int maxIntensity = 10;
     private String name;
     private int intensity; // from 0 to 10
 

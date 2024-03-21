@@ -1,4 +1,5 @@
 package com.well_sync.presentation;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,7 +12,9 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.well_sync.R;
 import com.well_sync.logic.IPatientHandler;
 import com.well_sync.logic.PatientHandler;
@@ -26,7 +29,7 @@ public class UserDetailsActivity extends AppCompatActivity {
     private DatePicker datePicker;
     private RadioGroup genderPicker;
     private Spinner bloodTypeSpinner;
-    private final String[] bloodTypeList = new String[]{"A+","A-", "B+", "B-", "O+","O-", "AB+","AB-"};
+    private final String[] bloodTypeList = getResources().getStringArray(R.array.blood_types);
 
     private Intent intent;
     private String bloodType, gender, firstName, lastName, email;
