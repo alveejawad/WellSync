@@ -67,10 +67,11 @@ public class SymptomsTrackerActivity extends AppCompatActivity {
             addSymptom("Decreased or Increased Appetit",R.id.ratingAppetite);
             addSymptom("Feelings of Guilt or Self-Blame",R.id.ratingGuilt);
             addSymptom("Thoughts of Death or Suicide",R.id.ratingSuicide);
+
             try {
                 dailyLogHandler.setSymptoms(newPatient,dailyLog);
             } catch (InvalidDailyLogException e) {
-                Toast.makeText(getApplicationContext(), "Your changes couldn't be saved, try again later.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
             }
 
             // Handle close button click
