@@ -3,7 +3,6 @@ package com.well_sync.presentation;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
 
         //LOG IN BUTTON
         loginButton.setOnClickListener(v -> {
-            userCredentials=getCredentials(v);
+            userCredentials = getCredentials();
             try {
                 UserCredentials.Role loginRole = loginHandler.login(userCredentials);
                 Intent openHome;
@@ -76,12 +75,13 @@ public class LoginActivity extends AppCompatActivity {
         signUpLink.setPaintFlags(signUpLink.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
     }
 
-    public UserCredentials getCredentials(View view) {
+    public UserCredentials getCredentials() {
         UserCredentials returningUser;
         String email = userEmail.getText().toString();
         String password = userPassword.getText().toString();
-        String role = "UNSPECIFIED";
-        returningUser = new UserCredentials(email,password,role);
+
+        // role will be filled in by backend, since user already exists
+        returningUser = new UserCredentials(email, password, null);
         return returningUser;
     }
 

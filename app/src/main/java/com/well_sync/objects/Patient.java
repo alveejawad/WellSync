@@ -1,6 +1,5 @@
 package com.well_sync.objects;
 
-import java.util.Locale;
 import java.util.Objects;
 
 public class Patient{
@@ -134,11 +133,6 @@ public class Patient{
 
     public void setDoctorNotes(String doctorNotes) {
         this.doctorNotes = doctorNotes;
-    }
-
-    @Override
-    public String toString() {
-        return String.format(Locale.CANADA, "%s %s (%d / %s / %s)", firstName, lastName, age, sex, bloodType);
     }
 
     @Override

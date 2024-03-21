@@ -5,28 +5,24 @@ import java.util.Objects;
 public class UserCredentials {
     public enum Role {
         DOCTOR,
-        PATIENT,
-        UNSPECIFIED;
+        PATIENT;
+
         public static UserCredentials.Role fromString(String role) {
-            switch (role.toUpperCase()) {
-            case "DOCTOR":
+            if (role.equalsIgnoreCase("doctor"))
                 return DOCTOR;
-            case "PATIENT":
-                return PATIENT;
-            default:
-                return UNSPECIFIED;
-            }
+            else return PATIENT;
         }
     }
 
     private final String email;
     private final String password;
-    private final Role role;
+    private Role role;
 
     public UserCredentials(final String email, final String password, final String role) {
         this.email = email;
         this.password = password;
-        this.role = Role.fromString(role);
+        if (role != null)
+            this.role = Role.fromString(role);
     }
 
     public String getEmail() {
