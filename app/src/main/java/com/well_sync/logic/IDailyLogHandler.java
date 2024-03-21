@@ -38,8 +38,12 @@ public interface IDailyLogHandler {
      */
     DailyLog getDailyLog(Patient patient, String date);
 
+    DailyLog getDailyLog(Patient patient, Date date);
+
     /**
      * Get all dates on which the given patient recorded a log.
      */
     List<Date> getAllDates(Patient patient);
+
+    double getAverageSleep(Patient patient);
 }

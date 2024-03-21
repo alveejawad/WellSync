@@ -1,14 +1,17 @@
 package com.well_sync.tests.business;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
 import com.well_sync.logic.IPatientHandler;
 import com.well_sync.logic.PatientHandler;
+import com.well_sync.logic.exceptions.InvalidNotesException;
 import com.well_sync.logic.exceptions.InvalidPatientException;
 import com.well_sync.objects.Patient;
 import com.well_sync.persistence.stubs.UserPersistenceStub;
 
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 public class PatientHandlerTest {
 
@@ -52,6 +55,49 @@ public class PatientHandlerTest {
             Patient invalidPatient = new Patient("invalid email address!");
             IPatientHandler.addPatient(invalidPatient);
             fail("Creating patient with malformed email address did not throw an exception.");
+        } catch (InvalidPatientException e) {
+            // pass!
+
+        }
+
+        try {
+            // Invalid because of the lack of blood type information
+            patientSet.setBloodType(null);
+            IPatientHandler.addPatient(patientSet);
+            fail("Adding patient with null blood type did not throw an exception.");
+        } catch (InvalidPatientException e) {
+            // pass!
+        }
+
+        try {
+            // Invalid because of the lack of sex information
+            patientSet.setBloodType(Patient.BloodType.TYPE_O);
+            patientSet.setSex(null);
+            IPatientHandler.addPatient(patientSet);
+            fail("Adding patient with null sex did not throw an exception.");
+        } catch (InvalidPatientException e) {
+            // pass!
+        }
+
+        try {
+            IPatientHandler.addPatient(null);
+            fail("Adding null patient did not throw an exception.");
+        } catch (InvalidPatientException e) {
+            // pass!
+        }
+
+        try {
+            Patient invalidNotes = new Patient(email, "Jane", "Newman", "O", "F", 0, null);
+            IPatientHandler.addPatient(invalidNotes);
+            fail("Adding patient with invalid notes did not throw an exception.");
+        } catch (InvalidNotesException e) {
+            // pass!
+        }
+
+        try {
+            Patient invalidAge = new Patient(email, "Jane", "Newman", "O", "F", -10, "hello");
+            IPatientHandler.addPatient(invalidAge);
+            fail("Adding patient with invalid age did not throw an exception.");
         } catch (InvalidPatientException e) {
             // pass!
         }
