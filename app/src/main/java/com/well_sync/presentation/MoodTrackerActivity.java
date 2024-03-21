@@ -29,15 +29,13 @@ public class MoodTrackerActivity extends AppCompatActivity {
     private TextView emotionText;
 
     private DailyLog dailyLog;
-    private Patient patient;
     private String email;
     private String date;
     private IDailyLogHandler dailyLogHandler;
-
     protected String emotion, sleepHoursText, userNotes;
-    private Intent intent;
     private int moodScores;
     private int sleepHours;
+    private final String[] moodList = getResources().getStringArray(R.array.moods);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,8 +70,7 @@ public class MoodTrackerActivity extends AppCompatActivity {
                 selectedImageView = smileImageView;
 
                 // Set the emotion text below the selected image view
-                emotionText.setText("Happy - Your mood score is 4");
-
+                emotionText.setText(moodList[0]);
                 // Set the mood score
                 moodScores = 4;
             }
@@ -86,7 +83,7 @@ public class MoodTrackerActivity extends AppCompatActivity {
                 neutralImageView.setColorFilter(Color.BLUE);
                 selectedImageView = neutralImageView;
                 // Set the emotion text below the selected image view
-                emotionText.setText("Neutral - Your mood score is 3");
+                emotionText.setText(moodList[1]);
 
                 // Set the mood score
                 moodScores = 3;
@@ -100,7 +97,7 @@ public class MoodTrackerActivity extends AppCompatActivity {
                 angryImageView.setColorFilter(Color.BLUE);
                 selectedImageView = angryImageView;
                 // Set the emotion text below the selected image view
-                emotionText.setText("Angry - Your mood score is 2");
+                emotionText.setText(moodList[2]);
 
                 // Set the mood score
                 moodScores = 2;
@@ -114,7 +111,7 @@ public class MoodTrackerActivity extends AppCompatActivity {
                 sickImageView.setColorFilter(Color.BLUE);
                 selectedImageView = sickImageView;
                 // Set the emotion text below the selected image view
-                emotionText.setText("Sick - Your mood score is 1");
+                emotionText.setText(moodList[3]);
 
                 // Set the mood score
                 moodScores = 1;
