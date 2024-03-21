@@ -49,7 +49,7 @@ public class MoodTrackerActivity extends AppCompatActivity {
         Intent intent = getIntent();
         email = intent.getStringExtra("email");
         date = intent.getStringExtra("date");
-        Date currDate = dailyLogHandler.DateFromString(date);
+        Date currDate = DailyLogHandler.DateFromString(date);
 
         // Initialize views
         closeImageView = findViewById(R.id.close);
@@ -161,21 +161,7 @@ public class MoodTrackerActivity extends AppCompatActivity {
                 }
                 sleepHours = Integer.parseInt(sleepHoursText);
 
-                // Validate mood score before setting it in the dailylog
-                if (!dailyLogHandler.validateMoodScore(moodScores)) {
-                    // Show a Toast or handle the validation error as needed
-                    Toast.makeText(MoodTrackerActivity.this, "Invalid mood score; must be between 1 and 4 inclusive.", Toast.LENGTH_SHORT).show();
-                    return; // Exit the onClick method to prevent further execution
-                }
-                // Validate sleep hours before setting it in the dailylog
-                if (!dailyLogHandler.validateSleepHours(sleepHours)) {
-                    // Show a Toast or handle the validation error as needed
-                    Toast.makeText(MoodTrackerActivity.this, "Invalid sleep hours; must be between 0 and 16 inclusive.", Toast.LENGTH_SHORT).show();
-                    return; // Exit the onClick method to prevent further execution
-                }
-
-
-                DailyLog dailyLog = new DailyLog(currDate,moodScores,sleepHours,userNotes );
+                DailyLog dailyLog = new DailyLog(currDate, moodScores, sleepHours, userNotes);
                 // Get the data from patient
                 PatientHandler patientHandler = new PatientHandler();
                 Patient newPatient = patientHandler.getDetails(email);
@@ -190,7 +176,7 @@ public class MoodTrackerActivity extends AppCompatActivity {
                     saveIntent.putExtra("userNotes", userNotes);
                     MoodTrackerActivity.this.startActivity(saveIntent);
                 } catch (InvalidDailyLogException e) {
-                    Toast.makeText(getApplicationContext(), "Your changes couldn't be saved, try again later.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         });

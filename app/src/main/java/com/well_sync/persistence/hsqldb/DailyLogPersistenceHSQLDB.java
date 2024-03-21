@@ -1,5 +1,6 @@
 package com.well_sync.persistence.hsqldb;
 
+import com.well_sync.logic.exceptions.InvalidDailyLogException;
 import com.well_sync.objects.Patient;
 import com.well_sync.objects.DailyLog;
 import com.well_sync.objects.Symptom;
@@ -223,7 +224,11 @@ public class DailyLogPersistenceHSQLDB implements IDailyLogPersistence {
         while (symptomResultSet.next()) {
             String symptomName = symptomResultSet.getString("symptom");
             int symptomIntensity = symptomResultSet.getInt("intensity");
-            dailyLog.addSymptom(symptomName, symptomIntensity);
+            try {
+                dailyLog.addSymptom(symptomName, symptomIntensity);
+            } catch (InvalidDailyLogException e) {
+                continue;
+            }
         }
 
         // Fetch Medications
@@ -237,7 +242,11 @@ public class DailyLogPersistenceHSQLDB implements IDailyLogPersistence {
             String medicationName = medicationResultSet.getString("medication");
             int medicationQuantity = medicationResultSet.getInt("quantity");
             int medicationDosage =medicationResultSet.getInt("dosage");
-            dailyLog.addMedication(medicationName, medicationQuantity,medicationDosage);
+            try {
+                dailyLog.addMedication(medicationName, medicationQuantity,medicationDosage);
+            } catch (InvalidDailyLogException e) {
+                continue;
+            }
         }
 
         // Fetch Substances
@@ -250,7 +259,11 @@ public class DailyLogPersistenceHSQLDB implements IDailyLogPersistence {
         while (substanceResultSet.next()) {
             String substanceName = substanceResultSet.getString("substance");
             int substanceQuantity = substanceResultSet.getInt("quantity");
-            dailyLog.addSubstance(substanceName, substanceQuantity);
+            try {
+                dailyLog.addSubstance(substanceName, substanceQuantity);
+            } catch (InvalidDailyLogException e) {
+                continue;
+            }
         }
 
         return dailyLog;

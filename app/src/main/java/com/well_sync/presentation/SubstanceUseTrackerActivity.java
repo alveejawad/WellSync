@@ -74,12 +74,13 @@ public class SubstanceUseTrackerActivity extends AppCompatActivity {
             }
 
             int amountInt = Integer.parseInt(amount);
-            if (!dailyLogHandler.validateAmountInt(amountInt)) {
-                // Show a Toast or handle the validation error as needed
-                Toast.makeText(SubstanceUseTrackerActivity.this, "Invalid amount; must be between 0 and 5 inclusive.", Toast.LENGTH_SHORT).show();
-                return; // Exit the onClick method to prevent further execution
+
+            try {
+                dailyLog.addSubstance(name, amountInt);
+            } catch (InvalidDailyLogException e) {
+                Toast.makeText(SubstanceUseTrackerActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
-                dailyLog.addSubstance(name,amountInt);
+
             try {
                 dailyLogHandler.setSubstances(newPatient,dailyLog);
             } catch (InvalidDailyLogException e) {

@@ -78,20 +78,16 @@ public class MedicationTrackerActivity extends AppCompatActivity {
                 Toast.makeText(MedicationTrackerActivity.this, "Dosage cannot be empty.", Toast.LENGTH_SHORT).show();
                 return; // Exit the onClick method to prevent further execution
             }
+
             int amountInt = Integer.parseInt(amount);
-            if (!dailyLogHandler.validateAmountInt(amountInt)) {
-                // Show a Toast or handle the validation error as needed
-                Toast.makeText(MedicationTrackerActivity.this, "Invalid amount; must be between 0 and 5 inclusive.", Toast.LENGTH_SHORT).show();
-                return; // Exit the onClick method to prevent further execution
-            }
             int dosageInt = Integer.parseInt(dosage);
-            if (!dailyLogHandler.validateDosage(dosageInt)) {
-                // Show a Toast or handle the validation error as needed
-                Toast.makeText(MedicationTrackerActivity.this, "Invalid dosages; must be between 0 and 5 inclusive.", Toast.LENGTH_SHORT).show();
-                return; // Exit the onClick method to prevent further execution
+
+            try {
+                dailyLog.addMedication(name, amountInt, dosageInt);
+            } catch (InvalidDailyLogException e) {
+                Toast.makeText(MedicationTrackerActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
 
-            dailyLog.addMedication(name, amountInt,dosageInt);
             try {
                 dailyLogHandler.setMedication(newPatient,dailyLog);
             } catch (InvalidDailyLogException e) {
