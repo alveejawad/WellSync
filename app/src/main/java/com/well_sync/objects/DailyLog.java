@@ -19,12 +19,16 @@ public class DailyLog {
     private int moodScore;
     private int sleepHours;
     private String notes;
-    private List<Symptom> symptomList;
-    private List<Medication> medicationList;
-    private List<Substance> substanceList;
+    private final List<Symptom> symptomList;
+    private final List<Medication> medicationList;
+    private final List<Substance> substanceList;
 
     public DailyLog() {
         this.date = new Date(); // initialized to present
+
+        this.symptomList = new ArrayList<>();
+        this.medicationList = new ArrayList<>();
+        this.substanceList = new ArrayList<>();
     }
 
     public DailyLog(String date, int moodScore, int sleepHours, String notes) {

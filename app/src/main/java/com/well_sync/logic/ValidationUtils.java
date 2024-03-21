@@ -12,7 +12,7 @@ abstract class ValidationUtils {
      * Valid name uses 2 or more alphabetic characters; nothing else.
      */
     public static <E extends Exception> void validateName(Class<E> exceptionType, String name) throws E {
-        if (name == null || !Pattern.matches("[\\w -]{2,}", name)) {
+        if (name == null || !Pattern.matches("[\\w /-]{2,}", name)) {
             try {
                 throw exceptionType
                         .getConstructor(String.class)

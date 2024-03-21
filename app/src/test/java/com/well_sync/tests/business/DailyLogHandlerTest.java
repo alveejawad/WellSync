@@ -1,17 +1,24 @@
 package com.well_sync.tests.business;
 
-import org.junit.Before;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import com.well_sync.logic.DailyLogHandler;
+import com.well_sync.logic.IDailyLogHandler;
 import com.well_sync.logic.IPatientHandler;
 import com.well_sync.logic.PatientHandler;
 import com.well_sync.logic.exceptions.InvalidDailyLogException;
 import com.well_sync.objects.DailyLog;
 import com.well_sync.objects.Patient;
+import com.well_sync.persistence.IDailyLogPersistence;
 import com.well_sync.persistence.stubs.DailyLogPersistenceStub;
 import com.well_sync.persistence.stubs.UserPersistenceStub;
+
+import org.junit.Before;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -91,5 +98,105 @@ public class DailyLogHandlerTest {
         datesActual = dailyLogHandler.getAllDates(p1);
         datesExpected.add(newDate);
         assertEquals(datesExpected, datesActual);
+    }
+
+    @Test
+    public void testSetMedication() {
+        IDailyLogPersistence mockedPersistence = mock(IDailyLogPersistence.class);
+        IDailyLogHandler toTest = new DailyLogHandler(mockedPersistence);
+
+        Date currDate = new Date();
+        Patient p1 = new Patient("mock1@example.com");
+        DailyLog dl1 = new DailyLog();
+
+        try {
+            dl1.addMedication("ibuprofen", 2, 200);
+            toTest.setMedication(p1, dl1);
+        } catch (InvalidDailyLogException e) {
+            fail(e.getMessage());
+        }
+
+        when(mockedPersistence.getDailyLog(p1, currDate)).thenReturn(dl1);
+
+        DailyLog dl2 = toTest.getDailyLog(p1, currDate);
+
+        verify(mockedPersistence).setMedication(p1, dl1);
+        verify(mockedPersistence).getDailyLog(p1, currDate);
+
+        assertEquals(dl1, dl2);
+    }
+
+    @Test
+    public void testSetSymptom() {
+        IDailyLogPersistence mockedPersistence = mock(IDailyLogPersistence.class);
+        IDailyLogHandler toTest = new DailyLogHandler(mockedPersistence);
+
+        Date currDate = new Date();
+        Patient p1 = new Patient("mock1@example.com");
+        DailyLog dl1 = new DailyLog();
+
+        try {
+            dl1.addSymptom("headache", 3);
+            toTest.setSymptoms(p1, dl1);
+        } catch (InvalidDailyLogException e) {
+            fail(e.getMessage());
+        }
+
+        when(mockedPersistence.getDailyLog(p1, currDate)).thenReturn(dl1);
+
+        DailyLog dl2 = toTest.getDailyLog(p1, currDate);
+
+        verify(mockedPersistence).setSymptoms(p1, dl1);
+        verify(mockedPersistence).getDailyLog(p1, currDate);
+
+        assertEquals(dl1, dl2);
+    }
+
+    @Test
+    public void testSetSubstance() {
+        IDailyLogPersistence mockedPersistence = mock(IDailyLogPersistence.class);
+        IDailyLogHandler toTest = new DailyLogHandler(mockedPersistence);
+
+        Date currDate = new Date();
+        Patient p1 = new Patient("mock1@example.com");
+        DailyLog dl1 = new DailyLog();
+
+        try {
+            dl1.addSubstance("caffeine", 5);
+            toTest.setSubstances(p1, dl1);
+        } catch (InvalidDailyLogException e) {
+            fail(e.getMessage());
+        }
+
+        when(mockedPersistence.getDailyLog(p1, currDate)).thenReturn(dl1);
+
+        DailyLog dl2 = toTest.getDailyLog(p1, currDate);
+
+        verify(mockedPersistence).setSubstances(p1, dl1);
+        verify(mockedPersistence).getDailyLog(p1, currDate);
+
+        assertEquals(dl1, dl2);
+    }
+
+    @Test
+    public void testGetAverageSleep() {
+        IDailyLogPersistence mockedPersistence = mock(IDailyLogPersistence.class);
+        IDailyLogHandler toTest = new DailyLogHandler(mockedPersistence);
+
+        Patient p1 = new Patient("mock1@example.com");
+
+        DailyLog dl1 = new DailyLog("2024-03-21", 3, 7, "");
+        DailyLog dl2 = new DailyLog("2024-03-22", 3, 9, "");
+        DailyLog dl3 = new DailyLog("2024-03-23", 3, 10, "");
+        List<DailyLog> logList = new ArrayList<>();
+        logList.add(dl1);
+        logList.add(dl2);
+        logList.add(dl3);
+
+        when(mockedPersistence.getAllDailyLogs(p1)).thenReturn(logList);
+        double avgSleep = toTest.getAverageSleep(p1);
+        verify(mockedPersistence).getAllDailyLogs(p1);
+
+        assertEquals(26.0/3, avgSleep, 0.0001);
     }
 }

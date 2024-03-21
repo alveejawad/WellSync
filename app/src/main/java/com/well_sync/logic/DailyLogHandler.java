@@ -55,14 +55,13 @@ public class DailyLogHandler implements IDailyLogHandler {
     }
 
     public double getAverageSleep(Patient patient) {
-        List<Date> allDates = getAllDates(patient);
+        List<DailyLog> allLogs = persistLog.getAllDailyLogs(patient);
         int totalHours = 0;
         int numLogs = 0;
 
-        for (Date date : allDates) {
-            DailyLog dailyLog = getDailyLog(patient, date);
-            if (dailyLog != null) {
-                totalHours += dailyLog.getSleepHours();
+        for (DailyLog log : allLogs) {
+            if (log != null) {
+                totalHours += log.getSleepHours();
                 numLogs++;
             }
         }
