@@ -50,6 +50,26 @@ public class DailyLogHandler implements IDailyLogHandler {
         }
     }
 
+    public double getAverageSleep(Patient patient) {
+        List<Date> allDates = getAllDates(patient);
+        int totalHours = 0;
+        int numLogs = 0;
+
+        for (Date date : allDates) {
+            DailyLog dailyLog = getDailyLog(patient, formatDate(date));
+            if (dailyLog != null) {
+                totalHours += dailyLog.getSleepHours();
+                numLogs++;
+            }
+        }
+
+        if (numLogs == 0) {
+            return 0.0;
+        }
+
+        return (double) totalHours / numLogs;
+    }
+
     public List<Date> getAllDates(Patient patient) {
         return persistLog.getAllDates(patient);
     }
