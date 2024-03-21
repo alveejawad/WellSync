@@ -15,7 +15,6 @@ import com.well_sync.objects.Medication;
 import com.well_sync.objects.Patient;
 import com.well_sync.objects.Substance;
 import com.well_sync.objects.Symptom;
-import java.util.Date;
 import java.util.List;
 
 public class DailyLogPatientActivity extends AppCompatActivity {
@@ -27,7 +26,6 @@ public class DailyLogPatientActivity extends AppCompatActivity {
         DailyLogHandler dailyLogHandler = new DailyLogHandler();
         Intent intent = getIntent();
         String date = intent.getStringExtra("date");
-        Date currDate=DailyLogHandler.DateFromString(date);
 
         //get email and date from HomePage Activity
         String patientEmail = intent.getStringExtra("patientEmail");
@@ -35,7 +33,7 @@ public class DailyLogPatientActivity extends AppCompatActivity {
         // Get the data from patient
         PatientHandler patientHandler = new PatientHandler();
         Patient newPatient = patientHandler.getDetails(patientEmail);
-        DailyLog dailyLog = dailyLogHandler.getDailyLog(newPatient, currDate);
+        DailyLog dailyLog = dailyLogHandler.getDailyLog(newPatient, date);
         //Get lists
         List<Symptom> symptomList = dailyLog.getSymptoms();
         List<Medication> medicationList =dailyLog.getMedications();

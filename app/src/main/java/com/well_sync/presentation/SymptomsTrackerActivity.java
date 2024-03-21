@@ -16,8 +16,6 @@ import com.well_sync.logic.exceptions.InvalidDailyLogException;
 import com.well_sync.objects.DailyLog;
 import com.well_sync.objects.Patient;
 
-import java.util.Date;
-
 public class SymptomsTrackerActivity extends AppCompatActivity {
     private DailyLogHandler dailyLogHandler;
     private String email;
@@ -36,13 +34,10 @@ public class SymptomsTrackerActivity extends AppCompatActivity {
         email = intent.getStringExtra("email");
         String date = intent.getStringExtra("date");
 
-        //Get an object of type Date from the string
-        Date currDate = DailyLogHandler.DateFromString(date);
-
         // Get the data from patient
         PatientHandler patientHandler = new PatientHandler();
         Patient newPatient = patientHandler.getDetails(email);
-        dailyLog = dailyLogHandler.getDailyLog(newPatient,currDate);
+        dailyLog = dailyLogHandler.getDailyLog(newPatient, date);
 
         // Set click listeners or any other event listeners as needed
         closeIcon.setOnClickListener(view -> {

@@ -47,12 +47,11 @@ public class HomePageActivity extends AppCompatActivity {
         String date = getCurrentDate();
 
         dailyLogHandler = new DailyLogHandler();
-        Date currDate = DailyLogHandler.DateFromString(date);
 
         // Get the data from patient
         PatientHandler patientHandler = new PatientHandler();
-       newPatient = patientHandler.getDetails(email);
-        dailyLog = dailyLogHandler.getDailyLog(newPatient,currDate);
+        newPatient = patientHandler.getDetails(email);
+        dailyLog = dailyLogHandler.getDailyLog(newPatient, date);
 
         // Find your widgets by their IDs
         layout= findViewById(R.id.layout);

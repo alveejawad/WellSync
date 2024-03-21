@@ -16,7 +16,6 @@ import com.well_sync.logic.exceptions.InvalidDailyLogException;
 import com.well_sync.objects.DailyLog;
 import com.well_sync.objects.Patient;
 
-import java.util.Date;
 
 public class SubstanceUseTrackerActivity extends AppCompatActivity {
 
@@ -40,12 +39,11 @@ public class SubstanceUseTrackerActivity extends AppCompatActivity {
         email = intent.getStringExtra("email");
         String date = intent.getStringExtra("date");
         dailyLogHandler = new DailyLogHandler();
-        Date currDate = DailyLogHandler.DateFromString(date);
 
         // Get the data from patient
         PatientHandler patientHandler = new PatientHandler();
         Patient newPatient = patientHandler.getDetails(email);
-        dailyLog = dailyLogHandler.getDailyLog(newPatient,currDate);
+        dailyLog = dailyLogHandler.getDailyLog(newPatient, date);
 
 
         // Set click listeners or any other event listeners as needed

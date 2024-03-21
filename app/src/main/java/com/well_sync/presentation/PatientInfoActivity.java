@@ -19,8 +19,6 @@ import com.well_sync.objects.DailyLog;
 import com.well_sync.objects.Patient;
 import com.well_sync.objects.Doctor;
 
-import java.util.Date;
-
 public class PatientInfoActivity extends AppCompatActivity {
     private DailyLog dailyLog;
     private DailyLogHandler dailyLogHandler;
@@ -66,8 +64,7 @@ public class PatientInfoActivity extends AppCompatActivity {
         logsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Date currDate=DailyLogHandler.DateFromString(date);
-                dailyLog = new DailyLog(currDate, 3, 8, "ok babe");
+                dailyLog = new DailyLog(date, 3, 8, "ok babe");
                         //dailyLogHandler.getDailyLog(patient, currDate);
                 if(dailyLog == null) {
                     // Show a Toast or handle the validation error as needed
