@@ -7,6 +7,9 @@ import com.well_sync.objects.Patient;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Saves and retrieves health log information saved by patients to particular calendar dates.
+ */
 public interface IDailyLogHandler {
 
     /**

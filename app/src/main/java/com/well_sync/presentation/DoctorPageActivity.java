@@ -12,8 +12,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.well_sync.R;
 import com.well_sync.logic.DoctorHandler;
+import com.well_sync.logic.IDoctorHandler;
+import com.well_sync.logic.IPatientHandler;
+import com.well_sync.logic.IUserAuthenticationHandler;
 import com.well_sync.logic.PatientHandler;
-import com.well_sync.logic.UserAuthenticationHandler;
 import com.well_sync.logic.exceptions.InvalidDoctorException;
 import com.well_sync.objects.Doctor;
 import com.well_sync.objects.Patient;
@@ -28,11 +30,11 @@ import java.util.Locale;
 public class DoctorPageActivity extends AppCompatActivity{
 
     private UserCredentials userCredentials;
-    private UserAuthenticationHandler userAuthenticationHandler;
+    private IUserAuthenticationHandler IUserAuthenticationHandler;
     private Doctor doctor;
     private String doctorEmail;
     private List<Patient> patientList;
-    private PatientHandler patientHandler;
+    private IPatientHandler patientHandler;
     private PatientAdapter patientAdapter;
 
     private EditText emailEditText;
@@ -51,7 +53,7 @@ public class DoctorPageActivity extends AppCompatActivity{
 
         //Initialize handler
         patientHandler = new PatientHandler();
-        DoctorHandler doctorHandler = new DoctorHandler();
+        IDoctorHandler doctorHandler = new DoctorHandler();
 
         doctor = doctorHandler.getDetails(doctorEmail);
         if (doctor == null) {

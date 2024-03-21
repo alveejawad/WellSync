@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.well_sync.R;
 import com.well_sync.logic.DailyLogHandler;
+import com.well_sync.logic.IDailyLogHandler;
+import com.well_sync.logic.IPatientHandler;
 import com.well_sync.logic.PatientHandler;
 import com.well_sync.logic.exceptions.InvalidDailyLogException;
 import com.well_sync.objects.DailyLog;
@@ -22,7 +24,7 @@ public class SubstanceUseTrackerActivity extends AppCompatActivity {
     private EditText nameSub, amountSub;
     protected String name, amount;
 
-    private DailyLogHandler dailyLogHandler;
+    private IDailyLogHandler dailyLogHandler;
     private String email;
     private DailyLog dailyLog;
     protected void onCreate(Bundle saveInstanceState) {
@@ -41,7 +43,7 @@ public class SubstanceUseTrackerActivity extends AppCompatActivity {
         dailyLogHandler = new DailyLogHandler();
 
         // Get the data from patient
-        PatientHandler patientHandler = new PatientHandler();
+        IPatientHandler patientHandler = new PatientHandler();
         Patient newPatient = patientHandler.getDetails(email);
         dailyLog = dailyLogHandler.getDailyLog(newPatient, date);
 

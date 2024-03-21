@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.well_sync.R;
 import com.well_sync.logic.DailyLogHandler;
+import com.well_sync.logic.IDailyLogHandler;
+import com.well_sync.logic.IPatientHandler;
 import com.well_sync.logic.PatientHandler;
 import com.well_sync.objects.DailyLog;
 import com.well_sync.objects.Medication;
@@ -23,7 +25,7 @@ public class DailyLogPatientActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_daily_log_patient);
 
-        DailyLogHandler dailyLogHandler = new DailyLogHandler();
+        IDailyLogHandler dailyLogHandler = new DailyLogHandler();
         Intent intent = getIntent();
         String date = intent.getStringExtra("date");
 
@@ -31,7 +33,7 @@ public class DailyLogPatientActivity extends AppCompatActivity {
         String patientEmail = intent.getStringExtra("patientEmail");
         String doctorEmail = intent.getStringExtra("doctorEmail");
         // Get the data from patient
-        PatientHandler patientHandler = new PatientHandler();
+        IPatientHandler patientHandler = new PatientHandler();
         Patient newPatient = patientHandler.getDetails(patientEmail);
         DailyLog dailyLog = dailyLogHandler.getDailyLog(newPatient, date);
         //Get lists

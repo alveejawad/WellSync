@@ -18,6 +18,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.well_sync.R;
 import com.well_sync.logic.DailyLogHandler;
+import com.well_sync.logic.IDailyLogHandler;
+import com.well_sync.logic.IPatientHandler;
 import com.well_sync.logic.PatientHandler;
 import com.well_sync.objects.DailyLog;
 import com.well_sync.objects.Patient;
@@ -28,7 +30,7 @@ import java.util.Locale;
 
 public class HomePageActivity extends AppCompatActivity {
 
-    private DailyLogHandler dailyLogHandler;
+    private IDailyLogHandler dailyLogHandler;
     private String email;
     private DailyLog dailyLog;
     RelativeLayout layout;
@@ -49,7 +51,7 @@ public class HomePageActivity extends AppCompatActivity {
         dailyLogHandler = new DailyLogHandler();
 
         // Get the data from patient
-        PatientHandler patientHandler = new PatientHandler();
+        IPatientHandler patientHandler = new PatientHandler();
         newPatient = patientHandler.getDetails(email);
         dailyLog = dailyLogHandler.getDailyLog(newPatient, date);
 

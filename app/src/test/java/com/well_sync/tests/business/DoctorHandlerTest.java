@@ -4,11 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import com.well_sync.logic.DoctorHandler;
+import com.well_sync.logic.IDoctorHandler;
 import com.well_sync.logic.exceptions.InvalidDoctorException;
-import com.well_sync.logic.exceptions.InvalidPatientException;
 import com.well_sync.objects.Doctor;
-import com.well_sync.objects.Patient;
-import com.well_sync.objects.UserCredentials;
 import com.well_sync.persistence.stubs.UserPersistenceStub;
 
 import org.junit.Before;
@@ -16,7 +14,7 @@ import org.junit.Test;
 
 public class DoctorHandlerTest {
 
-    private DoctorHandler doctorHandler;
+    private IDoctorHandler doctorHandler;
 
     @Before
     public void setup() {

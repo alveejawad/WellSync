@@ -14,6 +14,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.well_sync.R;
 import com.well_sync.logic.DailyLogHandler;
+import com.well_sync.logic.IDailyLogHandler;
+import com.well_sync.logic.IPatientHandler;
 import com.well_sync.logic.PatientHandler;
 import com.well_sync.logic.exceptions.InvalidDailyLogException;
 import com.well_sync.objects.DailyLog;
@@ -30,7 +32,7 @@ public class MoodTrackerActivity extends AppCompatActivity {
     private Patient patient;
     private String email;
     private String date;
-    private DailyLogHandler dailyLogHandler;
+    private IDailyLogHandler dailyLogHandler;
 
     protected String emotion, sleepHoursText, userNotes;
     private Intent intent;
@@ -160,7 +162,7 @@ public class MoodTrackerActivity extends AppCompatActivity {
 
                 DailyLog dailyLog = new DailyLog(date, moodScores, sleepHours, userNotes);
                 // Get the data from patient
-                PatientHandler patientHandler = new PatientHandler();
+                IPatientHandler patientHandler = new PatientHandler();
                 Patient newPatient = patientHandler.getDetails(email);
 
                 try {

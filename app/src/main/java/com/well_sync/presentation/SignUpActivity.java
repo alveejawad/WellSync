@@ -10,13 +10,14 @@ import android.widget.Toast;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import com.well_sync.R;
+import com.well_sync.logic.IUserAuthenticationHandler;
 import com.well_sync.logic.UserAuthenticationHandler;
 import com.well_sync.logic.exceptions.InvalidCredentialsException;
 import com.well_sync.objects.UserCredentials;
 
 public class SignUpActivity extends AppCompatActivity {
     private UserCredentials newUser;
-    private UserAuthenticationHandler signUpHandler;
+    private IUserAuthenticationHandler signUpHandler;
     private EditText userEmail;
     private EditText userPassword;
     private EditText userConfirmPassword;

@@ -11,13 +11,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.well_sync.R;
 import com.well_sync.logic.DailyLogHandler;
+import com.well_sync.logic.IDailyLogHandler;
+import com.well_sync.logic.IPatientHandler;
 import com.well_sync.logic.PatientHandler;
 import com.well_sync.logic.exceptions.InvalidDailyLogException;
 import com.well_sync.objects.DailyLog;
 import com.well_sync.objects.Patient;
 
 public class SymptomsTrackerActivity extends AppCompatActivity {
-    private DailyLogHandler dailyLogHandler;
+    private IDailyLogHandler dailyLogHandler;
     private String email;
     private DailyLog dailyLog;
     protected void onCreate(Bundle saveInstanceState) {
@@ -35,7 +37,7 @@ public class SymptomsTrackerActivity extends AppCompatActivity {
         String date = intent.getStringExtra("date");
 
         // Get the data from patient
-        PatientHandler patientHandler = new PatientHandler();
+        IPatientHandler patientHandler = new PatientHandler();
         Patient newPatient = patientHandler.getDetails(email);
         dailyLog = dailyLogHandler.getDailyLog(newPatient, date);
 

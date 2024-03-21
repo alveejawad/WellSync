@@ -1,9 +1,9 @@
 package com.well_sync.tests.business;
 
+import com.well_sync.logic.IPatientHandler;
 import com.well_sync.logic.PatientHandler;
 import com.well_sync.logic.exceptions.InvalidPatientException;
 import com.well_sync.objects.Patient;
-import com.well_sync.objects.UserCredentials;
 import com.well_sync.persistence.stubs.UserPersistenceStub;
 
 import org.junit.Before;
@@ -12,12 +12,12 @@ import static org.junit.Assert.*;
 
 public class PatientHandlerTest {
 
-    private PatientHandler patientHandler;
+    private IPatientHandler IPatientHandler;
 
     @Before
     public void setup() {
         System.out.println("Starting test for PatientHandlerTest");
-        patientHandler = new PatientHandler(new UserPersistenceStub());
+        IPatientHandler = new PatientHandler(new UserPersistenceStub());
     }
 
     @Test
@@ -25,7 +25,7 @@ public class PatientHandlerTest {
         System.out.println("\nStarting testGetDetails");
 
         String email = "patient1@example.com";
-        Patient patient = patientHandler.getDetails(email);
+        Patient patient = IPatientHandler.getDetails(email);
 
         assertEquals(patient.getEmail(), email);
         assertEquals(patient.getFirstName(), "John");
@@ -43,14 +43,14 @@ public class PatientHandlerTest {
 
         String email = "new-patient@example.com";
         Patient patientSet = new Patient(email, "Jane", "Newman", "O", "F", 0, "doctor says yes");
-        patientHandler.addPatient(patientSet);
-        Patient patientRetrieved = patientHandler.getDetails(email);
+        IPatientHandler.addPatient(patientSet);
+        Patient patientRetrieved = IPatientHandler.getDetails(email);
 
         assertEquals(patientSet, patientRetrieved);
 
         try {
             Patient invalidPatient = new Patient("invalid email address!");
-            patientHandler.addPatient(invalidPatient);
+            IPatientHandler.addPatient(invalidPatient);
             fail("Creating patient with malformed email address did not throw an exception.");
         } catch (InvalidPatientException e) {
             // pass!
@@ -64,7 +64,7 @@ public class PatientHandlerTest {
         System.out.println("\nStarting testEditDetails");
 
         String email = "patient2@example.com";
-        Patient patientYoung = patientHandler.getDetails(email);
+        Patient patientYoung = IPatientHandler.getDetails(email);
         Patient patientOld = new Patient(
                 email,
                 patientYoung.getFirstName(),
@@ -75,14 +75,14 @@ public class PatientHandlerTest {
                 "you're getting older!"
         );
 
-        patientHandler.editPatientDetails(patientOld);
-        Patient test = patientHandler.getDetails(email);
+        IPatientHandler.editPatientDetails(patientOld);
+        Patient test = IPatientHandler.getDetails(email);
 
         assertEquals(patientOld, test);
 
         try {
             Patient invalidPatient = new Patient("unused-wellformed-email@example.com");
-            patientHandler.editPatientDetails(invalidPatient);
+            IPatientHandler.editPatientDetails(invalidPatient);
             fail("Editing details of non-existent patient did not throw an exception.");
         } catch (InvalidPatientException e) {
             // pass!
@@ -90,7 +90,7 @@ public class PatientHandlerTest {
 
         try {
             Patient invalidPatient = new Patient("invalid email address");
-            patientHandler.editPatientDetails(invalidPatient);
+            IPatientHandler.editPatientDetails(invalidPatient);
             fail("Editing details given an invalid email address did not throw an exception.");
         } catch (InvalidPatientException e) {
             // pass!
