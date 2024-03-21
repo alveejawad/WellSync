@@ -5,7 +5,7 @@ import com.well_sync.logic.exceptions.InvalidCredentialsException;
 import com.well_sync.objects.UserCredentials;
 import com.well_sync.persistence.IUserPersistence;
 
-public class UserAuthenticationHandler {
+public class UserAuthenticationHandler implements IUserAuthenticationHandler {
 
     private final IUserPersistence persistUsers;
 
@@ -17,6 +17,7 @@ public class UserAuthenticationHandler {
         persistUsers = persistence;
     }
 
+    @Override
     public UserCredentials.Role login(UserCredentials inputCreds) throws InvalidCredentialsException {
         UserCredentials savedCreds = persistUsers.getUserCredentials(inputCreds);
 
@@ -38,6 +39,7 @@ public class UserAuthenticationHandler {
      * are valid. Note that account settings must be set using PatientHandler, and are undefined
      * for new accounts until this is done once.
      */
+    @Override
     public void register(UserCredentials credentials) throws InvalidCredentialsException {
         UserCredentialsValidator.validateCredentials(credentials);
         persistUsers.setUserCredentials(credentials);

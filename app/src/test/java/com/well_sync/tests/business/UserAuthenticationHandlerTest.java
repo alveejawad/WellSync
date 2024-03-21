@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+import com.well_sync.logic.IUserAuthenticationHandler;
 import com.well_sync.logic.UserAuthenticationHandler;
 import com.well_sync.logic.exceptions.InvalidCredentialsException;
 import com.well_sync.objects.UserCredentials;
@@ -11,7 +12,7 @@ import com.well_sync.persistence.stubs.UserPersistenceStub;
 
 public class UserAuthenticationHandlerTest {
 
-    private UserAuthenticationHandler userAuthHandler;
+    private IUserAuthenticationHandler userAuthHandler;
 
     @Before
     public void setup() {

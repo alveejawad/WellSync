@@ -5,9 +5,9 @@ import static org.junit.Assert.assertNotNull;
 
 import com.well_sync.application.Services;
 import com.well_sync.logic.DoctorHandler;
+import com.well_sync.logic.IDoctorHandler;
 import com.well_sync.logic.exceptions.InvalidDoctorException;
 import com.well_sync.objects.Doctor;
-import com.well_sync.objects.UserCredentials;
 import com.well_sync.tests.utils.TestUtils;
 
 import org.junit.After;
@@ -18,7 +18,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class DoctorHandlerIT {
-    private DoctorHandler handler;
+    private IDoctorHandler handler;
     private File tempDB;
 
     @Before

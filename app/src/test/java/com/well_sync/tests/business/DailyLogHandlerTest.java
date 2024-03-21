@@ -5,6 +5,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 import com.well_sync.logic.DailyLogHandler;
+import com.well_sync.logic.IPatientHandler;
 import com.well_sync.logic.PatientHandler;
 import com.well_sync.logic.exceptions.InvalidDailyLogException;
 import com.well_sync.objects.DailyLog;
@@ -20,13 +21,13 @@ import java.util.List;
 public class DailyLogHandlerTest {
 
     private DailyLogHandler dailyLogHandler;
-    private PatientHandler patientHandler; // needed to recall patients
+    private IPatientHandler IPatientHandler; // needed to recall patients
 
     @Before
     public void setup() {
         System.out.println("Starting test for DailyLogHandler");
         dailyLogHandler = new DailyLogHandler(new DailyLogPersistenceStub());
-        patientHandler = new PatientHandler(new UserPersistenceStub());
+        IPatientHandler = new PatientHandler(new UserPersistenceStub());
     }
 
     @Test
@@ -35,7 +36,7 @@ public class DailyLogHandlerTest {
 
         // retrieving known DailyLog
         Date date = new Date(123, Calendar.JANUARY, 1);
-        DailyLog log = dailyLogHandler.getDailyLog(patientHandler.getDetails("patient1@example.com"), date);
+        DailyLog log = dailyLogHandler.getDailyLog(IPatientHandler.getDetails("patient1@example.com"), "2023-01-01");
 
         assertEquals(date, log.getDate());
         assertEquals(7, log.getMoodScore());
@@ -50,15 +51,13 @@ public class DailyLogHandlerTest {
         System.out.println("\nStarting testSetDailyLog...");
 
         // set valid log for patient
-        Date date = new Date(124, Calendar.JANUARY, 17);
         Patient patient = new Patient("new-patient@example.com");
-        DailyLog dailyLog = new DailyLog(date, 2, 4, "Very tired");
+        DailyLog dailyLog = new DailyLog("2024-01-17", 2, 4, "Very tired");
 
         dailyLogHandler.setDailyLog(patient, dailyLog);
 
         // set invalid log
-        date = new Date(124, Calendar.JANUARY, 18);
-        dailyLog = new DailyLog(date, -42, -1, "weird day");
+        dailyLog = new DailyLog("2024-01-18", -42, -1, "weird day");
 
         try {
             dailyLogHandler.setDailyLog(patient, dailyLog);
@@ -71,24 +70,8 @@ public class DailyLogHandlerTest {
     }
 
     @Test
-    public void testDateFromString() {
-        Date d1 = DailyLogHandler.DateFromString("2022-04-25");
-        assertEquals(new Date(122, Calendar.APRIL, 25), d1);
-
-        Date d2 = DailyLogHandler.DateFromString("1901-01-01");
-        assertEquals(new Date(1, Calendar.JANUARY, 1), d2);
-
-        try {
-            DailyLogHandler.DateFromString("not a date");
-            fail("Invalid date did not throw an exception.");
-        } catch (RuntimeException e) {
-            // pass!
-        }
-    }
-
-    @Test
     public void testGetAllDates() {
-        Patient p1 = patientHandler.getDetails("patient1@example.com");
+        Patient p1 = IPatientHandler.getDetails("patient1@example.com");
         List<Date> datesActual = dailyLogHandler.getAllDates(p1);
         List<Date> datesExpected = new ArrayList<Date>() {{
             add(new Date(123, Calendar.JANUARY, 1));

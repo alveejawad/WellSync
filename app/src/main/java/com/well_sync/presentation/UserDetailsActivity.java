@@ -13,13 +13,14 @@ import android.widget.Spinner;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.well_sync.R;
+import com.well_sync.logic.IPatientHandler;
 import com.well_sync.logic.PatientHandler;
 import com.well_sync.logic.exceptions.InvalidPatientException;
 import com.well_sync.objects.Patient;
 
 import java.util.Calendar;
 public class UserDetailsActivity extends AppCompatActivity {
-    private PatientHandler patientHandler;
+    private IPatientHandler patientHandler;
     //User data
     private EditText userFirstName,userLastName;
     private DatePicker datePicker;

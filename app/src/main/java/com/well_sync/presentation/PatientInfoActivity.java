@@ -11,19 +11,17 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.well_sync.R;
-import com.well_sync.logic.DailyLogHandler;
 import com.well_sync.logic.DoctorHandler;
+import com.well_sync.logic.IDoctorHandler;
+import com.well_sync.logic.IPatientHandler;
 import com.well_sync.logic.PatientHandler;
 import com.well_sync.logic.exceptions.InvalidPatientException;
 import com.well_sync.objects.DailyLog;
 import com.well_sync.objects.Patient;
 import com.well_sync.objects.Doctor;
 
-import java.util.Date;
-
 public class PatientInfoActivity extends AppCompatActivity {
     private DailyLog dailyLog;
-    private DailyLogHandler dailyLogHandler;
     private Patient patient;
     private Doctor doctor;
     private TextView nameTextView, ageTextView, genderTextView, bloodTypeTextView;
@@ -38,8 +36,6 @@ public class PatientInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_info);
 
-        dailyLogHandler = new DailyLogHandler();
-
         // Initialize views
         adviseEditText = findViewById(R.id.advise_from_doctor);
         logsButton = findViewById(R.id.daily_logs);
@@ -52,9 +48,9 @@ public class PatientInfoActivity extends AppCompatActivity {
         doctorEmail = intent.getStringExtra("doctorEmail");
         date = intent.getStringExtra("date");
         patientEmail = intent.getStringExtra("patientEmail");
-        PatientHandler patientHandler = new PatientHandler();
+        IPatientHandler patientHandler = new PatientHandler();
         patient = patientHandler.getDetails(patientEmail);
-        DoctorHandler doctorHandler = new DoctorHandler();
+        IDoctorHandler doctorHandler = new DoctorHandler();
         doctor = doctorHandler.getDetails(doctorEmail);
 
         setData(R.id.name,patient.getFirstName()+" "+patient.getLastName());
@@ -66,8 +62,7 @@ public class PatientInfoActivity extends AppCompatActivity {
         logsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Date currDate=DailyLogHandler.DateFromString(date);
-                dailyLog = new DailyLog(currDate, 3, 8, "ok babe");
+                dailyLog = new DailyLog(date, 3, 8, "ok babe");
                         //dailyLogHandler.getDailyLog(patient, currDate);
                 if(dailyLog == null) {
                     // Show a Toast or handle the validation error as needed

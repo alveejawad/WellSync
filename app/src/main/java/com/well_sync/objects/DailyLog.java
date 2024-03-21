@@ -3,9 +3,12 @@ package com.well_sync.objects;
 import com.well_sync.logic.DailyLogValidator;
 import com.well_sync.logic.exceptions.InvalidDailyLogException;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 /**
@@ -28,6 +31,15 @@ public class DailyLog {
         this.date = new Date(); // initialized to present
     }
 
+    public DailyLog(String date, int moodScore, int sleepHours, String notes) {
+        this((Date) null, moodScore, sleepHours, notes);
+        try {
+            this.date = new SimpleDateFormat("yyyy-MM-dd", Locale.CANADA).parse(date);
+        } catch (ParseException e) {
+            this.date = null;
+        }
+    }
+
     public DailyLog(Date date, int moodScore, int sleepHours, String notes) {
         this.date = date;
         this.setMoodScore(moodScore); // bounds checking
@@ -38,6 +50,7 @@ public class DailyLog {
         this.medicationList = new ArrayList<>();
         this.substanceList = new ArrayList<>();
     }
+
 
     public Date getDate() {
         return date;

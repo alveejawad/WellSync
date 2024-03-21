@@ -5,7 +5,7 @@ import com.well_sync.logic.exceptions.InvalidPatientException;
 import com.well_sync.objects.Patient;
 import com.well_sync.persistence.IUserPersistence;
 
-public class PatientHandler {
+public class PatientHandler implements IPatientHandler {
 
 	private final IUserPersistence persistUsers;
 
@@ -17,6 +17,7 @@ public class PatientHandler {
 		persistUsers = persistence;
 	}
 
+	@Override
 	public Patient getDetails(String email) {
 		return persistUsers.getPatient(email);
 	}
@@ -24,6 +25,7 @@ public class PatientHandler {
 	/**
 	 * Edit existing patient details.
 	 */
+	@Override
 	public void editPatientDetails(Patient patient) throws InvalidPatientException {
 		PatientValidator.validatePatient(patient);
 		String email = patient.getEmail();
@@ -39,6 +41,7 @@ public class PatientHandler {
 	/**
 	 * Register new patient details in the database.
 	 */
+	@Override
 	public void addPatient(Patient patient) throws InvalidPatientException {
 		PatientValidator.validatePatient(patient);
 		Patient existingPatient = persistUsers.getPatient(patient.getEmail());

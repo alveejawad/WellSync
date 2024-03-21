@@ -1,6 +1,7 @@
 package com.well_sync.tests.business;
 
 import com.well_sync.application.Services;
+import com.well_sync.logic.IPatientHandler;
 import com.well_sync.logic.PatientHandler;
 import com.well_sync.logic.exceptions.InvalidPatientException;
 import com.well_sync.objects.Patient;
@@ -16,7 +17,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class PatientHandlerIT {
-    private PatientHandler handler;
+    private IPatientHandler handler;
     private File tempDB;
 
     @Before

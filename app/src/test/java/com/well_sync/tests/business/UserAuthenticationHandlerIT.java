@@ -1,13 +1,10 @@
 package com.well_sync.tests.business;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.fail;
 
 import com.well_sync.application.Services;
-import com.well_sync.logic.DoctorHandler;
-import com.well_sync.logic.PatientHandler;
+import com.well_sync.logic.IUserAuthenticationHandler;
 import com.well_sync.logic.UserAuthenticationHandler;
 import com.well_sync.logic.exceptions.InvalidCredentialsException;
 import com.well_sync.objects.UserCredentials;
@@ -21,9 +18,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class UserAuthenticationHandlerIT {
-    private UserAuthenticationHandler authHandler;
-    private PatientHandler patientHandler;
-    private DoctorHandler doctorHandler;
+    private IUserAuthenticationHandler authHandler;
     private File tempDB;
 
     @Before
@@ -31,8 +26,6 @@ public class UserAuthenticationHandlerIT {
         System.out.println("Starting integration test for UserAuthenticationHandler");
         this.tempDB = TestUtils.copyDB();
         this.authHandler = new UserAuthenticationHandler();
-        this.patientHandler = new PatientHandler();
-        this.doctorHandler = new DoctorHandler();
 
         assertNotNull(this.tempDB);
         assertNotNull(this.authHandler);

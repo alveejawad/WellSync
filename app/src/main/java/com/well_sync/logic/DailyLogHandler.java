@@ -12,7 +12,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class DailyLogHandler {
+public class DailyLogHandler implements IDailyLogHandler {
 
     private final IDailyLogPersistence persistLog;
 
@@ -42,20 +42,20 @@ public class DailyLogHandler {
         persistLog.setSymptoms(patient, dailyLog);
     }
 
-    public DailyLog getDailyLog(Patient patient, Date date) {
-        return persistLog.getDailyLog(patient, date);
+    public DailyLog getDailyLog(Patient patient, String date) {
+        try {
+            return persistLog.getDailyLog(patient, dateFromString(date));
+        } catch (ParseException e) {
+            return null;
+        }
     }
 
     public List<Date> getAllDates(Patient patient) {
         return persistLog.getAllDates(patient);
     }
 
-    public static Date DateFromString(String dateString) {
+    private static Date dateFromString(String dateString) throws ParseException {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.CANADA);
-        try {
-            return formatter.parse(dateString);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
+        return formatter.parse(dateString);
     }
 }

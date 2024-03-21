@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.well_sync.R;
+import com.well_sync.logic.IPatientHandler;
 import com.well_sync.logic.PatientHandler;
 import com.well_sync.objects.Patient;
 
@@ -29,7 +30,7 @@ public class UserSettingsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         email = intent.getStringExtra("email");
 
-        PatientHandler patientHandler = new PatientHandler();
+        IPatientHandler patientHandler = new PatientHandler();
         Patient patient = patientHandler.getDetails(email);
 
         setData(R.id.name, patient.getFirstName()+" "+patient.getLastName());
