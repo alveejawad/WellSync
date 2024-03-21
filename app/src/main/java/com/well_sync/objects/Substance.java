@@ -1,7 +1,6 @@
 package com.well_sync.objects;
 
 public class Substance {
-    public final int maxQuantity = 5;
     private String name;
     private int quantity;
 

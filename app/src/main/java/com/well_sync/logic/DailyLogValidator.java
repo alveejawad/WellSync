@@ -1,5 +1,6 @@
 package com.well_sync.logic;
 
+import com.well_sync.R;
 import com.well_sync.logic.exceptions.InvalidDailyLogException;
 import com.well_sync.objects.DailyLog;
 import com.well_sync.objects.Medication;
@@ -19,8 +20,8 @@ public abstract class DailyLogValidator {
             throw new InvalidDailyLogException("Daily log object undefined.");
 
         validateDate(log.getDate());
-        validateMoodScore(log.getMoodScore(), DailyLog.maxMoodScore);
-        validateSleepHours(log.getSleepHours(), DailyLog.maxSleepHours);
+        validateMoodScore(log.getMoodScore());
+        validateSleepHours(log.getSleepHours());
 
         validateMedicationList(log.getMedications());
         validateSymptomList(log.getSymptoms());
@@ -35,13 +36,13 @@ public abstract class DailyLogValidator {
             throw new InvalidDailyLogException("Daily log cannot be set to a future date.");
     }
 
-    public static void validateMoodScore(int moodScore, int maxScore) throws InvalidDailyLogException {
-        if (moodScore < 1 || moodScore > maxScore)
+    public static void validateMoodScore(int moodScore) throws InvalidDailyLogException {
+        if (moodScore < 1 || moodScore > R.integer.max_mood_score)
             throw new InvalidDailyLogException("Invalid mood score; must be between 1 and 4 inclusive.");
     }
 
-    public static void validateSleepHours(int sleepHours, int maxHours) throws InvalidDailyLogException {
-        if (sleepHours < 0 || sleepHours > maxHours)
+    public static void validateSleepHours(int sleepHours) throws InvalidDailyLogException {
+        if (sleepHours < 0 || sleepHours > R.integer.max_sleep_hours)
             throw new InvalidDailyLogException("Invalid sleep amount; must be between 0 and 16 hours inclusive.");
     }
 
@@ -56,10 +57,10 @@ public abstract class DailyLogValidator {
 
         ValidationUtils.validateName(InvalidDailyLogException.class, medicine.getName());
 
-        if (medicine.getQuantity() < 0 || medicine.getQuantity() > medicine.maxQuantity)
+        if (medicine.getQuantity() < 0 || medicine.getQuantity() > R.integer.max_med_quantity)
             throw new InvalidDailyLogException("Invalid quantity specified.");
 
-        if (medicine.getDosage() < 0 || medicine.getDosage() > medicine.maxDosage)
+        if (medicine.getDosage() < 0 || medicine.getDosage() > R.integer.max_med_dosage)
             throw new InvalidDailyLogException("Invalid dosage specified.");
     }
 
@@ -73,7 +74,7 @@ public abstract class DailyLogValidator {
             throw new InvalidDailyLogException("Medication details object undefined.");
 
         ValidationUtils.validateName(InvalidDailyLogException.class, symptom.getName());
-        if (symptom.getIntensity() < 0 || symptom.getIntensity() > symptom.maxIntensity)
+        if (symptom.getIntensity() < 0 || symptom.getIntensity() > R.integer.max_symptom_intensity)
             throw new InvalidDailyLogException("Invalid intensity specified.");
     }
 
@@ -87,7 +88,7 @@ public abstract class DailyLogValidator {
             throw new InvalidDailyLogException("Substance details object undefined.");
         ValidationUtils.validateName(InvalidDailyLogException.class, substance.getName());
 
-        if (substance.getQuantity() < 0 || substance.getQuantity() > substance.maxQuantity)
+        if (substance.getQuantity() < 0 || substance.getQuantity() > R.integer.max_substance_quantity)
             throw new InvalidDailyLogException("Invalid quantity specified.");
     }
 }
