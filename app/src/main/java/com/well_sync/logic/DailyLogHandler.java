@@ -44,10 +44,14 @@ public class DailyLogHandler implements IDailyLogHandler {
 
     public DailyLog getDailyLog(Patient patient, String date) {
         try {
-            return persistLog.getDailyLog(patient, dateFromString(date));
+            return getDailyLog(patient, dateFromString(date));
         } catch (ParseException e) {
             return null;
         }
+    }
+
+    public DailyLog getDailyLog(Patient patient, Date date) {
+        return persistLog.getDailyLog(patient, date);
     }
 
     public double getAverageSleep(Patient patient) {
@@ -56,7 +60,7 @@ public class DailyLogHandler implements IDailyLogHandler {
         int numLogs = 0;
 
         for (Date date : allDates) {
-            DailyLog dailyLog = getDailyLog(patient, formatDate(date));
+            DailyLog dailyLog = getDailyLog(patient, date);
             if (dailyLog != null) {
                 totalHours += dailyLog.getSleepHours();
                 numLogs++;
