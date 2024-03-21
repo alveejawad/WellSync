@@ -84,13 +84,14 @@ public class SubstanceUseTrackerActivity extends AppCompatActivity {
             try {
                 dailyLogHandler.setSubstances(newPatient,dailyLog);
             } catch (InvalidDailyLogException e) {
-                Toast.makeText(getApplicationContext(), "Your changes couldn't be saved, try again later.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
             }
-                Intent saveIntent = new Intent(SubstanceUseTrackerActivity.this, DisplaySubstanceUseActivity.class);
-                saveIntent.putExtra("email",email);
-                saveIntent.putExtra("name", name);
-                saveIntent.putExtra("amount", amount);
-                SubstanceUseTrackerActivity.this.startActivity(saveIntent);
+
+            Intent saveIntent = new Intent(SubstanceUseTrackerActivity.this, DisplaySubstanceUseActivity.class);
+            saveIntent.putExtra("email",email);
+            saveIntent.putExtra("name", name);
+            saveIntent.putExtra("amount", amount);
+            SubstanceUseTrackerActivity.this.startActivity(saveIntent);
 
         });
     }

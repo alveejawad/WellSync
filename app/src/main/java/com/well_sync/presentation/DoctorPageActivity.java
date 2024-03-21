@@ -14,12 +14,10 @@ import com.well_sync.R;
 import com.well_sync.logic.DoctorHandler;
 import com.well_sync.logic.IDoctorHandler;
 import com.well_sync.logic.IPatientHandler;
-import com.well_sync.logic.IUserAuthenticationHandler;
 import com.well_sync.logic.PatientHandler;
 import com.well_sync.logic.exceptions.InvalidDoctorException;
 import com.well_sync.objects.Doctor;
 import com.well_sync.objects.Patient;
-import com.well_sync.objects.UserCredentials;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -29,8 +27,6 @@ import java.util.Locale;
 
 public class DoctorPageActivity extends AppCompatActivity{
 
-    private UserCredentials userCredentials;
-    private IUserAuthenticationHandler IUserAuthenticationHandler;
     private Doctor doctor;
     private String doctorEmail;
     private List<Patient> patientList;
@@ -38,8 +34,6 @@ public class DoctorPageActivity extends AppCompatActivity{
     private PatientAdapter patientAdapter;
 
     private EditText emailEditText;
-    private String name, bloodType, gender;
-    private int age;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

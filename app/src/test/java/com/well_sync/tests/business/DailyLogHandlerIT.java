@@ -16,7 +16,6 @@ import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -37,14 +36,13 @@ public class DailyLogHandlerIT {
     @Test
     public void setAndGetLog() throws InvalidDailyLogException {
         Patient patient = new Patient("patient1@example.com");
-        Date date = new Date(124, Calendar.MARCH, 6);
-        DailyLog log1 = new DailyLog(date, 3, 10, "Slept in");
+        DailyLog log1 = new DailyLog("2024-03-06", 3, 10, "Slept in");
 
         List<Date> list1 = handler.getAllDates(patient);
         handler.setDailyLog(patient, log1);
         List<Date> list2 = handler.getAllDates(patient);
 
-        DailyLog log2 = handler.getDailyLog(patient, date);
+        DailyLog log2 = handler.getDailyLog(patient, "2024-03-06");
 
         assertEquals(log1, log2);
         assertEquals(list1.size() + 1, list2.size());
