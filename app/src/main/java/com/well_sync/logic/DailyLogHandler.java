@@ -145,4 +145,9 @@ public class DailyLogHandler implements IDailyLogHandler {
 
         return moodScoresArray;
     }
+
+    private static Date dateFromString(String dateString) throws ParseException {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.CANADA);
+        return formatter.parse(dateString);
+    }
 }
