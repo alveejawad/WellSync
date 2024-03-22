@@ -105,7 +105,6 @@ public class DailyLogHandler implements IDailyLogHandler {
                 }
             }
         }
-
         for (int i = 0; i < avgSymptoms.length; i++) {
             if (numLogs[i] != 0) {
                 avgSymptoms[i] = (float) totalIntensities[i] / numLogs[i];
