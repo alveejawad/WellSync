@@ -28,4 +28,6 @@ public interface IUserPersistence {
 
     List<Patient> getAllPatientsList();
 
+    List<Patient> getAllPatientsForDoctor(Doctor doctor);
+
 }
