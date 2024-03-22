@@ -22,7 +22,7 @@ public class SymptomsTrackerActivity extends AppCompatActivity {
     private IDailyLogHandler dailyLogHandler;
     private String email;
     private DailyLog dailyLog;
-    private final String[] symptomsList = getResources().getStringArray(R.array.symptoms);
+    private String[] symptomsList;
     protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_symptomstracker);
@@ -41,6 +41,7 @@ public class SymptomsTrackerActivity extends AppCompatActivity {
         IPatientHandler patientHandler = new PatientHandler();
         Patient newPatient = patientHandler.getDetails(email);
         dailyLog = dailyLogHandler.getDailyLog(newPatient, date);
+        symptomsList = getResources().getStringArray(R.array.symptoms);
 
         // Set click listeners or any other event listeners as needed
         closeIcon.setOnClickListener(view -> {
