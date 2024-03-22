@@ -73,9 +73,9 @@ public class DailyLogHandler implements IDailyLogHandler {
         return (double) totalHours / numLogs;
     }
 
-    public double[] getAllSleepHours(Patient patient) {
+    public float[] getAllSleepHours(Patient patient) {
         List<DailyLog> allLogs = persistLog.getAllDailyLogs(patient);
-        double[] sleepHoursArray = new double[allLogs.size()];
+        float[] sleepHoursArray = new double[allLogs.size()];
 
         for (int i = 0; i < allLogs.size(); i++) {
             DailyLog log = allLogs.get(i);
@@ -87,6 +87,33 @@ public class DailyLogHandler implements IDailyLogHandler {
         }
 
         return sleepHoursArray;
+    }
+
+    public float[] getAverageSymptoms(Patient patient) {
+        List<DailyLog> allLogs = persistLog.getAllDailyLogs(patient);
+        int[] totalIntensities = new int[17];
+        int[] numLogs = new int[17];
+        float[] avgSymptoms = new float[17];
+
+        for (DailyLog log : allLogs) {
+            if (log != null) {
+                List<Symptom> symptoms = log.getSymptoms();
+                for (int i = 0; i < symptoms.size(); i++) {
+                    Symptom symptom = symptoms.get(i);
+                    totalIntensities[i] += symptom.getIntensity();
+                    numLogs[i]++;
+                }
+            }
+        }
+        for (int i = 0; i < avgSymptoms.length; i++) {
+            if (numLogs[i] != 0) {
+                avgSymptoms[i] = (float) totalIntensities[i] / numLogs[i];
+            } else {
+                avgSymptoms[i] = 0.0f;
+            }
+        }
+
+        return avgSymptoms;
     }
 
     public List<Date> getAllDates(Patient patient) {
