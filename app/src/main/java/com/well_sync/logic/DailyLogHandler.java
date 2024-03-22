@@ -73,6 +73,22 @@ public class DailyLogHandler implements IDailyLogHandler {
         return (double) totalHours / numLogs;
     }
 
+    public double[] getAllSleepHours(Patient patient) {
+        List<DailyLog> allLogs = persistLog.getAllDailyLogs(patient);
+        double[] sleepHoursArray = new double[allLogs.size()];
+
+        for (int i = 0; i < allLogs.size(); i++) {
+            DailyLog log = allLogs.get(i);
+            if (log != null) {
+                sleepHoursArray[i] = log.getSleepHours();
+            } else {
+                sleepHoursArray[i] = 0.0;
+            }
+        }
+
+        return sleepHoursArray;
+    }
+
     public List<Date> getAllDates(Patient patient) {
         return persistLog.getAllDates(patient);
     }
