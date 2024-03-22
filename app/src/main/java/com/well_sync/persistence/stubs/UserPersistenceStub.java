@@ -151,4 +151,17 @@ public class UserPersistenceStub implements IUserPersistence {
         }
     }
 
+    @Override
+    public List<Patient> getAllPatientsForDoctor(Doctor doctor) {
+        List<Patient> patientsForDoctor = new ArrayList<>();
+        for (Doctor d : doctorList) {
+            if (d.getEmail().equals(doctor.getEmail())) {
+                patientsForDoctor.addAll(d.getPatients());
+                break;
+            }
+        }
+        return patientsForDoctor;
+    }
+
+
 }
