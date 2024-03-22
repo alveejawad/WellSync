@@ -85,6 +85,11 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.anychart.AnyChart;
+import com.anychart.AnyChartView;
+import com.anychart.chart.common.dataentry.DataEntry;
+import com.anychart.chart.common.dataentry.ValueDataEntry;
+import com.anychart.charts.Pie;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
@@ -103,6 +108,9 @@ public class UserProgressActivity extends AppCompatActivity {
     private List<String> dates;
     private int sizeXAxis;
     private List<String> moodsList;
+    AnyChartView symptomsChart;
+    private String[] symptomsList;
+    private double[] average= {0.5, 2.3, 3.1, 1.9, 0.7, 3.6, 2.2, 0.4, 1.3, 3.7, 2.8, 1.5, 0.9, 3.2, 1.1, 2.6, 0.2};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,6 +118,7 @@ public class UserProgressActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_progress);
         dates = Arrays.asList("12-03", "12-05", "12-06","12-07");
         moodsList = Arrays.asList(getResources().getStringArray(R.array.moods));
+        symptomsList = getResources().getStringArray(R.array.symptoms);
 
         List<Entry> entries1 = new ArrayList<>();
         entries1.add(new Entry(0f, 1f));
@@ -119,9 +128,23 @@ public class UserProgressActivity extends AppCompatActivity {
 
         createLineChart(R.id.mood_chart,"Mood", dates,moodsList,entries1);
         createLineChart(R.id.sleep_chart,"Sleep Hours", dates,moodsList,entries1);
+        createPieChart(R.id.symptoms_chart);
+
 
     }
-    public void createLineChart(int idView, String label, List<String> xList,List<String> yList,List<Entry> entries){
+    private void createPieChart(int idView) {
+        symptomsChart = findViewById(idView);
+        Pie pie = AnyChart.pie();
+        List<DataEntry> dataEntries = new ArrayList<>();
+        for (int i = 0; i < symptomsList.length; i++) {
+            dataEntries.add(new ValueDataEntry(symptomsList[i], average[i]));
+        }
+        pie.data(dataEntries);
+        pie.title("Symptoms Averages");
+        symptomsChart.setChart(pie);
+    }
+
+    private void createLineChart(int idView, String label, List<String> xList,List<String> yList,List<Entry> entries){
         lineChart = findViewById(idView);
         lineChart.getAxisRight().setDrawLabels(false);
 
