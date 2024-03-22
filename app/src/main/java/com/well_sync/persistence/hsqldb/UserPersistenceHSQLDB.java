@@ -265,4 +265,24 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public List<Patient> getAllPatientsForDoctor(Doctor doctor) {
+        List<Patient> patientsForDoctor = new ArrayList<>();
+        try (Connection connection = connect()) {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM ASSIGNED_PATIENTS WHERE doctor_email = ?");
+            statement.setString(1, doctor.getEmail());
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                String patientEmail = resultSet.getString("patient_email");
+                Patient patient = getPatient(patientEmail);
+                if (patient != null) {
+                    patientsForDoctor.add(patient);
+                }
+            }
+        } catch (final SQLException e) {
+            e.printStackTrace();
+        }
+        return patientsForDoctor;
+    }
 }
