@@ -124,4 +124,25 @@ public class DailyLogHandler implements IDailyLogHandler {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.CANADA);
         return formatter.parse(dateString);
     }
+
+    public float[] getAllMoodScores(Patient patient) {
+        List<DailyLog> allLogs = persistLog.getAllDailyLogs(patient);
+        List<Float> moodScores = new ArrayList<>();
+
+        for (DailyLog log : allLogs) {
+            if (log != null) {
+                moodScores.add((float) log.getMoodScore());
+            }
+        }
+
+        Comparator<DailyLog> byDate = Comparator.comparing(DailyLog::getDate);
+        allLogs.sort(byDate);
+
+        float[] moodScoresArray = new float[moodScores.size()];
+        for (int i = 0; i < moodScores.size(); i++) {
+            moodScoresArray[i] = moodScores.get(i);
+        }
+
+        return moodScoresArray;
+    }
 }
