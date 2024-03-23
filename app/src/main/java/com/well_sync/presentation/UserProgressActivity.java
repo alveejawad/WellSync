@@ -140,7 +140,6 @@ public class UserProgressActivity extends AppCompatActivity {
             dataEntries.add(new ValueDataEntry(symptomsList[i], average[i]));
         }
         pie.data(dataEntries);
-        pie.title("Symptoms Averages");
         symptomsChart.setChart(pie);
     }
 

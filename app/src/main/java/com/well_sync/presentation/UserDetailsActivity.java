@@ -29,7 +29,7 @@ public class UserDetailsActivity extends AppCompatActivity {
     private DatePicker datePicker;
     private RadioGroup genderPicker;
     private Spinner bloodTypeSpinner;
-    private final String[] bloodTypeList = getResources().getStringArray(R.array.blood_types);
+    private String[] bloodTypeList;
 
     private Intent intent;
     private String bloodType, gender, firstName, lastName, email;
@@ -45,6 +45,7 @@ public class UserDetailsActivity extends AppCompatActivity {
         genderPicker = findViewById(R.id.GenderPicker);
         Button saveButton = findViewById(R.id.savebutton);
         datePicker = findViewById(R.id.datePicker);
+        bloodTypeList = getResources().getStringArray(R.array.blood_types);
         bloodTypeSpinner = findViewById(R.id.BloodTypes);
         patientHandler = new PatientHandler();
         setBloodTypeValues();
