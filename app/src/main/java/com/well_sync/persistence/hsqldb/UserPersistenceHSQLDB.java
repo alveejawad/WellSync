@@ -16,35 +16,33 @@ import java.util.List;
 public class UserPersistenceHSQLDB implements IUserPersistence {
 
     private final String dbPath;
-    private final List<UserCredentials> userCredentialsList;
+//    private final List<UserCredentials> userCredentialsList;
     private final List<Patient> patientsList;
-    private final List<Doctor> doctorsList;
+//    private final List<Doctor> doctorsList;
 
     public UserPersistenceHSQLDB(String dbPath) {
         this.dbPath = dbPath;
-        this.userCredentialsList = new ArrayList<>();
         this.patientsList = new ArrayList<>();
-        this.doctorsList = new ArrayList<>();
-        loadUserCredentials();
+//        loadUserCredentials();
         loadPatients();
-        loadDoctors();
+//        loadDoctors();
     }
 
     private Connection connect() throws SQLException {
         return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "MD", "");
     }
 
-    private void loadUserCredentials() {
-        try (Connection connection = connect()) {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM USER_CREDENTIALS");
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                userCredentialsList.add(new UserCredentials(resultSet.getString("email"), resultSet.getString("password"),resultSet.getString("role")));
-            }
-        } catch (final SQLException e) {
-            e.printStackTrace();
-        }
-    }
+//    private void loadUserCredentials() {
+//        try (Connection connection = connect()) {
+//            PreparedStatement statement = connection.prepareStatement("SELECT * FROM USER_CREDENTIALS");
+//            ResultSet resultSet = statement.executeQuery();
+//            while (resultSet.next()) {
+//                userCredentialsList.add(new UserCredentials(resultSet.getString("email"), resultSet.getString("password"),resultSet.getString("role")));
+//            }
+//        } catch (final SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     private void loadPatients() {
         try (Connection connection = connect()) {
@@ -59,18 +57,18 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
         }
     }
 
-    private void loadDoctors() {
-        try (Connection connection = connect()) {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM DOCTORS");
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                Doctor doctor = createDoctorFromResultSet(resultSet);
-                doctorsList.add(doctor);
-            }
-        } catch (final SQLException e) {
-            e.printStackTrace();
-        }
-    }
+//    private void loadDoctors() {
+//        try (Connection connection = connect()) {
+//            PreparedStatement statement = connection.prepareStatement("SELECT * FROM DOCTORS");
+//            ResultSet resultSet = statement.executeQuery();
+//            while (resultSet.next()) {
+//                Doctor doctor = createDoctorFromResultSet(resultSet);
+//                doctorsList.add(doctor);
+//            }
+//        } catch (final SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     @Override
     public UserCredentials getUserCredentials(UserCredentials userCredentials) {
@@ -110,7 +108,7 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
             statement.setString(4, patient.getBloodType().toString());
             statement.setString(5, patient.getSex().toString());
             statement.setInt(6, patient.getAge());
-            statement.setString(7, patient.getDoctorNotes().toString());
+            statement.setString(7, patient.getDoctorNotes());
             statement.executeUpdate();
         } catch (final SQLException e) {
             e.printStackTrace();
@@ -167,15 +165,6 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
             doctorStatement.setString(3, doctor.getLastName());
             doctorStatement.executeUpdate();
 
-            List<Patient> doctorPatients = doctor.getPatients();
-            if (doctorPatients != null && !doctorPatients.isEmpty()) {
-                PreparedStatement assignStatement = connection.prepareStatement("INSERT INTO ASSIGNED_PATIENTS VALUES (?, ?)");
-                for (Patient patient : doctorPatients) {
-                    assignStatement.setString(1, doctor.getEmail());
-                    assignStatement.setString(2, patient.getEmail());
-                    assignStatement.executeUpdate();
-                }
-            }
         } catch (final SQLException e) {
             e.printStackTrace();
         }
@@ -212,7 +201,7 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
         }
         return null;
     }
-    public void assignPatientToDoctor(Patient patient, Doctor doctor){
+    public void assignPatientToDoctor(Patient patient, Doctor doctor) {
         try (Connection connection = connect()) {
             PreparedStatement assignStatement = connection.prepareStatement("INSERT INTO ASSIGNED_PATIENTS VALUES (?, ?)");
             assignStatement.setString(1, doctor.getEmail());
@@ -223,7 +212,7 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
         }
     }
 
-    public List<Patient> getAllPatientsList(){
+    public List<Patient> getAllPatientsList() {
         return this.patientsList;
     }
 
@@ -243,27 +232,8 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
         String email = resultSet.getString("email");
         String firstName = resultSet.getString("firstName");
         String lastName = resultSet.getString("lastName");
-        Doctor doctor = new Doctor(email, firstName, lastName);
-        loadDoctorPatients(doctor);
 
-        return doctor;
-    }
-
-    private void loadDoctorPatients(Doctor doctor) {
-        try (Connection connection = connect()) {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM ASSIGNED_PATIENTS WHERE doctor_email = ?");
-            statement.setString(1, doctor.getEmail());
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                String patientEmail = resultSet.getString("patient_email");
-                Patient patient = getPatient(patientEmail);
-                if (patient != null) {
-                    doctor.addPatient(patient);
-                }
-            }
-        } catch (final SQLException e) {
-            e.printStackTrace();
-        }
+        return new Doctor(email, firstName, lastName);
     }
 
     @Override

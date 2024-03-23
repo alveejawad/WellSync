@@ -6,17 +6,21 @@ import com.well_sync.objects.UserCredentials;
 import com.well_sync.persistence.IUserPersistence;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class UserPersistenceStub implements IUserPersistence {
     private final List<Patient> patientList;
     private final List<UserCredentials> userCredentialsList;
     private final List<Doctor> doctorList;
+    private final Map<String, List<Patient>> doctorsToPatients;
 
     public UserPersistenceStub() {
         this.patientList = new ArrayList<>();
         this.userCredentialsList = new ArrayList<>();
         this.doctorList = new ArrayList<>();
+        this.doctorsToPatients = new HashMap<>();
 
         // Sample data for USER_CREDENTIALS table
         UserCredentials userCredentials1 = new UserCredentials("patient1@example.com", "password1", "PATIENT");
@@ -37,10 +41,16 @@ public class UserPersistenceStub implements IUserPersistence {
         // Sample data for DOCTORS table
         Doctor doctor1 = new Doctor("doctor1@example.com", "Dr. Gabriel", "Young");
         Doctor doctor2 = new Doctor("doctor2@example.com", "Dr. Alvee", "Jawad");
-        doctor1.addPatient(patient1);
-        doctor2.addPatient(patient2);
         doctorList.add(doctor1);
         doctorList.add(doctor2);
+
+        ArrayList<Patient> doctor1List = new ArrayList<>();
+        doctor1List.add(patient1);
+        ArrayList<Patient> doctor2List = new ArrayList<>();
+        doctor2List.add(patient2);
+
+        doctorsToPatients.put(doctor1.getEmail(), doctor1List);
+        doctorsToPatients.put(doctor2.getEmail(), doctor2List);
     }
 
     @Override
@@ -137,30 +147,18 @@ public class UserPersistenceStub implements IUserPersistence {
 
     @Override
     public void removePatientFromDoctor(Doctor doctor, Patient patient) {
-        Doctor doctorToRemoveFrom = null;
-        for (Doctor d : doctorList) {
-            if (d.getEmail().equals(doctor.getEmail())) {
-                doctorToRemoveFrom = d;
-                break;
-            }
-        }
-        if (doctorToRemoveFrom != null) {
-            doctorToRemoveFrom.removePatient(patient);
+        if (doctor != null && patient != null) {
+            List<Patient> patientList = doctorsToPatients.get(doctor.getEmail());
+            if (patientList != null)
+                patientList.remove(patient);
         } else {
-            System.out.println("Doctor not found.");
+            System.out.println("Doctor or patient not specified.");
         }
     }
 
     @Override
     public List<Patient> getAllPatientsForDoctor(Doctor doctor) {
-        List<Patient> patientsForDoctor = new ArrayList<>();
-        for (Doctor d : doctorList) {
-            if (d.getEmail().equals(doctor.getEmail())) {
-                patientsForDoctor.addAll(d.getPatients());
-                break;
-            }
-        }
-        return patientsForDoctor;
+        return doctorsToPatients.get(doctor.getEmail());
     }
 
 

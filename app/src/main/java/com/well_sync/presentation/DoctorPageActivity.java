@@ -16,6 +16,7 @@ import com.well_sync.logic.IDoctorHandler;
 import com.well_sync.logic.IPatientHandler;
 import com.well_sync.logic.PatientHandler;
 import com.well_sync.logic.exceptions.InvalidDoctorException;
+import com.well_sync.logic.exceptions.InvalidPatientException;
 import com.well_sync.objects.Doctor;
 import com.well_sync.objects.Patient;
 
@@ -53,10 +54,12 @@ public class DoctorPageActivity extends AppCompatActivity{
         if (doctor == null) {
             doctor = new Doctor(doctorEmail);
         }
-        //Get doctor's patients
-        doctor = doctorHandler.getDetails(doctorEmail);
-        patientList = doctor.getPatients();
 
+        try {
+            patientList = doctorHandler.getAllPatientsForDoctor(doctor);
+        } catch (InvalidDoctorException e) {
+            patientList = null;
+        }
 
         //show list of patients
         RecyclerView recyclerView = findViewById(R.id.patientList);
@@ -101,11 +104,10 @@ public class DoctorPageActivity extends AppCompatActivity{
                     return; // Exit the onClick method to prevent further execution
                 }
             }
-            doctor.addPatient(existedPatient);
             try {
-              doctorHandler.addPatient(existedPatient,doctor);
-            } catch (InvalidDoctorException e) {
-                Toast.makeText(DoctorPageActivity.this, "Error, try again later", Toast.LENGTH_SHORT).show();
+              doctorHandler.addPatient(existedPatient, doctor);
+            } catch (InvalidDoctorException | InvalidPatientException e) {
+                Toast.makeText(DoctorPageActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
             //Notify the adapter of the data change
             patientAdapter.notifyDataSetChanged();

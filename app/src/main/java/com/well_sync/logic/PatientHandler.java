@@ -5,6 +5,8 @@ import com.well_sync.logic.exceptions.InvalidPatientException;
 import com.well_sync.objects.Patient;
 import com.well_sync.persistence.IUserPersistence;
 
+import java.util.List;
+
 public class PatientHandler implements IPatientHandler {
 
 	private final IUserPersistence persistUsers;
@@ -52,5 +54,10 @@ public class PatientHandler implements IPatientHandler {
 		} else {
 			throw new InvalidPatientException("Patient with email " + patient.getEmail() + " already exists.");
 		}
+	}
+
+	@Override
+	public List<Patient> getAllPatientsList() {
+		return persistUsers.getAllPatientsList();
 	}
 }
