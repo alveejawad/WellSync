@@ -4,16 +4,17 @@ import com.well_sync.application.Services;
 import com.well_sync.logic.exceptions.InvalidDailyLogException;
 import com.well_sync.objects.DailyLog;
 import com.well_sync.objects.Patient;
+import com.well_sync.objects.Symptom;
 import com.well_sync.persistence.IDailyLogPersistence;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
 public class DailyLogHandler implements IDailyLogHandler {
 
@@ -58,27 +59,21 @@ public class DailyLogHandler implements IDailyLogHandler {
     }
 
     public double getAverageSleep(Patient patient) {
-        List<DailyLog> allLogs = persistLog.getAllDailyLogs(patient);
-        int totalHours = 0;
-        int numLogs = 0;
+        double[] sleepHours = getAllSleepHours(patient);
+        if (sleepHours.length == 0)
+            return 0;
 
-        for (DailyLog log : allLogs) {
-            if (log != null) {
-                totalHours += log.getSleepHours();
-                numLogs++;
-            }
+        double sleepSum = 0.0;
+        for (double h : sleepHours) {
+            sleepSum += h;
         }
 
-        if (numLogs == 0) {
-            return 0.0;
-        }
-
-        return (double) totalHours / numLogs;
+        return sleepSum / sleepHours.length;
     }
 
-    public float[] getAllSleepHours(Patient patient) {
+    public double[] getAllSleepHours(Patient patient) {
         List<DailyLog> allLogs = persistLog.getAllDailyLogs(patient);
-        float[] sleepHoursArray = new double[allLogs.size()];
+        double[] sleepHoursArray = new double[allLogs.size()];
 
         for (int i = 0; i < allLogs.size(); i++) {
             DailyLog log = allLogs.get(i);
@@ -149,7 +144,7 @@ public class DailyLogHandler implements IDailyLogHandler {
         return moodScoresArray;
     }
 
-    public String<> getAllDatesAsString(Patient patient) {
+    public List<String> getAllDatesAsString(Patient patient) {
         List<Date> dates = persistLog.getAllDates(patient);
 
         Collections.sort(dates);

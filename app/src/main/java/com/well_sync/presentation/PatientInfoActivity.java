@@ -15,10 +15,11 @@ import com.well_sync.logic.DoctorHandler;
 import com.well_sync.logic.IDoctorHandler;
 import com.well_sync.logic.IPatientHandler;
 import com.well_sync.logic.PatientHandler;
+import com.well_sync.logic.exceptions.InvalidDoctorException;
 import com.well_sync.logic.exceptions.InvalidPatientException;
 import com.well_sync.objects.DailyLog;
-import com.well_sync.objects.Patient;
 import com.well_sync.objects.Doctor;
+import com.well_sync.objects.Patient;
 
 public class PatientInfoActivity extends AppCompatActivity {
     private DailyLog dailyLog;
@@ -101,8 +102,12 @@ public class PatientInfoActivity extends AppCompatActivity {
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                doctorHandler.removePatient(doctor,patient);
-                Toast.makeText(getApplicationContext(), "Patient removed successfully!", Toast.LENGTH_SHORT).show();
+                try {
+                    doctorHandler.removePatient(doctor, patient);
+                    Toast.makeText(getApplicationContext(), "Patient removed successfully!", Toast.LENGTH_SHORT).show();
+                } catch (InvalidDoctorException | InvalidPatientException e) {
+                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
                 Intent saveIntent = new Intent(PatientInfoActivity.this, DoctorPageActivity.class);
                 saveIntent.putExtra("email", doctorEmail);
                 PatientInfoActivity.this.startActivity(saveIntent);
