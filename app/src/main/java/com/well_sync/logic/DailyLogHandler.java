@@ -11,6 +11,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class DailyLogHandler implements IDailyLogHandler {
 
@@ -144,6 +147,19 @@ public class DailyLogHandler implements IDailyLogHandler {
         }
 
         return moodScoresArray;
+    }
+
+    public String<> getAllDatesAsString(Patient patient) {
+        List<Date> dates = persistLog.getAllDates(patient);
+
+        Collections.sort(dates);
+
+        List<String> dateStrings = new ArrayList<>();
+        for (Date date : dates) {
+            dateStrings.add(dateToString(date));
+        }
+
+        return dateStrings;
     }
 
     private static Date dateFromString(String dateString) throws ParseException {
