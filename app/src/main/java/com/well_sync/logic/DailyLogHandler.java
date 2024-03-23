@@ -11,6 +11,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class DailyLogHandler implements IDailyLogHandler {
 
@@ -118,6 +121,45 @@ public class DailyLogHandler implements IDailyLogHandler {
 
     public List<Date> getAllDates(Patient patient) {
         return persistLog.getAllDates(patient);
+    }
+
+    private static Date dateFromString(String dateString) throws ParseException {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.CANADA);
+        return formatter.parse(dateString);
+    }
+
+    public float[] getAllMoodScores(Patient patient) {
+        List<DailyLog> allLogs = persistLog.getAllDailyLogs(patient);
+        List<Float> moodScores = new ArrayList<>();
+
+        for (DailyLog log : allLogs) {
+            if (log != null) {
+                moodScores.add((float) log.getMoodScore());
+            }
+        }
+
+        Comparator<DailyLog> byDate = Comparator.comparing(DailyLog::getDate);
+        allLogs.sort(byDate);
+
+        float[] moodScoresArray = new float[moodScores.size()];
+        for (int i = 0; i < moodScores.size(); i++) {
+            moodScoresArray[i] = moodScores.get(i);
+        }
+
+        return moodScoresArray;
+    }
+
+    public String<> getAllDatesAsString(Patient patient) {
+        List<Date> dates = persistLog.getAllDates(patient);
+
+        Collections.sort(dates);
+
+        List<String> dateStrings = new ArrayList<>();
+        for (Date date : dates) {
+            dateStrings.add(dateToString(date));
+        }
+
+        return dateStrings;
     }
 
     private static Date dateFromString(String dateString) throws ParseException {
