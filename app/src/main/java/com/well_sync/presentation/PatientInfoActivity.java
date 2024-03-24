@@ -27,9 +27,10 @@ public class PatientInfoActivity extends AppCompatActivity {
     private Doctor doctor;
     private TextView nameTextView, ageTextView, genderTextView, bloodTypeTextView;
     private EditText adviseEditText;
-    private Button logsButton, sendButton, deleteButton;
+    private Button logsButton, sendButton, deleteButton, progressButton;
     private String doctorEmail, patientEmail;
     private String date;
+
 
 
     @Override
@@ -41,6 +42,7 @@ public class PatientInfoActivity extends AppCompatActivity {
         adviseEditText = findViewById(R.id.advise_from_doctor);
         logsButton = findViewById(R.id.daily_logs);
         sendButton = findViewById(R.id.send_rec);
+        progressButton = findViewById(R.id.see_progress);
         deleteButton = findViewById(R.id.delete_patient);
 
 
@@ -61,6 +63,7 @@ public class PatientInfoActivity extends AppCompatActivity {
 
         // handle the Button click listener as needed
         logsButton.setOnClickListener(new View.OnClickListener() {
+            //UPDATE THIS METHOD
             @Override
             public void onClick(View view) {
                 dailyLog = new DailyLog(date, 3, 8, "ok babe");
@@ -99,6 +102,15 @@ public class PatientInfoActivity extends AppCompatActivity {
                 PatientInfoActivity.this.startActivity(saveIntent);
             }
         });
+        progressButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent currentIntent = new Intent(PatientInfoActivity.this, UserProgressActivity.class);
+                currentIntent.putExtra("patientEmail",patientEmail);
+                PatientInfoActivity.this.startActivity(currentIntent);
+            }
+        });
+
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

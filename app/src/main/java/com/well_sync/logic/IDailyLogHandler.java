@@ -46,4 +46,10 @@ public interface IDailyLogHandler {
     List<Date> getAllDates(Patient patient);
 
     double getAverageSleep(Patient patient);
+    /**
+     * Get all dates on which the given patient recorded a log as Strings.
+     */
+    List<String> getAllDatesAsString(Patient patient);
+
+    float[] getAllMoodScores(Patient patient);
 }

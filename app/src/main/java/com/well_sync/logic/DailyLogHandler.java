@@ -157,8 +157,8 @@ public class DailyLogHandler implements IDailyLogHandler {
         return dateStrings;
     }
 
-    private static Date dateFromString(String dateString) throws ParseException {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.CANADA);
-        return formatter.parse(dateString);
+    private String dateToString(Date date){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.CANADA);
+        return dateFormat.format(date);
     }
 }
