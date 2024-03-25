@@ -1,83 +1,3 @@
-/*package com.well_sync.presentation;
-
-import android.graphics.Color;
-import android.os.Bundle;
-
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.Description;
-import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.components.YAxis;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
-import com.well_sync.R;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-public class UserProgressActivity extends AppCompatActivity {
-    private LineChart lineChart;
-    private List<String> dates;
-    private final String[] symptomsList = getResources().getStringArray(R.array.symptoms);
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_progress);
-
-        lineChart = findViewById(R.id.chart);
-        Description description = new Description();
-        description.setText("Mood Progress");
-        description.setPosition(150f,15f);
-        lineChart.setDescription(description);
-        lineChart.getAxisRight().setDrawLabels(false);
-        dates = Arrays.asList("12-03","12-05","12-06","12-07");
-
-
-        XAxis xAxis = lineChart.getXAxis();
-        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setValueFormatter(new IndexAxisValueFormatter(dates));
-        xAxis.setLabelCount(4);
-        xAxis.setGranularity(1f);
-
-
-
-        YAxis yAxis = lineChart.getAxisLeft();
-        yAxis.setValueFormatter(new IndexAxisValueFormatter(symptomsList));
-        yAxis.setGranularity(1f);
-        yAxis.setLabelCount(4);
-        yAxis.setAxisMinimum(0f);
-        yAxis.setAxisMaximum(4f); // Assuming mood labels count is 5
-        yAxis.setAxisLineWidth(2f);
-        yAxis.setAxisLineColor(Color.BLACK);
-
-       /* YAxis yAxis = lineChart.getAxisLeft();
-        yAxis.setAxisMinimum(0f);
-        yAxis.setAxisMaximum(100f);
-        yAxis.setAxisLineWidth(2f);
-        yAxis.setAxisLineColor(Color.BLACK);
-        yAxis.setLabelCount(19);
-
-        List<Entry> entries1= new ArrayList<>();
-        entries1.add(new Entry(0f,0f));
-        entries1.add(new Entry(1f,1f));
-        entries1.add(new Entry(2f, 2f));
-        entries1.add(new Entry( 3f,3f));
-
-        LineDataSet dataSet = new LineDataSet(entries1,"Mood");
-        dataSet.setColor(Color.BLUE);
-        LineData lineData= new LineData(dataSet);
-        lineChart.setData(lineData);
-        lineChart.invalidate();
-
-
-
-
-
-    }
-}*/
 package com.well_sync.presentation;
 
 import android.content.Intent;
@@ -134,31 +54,25 @@ public class UserProgressActivity extends AppCompatActivity {
         doctorEmail = intent.getStringExtra("doctorEmail");
         date = intent.getStringExtra("date");
 
-
-
+        //get the handler to call the methods
         IPatientHandler patientHandler = new PatientHandler();
         patient = patientHandler.getDetails("patient1@example.com");
         dailyLogHandler= new DailyLogHandler();
-        dates = dailyLogHandler.getAllDatesAsString(patient);
+
+        //Names
         moodNames = Arrays.asList(getResources().getStringArray(R.array.moods));
         symptomNames = getResources().getStringArray(R.array.symptoms);
+        //get the data for x and y coordinates
+        dates = dailyLogHandler.getAllDatesAsString(patient);
         moodScores=dailyLogHandler.getAllMoodScores(patient);
         sleepHours=dailyLogHandler.getAllSleepHours(patient);
         symptomScores=dailyLogHandler.getAverageSymptoms(patient);
+        List<Entry> entriesMood =dailyLogHandler.getEntries(moodScores);
+        List<Entry> entriesSleep =dailyLogHandler.getEntries(sleepHours);
 
-        List<Entry> entries1 = new ArrayList<>();
-        for(int i=0;i<moodScores.length;i++){
-            entries1.add(new Entry(i, moodScores[i]-1));
-        }
-
-        List<Entry> entries2 = new ArrayList<>();
-        for(int i=0;i<sleepHours.length;i++){
-            entries2.add(new Entry(i, sleepHours[i]));
-        }
-
-
-        createLineChart(R.id.mood_chart,"Mood", dates,moodNames,entries1);
-        createLineChart(R.id.sleep_chart,"Sleep Hours", dates,null,entries2);
+        //creat the charts
+        createLineChart(R.id.mood_chart,"Mood", dates,moodNames,entriesMood);
+        createLineChart(R.id.sleep_chart,"Sleep Hours", dates,null,entriesSleep);
         createPieChart(R.id.symptoms_chart);
 
         // Set click listeners or any other event listeners as needed
@@ -218,6 +132,5 @@ public class UserProgressActivity extends AppCompatActivity {
         lineChart.setData(lineData);
         lineChart.invalidate();
     }
-
 
 }
