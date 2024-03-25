@@ -1,25 +1,27 @@
 package com.well_sync.persistence.stubs;
 
 import com.well_sync.logic.exceptions.InvalidDailyLogException;
-import com.well_sync.objects.Patient;
 import com.well_sync.objects.DailyLog;
+import com.well_sync.objects.Patient;
 import com.well_sync.persistence.IDailyLogPersistence;
-import com.well_sync.persistence.IUserPersistence;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 public class DailyLogPersistenceStub implements IDailyLogPersistence {
 
-    private final Map<Patient, List<DailyLog>> dailyLogList;
-    private IUserPersistence userPersistence;
+    private final Map<String, List<DailyLog>> dailyLogList;
 
     public DailyLogPersistenceStub() {
         dailyLogList = new HashMap<>();
-        this.userPersistence = new UserPersistenceStub();
 
         // Default Sample Data
-        Patient patient1 = userPersistence.getPatient("patient1@example.com");
-        Patient patient2 = userPersistence.getPatient("patient2@example.com");
+        String patient1 = "patient1@example.com";
+        String patient2 = "patient2@example.com";
 
         List<DailyLog> dailyLogsPatient1 = new ArrayList<>();
         List<DailyLog> dailyLogsPatient2 = new ArrayList<>();
@@ -105,10 +107,10 @@ public class DailyLogPersistenceStub implements IDailyLogPersistence {
 
     @Override
     public void setDailyLog(Patient patient, DailyLog dailyLog) {
-        if (!dailyLogList.containsKey(patient)) {
-            dailyLogList.put(patient, new ArrayList<>());
+        if (!dailyLogList.containsKey(patient.getEmail())) {
+            dailyLogList.put(patient.getEmail(), new ArrayList<>());
         }
-        Objects.requireNonNull(dailyLogList.get(patient)).add(dailyLog);
+        Objects.requireNonNull(dailyLogList.get(patient.getEmail())).add(dailyLog);
     }
     public void setMedication(Patient patient, DailyLog dailyLog){}
     public void setSymptoms(Patient patient, DailyLog dailyLog){}
@@ -116,7 +118,7 @@ public class DailyLogPersistenceStub implements IDailyLogPersistence {
 
     @Override
     public DailyLog getDailyLog(Patient patient, Date date) {
-        List<DailyLog> patientDailyLogs = dailyLogList.get(patient);
+        List<DailyLog> patientDailyLogs = dailyLogList.get(patient.getEmail());
         if (patientDailyLogs != null) {
             for (DailyLog dailyLog : patientDailyLogs) {
                 if (dailyLog.getDate().equals(date)) {
@@ -129,12 +131,12 @@ public class DailyLogPersistenceStub implements IDailyLogPersistence {
 
     @Override
     public List<DailyLog> getAllDailyLogs(Patient patient) {
-        return dailyLogList.getOrDefault(patient, new ArrayList<>());
+        return dailyLogList.getOrDefault(patient.getEmail(), new ArrayList<>());
     }
 
     @Override
     public List<Date> getAllDates(Patient patient) {
-        List<DailyLog> patientDailyLogs = dailyLogList.get(patient);
+        List<DailyLog> patientDailyLogs = dailyLogList.get(patient.getEmail());
         List<Date> allDates = new ArrayList<>();
 
         if (patientDailyLogs != null) {

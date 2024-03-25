@@ -40,10 +40,10 @@ public class Patient{
     public enum Sex {
         MALE,
         FEMALE,
-        UNSPECIFIED;
+        OTHER;
 
         public static Sex fromString(String sex) {
-            if (sex == null) return Sex.UNSPECIFIED;
+            if (sex == null) return Sex.OTHER;
             switch (sex.toUpperCase()) {
                 case "M":
                 case "MALE":
@@ -51,15 +51,10 @@ public class Patient{
                 case "F":
                 case "FEMALE":
                     return Sex.FEMALE;
-                default: return Sex.UNSPECIFIED;
+                default: return Sex.OTHER;
             }
         }
     }
-
-    // defined here in case future extensions of Patient want to change these values,
-    // and the validator will still work
-    public final int MAX_AGE = 122;
-    public final int MAX_NOTES_LENGTH = 1000;
 
     private final String email;
     private String firstName;
@@ -149,8 +144,4 @@ public class Patient{
                 && Objects.equals(doctorNotes, patient.doctorNotes);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(email, firstName, lastName, bloodType, sex, age);
-    }
 }

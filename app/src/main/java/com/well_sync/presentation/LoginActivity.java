@@ -10,7 +10,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.well_sync.R;
+import com.well_sync.logic.DailyLogValidator;
 import com.well_sync.logic.IUserAuthenticationHandler;
+import com.well_sync.logic.PatientValidator;
 import com.well_sync.logic.UserAuthenticationHandler;
 import com.well_sync.logic.exceptions.InvalidCredentialsException;
 import com.well_sync.objects.UserCredentials;
@@ -30,7 +32,22 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_login);
 
+        // setup database
         DBHelper.copyDatabaseToDevice(this);
+
+        // setup validators
+        // this has to be set here, because the values are set in XML resource files that
+        // can only be read in an Android-specific scope
+        DailyLogValidator.setMaxima(
+                getResources().getInteger(R.integer.max_mood_score),
+                getResources().getInteger(R.integer.max_sleep_hours),
+                getResources().getInteger(R.integer.max_med_quantity),
+                getResources().getInteger(R.integer.max_med_dosage),
+                getResources().getInteger(R.integer.max_symptom_intensity),
+                getResources().getInteger(R.integer.max_substance_quantity)
+        );
+        PatientValidator.setMaxAge(getResources().getInteger(R.integer.max_age));
+
 
         loginHandler = new UserAuthenticationHandler();
         loginButton = findViewById(R.id.Loginbutton);
