@@ -73,7 +73,7 @@ public class MoodTrackerActivity extends AppCompatActivity {
                 // Set the emotion text below the selected image view
                 emotionText.setText(moodList[0]);
                 // Set the mood score
-                moodScores = 4;
+                moodScores = 3;
             }
         });
 
@@ -87,7 +87,7 @@ public class MoodTrackerActivity extends AppCompatActivity {
                 emotionText.setText(moodList[1]);
 
                 // Set the mood score
-                moodScores = 3;
+                moodScores = 2;
             }
         });
 
@@ -101,7 +101,7 @@ public class MoodTrackerActivity extends AppCompatActivity {
                 emotionText.setText(moodList[2]);
 
                 // Set the mood score
-                moodScores = 2;
+                moodScores = 1;
             }
         });
 
@@ -115,7 +115,7 @@ public class MoodTrackerActivity extends AppCompatActivity {
                 emotionText.setText(moodList[3]);
 
                 // Set the mood score
-                moodScores = 1;
+                moodScores = 0;
             }
         });
         // Set click listeners or any other event listeners as needed

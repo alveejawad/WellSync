@@ -37,7 +37,7 @@ public abstract class DailyLogValidator {
     }
 
     public static void validateMoodScore(int moodScore) throws InvalidDailyLogException {
-        if (moodScore < 1 || moodScore > R.integer.max_mood_score)
+        if (moodScore < 0 || moodScore > R.integer.max_mood_score)
             throw new InvalidDailyLogException("Invalid mood score; must be between 1 and 4 inclusive.");
     }
 
