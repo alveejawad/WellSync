@@ -30,6 +30,7 @@ import com.well_sync.objects.Patient;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public class UserProgressActivity extends AppCompatActivity {
     private String patientEmail, doctorEmail, date;
@@ -38,11 +39,10 @@ public class UserProgressActivity extends AppCompatActivity {
     private int sizeXAxis;
     private List<String> moodNames;
     AnyChartView symptomsChart;
-    private String[] symptomNames;
-    private double[] average= {0.5, 2.3, 3.1, 1.9, 0.7, 3.6, 2.2, 0.4, 1.3, 3.7, 2.8, 1.5, 0.9, 3.2, 1.1, 2.6, 0.2};
     private IDailyLogHandler dailyLogHandler;
     private Patient patient;
-    private float[] moodScores, sleepHours, symptomScores;
+    private float[] moodScores, sleepHours;
+    private Map<String, Float> symptomScores;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +61,6 @@ public class UserProgressActivity extends AppCompatActivity {
 
         //Names
         moodNames = Arrays.asList(getResources().getStringArray(R.array.moods));
-        symptomNames = getResources().getStringArray(R.array.symptoms);
         //get the data for x and y coordinates
         dates = dailyLogHandler.getAllDatesAsString(patient);
         moodScores=dailyLogHandler.getAllMoodScores(patient);
@@ -94,8 +93,8 @@ public class UserProgressActivity extends AppCompatActivity {
         symptomsChart = findViewById(idView);
         Pie pie = AnyChart.pie();
         List<DataEntry> dataEntries = new ArrayList<>();
-        for (int i = 0; i < symptomNames.length; i++) {
-            dataEntries.add(new ValueDataEntry(symptomNames[i], symptomScores[i]));
+        for (Map.Entry<String, Float> entry : symptomScores.entrySet()) {
+            dataEntries.add(new ValueDataEntry(entry.getKey(), entry.getValue()));
         }
         pie.data(dataEntries);
         symptomsChart.setChart(pie);

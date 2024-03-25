@@ -7,6 +7,7 @@ import com.well_sync.objects.Patient;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Saves and retrieves health log information saved by patients to particular calendar dates.
@@ -62,7 +63,7 @@ public interface IDailyLogHandler {
     /**
      * Get averages for all symptoms on which the given patient recorded a log.
      */
-    float[] getAverageSymptoms(Patient patient);
+    Map<String, Float> getAverageSymptoms(Patient patient);
     /**
      * return a list of coordinates to display on the charts.
      */
