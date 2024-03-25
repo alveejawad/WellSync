@@ -82,8 +82,10 @@ public class DailyLogPatientActivity extends AppCompatActivity {
         Button backButton = findViewById(R.id.backbutton);
 
         backButton.setOnClickListener(v -> {
-            Intent saveIntent = new Intent(DailyLogPatientActivity.this, DoctorPageActivity.class);
-            saveIntent.putExtra("email", doctorEmail);
+            Intent saveIntent = new Intent(DailyLogPatientActivity.this, PatientInfoActivity.class);
+            saveIntent.putExtra("date", date);
+            saveIntent.putExtra("patientEmail",patientEmail);
+            saveIntent.putExtra("doctorEmail", doctorEmail);
             DailyLogPatientActivity.this.startActivity(saveIntent);
         });
     }

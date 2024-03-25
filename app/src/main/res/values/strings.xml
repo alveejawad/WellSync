@@ -23,7 +23,8 @@
     <string name="guilt">Feelings of Guilt or Self-Blame: </string>
     <string name="suicide">Thoughts of Death or Suicide: </string>
 
-   x<string name="medication">Medication </string>
+    <string name="sleep_hours">Sleep Hours</string>
+    <string name="medication">Medication </string>
     <string name="pills_name">Medication Name: </string>
     <string name="pills_amount">Amount: </string>
     <string name="pills_dosage">Dosage: </string>
@@ -51,8 +52,6 @@
 
     <string name="back_button">BACK</string>
     <string name="log_saved">Log saved</string>
-
-
 
 
 </resources>

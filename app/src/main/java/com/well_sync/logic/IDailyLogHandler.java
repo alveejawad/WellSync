@@ -1,5 +1,6 @@
 package com.well_sync.logic;
 
+import com.github.mikephil.charting.data.Entry;
 import com.well_sync.logic.exceptions.InvalidDailyLogException;
 import com.well_sync.objects.DailyLog;
 import com.well_sync.objects.Patient;
@@ -46,4 +47,24 @@ public interface IDailyLogHandler {
     List<Date> getAllDates(Patient patient);
 
     double getAverageSleep(Patient patient);
+    /**
+     * Get all dates on which the given patient recorded a log as Strings.
+     */
+    List<String> getAllDatesAsString(Patient patient);
+    /**
+     * Get all mood scores on which the given patient recorded a log.
+     */
+    float[] getAllMoodScores(Patient patient);
+    /**
+     * Get all sleep hours on which the given patient recorded a log.
+     */
+    float[] getAllSleepHours(Patient patient);
+    /**
+     * Get averages for all symptoms on which the given patient recorded a log.
+     */
+    float[] getAverageSymptoms(Patient patient);
+    /**
+     * return a list of coordinates to display on the charts.
+     */
+    List<Entry> getEntries(float[] array);
 }

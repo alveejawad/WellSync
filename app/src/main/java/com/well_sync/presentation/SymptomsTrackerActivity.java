@@ -22,6 +22,7 @@ public class SymptomsTrackerActivity extends AppCompatActivity {
     private IDailyLogHandler dailyLogHandler;
     private String email;
     private DailyLog dailyLog;
+    private String[] symptomsList;
     protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_symptomstracker);
@@ -40,6 +41,7 @@ public class SymptomsTrackerActivity extends AppCompatActivity {
         IPatientHandler patientHandler = new PatientHandler();
         Patient newPatient = patientHandler.getDetails(email);
         dailyLog = dailyLogHandler.getDailyLog(newPatient, date);
+        symptomsList = getResources().getStringArray(R.array.symptoms);
 
         // Set click listeners or any other event listeners as needed
         closeIcon.setOnClickListener(view -> {
@@ -50,23 +52,23 @@ public class SymptomsTrackerActivity extends AppCompatActivity {
         });
 
         saveButton.setOnClickListener(view -> {
-            addSymptom("Sadness/Despair",R.id.ratingSadness);
-            addSymptom("Helplessness/Hopelessness",R.id.ratingHelplessness);
-            addSymptom("Low Self-Esteem",R.id.ratingSelfEsteem);
-            addSymptom("Feeling isolated",R.id.ratingIsolation);
-            addSymptom("Low Motivation/ Loss of Interest", R.id.ratingLowMotivation);
-            addSymptom("Impulsivity",R.id.ratingImpulsivity);
-            addSymptom("Inability to Concentrate",R.id.ratingConcentration);
-            addSymptom("Aggressive Behavior",R.id.ratingAggressiveness);
-            addSymptom("Feeling like you can do anything",R.id.ratingGrandioseIdeas);
-            addSymptom("Racing Thoughts",R.id.ratingRacingThoughts);
-            addSymptom("High Anxiety/Excessive Worry",R.id.ratingAnxiety);
-            addSymptom("Sleep Problems",R.id.ratingSleep);
-            addSymptom("Headache",R.id.ratingHeadache);
-            addSymptom("Body Ache/Pain",R.id.ratingPain);
-            addSymptom("Decreased or Increased Appetit",R.id.ratingAppetite);
-            addSymptom("Feelings of Guilt or Self-Blame",R.id.ratingGuilt);
-            addSymptom("Thoughts of Death or Suicide",R.id.ratingSuicide);
+            addSymptom(symptomsList[0],R.id.ratingSadness);
+            addSymptom(symptomsList[1],R.id.ratingHelplessness);
+            addSymptom(symptomsList[2],R.id.ratingSelfEsteem);
+            addSymptom(symptomsList[3],R.id.ratingIsolation);
+            addSymptom(symptomsList[4], R.id.ratingLowMotivation);
+            addSymptom(symptomsList[5],R.id.ratingImpulsivity);
+            addSymptom(symptomsList[6],R.id.ratingConcentration);
+            addSymptom(symptomsList[7],R.id.ratingAggressiveness);
+            addSymptom(symptomsList[8],R.id.ratingGrandioseIdeas);
+            addSymptom(symptomsList[9],R.id.ratingRacingThoughts);
+            addSymptom(symptomsList[10],R.id.ratingAnxiety);
+            addSymptom(symptomsList[11],R.id.ratingSleep);
+            addSymptom(symptomsList[12],R.id.ratingHeadache);
+            addSymptom(symptomsList[13],R.id.ratingPain);
+            addSymptom(symptomsList[14],R.id.ratingAppetite);
+            addSymptom(symptomsList[15],R.id.ratingGuilt);
+            addSymptom(symptomsList[16],R.id.ratingSuicide);
 
             try {
                 dailyLogHandler.setSymptoms(newPatient,dailyLog);
@@ -85,7 +87,6 @@ public class SymptomsTrackerActivity extends AppCompatActivity {
     private void addSymptom(String name, int idSymptom) {
         RatingBar symptom = findViewById(idSymptom); // Assuming you have a RatingBar in your layout with id "ratingBar"
         int valueSymptom = (int)symptom.getRating();
-
         try {
             dailyLog.addSymptom(name, valueSymptom);
         } catch (InvalidDailyLogException e) {

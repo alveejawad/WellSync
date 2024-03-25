@@ -5,6 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <Button
+        android:id="@+id/see_progress"
+        android:layout_width="153dp"
+        android:layout_height="56dp"
+        android:layout_marginBottom="176dp"
+        android:background="@drawable/button_bg"
+        android:text="User progress"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.746"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/advise_from_doctor"
+        app:layout_constraintVertical_bias="1.0" />
+
     <TextView
         android:id="@+id/textView2"
         android:layout_width="203dp"
@@ -177,7 +191,7 @@
         android:id="@+id/textView12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="54dp"
         android:layout_marginBottom="10dp"
         android:text="Send a recommendation to your patient:"
@@ -187,13 +201,13 @@
         app:layout_constraintBottom_toTopOf="@+id/advise_from_doctor"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout2"
-        app:layout_constraintVertical_bias="0.252" />
+        app:layout_constraintVertical_bias="0.386" />
 
     <Button
         android:id="@+id/send_rec"
         android:layout_width="153dp"
         android:layout_height="48dp"
-        android:layout_marginEnd="30dp"
+        android:layout_marginEnd="28dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/button_bg"
         android:text="Send"
@@ -206,19 +220,18 @@
         android:id="@+id/advise_from_doctor"
         android:layout_width="match_parent"
         android:layout_height="128dp"
-        android:layout_marginTop="29dp"
-        android:layout_marginBottom="82dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="182dp"
         android:background="@drawable/edittext_bg"
         android:gravity="top"
         android:hint="Type here..."
         android:inputType="text"
         android:padding="15dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/delete_patient"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.481"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/send_rec"
         app:layout_constraintVertical_bias="1.0" />
@@ -227,26 +240,23 @@
         android:id="@+id/delete_patient"
         android:layout_width="153dp"
         android:layout_height="56dp"
-        android:layout_marginTop="88dp"
-        android:layout_marginBottom="116dp"
+        android:layout_marginBottom="60dp"
         android:background="@drawable/button_bg"
         android:text="Delete patient"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.271"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/daily_logs"
         android:layout_width="153dp"
         android:layout_height="56dp"
-        android:layout_marginTop="88dp"
-        android:layout_marginBottom="116dp"
+        android:layout_marginBottom="176dp"
         android:background="@drawable/button_bg"
         android:text="Daily Logs"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.777"
+        app:layout_constraintHorizontal_bias="0.253"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/advise_from_doctor"
         app:layout_constraintVertical_bias="1.0" />

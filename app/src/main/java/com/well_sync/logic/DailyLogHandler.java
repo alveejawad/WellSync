@@ -1,5 +1,6 @@
 package com.well_sync.logic;
 
+import com.github.mikephil.charting.data.Entry;
 import com.well_sync.application.Services;
 import com.well_sync.logic.exceptions.InvalidDailyLogException;
 import com.well_sync.objects.DailyLog;
@@ -59,7 +60,7 @@ public class DailyLogHandler implements IDailyLogHandler {
     }
 
     public double getAverageSleep(Patient patient) {
-        double[] sleepHours = getAllSleepHours(patient);
+        float[] sleepHours = getAllSleepHours(patient);
         if (sleepHours.length == 0)
             return 0;
 
@@ -71,16 +72,16 @@ public class DailyLogHandler implements IDailyLogHandler {
         return sleepSum / sleepHours.length;
     }
 
-    public double[] getAllSleepHours(Patient patient) {
+    public float[] getAllSleepHours(Patient patient) {
         List<DailyLog> allLogs = persistLog.getAllDailyLogs(patient);
-        double[] sleepHoursArray = new double[allLogs.size()];
+        float[] sleepHoursArray = new float[allLogs.size()];
 
         for (int i = 0; i < allLogs.size(); i++) {
             DailyLog log = allLogs.get(i);
             if (log != null) {
                 sleepHoursArray[i] = log.getSleepHours();
             } else {
-                sleepHoursArray[i] = 0.0;
+                sleepHoursArray[i] = 0.0f;
             }
         }
 
@@ -157,8 +158,16 @@ public class DailyLogHandler implements IDailyLogHandler {
         return dateStrings;
     }
 
-    private static Date dateFromString(String dateString) throws ParseException {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.CANADA);
-        return formatter.parse(dateString);
+    public List<Entry> getEntries(float[] array){
+        List<Entry> entries = new ArrayList<>();
+        for(int i=0;i<array.length;i++){
+            entries.add(new Entry(i, array[i]));
+        }
+        return entries;
+    }
+
+    private String dateToString(Date date){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.CANADA);
+        return dateFormat.format(date);
     }
 }
