@@ -106,7 +106,9 @@ public class PatientInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent currentIntent = new Intent(PatientInfoActivity.this, UserProgressActivity.class);
+                currentIntent.putExtra("date", date);
                 currentIntent.putExtra("patientEmail",patientEmail);
+                currentIntent.putExtra("doctorEmail", doctorEmail);
                 PatientInfoActivity.this.startActivity(currentIntent);
             }
         });

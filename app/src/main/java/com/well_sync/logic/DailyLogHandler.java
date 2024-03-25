@@ -59,7 +59,7 @@ public class DailyLogHandler implements IDailyLogHandler {
     }
 
     public double getAverageSleep(Patient patient) {
-        double[] sleepHours = getAllSleepHours(patient);
+        float[] sleepHours = getAllSleepHours(patient);
         if (sleepHours.length == 0)
             return 0;
 
@@ -71,16 +71,16 @@ public class DailyLogHandler implements IDailyLogHandler {
         return sleepSum / sleepHours.length;
     }
 
-    public double[] getAllSleepHours(Patient patient) {
+    public float[] getAllSleepHours(Patient patient) {
         List<DailyLog> allLogs = persistLog.getAllDailyLogs(patient);
-        double[] sleepHoursArray = new double[allLogs.size()];
+        float[] sleepHoursArray = new float[allLogs.size()];
 
         for (int i = 0; i < allLogs.size(); i++) {
             DailyLog log = allLogs.get(i);
             if (log != null) {
                 sleepHoursArray[i] = log.getSleepHours();
             } else {
-                sleepHoursArray[i] = 0.0;
+                sleepHoursArray[i] = 0.0f;
             }
         }
 

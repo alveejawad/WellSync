@@ -52,4 +52,7 @@ public interface IDailyLogHandler {
     List<String> getAllDatesAsString(Patient patient);
 
     float[] getAllMoodScores(Patient patient);
+
+    float[] getAllSleepHours(Patient patient);
+    float[] getAverageSymptoms(Patient patient);
 }

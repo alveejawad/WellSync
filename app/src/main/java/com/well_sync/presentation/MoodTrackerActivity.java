@@ -35,13 +35,14 @@ public class MoodTrackerActivity extends AppCompatActivity {
     protected String emotion, sleepHoursText, userNotes;
     private int moodScores;
     private int sleepHours;
-    private final String[] moodList = getResources().getStringArray(R.array.moods);
+    private String[] moodList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mood); // Replace with your actual layout file name
         dailyLogHandler = new DailyLogHandler();
         moodScores = 0;
+        moodList = getResources().getStringArray(R.array.moods);
 
         //get email and date from HomePage Activity
         Intent intent = getIntent();
