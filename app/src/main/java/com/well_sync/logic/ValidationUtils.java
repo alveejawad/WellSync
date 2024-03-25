@@ -1,18 +1,29 @@
 package com.well_sync.logic;
 
+import com.well_sync.logic.exceptions.InvalidNotesException;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.regex.Pattern;
 
 /**
- * Package-private utility class for general helper functions related to validation.
+ * Utility class for general helper functions related to validation.
  */
-abstract class ValidationUtils {
+public abstract class ValidationUtils {
+
+    /**
+     * These constants are set by UI on app startup, since these are configured in
+     * Android-specific config XML files
+     */
+    private static int maxNotesLength;
+    public static void setMaxNotesLength(int length) {
+        maxNotesLength = length;
+    }
 
     /**
      * Valid name uses 2 or more alphabetic characters; nothing else.
      */
     public static <E extends Exception> void validateName(Class<E> exceptionType, String name) throws E {
-        if (name == null || !Pattern.matches("[\\w /-]{2,}", name)) {
+        if (name == null || !Pattern.matches("[\\w ./-]{2,}", name)) {
             try {
                 throw exceptionType
                         .getConstructor(String.class)
@@ -40,5 +51,13 @@ abstract class ValidationUtils {
                 throw new RuntimeException("Failed to instantiate invalid data exception.");
             }
         }
+    }
+
+    public static void validateNotes(String notes) throws InvalidNotesException {
+        if (notes == null)
+            throw new InvalidNotesException("Absent notes field.");
+
+        else if (notes.length() > maxNotesLength)
+            throw new InvalidNotesException("Exceeded word limit.");
     }
 }

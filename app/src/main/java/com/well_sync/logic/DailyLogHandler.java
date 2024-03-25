@@ -162,7 +162,7 @@ public class DailyLogHandler implements IDailyLogHandler {
     }
 
     public List<String> getAllDatesAsString(Patient patient) {
-        List<Date> dates = persistLog.getAllDates(patient);
+        List<Date> dates = getAllDates(patient);
 
         Collections.sort(dates);
 
