@@ -1,11 +1,11 @@
 package com.well_sync.persistence.hsqldb;
 
 import com.well_sync.logic.exceptions.InvalidDailyLogException;
-import com.well_sync.objects.Patient;
 import com.well_sync.objects.DailyLog;
-import com.well_sync.objects.Symptom;
 import com.well_sync.objects.Medication;
+import com.well_sync.objects.Patient;
 import com.well_sync.objects.Substance;
+import com.well_sync.objects.Symptom;
 import com.well_sync.persistence.IDailyLogPersistence;
 
 import java.sql.Connection;
@@ -26,7 +26,7 @@ public class DailyLogPersistenceHSQLDB implements IDailyLogPersistence {
     }
 
     private Connection connect() throws SQLException {
-        return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "MD", "");
+        return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true;create=true", "MD", "");
     }
 
     @Override
