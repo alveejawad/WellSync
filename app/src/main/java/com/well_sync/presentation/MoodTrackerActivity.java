@@ -73,7 +73,7 @@ public class MoodTrackerActivity extends AppCompatActivity {
                 // Set the emotion text below the selected image view
                 emotionText.setText(moodList[0]);
                 // Set the mood score
-                moodScores = 3;
+                moodScores = 0;
             }
         });
 
@@ -87,7 +87,7 @@ public class MoodTrackerActivity extends AppCompatActivity {
                 emotionText.setText(moodList[1]);
 
                 // Set the mood score
-                moodScores = 2;
+                moodScores = 1;
             }
         });
 
@@ -101,7 +101,7 @@ public class MoodTrackerActivity extends AppCompatActivity {
                 emotionText.setText(moodList[2]);
 
                 // Set the mood score
-                moodScores = 1;
+                moodScores = 2;
             }
         });
 
@@ -115,7 +115,7 @@ public class MoodTrackerActivity extends AppCompatActivity {
                 emotionText.setText(moodList[3]);
 
                 // Set the mood score
-                moodScores = 0;
+                moodScores = 3;
             }
         });
         // Set click listeners or any other event listeners as needed
@@ -173,7 +173,7 @@ public class MoodTrackerActivity extends AppCompatActivity {
                     saveIntent.putExtra("userNotes", userNotes);
                     MoodTrackerActivity.this.startActivity(saveIntent);
                 } catch (InvalidDailyLogException e) {
-                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),e.getMessage(), Toast.LENGTH_LONG).show();
                 }
             }
         });

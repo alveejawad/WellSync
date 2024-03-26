@@ -1,6 +1,5 @@
 package com.well_sync.logic;
 
-import com.github.mikephil.charting.data.Entry;
 import com.well_sync.logic.exceptions.InvalidDailyLogException;
 import com.well_sync.objects.DailyLog;
 import com.well_sync.objects.Patient;
@@ -64,8 +63,4 @@ public interface IDailyLogHandler {
      * Get averages for all symptoms on which the given patient recorded a log.
      */
     Map<String, Float> getAverageSymptoms(Patient patient);
-    /**
-     * return a list of coordinates to display on the charts.
-     */
-    List<Entry> getEntries(float[] array);
 }

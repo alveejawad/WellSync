@@ -3,7 +3,6 @@ package com.well_sync.presentation;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,15 +34,10 @@ import java.util.Map;
 public class UserProgressActivity extends AppCompatActivity {
     private String patientEmail, doctorEmail, date;
     private LineChart lineChart;
-    private List<String> dates;
-    private int sizeXAxis;
-    private List<String> moodNames;
     AnyChartView symptomsChart;
-    private IDailyLogHandler dailyLogHandler;
-    private Patient patient;
-    private float[] moodScores, sleepHours;
     private Map<String, Float> symptomScores;
-
+    private final String MOOD="mood";
+    private final String SLEEP="sleep hours";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,36 +50,34 @@ public class UserProgressActivity extends AppCompatActivity {
 
         //get the handler to call the methods
         IPatientHandler patientHandler = new PatientHandler();
-        patient = patientHandler.getDetails("patient1@example.com");
-        dailyLogHandler= new DailyLogHandler();
+        Patient patient = patientHandler.getDetails("patient1@example.com");
+        IDailyLogHandler dailyLogHandler = new DailyLogHandler();
 
         //Names
-        moodNames = Arrays.asList(getResources().getStringArray(R.array.moods));
+        List<String> moodNames = Arrays.asList(getResources().getStringArray(R.array.moods));
+        int totalSymptoms= getResources().getInteger(R.integer.total_symptoms);
         //get the data for x and y coordinates
-        dates = dailyLogHandler.getAllDatesAsString(patient);
-        moodScores=dailyLogHandler.getAllMoodScores(patient);
-        sleepHours=dailyLogHandler.getAllSleepHours(patient);
-        symptomScores=dailyLogHandler.getAverageSymptoms(patient);
-        List<Entry> entriesMood =dailyLogHandler.getEntries(moodScores);
-        List<Entry> entriesSleep =dailyLogHandler.getEntries(sleepHours);
+        List<String> dates = dailyLogHandler.getAllDatesAsString(patient);
+        float[] moodScores = dailyLogHandler.getAllMoodScores(patient);
+        float[] sleepHours = dailyLogHandler.getAllSleepHours(patient);
+        symptomScores= dailyLogHandler.getAverageSymptoms(patient);
+        List<Entry> entriesMood =getEntries(moodScores);
+        List<Entry> entriesSleep =getEntries(sleepHours);
 
-        //creat the charts
-        createLineChart(R.id.mood_chart,"Mood", dates,moodNames,entriesMood);
-        createLineChart(R.id.sleep_chart,"Sleep Hours", dates,null,entriesSleep);
+        //create the charts
+        createLineChart(R.id.mood_chart,MOOD, dates, moodNames,entriesMood);
+        createLineChart2(R.id.sleep_chart,SLEEP, dates,totalSymptoms,entriesSleep);
         createPieChart(R.id.symptoms_chart);
 
         // Set click listeners or any other event listeners as needed
         ImageView  closeImageView = findViewById(R.id.close);
-        closeImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Handle close button click
-                Intent closeIntent = new Intent(UserProgressActivity.this, PatientInfoActivity.class);
-                closeIntent.putExtra("doctorEmail",doctorEmail);
-                closeIntent.putExtra("patientEmail",patientEmail);
-                closeIntent.putExtra("date",date);
-                UserProgressActivity.this.startActivity(closeIntent);
-            }
+        closeImageView.setOnClickListener(view -> {
+            // Handle close button click
+            Intent closeIntent = new Intent(UserProgressActivity.this, PatientInfoActivity.class);
+            closeIntent.putExtra("doctorEmail",doctorEmail);
+            closeIntent.putExtra("patientEmail",patientEmail);
+            closeIntent.putExtra("date",date);
+            UserProgressActivity.this.startActivity(closeIntent);
         });
 
     }
@@ -130,6 +122,43 @@ public class UserProgressActivity extends AppCompatActivity {
         LineData lineData = new LineData(dataSet);
         lineChart.setData(lineData);
         lineChart.invalidate();
+    }
+
+    private void createLineChart2(int idView, String label, List<String> xList, int ySize,List<Entry> entries){
+        lineChart = findViewById(idView);
+        lineChart.getAxisRight().setDrawLabels(false);
+
+        XAxis xAxis = lineChart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setValueFormatter(new IndexAxisValueFormatter(xList));
+        xAxis.setLabelCount(xList.size());
+        xAxis.setAxisLineWidth(5f);
+        xAxis.setAxisLineColor(Color.BLACK);
+        xAxis.setGranularity(1f);
+
+        YAxis yAxis = lineChart.getAxisLeft();
+        yAxis.setAxisMinimum(0f);
+
+        yAxis.setAxisMaximum(ySize-1);
+        if(ySize>10)
+            yAxis.setLabelCount(ySize/2);
+        else
+            yAxis.setLabelCount(ySize);
+        yAxis.setAxisLineWidth(5f);
+        yAxis.setAxisLineColor(Color.BLACK);
+        yAxis.setGranularity(1f);
+        LineDataSet dataSet = new LineDataSet(entries,label);
+        dataSet.setColor(Color.BLUE);
+        LineData lineData = new LineData(dataSet);
+        lineChart.setData(lineData);
+        lineChart.invalidate();
+    }
+    public List<Entry> getEntries(float[] array){
+        List<Entry> entries = new ArrayList<>();
+        for(int i=0;i<array.length;i++){
+            entries.add(new Entry(i, array[i]));
+        }
+        return entries;
     }
 
 }
