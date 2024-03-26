@@ -14,6 +14,7 @@ import com.well_sync.logic.DailyLogValidator;
 import com.well_sync.logic.IUserAuthenticationHandler;
 import com.well_sync.logic.PatientValidator;
 import com.well_sync.logic.UserAuthenticationHandler;
+import com.well_sync.logic.ValidationUtils;
 import com.well_sync.logic.exceptions.InvalidCredentialsException;
 import com.well_sync.objects.UserCredentials;
 import com.well_sync.persistence.utils.DBHelper;
@@ -47,6 +48,7 @@ public class LoginActivity extends AppCompatActivity {
                 getResources().getInteger(R.integer.max_substance_quantity)
         );
         PatientValidator.setMaxAge(getResources().getInteger(R.integer.max_age));
+        ValidationUtils.setMaxNotesLength(getResources().getInteger(R.integer.max_notes_length));
 
 
         loginHandler = new UserAuthenticationHandler();

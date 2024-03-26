@@ -1,6 +1,5 @@
 package com.well_sync.logic;
 
-import com.github.mikephil.charting.data.Entry;
 import com.well_sync.application.Services;
 import com.well_sync.logic.exceptions.InvalidDailyLogException;
 import com.well_sync.objects.DailyLog;
@@ -172,14 +171,6 @@ public class DailyLogHandler implements IDailyLogHandler {
         }
 
         return dateStrings;
-    }
-
-    public List<Entry> getEntries(float[] array){
-        List<Entry> entries = new ArrayList<>();
-        for(int i=0;i<array.length;i++){
-            entries.add(new Entry(i, array[i]));
-        }
-        return entries;
     }
 
     private String dateToString(Date date){
