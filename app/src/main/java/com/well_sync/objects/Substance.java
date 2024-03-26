@@ -1,8 +1,10 @@
 package com.well_sync.objects;
 
+import java.util.Objects;
+
 public class Substance {
     private String name;
-    private int quantity;
+    private final int quantity;
 
     public Substance(String name, int quantity) {
         this.name = name;
@@ -21,7 +23,12 @@ public class Substance {
         return this.quantity;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Substance substance = (Substance) o;
+        return quantity == substance.quantity && Objects.equals(name, substance.name);
     }
+
 }

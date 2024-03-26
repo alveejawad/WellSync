@@ -1,13 +1,18 @@
 package com.well_sync.tests.business;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
+
 import com.well_sync.application.Services;
 import com.well_sync.logic.IPatientHandler;
 import com.well_sync.logic.PatientHandler;
+import com.well_sync.logic.PatientValidator;
+import com.well_sync.logic.ValidationUtils;
 import com.well_sync.logic.exceptions.InvalidPatientException;
 import com.well_sync.objects.Patient;
 import com.well_sync.tests.utils.TestUtils;
-
-import static org.junit.Assert.*;
 
 import org.junit.After;
 import org.junit.Before;
@@ -28,6 +33,10 @@ public class PatientHandlerIT {
 
         assertNotNull(this.tempDB);
         assertNotNull(this.handler);
+
+        // same as in Android config file
+        PatientValidator.setMaxAge(122);
+        ValidationUtils.setMaxNotesLength(1000);
     }
 
     @Test

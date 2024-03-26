@@ -28,6 +28,6 @@ abstract class UserCredentialsValidator {
         if (password == null)
             throw new InvalidCredentialsException("No password specified.");
         if (!Pattern.matches("((?=.)[^ ]){8,64}", password))
-            throw new InvalidCredentialsException("Invalid password.");
+            throw new InvalidCredentialsException("Invalid password. Must be between 8 and 64 characters.");
     }
 }

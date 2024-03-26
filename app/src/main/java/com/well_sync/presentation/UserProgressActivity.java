@@ -55,7 +55,7 @@ public class UserProgressActivity extends AppCompatActivity {
 
         //Names
         List<String> moodNames = Arrays.asList(getResources().getStringArray(R.array.moods));
-        int totalSymptoms= getResources().getInteger(R.integer.total_symptoms);
+        int totalSymptoms= getResources().getIntArray(R.array.symptoms).length;
         //get the data for x and y coordinates
         List<String> dates = dailyLogHandler.getAllDatesAsString(patient);
         float[] moodScores = dailyLogHandler.getAllMoodScores(patient);

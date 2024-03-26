@@ -16,59 +16,29 @@ import java.util.List;
 public class UserPersistenceHSQLDB implements IUserPersistence {
 
     private final String dbPath;
-//    private final List<UserCredentials> userCredentialsList;
-    private final List<Patient> patientsList;
-//    private final List<Doctor> doctorsList;
 
     public UserPersistenceHSQLDB(String dbPath) {
         this.dbPath = dbPath;
-        this.patientsList = new ArrayList<>();
-//        loadUserCredentials();
         loadPatients();
-//        loadDoctors();
     }
 
     private Connection connect() throws SQLException {
         return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true;create=true", "MD", "");
     }
 
-//    private void loadUserCredentials() {
-//        try (Connection connection = connect()) {
-//            PreparedStatement statement = connection.prepareStatement("SELECT * FROM USER_CREDENTIALS");
-//            ResultSet resultSet = statement.executeQuery();
-//            while (resultSet.next()) {
-//                userCredentialsList.add(new UserCredentials(resultSet.getString("email"), resultSet.getString("password"),resultSet.getString("role")));
-//            }
-//        } catch (final SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
 
     private void loadPatients() {
         try (Connection connection = connect()) {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM PATIENTS");
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                Patient patient = createPatientFromResultSet(resultSet);
-                patientsList.add(patient);
+                createPatientFromResultSet(resultSet);
             }
         } catch (final SQLException e) {
             e.printStackTrace();
         }
     }
 
-//    private void loadDoctors() {
-//        try (Connection connection = connect()) {
-//            PreparedStatement statement = connection.prepareStatement("SELECT * FROM DOCTORS");
-//            ResultSet resultSet = statement.executeQuery();
-//            while (resultSet.next()) {
-//                Doctor doctor = createDoctorFromResultSet(resultSet);
-//                doctorsList.add(doctor);
-//            }
-//        } catch (final SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
 
     @Override
     public UserCredentials getUserCredentials(UserCredentials userCredentials) {
@@ -210,10 +180,6 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
         } catch (final SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    public List<Patient> getAllPatientsList() {
-        return this.patientsList;
     }
 
     private Patient createPatientFromResultSet(ResultSet resultSet) throws SQLException {

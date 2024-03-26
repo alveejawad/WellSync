@@ -26,8 +26,6 @@ public interface IUserPersistence {
 
     void assignPatientToDoctor(Patient patient, Doctor doctor);
 
-    List<Patient> getAllPatientsList();
-
     List<Patient> getAllPatientsForDoctor(Doctor doctor);
 
 }

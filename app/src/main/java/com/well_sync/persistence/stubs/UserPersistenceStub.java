@@ -98,11 +98,6 @@ public class UserPersistenceStub implements IUserPersistence {
     public void assignPatientToDoctor(Patient patient, Doctor doctor){}
 
     @Override
-    public List<Patient> getAllPatientsList() {
-        return this.patientList;
-    }
-
-    @Override
     public void setUserCredentials(UserCredentials user) {
         userCredentialsList.add(user);
     }
