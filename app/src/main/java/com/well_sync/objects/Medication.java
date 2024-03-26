@@ -1,9 +1,11 @@
 package com.well_sync.objects;
 
+import java.util.Objects;
+
 public class Medication {
     private String name;
-    private int quantity; // number of tablets?
-    private int dosage;
+    private final int quantity; // number of tablets?
+    private final int dosage;
 
     public Medication(String name, int quantity, int dosage) {
         this.name = name;
@@ -23,15 +25,16 @@ public class Medication {
         return this.quantity;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public void setDosage(int dosage) {
-        this.dosage = dosage;
-    }
-
     public int getDosage(){
         return this.dosage;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Medication that = (Medication) o;
+        return quantity == that.quantity && dosage == that.dosage && Objects.equals(name, that.name);
+    }
+
 }

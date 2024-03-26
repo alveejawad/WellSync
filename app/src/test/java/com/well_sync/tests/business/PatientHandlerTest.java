@@ -22,6 +22,8 @@ public class PatientHandlerTest {
     public void setup() {
         System.out.println("Starting test for PatientHandlerTest");
         IPatientHandler = new PatientHandler(new UserPersistenceStub());
+
+        // same as in Android config file
         PatientValidator.setMaxAge(122);
         ValidationUtils.setMaxNotesLength(1000);
     }

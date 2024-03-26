@@ -149,9 +149,10 @@ public class DailyLog {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DailyLog dailyLog = (DailyLog) o;
+
         return moodScore == dailyLog.moodScore
                 && sleepHours == dailyLog.sleepHours
-                && Objects.equals(date, dailyLog.date)
+                && date.getTime() == dailyLog.date.getTime()
                 && Objects.equals(notes, dailyLog.notes)
                 && Objects.equals(symptomList, dailyLog.symptomList)
                 && Objects.equals(medicationList, dailyLog.medicationList)
