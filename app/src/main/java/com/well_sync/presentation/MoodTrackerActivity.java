@@ -173,8 +173,7 @@ public class MoodTrackerActivity extends AppCompatActivity {
                     saveIntent.putExtra("userNotes", userNotes);
                     MoodTrackerActivity.this.startActivity(saveIntent);
                 } catch (InvalidDailyLogException e) {
-                    String message = e.getMessage();
-                    Toast.makeText(getApplicationContext(),message, Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),e.getMessage(), Toast.LENGTH_LONG).show();
                 }
             }
         });
