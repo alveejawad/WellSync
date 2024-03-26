@@ -5,7 +5,8 @@ import static org.junit.Assert.fail;
 
 import com.well_sync.logic.IPatientHandler;
 import com.well_sync.logic.PatientHandler;
-import com.well_sync.logic.exceptions.InvalidNotesException;
+import com.well_sync.logic.PatientValidator;
+import com.well_sync.logic.ValidationUtils;
 import com.well_sync.logic.exceptions.InvalidPatientException;
 import com.well_sync.objects.Patient;
 import com.well_sync.persistence.stubs.UserPersistenceStub;
@@ -21,6 +22,8 @@ public class PatientHandlerTest {
     public void setup() {
         System.out.println("Starting test for PatientHandlerTest");
         IPatientHandler = new PatientHandler(new UserPersistenceStub());
+        PatientValidator.setMaxAge(122);
+        ValidationUtils.setMaxNotesLength(1000);
     }
 
     @Test
@@ -90,7 +93,7 @@ public class PatientHandlerTest {
             Patient invalidNotes = new Patient(email, "Jane", "Newman", "O", "F", 0, null);
             IPatientHandler.addPatient(invalidNotes);
             fail("Adding patient with invalid notes did not throw an exception.");
-        } catch (InvalidNotesException e) {
+        } catch (InvalidPatientException e) {
             // pass!
         }
 

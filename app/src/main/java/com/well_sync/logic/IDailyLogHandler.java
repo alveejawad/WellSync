@@ -1,12 +1,12 @@
 package com.well_sync.logic;
 
-import com.github.mikephil.charting.data.Entry;
 import com.well_sync.logic.exceptions.InvalidDailyLogException;
 import com.well_sync.objects.DailyLog;
 import com.well_sync.objects.Patient;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Saves and retrieves health log information saved by patients to particular calendar dates.
@@ -62,9 +62,5 @@ public interface IDailyLogHandler {
     /**
      * Get averages for all symptoms on which the given patient recorded a log.
      */
-    float[] getAverageSymptoms(Patient patient);
-    /**
-     * return a list of coordinates to display on the charts.
-     */
-    List<Entry> getEntries(float[] array);
+    Map<String, Float> getAverageSymptoms(Patient patient);
 }

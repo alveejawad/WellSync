@@ -29,7 +29,7 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
     }
 
     private Connection connect() throws SQLException {
-        return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "MD", "");
+        return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true;create=true", "MD", "");
     }
 
 //    private void loadUserCredentials() {

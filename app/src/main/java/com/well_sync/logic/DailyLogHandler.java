@@ -1,6 +1,5 @@
 package com.well_sync.logic;
 
-import com.github.mikephil.charting.data.Entry;
 import com.well_sync.application.Services;
 import com.well_sync.logic.exceptions.InvalidDailyLogException;
 import com.well_sync.objects.DailyLog;
@@ -14,8 +13,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class DailyLogHandler implements IDailyLogHandler {
 
@@ -88,31 +89,45 @@ public class DailyLogHandler implements IDailyLogHandler {
         return sleepHoursArray;
     }
 
-    public float[] getAverageSymptoms(Patient patient) {
+    public Map<String, Float> getAverageSymptoms(Patient patient) {
         List<DailyLog> allLogs = persistLog.getAllDailyLogs(patient);
-        int[] totalIntensities = new int[17];
-        int[] numLogs = new int[17];
-        float[] avgSymptoms = new float[17];
+
+        Map<String, Integer> countPerSymptom = new HashMap<>();
+        Map<String, Integer> sumScorePerSymptom = new HashMap<>();
+        Map<String, Float> avgScorePerSymptom = new HashMap<>();
 
         for (DailyLog log : allLogs) {
             if (log != null) {
                 List<Symptom> symptoms = log.getSymptoms();
-                for (int i = 0; i < symptoms.size(); i++) {
-                    Symptom symptom = symptoms.get(i);
-                    totalIntensities[i] += symptom.getIntensity();
-                    numLogs[i]++;
+                for (Symptom s : symptoms) {
+                    String name = s.getName();
+                    int intensity = s.getIntensity();
+
+                    Integer sum = sumScorePerSymptom.get(name);
+                    if (sum != null) sum = sum + intensity;
+                    else sum = intensity;
+                    sumScorePerSymptom.put(name, sum);
+
+                    Integer count = countPerSymptom.get(name);
+                    if (count != null) count = count + 1;
+                    else count = 1;
+                    countPerSymptom.put(name, count);
                 }
             }
         }
-        for (int i = 0; i < avgSymptoms.length; i++) {
-            if (numLogs[i] != 0) {
-                avgSymptoms[i] = (float) totalIntensities[i] / numLogs[i];
-            } else {
-                avgSymptoms[i] = 0.0f;
-            }
+
+        for (Map.Entry<String, Integer> entry : countPerSymptom.entrySet()) {
+            String name = entry.getKey();
+            Integer count = entry.getValue();
+            if (count == null) continue;
+
+            Integer totalScore = sumScorePerSymptom.get(name);
+            if (totalScore == null) totalScore = 0;
+
+            avgScorePerSymptom.put(name, (float)totalScore / (float)entry.getValue());
         }
 
-        return avgSymptoms;
+        return avgScorePerSymptom;
     }
 
     public List<Date> getAllDates(Patient patient) {
@@ -146,7 +161,7 @@ public class DailyLogHandler implements IDailyLogHandler {
     }
 
     public List<String> getAllDatesAsString(Patient patient) {
-        List<Date> dates = persistLog.getAllDates(patient);
+        List<Date> dates = getAllDates(patient);
 
         Collections.sort(dates);
 
@@ -156,14 +171,6 @@ public class DailyLogHandler implements IDailyLogHandler {
         }
 
         return dateStrings;
-    }
-
-    public List<Entry> getEntries(float[] array){
-        List<Entry> entries = new ArrayList<>();
-        for(int i=0;i<array.length;i++){
-            entries.add(new Entry(i, array[i]));
-        }
-        return entries;
     }
 
     private String dateToString(Date date){
