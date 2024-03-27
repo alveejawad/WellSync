@@ -8,16 +8,16 @@
       <entry key="LoginSignupTest">
         <State />
       </entry>
-      <entry key="SeeDoctorNotesTest">
-        <State />
-      </entry>
-      <entry key="TrackPatientDetailTest">
-        <State />
-      </entry>
       <entry key="app">
         <State />
       </entry>
+      <entry key="loginAsDoctorTest()">
+        <State />
+      </entry>
       <entry key="signUpAsDoctorTest()">
+        <State />
+      </entry>
+      <entry key="signUpAsPatientTest()">
         <State />
       </entry>
     </value>

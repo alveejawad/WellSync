@@ -41,6 +41,7 @@ public class CheckDailyLogTest {
 
     @Test
     public void checkDailyLogsTest() {
+
         onView(withId(R.id.daily_logs)).perform(click());
         onView(withId(R.id.date_list)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
         onView(withId(R.id.backbutton)).perform(ViewActions.scrollTo(), click());
