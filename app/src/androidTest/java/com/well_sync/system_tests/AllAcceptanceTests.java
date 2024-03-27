@@ -8,11 +8,11 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
         CheckDailyLogTest.class,
         DailyLogTest.class,
-        LoginSignupTest.class,
         AddPatientForDoctorTest.class,
         EditPatientDetailTest.class,
         SeeDoctorNotesTest.class,
-        TrackPatientDetailTest.class
+        TrackPatientDetailTest.class,
+        LoginSignupTest.class
 })
 public class AllAcceptanceTests {
 }

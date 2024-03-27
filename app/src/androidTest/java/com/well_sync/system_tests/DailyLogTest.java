@@ -2,6 +2,7 @@ package com.well_sync.system_tests;
 
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.espresso.action.ViewActions;
+import androidx.test.espresso.contrib.RecyclerViewActions;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 
@@ -24,7 +25,7 @@ public class DailyLogTest {
     @Before
     public void loginTest() {
         ActivityScenario.launch(LoginActivity.class);
-        onView(withId(R.id.editEmail)).perform(typeText("patient1@example.com"));
+        onView(withId(R.id.editEmail)).perform(typeText("patient1@example.com"), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.editPassword)).perform(typeText("password1"), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.Loginbutton)).perform(click());
     }
