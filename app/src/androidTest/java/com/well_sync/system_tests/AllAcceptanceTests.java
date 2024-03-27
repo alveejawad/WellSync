@@ -6,13 +6,14 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
+        LoginSignupTest.class,
         CheckDailyLogTest.class,
         DailyLogTest.class,
-        LoginSignupTest.class,
         AddPatientForDoctorTest.class,
         EditPatientDetailTest.class,
         SeeDoctorNotesTest.class,
-        TrackPatientDetailTest.class
+        TrackPatientDetailTest.class,
+
 })
 public class AllAcceptanceTests {
 }

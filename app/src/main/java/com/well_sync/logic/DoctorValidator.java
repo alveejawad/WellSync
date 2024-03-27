@@ -13,7 +13,7 @@ abstract class DoctorValidator {
             throw new InvalidDoctorException("Doctor details object undefined.");
 
         ValidationUtils.validateEmail(InvalidDoctorException.class, doctor.getEmail());
-        ValidationUtils.validateName(InvalidDoctorException.class, doctor.getFirstName());
-        ValidationUtils.validateName(InvalidDoctorException.class, doctor.getLastName());
+       //ValidationUtils.validateName(InvalidDoctorException.class, doctor.getFirstName());
+        //ValidationUtils.validateName(InvalidDoctorException.class, doctor.getLastName());
     }
 }

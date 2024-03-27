@@ -23,7 +23,7 @@ public class AddPatientForDoctorTest {
     @Before
     public void loginTest() {
         ActivityScenario.launch(LoginActivity.class);
-        onView(withId(R.id.editEmail)).perform(typeText("doctor1@example.com"));
+        onView(withId(R.id.editEmail)).perform(typeText("doctor1@example.com"), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.editPassword)).perform(typeText("password1"), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.Loginbutton)).perform(click());
     }

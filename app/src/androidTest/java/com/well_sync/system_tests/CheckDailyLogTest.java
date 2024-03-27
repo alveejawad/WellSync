@@ -31,7 +31,7 @@ public class CheckDailyLogTest {
     @Before
     public void loginTest() {
         ActivityScenario.launch(LoginActivity.class);
-        onView(withId(R.id.editEmail)).perform(typeText("doctor1@example.com"));
+        onView(withId(R.id.editEmail)).perform(typeText("doctor1@example.com"), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.editPassword)).perform(typeText("password1"), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.Loginbutton)).perform(click());
 
@@ -41,6 +41,7 @@ public class CheckDailyLogTest {
 
     @Test
     public void checkDailyLogsTest() {
+
         onView(withId(R.id.daily_logs)).perform(click());
         onView(withId(R.id.date_list)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
         onView(withId(R.id.backbutton)).perform(ViewActions.scrollTo(), click());
