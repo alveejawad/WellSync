@@ -36,7 +36,7 @@ public class CheckDailyLogTest {
         onView(withId(R.id.Loginbutton)).perform(click());
 
         // go to patient detail page
-        onView(withId(R.id.patientList)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
+        onView(withId(R.id.patientList)).perform(RecyclerViewActions.scrollToPosition(0), click());
     }
 
     @Test
