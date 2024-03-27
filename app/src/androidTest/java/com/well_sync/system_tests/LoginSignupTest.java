@@ -29,7 +29,7 @@ public class LoginSignupTest {
 
     @Test
     public void loginAsPatientTest() {
-        onView(withId(R.id.editEmail)).perform(typeText("patient1@example.com"));
+        onView(withId(R.id.editEmail)).perform(typeText("patient1@example.com"), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.editPassword)).perform(typeText("password1"), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.Loginbutton)).perform(click());
 
@@ -37,15 +37,7 @@ public class LoginSignupTest {
         onView(withId(R.id.logout)).perform(click());
     }
 
-    @Test
-    public void loginAsDoctorTest() {
-        onView(withId(R.id.editEmail)).perform(typeText("doctor1@example.com"));
-        onView(withId(R.id.editPassword)).perform(typeText("password1"), ViewActions.closeSoftKeyboard());
-        onView(withId(R.id.Loginbutton)).perform(click());
 
-        // perform log out
-        onView(withId(R.id.logout)).perform(click());
-    }
 
     @Test
     public void signUpAsPatientTest() {
@@ -73,11 +65,21 @@ public class LoginSignupTest {
     public void signUpAsDoctorTest() {
         onView(withId(R.id.SignUp)).perform(click());
         onView(withId(R.id.editEmail)).perform(typeText("hungludao@gmail.com"));
-        onView(withId(R.id.editPassword)).perform(typeText("password1"));
+        onView(withId(R.id.editPassword)).perform(typeText("password1"), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.editConfirmPassword)).perform(typeText("password1"), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.Roles)).perform(click());
         onView(ViewMatchers.withText("DOCTOR")).perform(click());
         onView(withId(R.id.Nextbutton)).perform(click());
+
+        // perform log out
+        onView(withId(R.id.logout)).perform(click());
+    }
+
+    @Test
+    public void loginAsDoctorTest() {
+        onView(withId(R.id.editEmail)).perform(typeText("doctor1@example.com"));
+        onView(withId(R.id.editPassword)).perform(typeText("password1"), ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.Loginbutton)).perform(click());
 
         // perform log out
         onView(withId(R.id.logout)).perform(click());
