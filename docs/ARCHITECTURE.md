@@ -37,8 +37,14 @@ Responsible for managing the storage and retrieval of data. The primary role of 
 - **UserPersistence:** Responsible for storing and retrieving information related to user registrations. It may include details such as usernames, passwords, email addresses, users details. Interfaces with the PatientHandler, DoctorHandler, and UserAuthenticationHandler from the Business Logic Layer, to ensure accurate and secure handling of user registration data.<br>
 - **DailyLogPersistence:** This component deals with storing and retrieving mood-related information logged by users. It interfaces with DailyLogHandler to organize and store each patient's logs.<br>
 
+## Iteration 3 Diagram
+Note that some minor presentation classes that do not read/write data are omitted from the diagram.
 
-## Iteration 2 Diagram
+For clarity, the addition of `DailyLogPatientActivity` in Iteration 3 is for doctors to view the daily logs of their patients.
+
+![architecture](architecture-3.png)
+
+## Iterations 2 & 3 Diagram
 
 ![architecture](architecture-2.png)
 
