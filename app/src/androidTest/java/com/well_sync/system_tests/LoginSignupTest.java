@@ -1,5 +1,10 @@
 package com.well_sync.system_tests;
 
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.typeText;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
+
 import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.contrib.PickerActions;
 import androidx.test.espresso.matcher.ViewMatchers;
@@ -7,18 +12,13 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 
+import com.well_sync.R;
+import com.well_sync.presentation.LoginActivity;
+
 import org.hamcrest.Matchers;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import com.well_sync.R;
-import com.well_sync.presentation.LoginActivity;
-
-import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.action.ViewActions.typeText;
-import static androidx.test.espresso.matcher.ViewMatchers.withId;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
@@ -28,20 +28,10 @@ public class LoginSignupTest {
     public ActivityScenarioRule<LoginActivity> activityScenarioRule = new ActivityScenarioRule<>(LoginActivity.class);
 
     @Test
-    public void loginAsPatientTest() {
-        onView(withId(R.id.editEmail)).perform(typeText("patient1@example.com"), ViewActions.closeSoftKeyboard());
-        onView(withId(R.id.editPassword)).perform(typeText("password1"), ViewActions.closeSoftKeyboard());
-        onView(withId(R.id.Loginbutton)).perform(click());
-
-        // perform log out
-        onView(withId(R.id.logout)).perform(click());
-    }
-
-
-
-    @Test
-    public void signUpAsPatientTest() {
+    public void signupLoginPatientTest() throws InterruptedException {
+        // sign up as patient
         onView(withId(R.id.SignUp)).perform(click());
+        Thread.sleep(2000);
         onView(withId(R.id.editEmail)).perform(typeText("hungludao@gmail.com"));
         onView(withId(R.id.editPassword)).perform(typeText("password1"));
         onView(withId(R.id.editConfirmPassword)).perform(typeText("password1"), ViewActions.closeSoftKeyboard());
@@ -59,12 +49,23 @@ public class LoginSignupTest {
         onView(withId(R.id.BloodTypes)).perform(click());
         onView(ViewMatchers.withText("A+")).perform(click());
         onView(withId(R.id.savebutton)).perform(click());
+
+        // perform log out
+        onView(withId(R.id.logout)).perform(click());
+
+        // log in as patient
+        onView(withId(R.id.editEmail)).perform(typeText("hungludao@gmail.com"), ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.editPassword)).perform(typeText("password1"), ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.Loginbutton)).perform(click());
     }
 
+
     @Test
-    public void signUpAsDoctorTest() {
+    public void signupLoginDoctorTest() throws InterruptedException {
+        // sign up as doctor
         onView(withId(R.id.SignUp)).perform(click());
-        onView(withId(R.id.editEmail)).perform(typeText("hungludao@gmail.com"));
+        Thread.sleep(2000);
+        onView(withId(R.id.editEmail)).perform(typeText("hungludao-dr@gmail.com"));
         onView(withId(R.id.editPassword)).perform(typeText("password1"), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.editConfirmPassword)).perform(typeText("password1"), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.Roles)).perform(click());
@@ -73,15 +74,10 @@ public class LoginSignupTest {
 
         // perform log out
         onView(withId(R.id.logout)).perform(click());
-    }
 
-    @Test
-    public void loginAsDoctorTest() {
-        onView(withId(R.id.editEmail)).perform(typeText("doctor1@example.com"));
+        // log in as doctor
+        onView(withId(R.id.editEmail)).perform(typeText("hungludao-dr@gmail.com"));
         onView(withId(R.id.editPassword)).perform(typeText("password1"), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.Loginbutton)).perform(click());
-
-        // perform log out
-        onView(withId(R.id.logout)).perform(click());
     }
 }
