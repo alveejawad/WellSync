@@ -11,7 +11,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.well_sync.R;
+import com.well_sync.logic.DailyLogHandler;
 import com.well_sync.logic.DoctorHandler;
+import com.well_sync.logic.IDailyLogHandler;
 import com.well_sync.logic.IDoctorHandler;
 import com.well_sync.logic.IPatientHandler;
 import com.well_sync.logic.PatientHandler;
@@ -20,12 +22,16 @@ import com.well_sync.logic.exceptions.InvalidPatientException;
 import com.well_sync.objects.Doctor;
 import com.well_sync.objects.Patient;
 
+import java.util.Date;
+import java.util.List;
+
 public class PatientInfoActivity extends AppCompatActivity {
     private Patient patient;
     private Doctor doctor;
     private EditText adviseEditText;
     private String doctorEmail, patientEmail;
     private String date;
+    private List<Date> listDates;
 
 
 
@@ -52,6 +58,9 @@ public class PatientInfoActivity extends AppCompatActivity {
         patient = patientHandler.getDetails(patientEmail);
         IDoctorHandler doctorHandler = new DoctorHandler();
         doctor = doctorHandler.getDetails(doctorEmail);
+        // get all the date from the patient
+        IDailyLogHandler logHandler = new DailyLogHandler();
+        listDates= logHandler.getAllDates(patient);
 
         setData(R.id.name,patient.getFirstName()+" "+patient.getLastName());
         setData(R.id.birthday, String.valueOf(patient.getAge()));
@@ -68,11 +77,15 @@ public class PatientInfoActivity extends AppCompatActivity {
         // handle the Button click listener as needed
         //UPDATE THIS METHOD
         logsButton.setOnClickListener(view -> {
-            Intent currentIntent = new Intent(PatientInfoActivity.this, DateActivity.class);
-            currentIntent.putExtra("date", date);
-            currentIntent.putExtra("patientEmail",patientEmail);
-            currentIntent.putExtra("doctorEmail", doctorEmail);
-            PatientInfoActivity.this.startActivity(currentIntent);
+            if(!listDates.isEmpty()){
+                Intent currentIntent = new Intent(PatientInfoActivity.this, DateActivity.class);
+                currentIntent.putExtra("date", date);
+                currentIntent.putExtra("patientEmail",patientEmail);
+                currentIntent.putExtra("doctorEmail", doctorEmail);
+                PatientInfoActivity.this.startActivity(currentIntent);
+            }else{
+                Toast.makeText(PatientInfoActivity.this, "No logs to show.", Toast.LENGTH_SHORT).show();
+            }
         });
         sendButton.setOnClickListener(v -> {
             // Implement save functionality here
@@ -94,11 +107,16 @@ public class PatientInfoActivity extends AppCompatActivity {
             PatientInfoActivity.this.startActivity(saveIntent);
         });
         progressButton.setOnClickListener(view -> {
-            Intent currentIntent = new Intent(PatientInfoActivity.this, UserProgressActivity.class);
-            currentIntent.putExtra("date", date);
-            currentIntent.putExtra("patientEmail",patientEmail);
-            currentIntent.putExtra("doctorEmail", doctorEmail);
-            PatientInfoActivity.this.startActivity(currentIntent);
+            if(listDates.size()>2){
+                Intent currentIntent = new Intent(PatientInfoActivity.this, UserProgressActivity.class);
+                currentIntent.putExtra("date", date);
+                currentIntent.putExtra("patientEmail",patientEmail);
+                currentIntent.putExtra("doctorEmail", doctorEmail);
+                PatientInfoActivity.this.startActivity(currentIntent);
+            }else{
+                Toast.makeText(PatientInfoActivity.this, "Not enough daily logs to display.", Toast.LENGTH_SHORT).show();
+            }
+
         });
 
         deleteButton.setOnClickListener(v -> {

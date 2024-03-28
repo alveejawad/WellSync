@@ -51,7 +51,7 @@ public class UserProgressActivity extends AppCompatActivity {
 
         //get the handler to call the methods
         IPatientHandler patientHandler = new PatientHandler();
-        Patient patient = patientHandler.getDetails("patient1@example.com");
+        Patient patient = patientHandler.getDetails(patientEmail);
         IDailyLogHandler dailyLogHandler = new DailyLogHandler();
 
         //Names
