@@ -51,10 +51,6 @@ public class DoctorPageActivity extends AppCompatActivity{
         IDoctorHandler doctorHandler = new DoctorHandler();
 
         doctor = doctorHandler.getDetails(doctorEmail);
-        if (doctor == null) {
-            doctor = new Doctor(doctorEmail);
-        }
-
         try {
             patientList = doctorHandler.getAllPatientsForDoctor(doctor);
         } catch (InvalidDoctorException e) {
