@@ -102,6 +102,7 @@ public class DoctorPageActivity extends AppCompatActivity{
             }
             try {
               doctorHandler.addPatient(existedPatient, doctor);
+              patientList.add(existedPatient);
             } catch (InvalidDoctorException | InvalidPatientException e) {
                 Toast.makeText(DoctorPageActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
