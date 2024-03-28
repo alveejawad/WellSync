@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <integer name="max_age">122</integer>
-    <integer name="max_mood_score">4</integer>
+    <integer name="max_mood_score">3</integer>
     <integer name="max_sleep_hours">16</integer>
     <integer name="max_symptom_intensity">10</integer>
     <integer name="max_med_quantity">5</integer>
