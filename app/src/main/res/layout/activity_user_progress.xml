@@ -22,15 +22,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.037">
-        <ImageView
-            android:id="@+id/close"
-            android:layout_width="26dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="20dp"
 
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/close" />
+            <ImageView
+                android:id="@+id/close"
+                android:layout_width="19dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="20dp"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/close" />
         <LinearLayout
             android:id="@+id/header"
             android:layout_width="match_parent"
@@ -117,6 +118,19 @@
                 android:textSize="30sp"
                 android:textStyle="bold" />
         </LinearLayout>
+            <TextView
+                android:id="@+id/avg_sleep"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="16dp"
+                android:text="Sleep Average: "
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="17sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
         <LinearLayout
             android:id="@+id/sleep_layout"
             android:layout_width="match_parent"
@@ -165,7 +179,15 @@
                 android:id="@+id/symptoms_chart"
                 android:layout_marginVertical="20sp"
                 android:layout_width="match_parent"
-                android:layout_height="400dp"/>
+                android:layout_height="400dp">
+
+            </com.anychart.AnyChartView>
+
+            <TextView
+                android:id="@+id/end_progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible" />
 
         </LinearLayout>
 

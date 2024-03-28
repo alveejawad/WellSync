@@ -19,42 +19,34 @@ import java.util.List;
 
 public class DateActivity extends AppCompatActivity {
 
-    private RecyclerView dateList;
     private String patientEmail;
     private String doctorEmail;
-    private String date;
     private List<Date> listOfDate;
-
-    private IPatientHandler patientHandler;
-    private Patient patient;
-    private IDailyLogHandler logHandler;
-
-    private DateAdapter dateAdapter;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_date_list);
 
-        dateList = findViewById(R.id.date_list);
+        RecyclerView dateList = findViewById(R.id.date_list);
 
         // retrieve the patient email and date from the intent
         Intent intent = getIntent();
         patientEmail = intent.getStringExtra("patientEmail");
         doctorEmail = intent.getStringExtra("doctorEmail");
-        date = intent.getStringExtra("date");
+        String date = intent.getStringExtra("date");
 
         // Initialize handler
-        patientHandler = new PatientHandler();
-        patient = patientHandler.getDetails(patientEmail);
+        IPatientHandler patientHandler = new PatientHandler();
+        Patient patient = patientHandler.getDetails(patientEmail);
 
         // get all the date from the patient
-        logHandler = new DailyLogHandler();
+        IDailyLogHandler logHandler = new DailyLogHandler();
         listOfDate = logHandler.getAllDates(patient);
 
         //show list of dates
         RecyclerView recyclerView = findViewById(R.id.date_list);
-        dateAdapter = new DateAdapter(this, listOfDate);
+        DateAdapter dateAdapter = new DateAdapter(this, listOfDate);
         dateList.setAdapter(dateAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 

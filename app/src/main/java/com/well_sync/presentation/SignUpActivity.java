@@ -106,8 +106,8 @@ public class SignUpActivity extends AppCompatActivity {
      Function: reset the password entry fields in case passwords don't match
      */
     private void resetPasswords(){
-        EditText Password = (EditText) findViewById(R.id.editPassword);
-        EditText ConfirmPassword = (EditText) findViewById(R.id.editConfirmPassword);
+        EditText Password = findViewById(R.id.editPassword);
+        EditText ConfirmPassword = findViewById(R.id.editConfirmPassword);
         Password.setText("");
         ConfirmPassword.setText("");
     }

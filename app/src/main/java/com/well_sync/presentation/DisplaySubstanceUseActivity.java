@@ -1,19 +1,14 @@
 package com.well_sync.presentation;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.content.Intent;
-
-import android.app.Activity;
 
 import com.well_sync.R;
 
 public class DisplaySubstanceUseActivity extends Activity {
-
-    private TextView nameText, amountText;
-    private Button buttonContinue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,9 +16,9 @@ public class DisplaySubstanceUseActivity extends Activity {
         setContentView(R.layout.activity_display_subs);
 
         // Initialize TextViews
-        nameText = findViewById(R.id.substance_name);
-        amountText = findViewById(R.id.substance_amount);
-        buttonContinue = findViewById(R.id.button_continue_2);
+        TextView nameText = findViewById(R.id.substance_name);
+        TextView amountText = findViewById(R.id.substance_amount);
+        Button buttonContinue = findViewById(R.id.button_continue_2);
 
         Intent intent = getIntent();
         String email = intent.getStringExtra("email");
@@ -34,14 +29,11 @@ public class DisplaySubstanceUseActivity extends Activity {
         amountText.setText("Amount: " + amount);
 
 
-        buttonContinue.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Handle close button click
-                Intent continueIntent = new Intent(DisplaySubstanceUseActivity.this, HomePageActivity.class);
-                continueIntent.putExtra("email",email);
-                DisplaySubstanceUseActivity.this.startActivity(continueIntent);
-            }
+        buttonContinue.setOnClickListener(view -> {
+            // Handle close button click
+            Intent continueIntent = new Intent(DisplaySubstanceUseActivity.this, HomePageActivity.class);
+            continueIntent.putExtra("email",email);
+            DisplaySubstanceUseActivity.this.startActivity(continueIntent);
         });
     }
 }
