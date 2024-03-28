@@ -25,7 +25,6 @@ public class SymptomsTrackerActivity extends AppCompatActivity {
     private String email;
     private DailyLog dailyLog;
     private String[] symptomNames;
-    private SymptomAdapter symptomAdapter;
     private RecyclerView recyclerView;
 
     protected void onCreate(Bundle saveInstanceState) {
@@ -50,7 +49,7 @@ public class SymptomsTrackerActivity extends AppCompatActivity {
         //get symptoms list
         symptomNames = getResources().getStringArray(R.array.symptoms);
         recyclerView = findViewById(R.id.symptoms_list);
-        symptomAdapter = new SymptomAdapter(symptomNames);
+        SymptomAdapter symptomAdapter = new SymptomAdapter(symptomNames);
         recyclerView.setAdapter(symptomAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 

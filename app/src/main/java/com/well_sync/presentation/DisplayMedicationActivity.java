@@ -12,19 +12,16 @@ import com.well_sync.R;
 
 public class DisplayMedicationActivity extends Activity {
 
-    private TextView nameText, amountText, dosageText;
-    private Button buttonContinue;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_med);
 
         // Initialize TextViews
-        nameText = findViewById(R.id.med_name_result);
-        amountText = findViewById(R.id.med_amount_result);
-        dosageText = findViewById(R.id.med_dosage_result);
-        buttonContinue = findViewById(R.id.button_continue_1);
+        TextView nameText = findViewById(R.id.med_name_result);
+        TextView amountText = findViewById(R.id.med_amount_result);
+        TextView dosageText = findViewById(R.id.med_dosage_result);
+        Button buttonContinue = findViewById(R.id.button_continue_1);
 
         Intent intent = getIntent();
         String email = intent.getStringExtra("email");

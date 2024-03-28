@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.well_sync.R;
 
 public class SymptomAdapter extends RecyclerView.Adapter<SymptomAdapter.SymptomViewHolder> {
-    private String[] symptomsList;
+    private final String[] symptomsList;
 
     // Constructor and other methods...
     protected static OnItemClickListener onItemClickListener;
@@ -21,7 +21,7 @@ public class SymptomAdapter extends RecyclerView.Adapter<SymptomAdapter.SymptomV
         this.symptomsList = symptomsList;
     }
     public void setOnItemClickListener(OnItemClickListener listener) {
-        this.onItemClickListener = listener;
+        onItemClickListener = listener;
     }
 
     @NonNull
@@ -29,7 +29,7 @@ public class SymptomAdapter extends RecyclerView.Adapter<SymptomAdapter.SymptomV
     public SymptomAdapter.SymptomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.symptoms_view, parent, false);
-        return new SymptomAdapter.SymptomViewHolder(view);
+        return new SymptomViewHolder(view);
     }
     @Override
     public void onBindViewHolder(@NonNull SymptomAdapter.SymptomViewHolder holder, int position) {
@@ -43,10 +43,9 @@ public class SymptomAdapter extends RecyclerView.Adapter<SymptomAdapter.SymptomV
 
 
         public interface OnItemClickListener {
-            void onItemClick(int position);
         }
 
-        public class SymptomViewHolder extends RecyclerView.ViewHolder {
+        public static class SymptomViewHolder extends RecyclerView.ViewHolder {
             TextView nameTextView;
             RatingBar ratingBar;
             public SymptomViewHolder(@NonNull View itemView) {
