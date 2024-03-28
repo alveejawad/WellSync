@@ -13,7 +13,7 @@
         android:layout_marginTop="4dp"
         android:gravity="center"
         android:text="@string/log_saved"
-        android:textColor="#3E2723"
+        android:textColor="@color/black"
         android:textSize="40sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,10 +23,12 @@
 
     <TextView
         android:id="@+id/textView11"
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_marginTop="20dp"
         android:text="@string/med_details"
+        android:textColor="@color/black"
+        android:layout_marginStart="40dp"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.291"
@@ -35,11 +37,13 @@
 
     <TextView
         android:id="@+id/med_name_result"
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_marginTop="8dp"
+        android:layout_marginStart="40dp"
         android:text="@string/pills_name"
         android:textSize="20sp"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.288"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,11 +51,12 @@
 
     <TextView
         android:id="@+id/med_amount_result"
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_marginTop="16dp"
+        android:layout_marginStart="40dp"
         android:text="@string/amount"
-        android:textColor="#3E2723"
+        android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.288"
@@ -74,10 +79,12 @@
 
     <TextView
         android:id="@+id/med_dosage_result"
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="70dp"
         android:text="@string/pills_dosage"
         android:textSize="20sp"
+        android:textColor="@color/black"
+        android:layout_marginStart="40dp"
         app:layout_constraintBottom_toTopOf="@+id/button_continue_1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.288"
