@@ -30,13 +30,12 @@ public class LoginSignupTest {
     @Test
     public void signupLoginPatientTest() throws InterruptedException {
         // sign up as patient
+        Thread.sleep(1000);
         onView(withId(R.id.SignUp)).perform(click());
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         onView(withId(R.id.editEmail)).perform(typeText("hungludao@gmail.com"));
         onView(withId(R.id.editPassword)).perform(typeText("password1"));
         onView(withId(R.id.editConfirmPassword)).perform(typeText("password1"), ViewActions.closeSoftKeyboard());
-        onView(withId(R.id.Roles)).perform(click());
-        onView(ViewMatchers.withText("PATIENT")).perform(click());
         onView(withId(R.id.Nextbutton)).perform(click());
 
         // perform add details to new user
@@ -49,14 +48,15 @@ public class LoginSignupTest {
         onView(withId(R.id.BloodTypes)).perform(click());
         onView(ViewMatchers.withText("A+")).perform(click());
         onView(withId(R.id.savebutton)).perform(click());
-
         // perform log out
         onView(withId(R.id.logout)).perform(click());
-
         // log in as patient
         onView(withId(R.id.editEmail)).perform(typeText("hungludao@gmail.com"), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.editPassword)).perform(typeText("password1"), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.Loginbutton)).perform(click());
+        // perform log out
+        onView(withId(R.id.logout)).perform(click());
+
     }
 
 
@@ -71,6 +71,9 @@ public class LoginSignupTest {
         onView(withId(R.id.Roles)).perform(click());
         onView(ViewMatchers.withText("DOCTOR")).perform(click());
         onView(withId(R.id.Nextbutton)).perform(click());
+        onView(withId(R.id.editFirstName)).perform(typeText("Cristhian"));
+        onView(withId(R.id.editLastName)).perform(typeText("Martinez"),ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.savebutton)).perform(click());
 
         // perform log out
         onView(withId(R.id.logout)).perform(click());
