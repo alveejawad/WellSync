@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -60,9 +61,12 @@ public class UserProgressActivity extends AppCompatActivity {
         List<String> dates = dailyLogHandler.getAllDatesAsString(patient);
         float[] moodScores = dailyLogHandler.getAllMoodScores(patient);
         float[] sleepHours = dailyLogHandler.getAllSleepHours(patient);
+        double avgSleep = dailyLogHandler.getAverageSleep(patient);
         symptomScores= dailyLogHandler.getAverageSymptoms(patient);
         List<Entry> entriesMood =getEntries(moodScores);
         List<Entry> entriesSleep =getEntries(sleepHours);
+        TextView average= findViewById(R.id.avg_sleep);
+        average.setText("Sleep Average: "+avgSleep+" hrs.");
 
         //create the charts
         createLineChart(R.id.mood_chart,MOOD, dates, moodNames,entriesMood);
