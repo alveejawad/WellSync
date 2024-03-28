@@ -62,6 +62,7 @@ public class DailyLogHandler implements IDailyLogHandler {
 
     public double getAverageSleep(Patient patient) {
         float[] sleepHours = getAllSleepHours(patient);
+        double average;
         if (sleepHours.length == 0)
             return 0;
 
@@ -69,8 +70,10 @@ public class DailyLogHandler implements IDailyLogHandler {
         for (double h : sleepHours) {
             sleepSum += h;
         }
-
-        return sleepSum / sleepHours.length;
+        average=sleepSum / sleepHours.length;
+        // Round the average to one decimal place
+        average = Math.round(average * 10.0) / 10.0;
+        return average;
     }
 
     public float[] getAllSleepHours(Patient patient) {
