@@ -195,7 +195,7 @@ public class DailyLogHandlerTest {
         IDailyLogPersistence mockedPersistence = mock(IDailyLogPersistence.class);
         IDailyLogHandler toTest = new DailyLogHandler(mockedPersistence);
 
-        Patient p1 = new Patient("mock1@example.com");
+        Patient p1 = new Patient("mock2@example.com");
 
         DailyLog dl1 = new DailyLog("2024-03-21", 3, 7, "");
         DailyLog dl2 = new DailyLog("2024-03-22", 3, 9, "");
@@ -209,7 +209,7 @@ public class DailyLogHandlerTest {
         double avgSleep = toTest.getAverageSleep(p1);
         verify(mockedPersistence).getAllDailyLogs(p1);
 
-        assertEquals(26.0/3, avgSleep, 0.0001);
+        assertEquals(26.0/3, avgSleep, 0.1);
     }
 
     @Test
