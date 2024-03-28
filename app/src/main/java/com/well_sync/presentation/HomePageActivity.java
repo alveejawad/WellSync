@@ -30,12 +30,10 @@ import java.util.Locale;
 
 public class HomePageActivity extends AppCompatActivity {
 
-    private IDailyLogHandler dailyLogHandler;
     private String email;
     private DailyLog dailyLog;
     RelativeLayout layout;
     Patient newPatient;
-    boolean messageOpened;
 
 
     @Override
@@ -48,7 +46,7 @@ public class HomePageActivity extends AppCompatActivity {
         email = intent.getStringExtra("email");
         String date = getCurrentDate();
 
-        dailyLogHandler = new DailyLogHandler();
+        IDailyLogHandler dailyLogHandler = new DailyLogHandler();
 
         // Get the data from patient
         IPatientHandler patientHandler = new PatientHandler();
@@ -154,18 +152,8 @@ public class HomePageActivity extends AppCompatActivity {
         boolean focusable=true;
         message.setText(newPatient.getDoctorNotes());
         PopupWindow popupWindow=new PopupWindow(popUpView, width, height,focusable);
-        layout.post(new Runnable() {
-            @Override
-            public void run() {
-                popupWindow.showAtLocation(layout, Gravity.TOP, 0, 0);
-            }
-        });
-        close.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                popupWindow.dismiss();
-            }
-        });
+        layout.post(() -> popupWindow.showAtLocation(layout, Gravity.TOP, 0, 0));
+        close.setOnClickListener(v -> popupWindow.dismiss());
     }
     private String setNotification(){
        String text="";

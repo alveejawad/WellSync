@@ -10,7 +10,7 @@ import com.well_sync.R;
 import java.util.List;
 
 public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHolder> {
-    private List<Patient> patientList;
+    private final List<Patient> patientList;
     protected static OnItemClickListener onItemClickListener;
 
     public PatientAdapter(List<Patient> patientList) {
@@ -18,7 +18,7 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHold
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
-        this.onItemClickListener = listener;
+        onItemClickListener = listener;
     }
     @NonNull
     @Override
@@ -55,13 +55,10 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHold
             emailTextView = itemView.findViewById(R.id.patient_email);
 
             // set click listener for the item
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int position = getAdapterPosition();
-                    if(position != RecyclerView.NO_POSITION && onItemClickListener != null) {
-                        onItemClickListener.onItemClick(position);
-                    }
+            itemView.setOnClickListener(v -> {
+                int position = getAdapterPosition();
+                if(position != RecyclerView.NO_POSITION && onItemClickListener != null) {
+                    onItemClickListener.onItemClick(position);
                 }
             });
         }
