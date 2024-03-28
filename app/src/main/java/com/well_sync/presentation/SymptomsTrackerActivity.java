@@ -2,12 +2,14 @@ package com.well_sync.presentation;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.well_sync.R;
 import com.well_sync.logic.DailyLogHandler;
@@ -22,7 +24,10 @@ public class SymptomsTrackerActivity extends AppCompatActivity {
     private IDailyLogHandler dailyLogHandler;
     private String email;
     private DailyLog dailyLog;
-    private String[] symptomsList;
+    private String[] symptomNames;
+    private SymptomAdapter symptomAdapter;
+    private RecyclerView recyclerView;
+
     protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_symptomstracker);
@@ -41,58 +46,49 @@ public class SymptomsTrackerActivity extends AppCompatActivity {
         IPatientHandler patientHandler = new PatientHandler();
         Patient newPatient = patientHandler.getDetails(email);
         dailyLog = dailyLogHandler.getDailyLog(newPatient, date);
-        symptomsList = getResources().getStringArray(R.array.symptoms);
+
+        //get symptoms list
+        symptomNames = getResources().getStringArray(R.array.symptoms);
+        recyclerView = findViewById(R.id.symptoms_list);
+        symptomAdapter = new SymptomAdapter(symptomNames);
+        recyclerView.setAdapter(symptomAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         // Set click listeners or any other event listeners as needed
         closeIcon.setOnClickListener(view -> {
             // Handle close button click
             Intent closeIntent = new Intent(SymptomsTrackerActivity.this, HomePageActivity.class);
-            closeIntent.putExtra("email",email);
+            closeIntent.putExtra("email", email);
             SymptomsTrackerActivity.this.startActivity(closeIntent);
         });
 
         saveButton.setOnClickListener(view -> {
-            addSymptom(symptomsList[0],R.id.ratingSadness);
-            addSymptom(symptomsList[1],R.id.ratingHelplessness);
-            addSymptom(symptomsList[2],R.id.ratingSelfEsteem);
-            addSymptom(symptomsList[3],R.id.ratingIsolation);
-            addSymptom(symptomsList[4], R.id.ratingLowMotivation);
-            addSymptom(symptomsList[5],R.id.ratingImpulsivity);
-            addSymptom(symptomsList[6],R.id.ratingConcentration);
-            addSymptom(symptomsList[7],R.id.ratingAggressiveness);
-            addSymptom(symptomsList[8],R.id.ratingGrandioseIdeas);
-            addSymptom(symptomsList[9],R.id.ratingRacingThoughts);
-            addSymptom(symptomsList[10],R.id.ratingAnxiety);
-            addSymptom(symptomsList[11],R.id.ratingSleep);
-            addSymptom(symptomsList[12],R.id.ratingHeadache);
-            addSymptom(symptomsList[13],R.id.ratingPain);
-            addSymptom(symptomsList[14],R.id.ratingAppetite);
-            addSymptom(symptomsList[15],R.id.ratingGuilt);
-            addSymptom(symptomsList[16],R.id.ratingSuicide);
-
+            saveRatings();
             try {
-                dailyLogHandler.setSymptoms(newPatient,dailyLog);
+                dailyLogHandler.setSymptoms(newPatient, dailyLog);
             } catch (InvalidDailyLogException e) {
                 Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
             }
 
             // Handle close button click
             Intent continueIntent = new Intent(SymptomsTrackerActivity.this, HomePageActivity.class);
-            continueIntent.putExtra("email",email);
+            continueIntent.putExtra("email", email);
             SymptomsTrackerActivity.this.startActivity(continueIntent);
         });
 
     }
 
-    private void addSymptom(String name, int idSymptom) {
-        RatingBar symptom = findViewById(idSymptom); // Assuming you have a RatingBar in your layout with id "ratingBar"
-        int valueSymptom = (int)symptom.getRating();
-        try {
-            dailyLog.addSymptom(name, valueSymptom);
-        } catch (InvalidDailyLogException e) {
-            e.printStackTrace();
+    private void saveRatings() {
+        for (int i = 0; i < recyclerView.getChildCount(); i++) {
+            View childView = recyclerView.getChildAt(i);
+            SymptomAdapter.SymptomViewHolder viewHolder = (SymptomAdapter.SymptomViewHolder) recyclerView.getChildViewHolder(childView);
+            int rating = viewHolder.getCurrentRating();
+            try {
+                dailyLog.addSymptom(symptomNames[i],rating);
+            } catch (InvalidDailyLogException e) {
+                e.printStackTrace();
+            }
         }
     }
-
 }
 

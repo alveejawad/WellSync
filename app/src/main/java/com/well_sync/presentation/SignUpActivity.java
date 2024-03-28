@@ -78,7 +78,7 @@ public class SignUpActivity extends AppCompatActivity {
                         startActivity(openUserDetails);
 
                     } else {
-                        Intent openDoctorView=  new Intent(SignUpActivity.this, DoctorPageActivity.class);
+                        Intent openDoctorView=  new Intent(SignUpActivity.this, DoctorSignUpActivity.class);
                         openDoctorView.putExtra("email",email);
                         startActivity(openDoctorView);
                     }
