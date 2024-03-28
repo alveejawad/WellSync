@@ -93,21 +93,26 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
             android:orientation="horizontal"
             android:textAlignment="center"
             android:layout_gravity="center">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Dont have an Account?" />
+                android:text="Dont have an Account?"
+                android:textSize="16sp"/>
 
             <TextView
                 android:id="@+id/SignUp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
+                android:clickable="true"
+                android:text="SignUp"
                 android:textColor="@color/medication_end"
-                android:text="SignUp" />
+                android:textSize="16sp"
+                tools:ignore="TouchTargetSizeCheck" />
 
         </LinearLayout>
 

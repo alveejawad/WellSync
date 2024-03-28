@@ -2,6 +2,7 @@ package com.well_sync.system_tests;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
@@ -31,20 +32,22 @@ public class CheckDailyLogTest {
         onView(withId(R.id.editEmail)).perform(typeText("doctor1@example.com"), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.editPassword)).perform(typeText("password1"), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.Loginbutton)).perform(click());
-
         // go to patient detail page
-        onView(withId(R.id.patientList)).perform(RecyclerViewActions.scrollToPosition(0), click());
+        onView(withId(R.id.patientList)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
     }
 
     @Test
     public void checkDailyLogsTest() {
         onView(withId(R.id.daily_logs)).perform(click());
         onView(withId(R.id.date_list)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
-
         onView(withId(R.id.date)).check(matches(withText("2023-01-01")));
         onView(withId(R.id.Notes)).check(matches(withText("Feeling good today")));
         onView(withId(R.id.PillsName)).check(matches(withText("Tylenol")));
-
-        onView(withId(R.id.backbutton)).perform(ViewActions.scrollTo(), click());
+        onView(withId(R.id.backbutton)).perform(scrollTo(), click());
+    }
+    @Test
+    public void checkUserProgress() {
+        onView(withId(R.id.see_progress)).perform(click());
+        onView(withId(R.id.close)).perform(scrollTo(), click());
     }
 }
