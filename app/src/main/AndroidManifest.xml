@@ -6,18 +6,21 @@
     <application
         android:allowBackup="true"
         android:label="WELLSYNC"
-        tools:replace="android:label"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:replace="android:label">
+        <activity
+            android:name=".presentation.DoctorSignUpActivity"
+            android:exported="false" />
         <activity
             android:name=".presentation.UserProgressActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.DisplaySubstanceUseActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".presentation.DisplayMedicationActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".presentation.DisplayDataActivity"
             android:exported="false" />
@@ -47,16 +50,16 @@
             android:exported="false" />
         <activity
             android:name=".presentation.DoctorPageActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".presentation.PatientInfoActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".presentation.DailyLogPatientActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".presentation.DateActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".presentation.LoginActivity"
             android:exported="true"
