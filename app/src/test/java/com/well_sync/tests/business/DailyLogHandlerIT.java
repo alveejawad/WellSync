@@ -70,9 +70,12 @@ public class DailyLogHandlerIT {
 
         Patient p1 = new Patient("patient1@example.com");
         double avgSleep = handler.getAverageSleep(p1);
+        double expected =(7+8+6+7+8+6+9) / 7.0;
+        // Round the average to one decimal place
+        expected = Math.round(expected * 10.0) / 10.0;
 
         // based on existing logs
-        assertEquals((7+8) / 2.0, avgSleep, 0.0001);
+        assertEquals(expected, avgSleep, 0.0001);
 
         DailyLog dl1 = new DailyLog("2023-03-24", 3, 9, "typical");
         DailyLog dl2 = new DailyLog("2023-03-25", 4, 11, "sleepy");
@@ -83,9 +86,11 @@ public class DailyLogHandlerIT {
         handler.setDailyLog(p1, dl3);
 
         avgSleep = handler.getAverageSleep(p1);
-
+        expected =(7+8+6+7+8+6+9+9+11+4)/10.0;
+        // Round the average to one decimal place
+        expected = Math.round(expected * 10.0) / 10.0;
         // existing + new logs
-        assertEquals((7+8+9+11+4)/5.0, avgSleep, 0.0001);
+        assertEquals((7+8+6+7+8+6+9+9+11+4)/10.0, avgSleep, 0.0001);
     }
 
     @After
