@@ -1,26 +1,27 @@
 package com.well_sync.system_tests;
 
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.longClick;
+import static androidx.test.espresso.action.ViewActions.typeText;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
+
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.contrib.PickerActions;
 import androidx.test.espresso.matcher.ViewMatchers;
-import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
-
-import org.hamcrest.Matchers;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import com.well_sync.R;
 import com.well_sync.presentation.LoginActivity;
 
-import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.action.ViewActions.typeText;
-import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import org.hamcrest.Matchers;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
@@ -36,8 +37,8 @@ public class EditPatientDetailTest {
 
     @Test
     public void editDetail() {
-        onView(withId(R.id.user)).perform(click());
-        onView(withId(R.id.Editbutton)).perform(click());
+        onView(withId(R.id.user)).perform(longClick());
+        onView(withId(R.id.Editbutton)).perform(longClick());
 
         // perform edit details
         onView(withId(R.id.editFirstName)).perform(typeText("Lucifer"));
@@ -50,5 +51,11 @@ public class EditPatientDetailTest {
         onView(ViewMatchers.withText("A+")).perform(click());
         onView(withId(R.id.savebutton)).perform(click());
 
+        // verify that it saved
+        onView(withId(R.id.user)).perform(click());
+        onView(withId(R.id.name)).check(matches(withText("Lucifer Nguyen")));
+        onView(withId(R.id.birthday)).check(matches(withText("23 ")));
+        onView(withId(R.id.gender)).check(matches(withText("MALE")));
+        onView(withId(R.id.bloodtype)).check(matches(withText("TYPE_A")));
     }
 }
