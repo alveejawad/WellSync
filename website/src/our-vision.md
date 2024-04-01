@@ -1,5 +1,4 @@
 # Our vision
-
 WellSync is a health and wellness tracker that allows patients and their healthcare providers to plan treatments and monitor progress together.
 
 ## What is WellSync?
