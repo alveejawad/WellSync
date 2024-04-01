@@ -4,7 +4,7 @@
 WellSync is created to provide a space where patients and healthcare providers can work together to improve on patient health.
 
 ### Patients:
-WellSync will provide a user-friendly application to allow patients to log and track their mood,
+WellSync will provide a user-friendly application to allow patients to log their mood,
 sleep, symptoms, medication-use and substance-use on a daily basis. Patients at WellSync will also receive
 graphs and insights based on their logs to help get a better idea of their health and well-being.
 

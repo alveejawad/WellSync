@@ -30,4 +30,5 @@ Here at WellSync, we design our app to help empower patients to take control ove
 [See WellSync in action!](https://en.wikipedia.org)
 
 ## Postmortem
-lorem ipsum dolor
+See our recap for the entire developmental process of the WellSync app. It explores some positive and negative points on some issues that arose during the entire process of development.
+**[Read&nbsp;more&nbsp;→](postmortem.md)**
