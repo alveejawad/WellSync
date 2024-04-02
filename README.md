@@ -2,6 +2,8 @@ COMP 3350: Winter 2024 \
 Group 16 (char++)
 # WellSync
 
+***See website at `website/book/index.html`.***
+
 ## How to use
 ### Login
 - Graders may log in to the app as a patient with the credentials `patient1@example.com`/`password1`
