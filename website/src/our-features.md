@@ -1,16 +1,15 @@
 # Our features
-Here at WellSync, we've designed our app to help empower patients to take control over their health and help connect their healthcare providers to them efficiently. We've created features to help both healthcare providers and patients monitor your health and well-being:
+Here at WellSync, we've designed our app to empower patients to take control over their health and help them connect with their healthcare providers efficiently. We've created features to help both healthcare providers and their patients keep track of health and well-being.
 
 ## Account Management:
-• Wellsync offers a personalized experience by allowing users to create accounts as either doctors or patients.\
-• Patients will be able to personalize their account by updating their personal information.
+- WellSync offers a personalized experience by allowing users to create accounts as either doctors or patients.
+- Patients can personalize their account by updating their personal details.
 
 ## Daily Tracking:
-• Wellsync enables users to get a better sense of their days by allowing users to log and track their mood, sleep, symptoms, medications and substance-use on a daily basis. \
-• Doctors will be able to monitor their patient's progress by having access to the patient's history of logs, if they patient permits. \
-• Doctors will be able to communicate with users by leaving notes and personalizing their patient's forms to allow faster communication.
+- WellSync keeps patients motivated to stay on top of their wellness and recovery by encouraging daily logging of mood, sleep, symptoms, medications and substance use.
+- Doctors can monitor their patients' conditions every day by viewing the information that their patients recorded.
+- Doctors can also view the entire history of past patient logs, to track progress over time.
+- Data visualizations of patient mood, sleep habits, and symptoms are available for the doctors to view on each patient individually, to help them identify notable patterns.
 
-## Goals and personalization:
-• Wellsync allows patient's to receive personalized reminders to log their day. \
-• Patients are able to set personalized goals to get a better sense of what specific areas need to be improved on. \
-• Patients will be able to receive statistics and graphs on logs such as their mood to help get a better understanding of their overall well-being.
+## Communication:
+- Doctors can communicate with their patients by leaving them notes, which patients will then see on their WellSync homepage next time they log in.
