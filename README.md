@@ -2,7 +2,8 @@ COMP 3350: Winter 2024 \
 Group 16 (char++)
 # WellSync
 
-***See website at `website/book/index.html`.***
+## Website
+Download [website.zip](https://code.cs.umanitoba.ca/comp3350-winter2024/char-a02-16/-/blob/main/website.zip), and open `book/index.html`.
 
 ## How to use
 ### Login
