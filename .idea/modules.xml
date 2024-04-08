@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/SwingModule.iml" filepath="$PROJECT_DIR$/SwingModule.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/WellSync.iml" filepath="$PROJECT_DIR$/.idea/modules/WellSync.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/WellSync.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/WellSync.app.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/WellSync.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/WellSync.app.androidTest.iml" />
