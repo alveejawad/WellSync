@@ -20,7 +20,11 @@ import org.softeng.assignment.objects.UserCredentials;
 import java.io.IOException;
 
 public class HelloController {
+    @FXML
+
     public Button loginButton;
+    @FXML
+    public Label errorLabel;
     private UserAuthenticationHandler loginHandler;
     @FXML
     private Label welcomeText;
@@ -32,17 +36,10 @@ public class HelloController {
     @FXML
     private TextField userPassword;
 
-//    @FXML
-//    private Label errorMessageLabel;
-
     public HelloController() {
         loginHandler = new UserAuthenticationHandler();
     }
 
-    @FXML
-    private void initialize() {
-//            errorMessageLabel.setTextFill(Color.RED);
-    }
 
     @FXML
     private void handleLoginButtonAction() {
@@ -50,14 +47,15 @@ public class HelloController {
         String password = userPassword.getText();
 
         try {
-//            UserCredentials.Role loginRole = loginHandler.login(new UserCredentials(email, password, "UNSPECIFIED"));
+            UserCredentials.Role loginRole = loginHandler.login(new UserCredentials(email, password, "UNSPECIFIED"));
 
+            errorLabel.setVisible(false);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("assignment-done.fxml"));
             Parent root = loader.load();
 
             DoneController controller = loader.getController();
             // Pass the string parameter and print it
-            controller.setLabelText("Assignment done! The role of the logged in user is: ");
+            controller.setLabelText("Assignment done! The role of the logged in user is: " + loginRole.name());
 
             // Get the current stage
             Stage stage = (Stage) loginButton.getScene().getWindow();
@@ -66,10 +64,10 @@ public class HelloController {
             Scene scene = new Scene(root, 500, 500);
             stage.setTitle("Done!");
             stage.setScene(scene);
-//        } catch (InvalidCredentialsException e) {
-//            errorMessageLabel.setText("Invalid email or password");
-            // Reset login fields
-//            resetLoginFields();
+        } catch (InvalidCredentialsException e) {
+            errorLabel.setVisible(true);
+            //Reset login fields
+            resetLoginFields();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

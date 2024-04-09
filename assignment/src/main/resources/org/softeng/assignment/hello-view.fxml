@@ -14,9 +14,13 @@
     <TextField fx:id="userEmail" layoutX="128.0" layoutY="54.0" prefHeight="25.0" prefWidth="150.0"/>
     <Label layoutX="42.0" layoutY="105.0" text="Password"/>
     <PasswordField fx:id="userPassword" layoutX="128.0" layoutY="101.0" prefHeight="25.0" prefWidth="150.0"/>
-    <Button fx:id="loginButton" layoutX="128.0" layoutY="151.0" mnemonicParsing="false" text="Login" onAction="#handleLoginButtonAction"/>
+    <Button fx:id="loginButton" layoutX="128.0" layoutY="151.0" mnemonicParsing="false" text="Login"
+            onAction="#handleLoginButtonAction"/>
     <!-- Centering the welcomeText label horizontally and wrapping text to the next line -->
     <Label fx:id="welcomeText" visible="false"
            text="Assignment done! Launching a scrap page to show that login is successful..."
            wrapText="true" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="70.0"/>
+    <Label fx:id="errorLabel" text="Incorrect credentials, please try again.."
+           textFill="red" visible="false" wrapText="true"
+           AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.bottomAnchor="20.0"/>
 </AnchorPane>

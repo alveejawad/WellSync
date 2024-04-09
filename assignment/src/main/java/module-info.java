@@ -9,6 +9,7 @@ module org.softeng.assignment {
     requires org.kordamp.ikonli.javafx;
     requires eu.hansolo.tilesfx;
     requires java.sql;
+    requires com.google.common;
 
     opens org.softeng.assignment to javafx.fxml;
     exports org.softeng.assignment;
