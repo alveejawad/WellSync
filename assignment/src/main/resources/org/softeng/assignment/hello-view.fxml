@@ -11,10 +11,10 @@
             prefWidth="300.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="org.softeng.assignment.HelloController">
     <Label layoutX="42.0" layoutY="58.0" text="Username"/>
-    <TextField layoutX="128.0" layoutY="54.0" prefHeight="25.0" prefWidth="150.0"/>
+    <TextField fx:id="userEmail" layoutX="128.0" layoutY="54.0" prefHeight="25.0" prefWidth="150.0"/>
     <Label layoutX="42.0" layoutY="105.0" text="Password"/>
-    <PasswordField layoutX="128.0" layoutY="101.0" prefHeight="25.0" prefWidth="150.0"/>
-    <Button layoutX="128.0" layoutY="151.0" mnemonicParsing="false" text="Login" onAction="#onHelloButtonClick"/>
+    <PasswordField fx:id="userPassword" layoutX="128.0" layoutY="101.0" prefHeight="25.0" prefWidth="150.0"/>
+    <Button fx:id="loginButton" layoutX="128.0" layoutY="151.0" mnemonicParsing="false" text="Login" onAction="#handleLoginButtonAction"/>
     <!-- Centering the welcomeText label horizontally and wrapping text to the next line -->
     <Label fx:id="welcomeText" visible="false"
            text="Assignment done! Launching a scrap page to show that login is successful..."
