@@ -1,1 +1,0 @@
-# WellSync in action
